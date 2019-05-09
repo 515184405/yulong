@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/asset/static/css/case.css">
-<div class="banner-box">
 
-</div>
+<link rel="stylesheet" href="/asset/static/css/case.css">
+<?= $this->render('../template/header');?>
