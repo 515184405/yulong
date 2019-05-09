@@ -14,7 +14,7 @@
     <div class="list-aslide">
         <img src="/asset/static/image/logo.png" alt="" class="list-logo">
         <div class="list-aslide-nav">
-            <a href="#">返回首页</a>
+            <a href="/">返回首页</a>
             <a class="active" href="#">设计案例</a>
             <a href="#">文章动态</a>
         </div>
@@ -24,18 +24,10 @@
     <div class="list-container">
         <div class="list-header clearfix">
             <i class="iconfont aslide-switch left"></i>
-            <div class="list-header-nav left">
-                    <a class="lhn-item active">全部</a>
-                    <a class="lhn-item">教育</a>
-                    <a class="lhn-item">旅游</a>
-                    <a class="lhn-item">房产</a>
-                    <a class="lhn-item">金融</a>
-                    <a class="lhn-item">科技</a>
-                    <a class="lhn-item">医疗</a>
-                    <a class="lhn-item">制造</a>
-                    <a class="lhn-item">农业</a>
-                    <a class="lhn-item">媒体</a>
-                    <a class="lhn-item">其他</a>
+            <?=$this->render('../template/nav');?>
+        </div>
+        <div class="list-content">
+            <div class="lc-content">
 
             </div>
         </div>
