@@ -6,9 +6,6 @@
     <a class="lhn-item">金融</a>
     <a class="lhn-item">科技</a>
     <a class="lhn-item">医疗</a>
-    <a class="lhn-item">制造</a>
-    <a class="lhn-item">农业</a>
-    <a class="lhn-item">媒体</a>
     <a class="lhn-item">其他</a>
 
 </div>

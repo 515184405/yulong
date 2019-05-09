@@ -11,7 +11,7 @@
     <script src="/asset/static/wigdet/jquery.min.js"></script>
 </head>
 <body>
-    <div class="list-aslide">
+    <div class="list-aslide transition">
         <img src="/asset/static/image/logo.png" alt="" class="list-logo">
         <div class="list-aslide-nav">
             <a href="/">返回首页</a>
@@ -21,16 +21,11 @@
         <img src="http://www.1000zhu.com/images/wechat_code.jpg" alt="" class="erweima">
         <p>扫一扫微信二维码</p>
     </div>
-    <div class="list-container">
-        <div class="list-header clearfix">
+    <div class="list-container transition">
+        <div class="list-header transition clearfix">
             <i class="iconfont aslide-switch left"></i>
             <?=$this->render('../template/nav');?>
         </div>
-        <div class="list-content">
+        <div class="list-content transition">
             <div class="lc-content">
 
-            </div>
-        </div>
-    </div>
-</body>
-</html>
