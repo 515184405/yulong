@@ -18,11 +18,20 @@
     <?php } ?>
 </div>
 <script>
-    for(var i = 0,len = $('.animated').length;i < len; i++){
-        var width = $('.case-list')[0].clientWidth;
-        var oneAWidth = 295;
-        $($('.animated')[i]).addClass('delay-'+i % Math.floor(width/oneAWidth)+'s')
+    function addAnimateDelay(){
+        for(var i = 0,len = $('.animated').length;i < len; i++){
+            var width = $('.case-list')[0].clientWidth;
+            var oneAWidth = 295;
+            //删除已存在的delay-{{}}s;
+            var reg = /delay-[0-9]s/g;
+
+            var classes = $('.animated')[i].className.match(reg);
+            classes && $($('.animated')[i]).removeClass(classes[0]);
+            $($('.animated')[i]).addClass('delay-'+i % Math.floor(width/oneAWidth)+'s')
+        }
     }
 
+    addAnimateDelay();
+    window.onresize = addAnimateDelay;
 </script>
 <?= $this->render('../template/footer');?>

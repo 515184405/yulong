@@ -73,7 +73,6 @@ body{
     position: absolute;
     left:0%;
     top:60px;
-    bottom:0;
     right:0;
     .lc-content{
       background-color: #fff;
@@ -98,6 +97,11 @@ body{
   transform:translate3d(0,-100%,0);
   height:60px;
   background-color: #fafafa;
+  position: fixed;
+  width:82%;
+  left:18%;
+  top:0;
+  z-index: 2;
   .aslide-switch{
     font-size: 24px;
     color: #333;
@@ -133,6 +137,10 @@ body{
 .list-container.active{
   width:100%;
   left:0;
+  .list-header{
+    left:0;
+    width:100%;
+  }
 }
 @media screen and(max-width:1004px) {
   .list-aslide{
@@ -141,6 +149,10 @@ body{
   .list-container{
     width:100%;
     left:0;
+    .list-header{
+      width:100%;
+      left:0;
+    }
   }
   .aslide-switch{
     &:before{

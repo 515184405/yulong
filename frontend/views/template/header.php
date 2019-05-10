@@ -15,8 +15,8 @@
         <img src="/asset/static/image/logo.png" alt="" class="list-logo">
         <div class="list-aslide-nav">
             <a href="/">返回首页</a>
-            <a class="active" href="#">设计案例</a>
-            <a href="#">文章动态</a>
+            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case">设计案例</a>
+            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news">文章动态</a>
         </div>
         <img src="http://www.1000zhu.com/images/wechat_code.jpg" alt="" class="erweima">
         <p>扫一扫微信二维码</p>

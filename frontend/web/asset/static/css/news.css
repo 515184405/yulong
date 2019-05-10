@@ -1,0 +1,79 @@
+.lc-content {
+  background-color: #f1f1f1 !important;
+}
+.news-list .news-item {
+  display: block;
+  width: 100%;
+  height: 160px;
+  background-color: #fff;
+  padding: 15px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  position: relative;
+}
+.news-list .news-item .page-date {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 60px;
+  height: 60px;
+}
+.news-list .news-item .news-img {
+  width: 230px;
+  float: left;
+}
+.news-list .news-item .news-content {
+  margin-left: 245px;
+  padding-right: 15px;
+}
+.news-list .news-item .news-content .nc-title a {
+  font-size: 18px;
+  color: #595757;
+  font-weight: bold;
+}
+.news-list .news-item .news-content .nc-title a:hover {
+  color: #5181f1;
+}
+.news-list .news-item .news-content .nc-info {
+  color: #aaa;
+  font-size: 13px;
+  margin-top: 5px;
+}
+.news-list .news-item .news-content .nc-info .iconfont {
+  margin-left: 30px;
+  margin-right: 3px;
+}
+.news-list .news-item .news-content .nc-info .icon-date {
+  margin-left: 0px;
+  font-size: 12px;
+  position: relative;
+  top: -1px;
+}
+.news-list .news-item .news-content .nc-info .icon-type {
+  font-size: 15px;
+  position: relative;
+  top: 1px;
+}
+.news-list .news-item .news-content .nc-desc {
+  font-size: 15px;
+  color: #888;
+  line-height: 25px;
+  margin-top: 10px;
+}
+.news-list .news-item .news-content .news-tag {
+  margin-top: 10px;
+}
+.news-list .news-item .news-content .news-tag .icon-tag {
+  color: #5181f1;
+  font-size: 20px;
+  margin-left: 5px;
+}
+.news-list .news-item .news-content .news-tag .tag-link {
+  margin-right: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.news-list .news-item .news-content .news-tag .tag-link:hover {
+  opacity: 1;
+}
+/*# sourceMappingURL=news.css.map */

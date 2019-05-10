@@ -13,10 +13,11 @@
                     $(this).addClass('active');
                     $('.list-aslide,.list-container').addClass('active');
                 }
+
             })
             //首页增加滚动动画
             var scrollFun = function(){
-                $('.lc-content').scroll(function() {
+                $('.list-container').scroll(function() {
                     $(".animated").each(function(){
                         var pos = $(this).offset().top;
                         var animatedType = $(this).attr('animate-type');
@@ -28,7 +29,7 @@
                     });
                 });
 
-                $('.lc-content').scroll();
+                $('.list-container').scroll();
             };
             scrollFun();
         </script>
