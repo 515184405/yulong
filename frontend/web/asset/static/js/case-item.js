@@ -2,7 +2,7 @@ var arrTop = [];
 $('.list-container').scroll(function(){
     var scrollTop = $('.list-container').scrollTop();
     var offsetTop = $('.js_case_list')[0].offsetTop;
-    if(scrollTop >= offsetTop - 100){
+    if(scrollTop >= offsetTop){
         if($('.js_list_box').attr('data-show') != 1){
             $.each($('.js_list_box').find('img'),function(key,elem){
                 $(elem).attr('src',$(elem).attr('data-src'));

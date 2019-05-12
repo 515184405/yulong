@@ -207,10 +207,13 @@
   -ms-transform: translate3d(0, 100%, 0);
   -o-transform: translate3d(0, 100%, 0);
   transform: translate3d(0, 100%, 0);
-  padding: 30px;
+  padding: 300px 30px 30px 30px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.case-swipper img {
+  margin: 50px auto!important;
 }
 .case-swipper p {
   text-align: center;
