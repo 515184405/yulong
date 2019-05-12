@@ -1,0 +1,249 @@
+.lc-content{
+  background-color: transparent!important;
+}
+.news-items{
+  margin-right:275px;
+  background-color: #fff;
+  overflow: hidden;
+  .news-hidden-scroll{
+    //margin-right: -15px;
+    padding:0 20px;
+    overflow-y: auto;
+    .content-title {
+      padding: 15px;
+      font-size: 26px;
+      color: #3D3D3D;
+      font-weight: bold;
+      border-bottom: 2px solid #ddd;
+      margin-top: 30px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .content-info{
+      text-align: center;
+      color:#999;
+      span {
+        margin-right: 25px;
+      }
+    }
+    .content-text {
+      margin-top: 30px;
+      img{
+        max-width: 100%;
+      }
+    }
+    .btn-box{
+      margin-top:100px;
+      border-top: 1px solid #ddd;
+      padding:20px;
+      .btn-prev,.btn-next{
+        display: block;
+        line-height: 30px;
+      }
+    }
+    .share-box{
+      padding:0 15px;
+      padding-bottom:200px;
+    }
+  }
+}
+.news-recommend{
+  width: 260px;
+  padding:15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #fff;
+  position: fixed;top:15px;right:15px;
+  overflow: hidden;
+  .nr-img{
+    max-width: 100%;
+  }
+  .nr-title{
+    margin-top: 25px;
+    height: 35px;
+    border-bottom: 2px solid #eee;
+    position: relative;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom:10px;
+    &:after{
+      content: '';
+      width:70px;
+      border:1px solid #5181f1;
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+    }
+  }
+  .nr-item{
+    display: block;
+    padding:7px 0;
+    height:70px;
+    border-bottom: 1px solid #f1f1f1;
+    &:last-child{
+      border-bottom: 0;
+    }
+    .nr-item-img{
+      height: 70px;
+      width:100px;
+      float: left;
+    }
+    .nr-item-content{
+      margin-left:115px;
+      .nric-title{
+        font-weight: bold;
+        line-height: 20px;
+      }
+      .nric-desc{
+        font-size: 13px;
+        margin-top:5px;
+        line-height: 20px;
+      }
+      .nric-info{
+        font-size: 12px;
+        margin-top:8px;
+        .iconfont{
+          position: relative;
+          top:2px;
+          margin-left:15px;
+        }
+      }
+    }
+  }
+  .news-recommend-hidden{
+    width: 100%;
+    height:100%;
+    padding-right:30px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+//项目案例详情
+.case-items{
+  padding:15px;
+  background-color: #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  .news-hidden-scroll{
+    padding:0;
+  }
+  .case-banner{
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin:0 auto;
+  }
+  .case-title{
+    font-size: 18px;
+    margin-top:30px;
+    padding-left:15px;
+    position: relative;
+    &:before{
+      content: '';
+      position: absolute;
+      left:0;
+      top:0;
+      width:6px;
+      height:100%;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      background-color: #5181f1;
+    }
+  }
+  .case-desc{
+    margin-top:15px;
+    line-height: 25px;
+    font-size: 15px;
+  }
+  .case-dress{
+    text-indent: 2rem;
+    font-size: 15px;
+    margin-top:15px;
+    p{
+      margin-top:8px;
+      a{
+        color:#5181f1;
+      }
+      .case-dress-wx{
+        margin-left:5px;
+      }
+    }
+    .case-dress-wxbox{
+      margin-top:8px;
+    }
+  }
+  .case-share{
+    margin-left:2rem;
+    margin-top:20px;
+  }
+  .case-show-img{
+    display: block;
+    max-width: 100%;
+    margin:20px auto;
+  }
+}
+.case-tag{
+  border-right:1px solid #5181f1;
+  padding:0 10px;
+  &:last-child{
+    border-right:0;
+  }
+}
+//案例欣赏列表
+.case-swipper{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,.5);
+  z-index: 99;
+  overflow: auto;
+  -webkit-transform: translate3d(0,100%,0);
+  -moz-transform: translate3d(0,100%,0);
+  -ms-transform: translate3d(0,100%,0);
+  -o-transform: translate3d(0,100%,0);
+  transform: translate3d(0,100%,0);
+  padding:30px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  p{
+    text-align: center;
+    font-size: 24px;
+    line-height: 40px;
+    color:#f00;
+  }
+}
+.swipper-number{
+  position: fixed;
+  right:30px;
+  bottom:30px;
+  width:100px;
+  height:100px;
+  background-color: rgba(0,0,0,.5);
+  border-radius:50%;
+  text-align: center;
+  line-height: 100px;
+  font-size: 24px;
+  color:#fff;
+}
+.sn-current{
+  position: relative;
+  top:-5px;
+}
+.sn-count{
+  position: relative;
+  top:5px;
+}
+.add-animated{
+  -webkit-transform: translate3d(0,0%,0);
+  -moz-transform: translate3d(0,0%,0);
+  -ms-transform: translate3d(0,0%,0);
+  -o-transform: translate3d(0,0%,0);
+  transform: translate3d(0,0%,0);
+}

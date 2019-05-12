@@ -1,10 +1,13 @@
+html {
+  overflow: hidden;
+}
 body {
   font-size: 14px;
   color: #333;
   background-color: #f1f1f1;
 }
 .list-aslide {
-  width: 18%;
+  width: 230px;
   position: fixed;
   left: 0;
   top: 0;
@@ -21,13 +24,47 @@ body {
   display: block;
   margin: 0 auto;
 }
+.list-aslide .QQ {
+  display: inline-block;
+  font-size: 24px;
+  margin-right: 5px;
+  top: 2px;
+  color: #5181f1;
+  position: relative;
+}
+.list-aslide .QQ-box {
+  width: 140px;
+  text-align: left;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.list-aslide .tel-box {
+  width: 140px;
+  text-align: left;
+  margin-top: 3px;
+  font-size: 16px;
+}
+.list-aslide .tel-box .iconfont {
+  font-size: 14px;
+  width: 23px;
+  height: 23px;
+  line-height: 23px;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background-color: #5181f1;
+  color: #fff;
+  position: relative;
+  top: -1px;
+}
 .list-aslide .list-logo {
   width: 70%;
   max-width: 150px;
   margin-top: 60px;
 }
 .list-aslide .list-aslide-nav {
-  margin-top: 50px;
+  margin-top: 40px;
 }
 .list-aslide .list-aslide-nav a {
   width: 100px;
@@ -50,14 +87,23 @@ body {
 .list-aslide .erweima {
   width: 80%;
   max-width: 150px;
-  margin-top: 40px;
+  margin-top: 30px;
   padding: 10px 0;
 }
+.list-aslide .aslide-footer {
+  font-size: 12px;
+  text-align: center;
+  color: #aaa;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
 .list-container {
-  width: 82%;
   position: fixed;
-  left: 18%;
+  left: 230px;
   top: 0;
+  right: 0;
   height: 100%;
   overflow: auto;
 }
@@ -98,9 +144,9 @@ body {
   height: 60px;
   background-color: #fafafa;
   position: fixed;
-  width: 82%;
-  left: 18%;
+  left: 230px;
   top: 0;
+  right: 0;
   z-index: 2;
 }
 .list-header .aslide-switch {
@@ -117,10 +163,14 @@ body {
   content: '\e62c';
 }
 .list-header .list-header-nav {
-  margin: 17.5px 0 0 30px;
+  margin: 7.5px 15px 0 40px;
+  padding: 10px;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 .list-header .list-header-nav .lhn-item {
-  font-size: 15px;
+  font-size: 14px;
   padding: 5px 15px;
   background-color: #ddd;
   margin-right: 2px;
@@ -128,6 +178,20 @@ body {
 .list-header .list-header-nav .lhn-item.active {
   background-color: #5181f1;
   color: #fff;
+}
+.list-header .list-header-nav2 .lhn-item {
+  background-color: transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  color: #666;
+}
+.list-header .list-header-nav2 .lhn-item .icon-prev {
+  padding-right: 3px;
+}
+.list-header .list-header-nav2 .lhn-item .icon-next {
+  padding-left: 3px;
 }
 .list-aslide.active {
   left: -100%;

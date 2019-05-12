@@ -74,4 +74,11 @@
 .case-list .case-item:hover .case-desc {
   color: #fff;
 }
+@media screen and (max-width: 500px) {
+  .case-list .case-item {
+    float: none;
+    margin: 0 auto;
+    margin-top: 15px;
+  }
+}
 /*# sourceMappingURL=case.css.map */

@@ -37,8 +37,8 @@ AppAsset::register($this);
                 <li><a href="/">首页</a></li>
                 <li><a href="#">关于</a></li>
                 <li><a href="#">服务</a></li>
-                <li><a href="#">流程</a></li>
-                <li><a href="/case">案例</a></li>
+                <li><a href="/case">精品案例</a></li>
+                <li><a href="/news">新闻动态</a></li>
                 <li><a href="#">合作</a></li>
                 <li><a href="#">联系</a></li>
                 <li class="telephone-box js_telephone_box">

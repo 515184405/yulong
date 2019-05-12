@@ -14,21 +14,31 @@
                     $('.list-aslide,.list-container').addClass('active');
                 }
 
+                //案例列表动画改编
+                setTimeout(function(){
+                    !!addAnimateDelay && typeof(addAnimateDelay) == 'function' && addAnimateDelay();
+                    $('.list-container').scroll();
+                },300)
             })
+
+
             //首页增加滚动动画
+            function addScrollAnimate(){
+                $(".animated").each(function(){
+                    var pos = $(this).offset().top;
+                    var animatedType = $(this).attr('animate-type');
+                    var winHeight = $(window).height();
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + winHeight) {
+                        $(this).addClass(animatedType);
+                    }
+                });
+            };
+
             var scrollFun = function(){
                 $('.list-container').scroll(function() {
-                    $(".animated").each(function(){
-                        var pos = $(this).offset().top;
-                        var animatedType = $(this).attr('animate-type');
-                        var winHeight = $(window).height();
-                        var winTop = $(window).scrollTop();
-                        if (pos < winTop + winHeight) {
-                            $(this).addClass(animatedType);
-                        }
-                    });
+                    addScrollAnimate();
                 });
-
                 $('.list-container').scroll();
             };
             scrollFun();
