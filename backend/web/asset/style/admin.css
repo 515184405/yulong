@@ -503,7 +503,24 @@ html{background-color: #f2f2f2; color: #666;}
 .layadmin-tips h1{font-size: 100px; line-height: 100px; color: #009688;}
 .layadmin-tips .layui-text .layui-anim{display: inline-block;}
 
+
 /*内容*/
+@font-face {
+  font-family: 'iconfont';  /* project id 1174705 */
+  src: url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.eot');
+  src: url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1174705_7x47rlbkj4c.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
 .wrapper{
   background-color: #fff;
   padding:15px;
@@ -525,6 +542,23 @@ html{background-color: #f2f2f2; color: #666;}
 }
 .ml10{
   margin-left:10px;
+}
+.upload-image-box{
+  position: relative;
+  display: inline-block;
+}
+.upload-image-close{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 90%;
+  text-align: center;
+  top: 50%;
+  margin-top: -15px;
+  font-size: 24px;
+  color: #f00;
+  z-index: 5;
+  cursor: pointer;
 }
 /*
 

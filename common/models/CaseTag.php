@@ -42,4 +42,17 @@ class CaseTag extends \yii\db\ActiveRecord
             'case_id' => 'Case ID',
         ];
     }
+
+    //插入数据
+    public function insetData($data,$case_id){
+        $tagStr = '';
+        foreach ($data as $val){
+            $model = new static();
+            $model->setAttributes(['title' => $val,'case_id'=>strval($case_id)]);
+            if($model->save()){
+                $tagStr .= $model->attributes['tag_id'] . ',';
+            };
+        }
+        return $tagStr;
+    }
 }

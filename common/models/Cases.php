@@ -13,7 +13,7 @@ use Yii;
  * @property string $pc_link
  * @property string $wap_link
  * @property string $wx_link
- * @property string $create_time
+ * @property int $create_time
  * @property string $banner_url
  * @property string $header_url
  * @property string $content_url
@@ -36,7 +36,7 @@ class Cases extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['create_time'], 'safe'],
+            [['create_time'], 'integer'],
             [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 300],
             [['desc'], 'string', 'max' => 255],
         ];

@@ -1,48 +1,27 @@
-<?php
-
+<?PHP
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
-
 /**
- * This is the model class for table "upload_form".
- *
- * @property int $id
- * @property string $src
+ * UploadForm is the model behind the upload form.
  */
-class UploadForm extends \yii\db\ActiveRecord
+class UploadForm extends Model
 {
     /**
-     * {@inheritdoc}
+     * @var UploadedFile file attribute
      */
-    public static function tableName()
-    {
-        return 'upload_form';
-    }
+    public $file;
 
     /**
-     * {@inheritdoc}
+     * @return array the validation rules.
      */
     public function rules()
     {
         return [
-            [['src'], 'string', 'max' => 500],
+            [['file'], 'file'],
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'src' => 'Src',
-        ];
-    }
-
-
 }
+?>

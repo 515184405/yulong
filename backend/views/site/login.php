@@ -94,32 +94,58 @@
         form.render();
 
         //提交
+        /* 自定义验证规则 */
+        form.verify({
+            username: function(value){
+                value = $.trim(value);
+                var errorMsg = '账号格式不正确！';
+                //是否为手机号码
+                if (!/(^1[3|5|6|7|8][0-9]{9}$)/.test(value)) {
+                    //是否为邮箱
+                    if (!/(^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/.test(value)) {
+                        return errorMsg;
+                    }
+                }
+            },
+        });
+
+        //提交
         form.on('submit(LAY-user-login-submit)', function(data){
             layer.load(1, {shade: .1});
-            var _this = this;_this.disabled=true;//防止多次提交
-            var params = data.field;
-            //请求登入接口
             $.ajax({
                 type: "post",
                 url: "",
-                data: params,
+                data: data.field,
                 dataType: "json",
-                success: function(res) {
-                    layer.closeAll();
-                    alert(111)
-
+                success: function(data) {
+                    if(data.code == 100000){
+                        layer.msg(data.message, {icon: 1,time:1500}, function(){
+                            window.location.href='/';
+                        })
+                    }else{
+                        layer.closeAll();
+                        layer.msg(data.message,{icon: 5,time:1500}, function(){
+                            //异步刷新验证码
+                            $(".captcha").attr('src','/common/captcha?t='+Math.random());
+                            $("input[name='captcha']").val("");
+                            if(data.code == 3){
+                                window.location.reload();
+                            }
+                        })
+                    }
                 },
                 error: function(){
                     layer.closeAll();
-                    _this.disabled=false;
-                    layer.msg('操作失败', {icon: 1}, function(){
-
-                    })
+                    layer.msg("登录失败，请稍后再试！", function () {
+                        window.location.reload();
+                    });
                 }
             });
-
-
+            return false;
         });
+
+
+
 
 
         //增加背景动画

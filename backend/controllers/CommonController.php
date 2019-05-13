@@ -1,6 +1,10 @@
 <?php
 namespace backend\controllers;
 
+use Yii;
+use common\models\UploadForm;
+use yii\helpers\Json;
+use yii\web\UploadedFile;
 
 /**
  * {@inheritdoc}
@@ -31,4 +35,29 @@ class CommonController extends \yii\web\Controller{
 //            ],
 //        ];
 //    }
+
+    public function uploadImage(){
+        $model = new UploadForm();
+        if (Yii::$app->request->isPost) {
+            $date = date('Ymd').'/';
+            $dress = isset($_POST['caseDir']) ? $_POST['caseDir'] : 'template/';
+            $rootDir = 'uploads/'.$dress.$date;
+            $fileName = isset($_POST['fileName']) ? $_POST['fileName'] : '';
+            $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
+            if ($model->file && $model->validate()) {
+                is_dir($rootDir) OR mkdir($rootDir, 0777, true);
+                $fileSrc=$rootDir . rand(10000, 99999) .time() . '.' . $model->file->extension;
+                $model->file->saveAs($fileSrc);
+                return array(
+                    'fileName' => $fileName,
+                    'fileSrc' => $fileSrc,
+                    'status' => true,
+                );
+            }
+            return array(
+                'status' => false,
+            );
+        }
+    }
+
 }
