@@ -102,7 +102,6 @@
                     <select name="type_id" lay-verify="required" lay-text="案例类型必填">
                         <option value="">请选择</option>
                         <?php foreach($data['case_type'] as $key => $val){ ?>
-                            <option selected value="1">aaa</option>
                             <option <?=(isset($data['case']['type_id']) && $data['case']['type_id'] == $val['type_id']) ? 'selected' : ''?> value="<?=$val['type_id']?>"><?=$val['title']?></option>
                         <?php } ?>
                     </select>
@@ -119,7 +118,7 @@
                             $tag_id .= ','.$val['tag_id']['tag_id'];
                         }}
                     ?>
-                    <input id="tags_1" type="text" lay-verify="required" name="tag_id" placeholder="添加标签" class="tags" value="1<?= isset($tag_title) ? substr($tag_title,1): '' ?>" />
+                    <input id="tags_1" type="text" lay-verify="required" name="tag_id" placeholder="添加标签" class="tags" value="<?= isset($tag_title) ? substr($tag_title,1): '' ?>" />
                     <input type="hidden" name="tag_ids" value="<?=isset($tag_id) ? substr($tag_id,1) : ''?>">
                 </div>
             </div>
@@ -267,7 +266,7 @@
                 success: function(res) {
                     layer.closeAll();
                     layer.msg(res.message);
-
+                    _this.disabled=false;
                 },
                 error: function(){
                     layer.closeAll();
