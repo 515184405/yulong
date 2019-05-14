@@ -37,8 +37,7 @@ class Cases extends \yii\db\ActiveRecord
     {
         return [
             [['create_time'], 'integer'],
-            [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 300],
-            [['desc'], 'string', 'max' => 255],
+            [['title', 'desc', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -62,4 +61,27 @@ class Cases extends \yii\db\ActiveRecord
             'tag_id' => 'Tag ID',
         ];
     }
+
+    /*
+     * 关联case_tag_join表
+     * */
+    public function getTag_join(){
+        return $this->hasMany(CaseTagJoin::className(),['case_id' => 'id'])->with('tag_id');
+    }
+
+    /*存与更新数据*/
+    public function insertUpdate($params,$case_id = null){
+        $params['create_time'] = time();
+        $casesModel = new static();
+        if(!empty($case_id)) {
+            $casesModel = $casesModel::findOne($case_id);
+        }
+        $casesModel->setAttributes($params);
+        $casesModel->save();
+        if(empty($case_id)) {
+            return $casesModel->attributes['id'];
+        }
+        return $case_id;
+    }
+
 }

@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/asset/style/jquery.tagsinput.css">
+<?php //var_dump($data['case']['tag_join']); ?>
+<?php //var_dump(\yii\helpers\Json::encode($data));die;?>
 <div class="layui-card">
     <div class="layui-card-header header-title">创建案例</div>
     <div class="layui-card-body">
@@ -6,42 +8,44 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">案例标题</label>
                 <div class="layui-input-block">
-                    <input type="text" name="title" lay-verify="required" lay-text="标题不能为空" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    <input type="text" value="<?=isset($data['case']['title']) ? $data['case']['title'] : ''?>" name="title" lay-verify="required" lay-text="标题不能为空" autocomplete="off" placeholder="请输入标题" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">案例描述</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea layui-hide" name="desc" id="LAY_demo_editor"></textarea>
+                    <textarea class="layui-textarea layui-hide" name="desc" id="LAY_demo_editor">
+                        <?=isset($data['case']['deac']) ? $data['case']['deac'] : ''?>
+                    </textarea>
                 </div>
             </div>
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">案例地址</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" lay-filter="filter-link" value="pc" lay-skin="primary" title="PC端地址">
-                    <input type="checkbox" lay-filter="filter-link" value="wap" lay-skin="primary" title="移动端地址">
-                    <input type="checkbox" lay-filter="filter-link" value="wx" lay-skin="primary" title="微信二维码">
+                    <input type="checkbox" <?=isset($data['case']['pc_link']) ? 'checked' : ''?> lay-filter="filter-link" value="pc" lay-skin="primary" title="PC端地址">
+                    <input type="checkbox" <?=isset($data['case']['wap_link']) ? 'checked' : ''?> lay-filter="filter-link" value="wap" lay-skin="primary" title="移动端地址">
+                    <input type="checkbox" <?=(isset($data['case']['wx_link']) && !empty($data['case']['wx_link'])) ? 'checked' : ''?> lay-filter="filter-link" value="wx" lay-skin="primary" title="微信二维码">
                 </div>
             </div>
-            <div id="pc_link" class="layui-form-item layui-hide">
+            <div id="pc_link" class="layui-form-item  <?=isset($data['case']['pc_link']) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">PC端地址</label>
                 <div class="layui-input-block">
-                    <input type="text" name="pc_link" placeholder="请输入PC端地址" autocomplete="off" class="layui-input">
+                    <input type="text" value="<?=isset($data['case']['pc_link']) ? $data['case']['pc_link'] : ''?>" name="pc_link" placeholder="请输入PC端地址" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div id="wap_link" class="layui-form-item layui-hide">
+            <div id="wap_link" class="layui-form-item <?=isset($data['case']['wap_link']) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">移动端地址</label>
                 <div class="layui-input-block">
-                    <input type="text" name="wap_link" placeholder="请输入移动端地址" autocomplete="off" class="layui-input">
+                    <input type="text" value="<?=isset($data['case']['pc_link']) ? $data['case']['wap_link'] : ''?>" name="wap_link" placeholder="请输入移动端地址" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div id="wx_link" class="layui-form-item layui-hide">
+            <div id="wx_link" class="layui-form-item <?=(isset($data['case']['wx_link']) && !empty($data['case']['wx_link'])) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">微信二维码</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal1">上传图片</button>
-                    <input type="hidden" class="js_wx_link" name="wx_link">
+                    <input type="hidden" value="<?=isset($data['case']['wx_link']) ? $data['case']['wx_link'] : ''?>" class="js_wx_link" name="wx_link">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="test-upload-normal-img1">
+                        <img class="layui-upload-img" src="<?=isset($data['case']['wx_link']) ? $data['case']['wx_link'] : ''?>" id="test-upload-normal-img1">
                         <p id="test-upload-demoText1"></p>
                     </div>
                 </div>
@@ -50,9 +54,9 @@
                 <label class="layui-form-label">列表小图</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal2">上传图片</button><span class="theme-red ml10">建议上传280 * 180</span>
-                    <input type="hidden" lay-verify="required" lay-text="请上传列表小图" class="js_banner_url" name="banner_url">
+                    <input type="hidden" value="<?=isset($data['case']['banner_url']) ? $data['case']['banner_url'] : ''?>" lay-verify="required" lay-text="请上传列表小图" class="js_banner_url" name="banner_url">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="test-upload-normal-img2">
+                        <img class="layui-upload-img" src="<?=isset($data['case']['banner_url']) ? $data['case']['banner_url'] : ''?>" id="test-upload-normal-img2">
                         <p id="test-upload-demoText2"></p>
                     </div>
                 </div>
@@ -62,9 +66,9 @@
                 <label class="layui-form-label">详情头图</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal3">上传图片</button><span class="theme-red ml10">建议上传1920 * 500</span>
-                    <input type="hidden" lay-verify="required" lay-text="请上传详情头图" class="js_header_url" name="header_url">
+                    <input type="hidden" value="<?=isset($data['case']['header_url']) ? $data['case']['header_url'] : null?>" lay-verify="required" lay-text="请上传详情头图" class="js_header_url" name="header_url">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" id="test-upload-normal-img3">
+                        <img class="layui-upload-img" src="<?=isset($data['case']['header_url']) ? $data['case']['header_url'] : null?>" id="test-upload-normal-img3">
                         <p id="test-upload-demoText3"></p>
                     </div>
 
@@ -75,10 +79,17 @@
                 <label class="layui-form-label">内容大图</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-primary" id="test-upload-more">多图片上传</button>
-                    <input type="hidden" lay-verify="required" lay-text="请上传内容大图" class="js_content_url" name="content_url">
+                    <input type="hidden" value="<?=isset($data['case']['content_url']) ? $data['case']['content_url'] : ''?>" lay-verify="required" lay-text="请上传内容大图" class="js_content_url" name="content_url">
                     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
                         预览图：
-                        <div class="layui-upload-list" id="test-upload-more-list"></div>
+                        <div class="layui-upload-list" id="test-upload-more-list">
+                            <?php if(isset($data['case']['content_url'])){
+                                $conent_url_arr = explode(',',substr($data['case']['content_url'],1));
+                                foreach ($conent_url_arr as $key => $val){
+                            ?>
+                                <p class="upload-image-box"><img src="<?=$val?>" class="layui-upload-img"><i class="iconfont upload-image-close js_close_icon">&#xe61b;</i></p>
+                            <?php }} ?>
+                        </div>
                     </blockquote>
 
                 </div>
@@ -90,11 +101,10 @@
                 <div class="layui-input-block">
                     <select name="type_id" lay-verify="required" lay-text="案例类型必填">
                         <option value="">请选择</option>
-                        <option value="0">写作</option>
-                        <option value="1">阅读</option>
-                        <option value="2">游戏</option>
-                        <option value="3">音乐</option>
-                        <option value="4">旅行</option>
+                        <?php foreach($data['case_type'] as $key => $val){ ?>
+                            <option selected value="1">aaa</option>
+                            <option <?=(isset($data['case']['type_id']) && $data['case']['type_id'] == $val['type_id']) ? 'selected' : ''?> value="<?=$val['type_id']?>"><?=$val['title']?></option>
+                        <?php } ?>
                     </select>
                 </div>
             </div>
@@ -102,7 +112,15 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">案例标签</label>
                 <div class="layui-input-block">
-                    <input id="tags_1" type="text" lay-verify="required" name="tag_id" placeholder="添加标签" class="tags" value="foo,bar,baz,roffle" />
+                    <?php if(isset($data['case']['tag_join'])) {
+                        $tag_title = '';$tag_id = '';
+                        foreach ($data['case']['tag_join'] as $key => $val) {
+                            $tag_title .= ','.$val['tag_id']['title'];
+                            $tag_id .= ','.$val['tag_id']['tag_id'];
+                        }}
+                    ?>
+                    <input id="tags_1" type="text" lay-verify="required" name="tag_id" placeholder="添加标签" class="tags" value="1<?= isset($tag_title) ? substr($tag_title,1): '' ?>" />
+                    <input type="hidden" name="tag_ids" value="<?=isset($tag_id) ? substr($tag_id,1) : ''?>">
                 </div>
             </div>
 
@@ -132,7 +150,7 @@
         //超文本编辑器
         layedit.set({
             uploadImage: {
-                url: '/case/layedit', //接口url
+                url: '/cases/layedit', //接口url
                 type: 'post' //默认post
             }
         });
@@ -153,7 +171,7 @@
             var fileName = $(elem).parent().find('input[type="hidden"]').attr('name');
             var uploadInst = upload.render({
                 elem: '#test-upload-normal'+(key+1)
-                , url: '/case/upload-image'
+                , url: '/cases/upload-image'
                 ,data:{
                     fileName : fileName,
                     caseDir : 'case/'+fileName+'/'
@@ -188,7 +206,7 @@
         //多图片上传
         upload.render({
             elem: '#test-upload-more'
-            ,url: '/case/upload-image'
+            ,url: '/cases/upload-image'
             ,data:{
                 fileName : 'content_url',
                 caseDir : 'case/content_url/'
@@ -227,7 +245,7 @@
                 currentImg.parent().remove();
                 layer.closeAll();
                 //删除线上图片
-                $.post('/case/remove-image',{filesrc:imgSrc},function(){});
+                $.post('/cases/remove-image',{filesrc:imgSrc},function(){});
             }, function(){
 
             });
@@ -241,7 +259,6 @@
             layer.load(1, {shade: .1});
             var _this = this;_this.disabled=true;//防止多次提交
             var params = data.field;
-
             $.ajax({
                 type: "post",
                 url: "",
@@ -249,7 +266,7 @@
                 dataType: "json",
                 success: function(res) {
                     layer.closeAll();
-
+                    layer.msg(res.message);
 
                 },
                 error: function(){

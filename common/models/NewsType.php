@@ -27,7 +27,8 @@ class NewsType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'news_id'], 'string', 'max' => 255],
+            [['news_id'], 'string'],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 

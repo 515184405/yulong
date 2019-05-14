@@ -27,7 +27,8 @@ class CaseType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'case_id'], 'string', 'max' => 255],
+            [['case_id'], 'string'],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 

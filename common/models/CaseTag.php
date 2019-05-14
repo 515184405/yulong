@@ -27,7 +27,7 @@ class CaseTag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'case_id'], 'string', 'max' => 100],
+            [['title'], 'string', 'max' => 100],
         ];
     }
 
@@ -39,19 +39,23 @@ class CaseTag extends \yii\db\ActiveRecord
         return [
             'tag_id' => 'Tag ID',
             'title' => 'Title',
-            'case_id' => 'Case ID',
         ];
     }
 
     //插入数据
-    public function insetData($data,$case_id){
-        $tagStr = '';
+    public function insertUpdate($data){
+        $tagStr = [];
         foreach ($data as $val){
             $model = new static();
-            $model->setAttributes(['title' => $val,'case_id'=>strval($case_id)]);
-            if($model->save()){
-                $tagStr .= $model->attributes['tag_id'] . ',';
-            };
+            $oneModel = $model->find()->where(['title'=>$val])->one();
+            if(!$oneModel){
+                $model->setAttributes(['title' => $val]);
+                if($model->save()){
+                    array_push($tagStr,$model->attributes['tag_id']);
+                };
+            }else{
+                array_push($tagStr,$oneModel->attributes['tag_id']);
+            }
         }
         return $tagStr;
     }

@@ -87,20 +87,20 @@
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item">
-                        <a href="/console" lay-tips="控制台" lay-direction="2">
+                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
+                        <a href="/console" class="layui-this" lay-tips="控制台" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>控制台</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
-                        <a href="/case"  class="" lay-tips="精品案例" lay-direction="2">
+                        <a href="/cases"  class="" lay-tips="精品案例" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>精品案例</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a href="/news"  class="layui-this" lay-tips="文章列表" lay-direction="2">
+                        <a href="/news" lay-tips="文章列表" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>文章列表</cite>
                         </a>

@@ -1,0 +1,62 @@
+<?php
+
+namespace common\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "case_tag_join".
+ *
+ * @property int $id
+ * @property int $tag_id
+ * @property int $case_id
+ */
+class CaseTagJoin extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'case_tag_join';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['tag_id', 'case_id'], 'integer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'tag_id' => 'Tag ID',
+            'case_id' => 'Case ID',
+        ];
+    }
+
+    public function getTag_id(){
+        return $this->hasOne(CaseTag::className(),['tag_id' => 'tag_id']);
+    }
+
+    public function insertUpdate($cases_id,$caseTag_id){
+        $models = new static();
+        $models::deleteAll('case_id in('.$cases_id.')');
+        foreach ($caseTag_id as $val){
+            $model = new static();
+            $oneModel = $model->find()->where(['tag_id'=>$val])->one();
+            if(!$oneModel) {
+                $model->setAttributes(['tag_id' => $val, 'case_id' => $cases_id]);
+                $model->save();
+            }
+        };
+    }
+}
