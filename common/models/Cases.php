@@ -36,8 +36,9 @@ class Cases extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['desc'], 'string'],
             [['create_time'], 'integer'],
-            [['title', 'desc', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
+            [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
         ];
     }
 
@@ -61,12 +62,40 @@ class Cases extends \yii\db\ActiveRecord
             'tag_id' => 'Tag ID',
         ];
     }
-
     /*
      * 关联case_tag_join表
      * */
     public function getTag_join(){
         return $this->hasMany(CaseTagJoin::className(),['case_id' => 'id'])->with('tag_id');
+    }
+
+    /*关联case_type*/
+    public function getCaseType(){
+        return $this->hasOne(CaseType::className(),['type_id' => 'type_id']);
+    }
+
+    /*删除数据*/
+    public static function deletes($id){
+        Cases::deleteAll(['id'=>$id]);
+    }
+
+    /*查数据*/
+    public static function search($params){
+       $query = static::find();
+       //按title查找
+       if(isset($params['title'])){
+           $query->andFilterWhere(['like','Cases.title',$params['title']]);
+       }
+       $page = isset($params['page']) ? $params['page'] : '';
+       $limit = isset($params['limit']) ? $params['limit'] : '';
+       $count = 0;
+       if($page && $limit){
+           $offset = ($page - 1) * $limit;
+           $count = $query->count();
+           $query->offset($offset)->limit($limit);
+       }
+       $list = $query->joinWith('caseType')->asArray()->all();
+        return compact('count', 'list');
     }
 
     /*存与更新数据*/
@@ -77,11 +106,12 @@ class Cases extends \yii\db\ActiveRecord
             $casesModel = $casesModel::findOne($case_id);
         }
         $casesModel->setAttributes($params);
-        $casesModel->save();
-        if(empty($case_id)) {
-            return $casesModel->attributes['id'];
-        }
-        return $case_id;
+        if($casesModel->save()){
+            if(empty($case_id)) {
+                return $casesModel->attributes['id'];
+            }
+            return $case_id;
+        };
+       return false;
     }
-
 }

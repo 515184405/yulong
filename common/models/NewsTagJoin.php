@@ -5,20 +5,20 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "news_type".
+ * This is the model class for table "news_tag_join".
  *
- * @property int $type_id
- * @property string $title
- * @property string $news_id
+ * @property int $id
+ * @property int $tag_id
+ * @property int $news_id
  */
-class NewsType extends \yii\db\ActiveRecord
+class NewsTagJoin extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'news_type';
+        return 'news_tag_join';
     }
 
     /**
@@ -27,7 +27,7 @@ class NewsType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'string', 'max' => 255],
+            [['tag_id', 'news_id'], 'integer'],
         ];
     }
 
@@ -37,8 +37,9 @@ class NewsType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'type_id' => 'Type ID',
-            'title' => 'Title',
+            'id' => 'ID',
+            'tag_id' => 'Tag ID',
+            'news_id' => 'News ID',
         ];
     }
 }

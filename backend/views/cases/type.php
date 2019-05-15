@@ -44,7 +44,7 @@
                             layer.closeAll();
                             window.location.reload();
                         }, function(){
-                            location.href='/case';
+                            location.href='/cases';
                         });
                     }else{
                         layer.msg(res.message, {icon: 1}, function(){

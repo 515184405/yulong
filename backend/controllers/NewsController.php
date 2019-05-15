@@ -24,7 +24,14 @@ class NewsController extends CommonController
     //创建文章
     public function actionInfo()
     {
-        return $this->render('info');
+        if(Yii::$app->request->isPost){
+            $params = $_POST;
+            //存newsModel数据
+            var_dump($params);die;
+        }
+        //查类型数据
+        $data['type'] = NewsType::find()->asArray()->all();
+        return $this->render('info',compact('data'));
     }
     //新增文章类型
     public function actionType()
@@ -42,5 +49,20 @@ class NewsController extends CommonController
             }
         }
         return $this->render('type');
+    }
+
+    //图片上传
+    public function actionUploadImage(){
+        $uploadImage = $this->uploadImage();
+        if(isset($uploadImage)){
+            if($uploadImage['status']) {
+                return Json::encode(array('code'=>'100000','message'=>'添加成功！','data'=>array(
+                    'fileName' => $uploadImage['fileName'],
+                    'fileSrc' => '/'.$uploadImage['fileSrc']
+                )));
+            }else{
+                return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
+            }
+        }
     }
 }

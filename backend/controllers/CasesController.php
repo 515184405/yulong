@@ -21,48 +21,14 @@ class CasesController extends CommonController
      */
     public function actionIndex()
     {
+        //读数据
+        $params = Yii::$app->request->get();
+        if(Yii::$app->request->isAjax){
+            $data = Cases::search($params);
+            return $this->convertJson('0','查询成功',$data['list'], $data['count']);
+        }
         return $this->render('index');
     }
-
-    //创建案例
-//    public function actionInfo()
-//    {
-//        $case_id = isset($_GET['id']) ? $_GET['id'] : '';
-//        //存数据
-//        if (Yii::$app->request->isPost) {
-//
-//            $params = $_POST;
-//            $params['create_time'] = time();
-//            $caseTag = new CaseTag();
-//            $casesModel = new Cases();
-//            $caseTagArr = explode(',',$params['tag_id']);
-//            if(!empty($case_id)) {
-//                $casesModel = $casesModel::findOne($case_id);
-//            }
-//            $casesModel->setAttributes($params);
-//            $tagStr = '';
-//            if($casesModel->save()){
-//                $casesModel::find()->where(['id'=>$casesModel->attributes['id']])->one();
-//                //存标签并更新案例关联标签
-//                $casesModel->tag_id = $caseTag->insetData($caseTagArr);
-//                $casesModel->save();
-//
-//                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
-//            }
-//            return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
-//        }
-//
-//        //读数据
-//        $caseType = new CaseType();
-//        $data['case_type'] = $caseType::find()->asArray()->all();
-//        if(!empty($case_id)){
-//            $case = new Cases();
-//            $data['case'] = $case::find()->joinWith('tag_id')->where(['id'=>$case_id])->asArray()->one();
-//        }
-//        return $this->render('info',compact('data'));
-//    }
-
-
 
     //创建案例
     public function actionInfo()
@@ -79,9 +45,15 @@ class CasesController extends CommonController
             $caseTagModel = new CaseTag();
             $caseTagArr = explode(',',$params['tag_id']);
             $caseTag_id = $caseTagModel->insertUpdate($caseTagArr);
+            if(!$caseTag_id){
+                return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
+            }
             //存或更新caseTagJoin表
             $CaseTagJoinModel = new CaseTagJoin();
             $CaseTagJoinModel->insertUpdate($cases_id,$caseTag_id);
+            if($case_id){
+                return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
+            }
             if($caseTag_id && $cases_id){
                 return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
             }
@@ -94,8 +66,22 @@ class CasesController extends CommonController
         if(!empty($case_id)){
             $cases = new Cases();
             $data['case'] = $cases::find()->joinWith(['tag_join'])->where(['Cases.id'=>$case_id])->asArray()->one();
+            if(empty($data['case'])){
+                return '此项目不存在';
+            }
         }
         return $this->render('info',compact('data'));
+    }
+
+    public function actionDelete(){
+        $caseid = isset($_POST['id']) ? $_POST['id'] : '';
+        if(Yii::$app->request->isPost && $caseid){
+            Cases::deletes($caseid);
+            CaseTagJoin::deletes($caseid);
+            return Json::encode(['code' => 100000,'message' => '删除成功']);
+        }else{
+            return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);
+        }
     }
 
 
@@ -114,20 +100,6 @@ class CasesController extends CommonController
         }
     }
 
-    //编辑器图片上传
-    public function actionLayedit(){
-        $uploadImage = $this->uploadImage();
-        if(isset($uploadImage)){
-            if($uploadImage['status']) {
-                return Json::encode(array('code'=>'0','msg'=>'添加成功！','data'=>array(
-                    'title' => $uploadImage['fileName'],
-                    'src' => '/'.$uploadImage['fileSrc']
-                )));
-            }else{
-                return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
-            }
-        }
-    }
 
     //删除图片文件
     public function actionRemoveImage(){

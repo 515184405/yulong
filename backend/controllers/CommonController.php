@@ -36,6 +36,40 @@ class CommonController extends \yii\web\Controller{
 //        ];
 //    }
 
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config'=>[
+                    //上传图片配置
+                    //'imageUrlPrefix' => Yii::$app->params['site_url'], /* 图片访问路径前缀 */
+                ]
+            ]
+        ];
+    }
+
+    /**转Json格式
+     * @param $code
+     * @param $message
+     * @param $data
+     * @param $count
+     * @return string
+     */
+    public function convertJson($code, $message, $data = '', $count = null)
+    {
+
+        $Json['code'] = $code;
+        $Json['msg'] = $message;
+        $Json['data'] = $data;
+        if (!empty($count)) {
+            $Json['count'] = $count;
+        }
+        return json_encode($Json);
+
+    }
+
+    //图片上传
     public function uploadImage(){
         $model = new UploadForm();
         if (Yii::$app->request->isPost) {

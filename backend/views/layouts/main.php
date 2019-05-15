@@ -1,5 +1,5 @@
 
-
+<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,5 +128,6 @@
 </div>
 </body>
 </html>
+<?php $this->endPage() ?>
 
 

@@ -10,7 +10,8 @@ use Yii;
  * @property int $id
  * @property string $title 标题
  * @property string $desc 简介
- * @property string $create_time 创建时间
+ * @property int $create_time 创建时间
+ * @property string $banner_url
  * @property int $look 点击率
  * @property string $type_id 类型
  * @property string $tag_id 标签
@@ -34,12 +35,10 @@ class News extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['create_time'], 'safe'],
-            [['look', 'issue'], 'integer'],
-            [['content'], 'string'],
-            [['title'], 'string', 'max' => 300],
-            [['desc'], 'string', 'max' => 500],
-            [['type_id', 'tag_id', 'sourse'], 'string', 'max' => 100],
+            [['desc', 'content'], 'string'],
+            [['create_time', 'look', 'issue'], 'integer'],
+            [['title', 'banner_url', 'tag_id', 'sourse'], 'string', 'max' => 255],
+            [['type_id'], 'string', 'max' => 11],
         ];
     }
 
@@ -53,6 +52,7 @@ class News extends \yii\db\ActiveRecord
             'title' => 'Title',
             'desc' => 'Desc',
             'create_time' => 'Create Time',
+            'banner_url' => 'Banner Url',
             'look' => 'Look',
             'type_id' => 'Type ID',
             'tag_id' => 'Tag ID',
@@ -60,5 +60,13 @@ class News extends \yii\db\ActiveRecord
             'content' => 'Content',
             'issue' => 'Issue',
         ];
+    }
+
+    public static function insertUpdate($params,$news_id){
+        if($news_id){
+
+        }
+        News::setAttributes($params);
+        News::save();
     }
 }

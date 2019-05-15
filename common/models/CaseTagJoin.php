@@ -47,16 +47,18 @@ class CaseTagJoin extends \yii\db\ActiveRecord
         return $this->hasOne(CaseTag::className(),['tag_id' => 'tag_id']);
     }
 
+    //删除数据
+    public static function deletes($id){
+        CaseTagJoin::deleteAll(['case_id'=>$id]);
+    }
+
     public function insertUpdate($cases_id,$caseTag_id){
         $models = new static();
         $models::deleteAll('case_id in('.$cases_id.')');
         foreach ($caseTag_id as $val){
             $model = new static();
-            $oneModel = $model->find()->where(['tag_id'=>$val])->one();
-            if(!$oneModel) {
-                $model->setAttributes(['tag_id' => $val, 'case_id' => $cases_id]);
-                $model->save();
-            }
+            $model->setAttributes(['tag_id' => $val, 'case_id' => $cases_id]);
+            $model->save();
         };
     }
 }

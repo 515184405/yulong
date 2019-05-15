@@ -1,8 +1,11 @@
+<?php
+use kucha\ueditor\UEditor;
+?>
 <link rel="stylesheet" href="/asset/style/jquery.tagsinput.css">
 <?php //var_dump($data['case']['tag_join']); ?>
 <?php //var_dump(\yii\helpers\Json::encode($data));die;?>
 <div class="layui-card">
-    <div class="layui-card-header header-title">创建案例</div>
+    <div class="layui-card-header header-title"><?=isset($_GET['id']) ? '修改案例' : '添加案例'?></div>
     <div class="layui-card-body">
         <form class="layui-form" action="">
             <div class="layui-form-item">
@@ -14,9 +17,17 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">案例描述</label>
                 <div class="layui-input-block">
-                    <textarea class="layui-textarea layui-hide" name="desc" id="LAY_demo_editor">
-                        <?=isset($data['case']['deac']) ? $data['case']['deac'] : ''?>
-                    </textarea>
+                    <?php echo UEditor::widget([
+                        'id'=>'desc',
+                        'name'=>'desc',
+                        'value'=>isset($data['case']['desc']) ? $data['case']['desc'] : '',
+                        'clientOptions'=>[
+                            'initialFrameHeight'=>'200',
+                            'scaleEnabled'=>true,
+                            //'initialFrameWidth'=>'40%',
+                            'toolbars'=>Yii::$app->params['toolbars']
+                        ]
+                    ]);?>
                 </div>
             </div>
             <div class="layui-form-item" pane="">
@@ -42,10 +53,10 @@
             <div id="wx_link" class="layui-form-item <?=(isset($data['case']['wx_link']) && !empty($data['case']['wx_link'])) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">微信二维码</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal1">上传图片</button>
+                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal1">上传图片</button><span class="theme-red ml10">建议上传200*200，图片大小不要超过2M</span>
                     <input type="hidden" value="<?=isset($data['case']['wx_link']) ? $data['case']['wx_link'] : ''?>" class="js_wx_link" name="wx_link">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" src="<?=isset($data['case']['wx_link']) ? $data['case']['wx_link'] : ''?>" id="test-upload-normal-img1">
+                        <img class="layui-upload-img" <?=isset($data['case']['wx_link']) ? 'src="'.$data['case']['wx_link'].'"' : ''?>" id="test-upload-normal-img1">
                         <p id="test-upload-demoText1"></p>
                     </div>
                 </div>
@@ -53,10 +64,10 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">列表小图</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal2">上传图片</button><span class="theme-red ml10">建议上传280 * 180</span>
+                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal2">上传图片</button><span class="theme-red ml10">建议上传280 * 180，图片大小不要超过2M</span>
                     <input type="hidden" value="<?=isset($data['case']['banner_url']) ? $data['case']['banner_url'] : ''?>" lay-verify="required" lay-text="请上传列表小图" class="js_banner_url" name="banner_url">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" src="<?=isset($data['case']['banner_url']) ? $data['case']['banner_url'] : ''?>" id="test-upload-normal-img2">
+                        <img class="layui-upload-img" <?=isset($data['case']['banner_url']) ? 'src="'.$data['case']['banner_url'].'"' : ''?>" id="test-upload-normal-img2">
                         <p id="test-upload-demoText2"></p>
                     </div>
                 </div>
@@ -65,10 +76,10 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">详情头图</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal3">上传图片</button><span class="theme-red ml10">建议上传1920 * 500</span>
+                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal3">上传图片</button><span class="theme-red ml10">建议上传1920 * 500，图片大小不要超过2M</span>
                     <input type="hidden" value="<?=isset($data['case']['header_url']) ? $data['case']['header_url'] : null?>" lay-verify="required" lay-text="请上传详情头图" class="js_header_url" name="header_url">
                     <div class="layui-upload-list">
-                        <img class="layui-upload-img" src="<?=isset($data['case']['header_url']) ? $data['case']['header_url'] : null?>" id="test-upload-normal-img3">
+                        <img class="layui-upload-img" "<?=isset($data['case']['header_url']) ? 'src="'.$data['case']['header_url'].'"' : null?>" id="test-upload-normal-img3">
                         <p id="test-upload-demoText3"></p>
                     </div>
 
@@ -78,7 +89,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">内容大图</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary" id="test-upload-more">多图片上传</button>
+                    <button type="button" class="layui-btn layui-btn-primary" id="test-upload-more">多图片上传</button><span class="theme-red ml10">图片大小不要超过2M</span>
                     <input type="hidden" value="<?=isset($data['case']['content_url']) ? $data['case']['content_url'] : ''?>" lay-verify="required" lay-text="请上传内容大图" class="js_content_url" name="content_url">
                     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
                         预览图：
@@ -139,21 +150,11 @@
     }).extend({
         index: 'lib/index', //主入口模块
         tagsInput:'../lib/jquery.tagsinput.min'
-    }).use(['index', 'form','layedit','upload','tagsInput'], function(){
+    }).use(['index', 'form','upload','tagsInput'], function(){
 
         var $ = layui.$,
-            layedit = layui.layedit,
             upload = layui.upload,
             form = layui.form;
-
-        //超文本编辑器
-        layedit.set({
-            uploadImage: {
-                url: '/cases/layedit', //接口url
-                type: 'post' //默认post
-            }
-        });
-        var layedit_index = layedit.build('LAY_demo_editor');
 
         //链接地址
         form.on('checkbox(filter-link)',function(data){
@@ -265,8 +266,15 @@
                 dataType: "json",
                 success: function(res) {
                     layer.closeAll();
-                    layer.msg(res.message);
                     _this.disabled=false;
+                    // layer.confirm(res.message+'是否继续操作？', {
+                    //     btn: ['确定','取消'] //按钮
+                    // }, function(){
+                    //     layer.closeAll();
+                    //     window.location.reload();
+                    // }, function(){
+                    //     location.href='/cases';
+                    // });
                 },
                 error: function(){
                     layer.closeAll();
