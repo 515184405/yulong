@@ -86,24 +86,6 @@
         });
 
 
-        //头工具栏事件
-        table.on('toolbar(test-table-toolbar)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch(obj.event){
-                case 'getCheckData':
-                    var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
-                    break;
-                case 'getCheckLength':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：'+ data.length + ' 个');
-                    break;
-                case 'isAll':
-                    layer.msg(checkStatus.isAll ? '全选': '未全选');
-                    break;
-            };
-        });
-
         //监听行工具事件
         table.on('tool(test-table-toolbar)', function(obj){
             var data = obj.data;

@@ -27,7 +27,7 @@ class NewsTag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'news_id'], 'string', 'max' => 100],
+            [['title'], 'string', 'max' => 100],
         ];
     }
 
@@ -39,7 +39,24 @@ class NewsTag extends \yii\db\ActiveRecord
         return [
             'tag_id' => 'Tag ID',
             'title' => 'Title',
-            'news_id' => 'News ID',
         ];
+    }
+
+    /*存数据*/
+    public static function insertUpdate($tagArr){
+        $tagArrId = [];
+        foreach ($tagArr as $item) {
+            $model = new static();
+            $oneModel = $model->find()->where(['title'=>$item])->one();
+            if(!$oneModel){
+                $model->setAttributes(['title'=>$item]);
+                if($model->save()){
+                    array_push($tagArrId,$model->attributes['tag_id']);
+                };
+            }else{
+                array_push($tagArrId,$oneModel->attributes['tag_id']);
+            }
+        }
+        return $tagArrId;
     }
 }

@@ -1,6 +1,9 @@
 <?php
 namespace backend\controllers;
 
+use common\models\News;
+use common\models\NewsTag;
+use common\models\NewsTagJoin;
 use common\models\NewsType;
 use Yii;
 use yii\helpers\Json;
@@ -19,18 +22,40 @@ class NewsController extends CommonController
      */
     public function actionIndex()
     {
+        //读数据
+        $params = Yii::$app->request->get();
+        if(Yii::$app->request->isAjax){
+            $data = news::search($params);
+            return $this->convertJson('0','查询成功',$data['list'], $data['count']);
+        }
         return $this->render('index');
     }
     //创建文章
     public function actionInfo()
     {
+        $news_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(Yii::$app->request->isPost){
             $params = $_POST;
             //存newsModel数据
-            var_dump($params);die;
+            $news_id2 = News::insertUpdate($params,$news_id);
+            //存newsTagModel数据
+            $newTagArr = explode(',',$params['tag_id']);
+            $tag_id = NewsTag::insertUpdate($newTagArr);
+            NewsTagJoin::insertUpdate($tag_id,$news_id2);
+            if($news_id){
+                return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
+            }
+            return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
         }
         //查类型数据
         $data['type'] = NewsType::find()->asArray()->all();
+        //查询新闻数据
+        if($news_id){
+            $data['news'] = News::find()->joinWith(['news_tag_join'])->where(['News.id'=>$news_id])->asArray()->one();
+            if(!$data['news']){
+                return '新闻不存在';
+            }
+        }
         return $this->render('info',compact('data'));
     }
     //新增文章类型
@@ -49,6 +74,18 @@ class NewsController extends CommonController
             }
         }
         return $this->render('type');
+    }
+
+
+    public function actionDelete(){
+        $newsid = isset($_POST['id']) ? $_POST['id'] : '';
+        if(Yii::$app->request->isPost && $newsid){
+            News::deletes($newsid);
+            NewsTagJoin::deletes($newsid);
+            return Json::encode(['code' => 100000,'message' => '删除成功']);
+        }else{
+            return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);
+        }
     }
 
     //图片上传

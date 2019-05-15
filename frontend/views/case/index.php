@@ -3,18 +3,20 @@
 
 <link rel="stylesheet" href="/asset/static/css/case.css">
 <div class="case-list clearfix">
-    <?php for($i = 0; $i < 100; $i++){?>
+    <?php if(count($data['case'])) foreach ($data['case'] as $val){?>
 <!--        delay---><?//= $i % 5 ?><!--s-->
-    <a href="/case/item/<?=$i?>" animate-type="slideInUp" class="case-item animated ">
+    <a href="/case/item/<?=$val['id']?>" animate-type="slideInUp" class="case-item animated ">
         <div class="case-active-bg transition">
             <i class="iconfont transition">&#xe728;</i>
         </div>
         <div class="case-active-bg2 transition">
         </div>
-        <img src="http://www.1000zhu.com/upload/image/201511/10/1153507477.jpg" alt="" class="case-img">
-        <h2 class="case-title transition overflow-text">京城地铁官网</h2>
-        <p class="case-desc transition overflow-text">国有企业 , 企业官网国有企业企业官网国有企业 , 企业官网国有企业 , 企业官网国有企业 , 企业官网</p>
+        <img src="<?=Yii::$app->params['backend_url'].$val['banner_url']?>" alt="" class="case-img">
+        <h2 class="case-title transition overflow-text"><?=$val['title']?></h2>
+        <p class="case-desc transition overflow-text"><?=strip_tags($val['desc'])?></p>
     </a>
+    <?php }else{ ?>
+        无数据
     <?php } ?>
 </div>
 <script>

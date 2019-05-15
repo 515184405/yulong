@@ -5,34 +5,42 @@
 
 <div class="news-items case-items">
     <div class="news-hidden-scroll js_news_items">
-        <img class="case-banner" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557571160202&di=ffe2cc9109a1032e98386fcb346cb987&imgtype=0&src=http%3A%2F%2Fimages.hisupplier.com%2Fvar%2FuserImages%2F201609%2F23%2F160034532709_s.jpg" alt="">
+        <img class="case-banner" src="<?=Yii::$app->params['backend_url'].$data['data']['header_url']?>" alt="">
         <h2 class="case-title">项目简介</h2>
         <div class="case-desc">
-            <p style="text-indent: 2rem;">ATA是一家纳斯达克上市公司，以考试与测评服务为主营业务的公司，总部位于北京，运营中心在上海。ATA以世界领先的考试技术，丰富的考试运营和管理经验，以及遍布全国的3,000余家考站为政府机构，教育机构，企事业单位和数千万考生提供专业化的考试和测评服务。</p>
-            <p style="text-indent: 2rem;">ATA的网站建设项目采用了当前比较前沿的技术，HTML5响应式网站布局，整体设计风格采用了简约欧美风，布局均采用一屏布局，其中的交互动画充满了科技感，酷炫的动画使整个网站充满活力，更多精彩可以关注ATA官网。</p>
+            <?=$data['data']['desc']?>
         </div>
         <h2 class="case-title">项目标签</h2>
         <div class="case-dress">
             <i class="iconfont theme" style="font-size: 22px;position:relative;top:2px;">&#xe634;</i>
-            <a href="#" class="theme case-tag">设计案例</a><a href="#" class="theme case-tag">宇龙精选</a>
+            <?php foreach ($data['data']['tag_join'] as $item){ ?>
+            <a href="/case/?tag_id=<?=$item['tag_id']['tag_id']?>" class="theme case-tag"><?=$item['tag_id']['title']?></a>
+            <?php } ?>
         </div>
         <h2 class="case-title">项目地址</h2>
         <div class="case-dress">
-            <p>电脑端：<a href="http://www.baidu.com">http://www.baidu.com</a></p>
-            <p>移动端：<a href="http://www.baidu.com">http://www.baidu.com</a></p>
+            <?php if($data['data']['pc_link']){ ?>
+            <p>电脑端：<a href="<?=$data['data']['pc_link']?>"><?=$data['data']['pc_link']?></a></p>
+            <?php } ?>
+            <?php if($data['data']['wap_link']){ ?>
+                <p>移动端：<a href="<?=$data['data']['wap_link']?>"><?=$data['data']['wap_link']?></a></p>
+            <?php } ?>
+            <?php if(!is_null($data['data']['wap_link'])){ ?>
             <div class="case-dress-wxbox">
-                <img class="case-dress-wx" style="width:120px;height:120px;" src="http://www.1000zhu.com/images/wechat_code.jpg" alt="">
+                <img class="case-dress-wx" style="width:120px;height:120px;" src="<?=Yii::$app->params['backend_url'].$data['data']['wx_link']?>" alt="">
                 <p>扫一扫微信二维码</p>
             </div>
+            <?php } ?>
         </div>
         <h2 class="case-title">分享精品</h2>
         <div id="share" class="case-share"></div>
         <h2 class="case-title">设计欣赏</h2>
-        <img class="case-show-img js_case_list" src="http://www.1000zhu.com/upload/image/201610/24/0117212543.gif" alt="">
+        <?php $contentArr = explode(',',substr($data['data']['content_url'],1));?>
+        <img class="case-show-img js_case_list" src="<?=Yii::$app->params['backend_url'].$contentArr[0]?>" alt="">
         <div class="js_list_box case-swipper" data-show="0">
-            <img class="case-show-img" data-src="https://www.yilinicms.com/public/uploads/20181101/10621621b41b90eb6511686975e0fc98.jpg" alt="">
-            <img class="case-show-img" data-src="https://www.yilinicms.com/public/uploads/20181101/df459cee12342cf507c13e6903a47a12.jpg" alt="">
-            <img class="case-show-img" data-src="https://www.yilinicms.com/public/uploads/20181101/3224dd69bce7c52cce0a1c9a87442bba.jpg" alt="">
+            <?php foreach ($contentArr as $val){ ?>
+            <img class="case-show-img" data-src="<?=Yii::$app->params['backend_url'].$val?>" alt="">
+            <?php } ?>
         </div>
     </div>
 </div>

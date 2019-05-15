@@ -42,4 +42,24 @@ class NewsTagJoin extends \yii\db\ActiveRecord
             'news_id' => 'News ID',
         ];
     }
+
+    /*关联newsTag*/
+    public function getNewsTag(){
+        return $this->hasOne(NewsTag::className(),['tag_id'=>'tag_id']);
+    }
+
+    //删除数据
+    public static function deletes($id){
+        CaseTagJoin::deleteAll(['news_id'=>$id]);
+    }
+
+    public static function insertUpdate($tag_id,$news_id){
+        $models = new static();
+        $models::deleteAll('news_id in('.$news_id.')');
+        foreach ($tag_id as $item) {
+            $model = new static();
+            $model->setAttributes(['tag_id' => $item, 'news_id' => $news_id]);
+            $model->save();
+        }
+    }
 }

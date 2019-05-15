@@ -61,12 +61,55 @@ class News extends \yii\db\ActiveRecord
             'issue' => 'Issue',
         ];
     }
+    /*关联newsTagJoin*/
 
-    public static function insertUpdate($params,$news_id){
-        if($news_id){
+    public function getNews_tag_join(){
+        return $this->hasMany(NewsTagJoin::className(),['news_id'=>'id'])->with('newsTag');
+    }
+    /*关联case_type*/
+    public function getNewsType(){
+        return $this->hasOne(NewsType::className(),['type_id' => 'type_id']);
+    }
 
+    /*删除数据*/
+    public static function deletes($id){
+        News::deleteAll(['id'=>$id]);
+    }
+
+    /*查数据*/
+    public static function search($params){
+        $query = static::find();
+        //按title查找
+        if(isset($params['title'])){
+            $query->andFilterWhere(['like','news.title',$params['title']]);
         }
-        News::setAttributes($params);
-        News::save();
+        $page = isset($params['page']) ? $params['page'] : '';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->joinWith('newsType')->asArray()->all();
+        return compact('count', 'list');
+    }
+
+    public static function insertUpdate($params,$news_id = null){
+        $model = new static();
+        $params['create_time'] = time();
+        $content = strip_tags($params['content']);
+        $params['desc'] = mb_substr($content,0,100);
+        if($news_id){
+            $model = $model::findOne($news_id);
+        }
+        $model->setAttributes($params);
+        if($model->save()){
+            if(!$news_id) {
+                return $model->attributes['id'];
+            }
+            return $news_id;
+        };
+        return false;
     }
 }

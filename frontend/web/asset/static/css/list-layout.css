@@ -193,6 +193,9 @@ body {
 .list-header .list-header-nav2 .lhn-item .icon-next {
   padding-left: 3px;
 }
+.list-header .list-header-nav2 .a-disabled {
+  background-color: #f1eded;
+}
 .list-aslide.active {
   left: -100%;
 }
