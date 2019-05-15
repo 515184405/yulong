@@ -17,7 +17,7 @@
     <div class="list-header transition clearfix">
         <i class="iconfont aslide-switch left"></i>
         <div class="list-header-nav">
-            <a href="/<?=$data['link']?>?id=0" class="lhn-item <?=(!isset($_GET['id']) || (isset($_GET['id'])&&$_GET['id']==0)) ? 'active' : '' ?>">全部</a>
+            <a href="/<?=$data['link']?>" class="lhn-item <?=(!isset($_GET['id']) || (isset($_GET['id'])&&$_GET['id']==0)) ? 'active' : '' ?>">全部</a>
             <?php foreach ($data['type'] as $key=>$val){ ?>
             <a href="/<?=$data['link']?>?id=<?=$val['type_id']?>" class="lhn-item <?=((isset($_GET['id'])&&$_GET['id']!=0) && $_GET['id']== $val['type_id']) ? 'active' : '' ?>"><?=$val['title']?></a>
             <?php } ?>
