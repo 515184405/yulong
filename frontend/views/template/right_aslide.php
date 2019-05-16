@@ -5,13 +5,13 @@
             案例推荐
         </h2>
         <div>
-        <?php for($i = 0; $i < 3; $i++){?>
-            <a href="/case/item/<?=$i;?>" class="nr-item clearfix">
-                <img class="nr-item-img" src="http://www.1000zhu.com/upload/image/201607/09/0217075001.jpg" alt="">
+        <?php foreach ($data['recommend_case'] as $v){?>
+            <a href="/case/item/<?=$v['id']?>" class="nr-item clearfix">
+                <img class="nr-item-img" src="<?=Yii::$app->params['backend_url'].$v['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v['banner_url']?>">
                 <div class="nr-item-content">
-                    <h3 class="nric-title overflow-text">为企业网站购买云服务器</h3>
+                    <h3 class="nric-title overflow-text"><?=$v['title']?></h3>
                     <p class="overflow-text2 nric-desc">
-                        快乐和公司来管理你是个但经过看见帅哥吧福利局i
+                        <?=mb_substr(strip_tags($v['desc']),0,30)?>
                     </p>
                 </div>
             </a>
@@ -22,14 +22,14 @@
             文章推荐
         </h2>
         <div>
-        <?php for($j = 0; $j < 3; $j++){?>
-            <a href="/news/item/<?=$j;?>" class="nr-item clearfix">
-                <img class="nr-item-img" src="http://www.1000zhu.com/upload/image/201607/09/0217075001.jpg" alt="">
+            <?php foreach ($data['recommend_news'] as $v2){?>
+            <a href="/news/item/<?=$v2['id'];?>" class="nr-item clearfix">
+                <img class="nr-item-img" src="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>">
                 <div class="nr-item-content">
-                    <h3 class="nric-title overflow-text2" title="为企业网站购买云服务器，你真的懂吗？">为企业网站购买云服务器，你真的懂吗？</h3>
+                    <h3 class="nric-title overflow-text2" title="<?=$v2['title']?>"><?=$v2['title']?></h3>
                     <p class="nric-info">
-                        <span>03-05</span>
-                        <i class="iconfont">&#xe605;</i>55576
+                        <span><?=date('m-d',$v2['create_time'])?></span>
+                        <i class="iconfont">&#xe605;</i><?=$v2['look']?>
                     </p>
                 </div>
             </a>

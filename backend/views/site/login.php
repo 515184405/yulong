@@ -43,7 +43,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
-                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" placeholder="密码" class="layui-input">
+                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" lay-text="密码不能为空" placeholder="密码" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
@@ -97,14 +97,11 @@
         /* 自定义验证规则 */
         form.verify({
             username: function(value){
-                value = $.trim(value);
                 var errorMsg = '账号格式不正确！';
                 //是否为手机号码
-                if (!/(^1[3|5|6|7|8][0-9]{9}$)/.test(value)) {
+                if (value.length < 6) {
                     //是否为邮箱
-                    if (!/(^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$)/.test(value)) {
-                        return errorMsg;
-                    }
+                    return errorMsg;
                 }
             },
         });
@@ -118,27 +115,28 @@
                 data: data.field,
                 dataType: "json",
                 success: function(data) {
-                    if(data.code == 100000){
-                        layer.msg(data.message, {icon: 1,time:1500}, function(){
-                            window.location.href='/';
-                        })
-                    }else{
-                        layer.closeAll();
-                        layer.msg(data.message,{icon: 5,time:1500}, function(){
-                            //异步刷新验证码
-                            $(".captcha").attr('src','/common/captcha?t='+Math.random());
-                            $("input[name='captcha']").val("");
-                            if(data.code == 3){
-                                window.location.reload();
-                            }
-                        })
-                    }
+                    console.log(data);
+                    // if(data.code == 100000){
+                    //     layer.msg(data.message, {icon: 1,time:1500}, function(){
+                    //         window.location.href='/';
+                    //     })
+                    // }else{
+                    //     layer.closeAll();
+                    //     layer.msg(data.message,{icon: 5,time:1500}, function(){
+                    //         //异步刷新验证码
+                    //         $(".captcha").attr('src','/common/captcha?t='+Math.random());
+                    //         $("input[name='captcha']").val("");
+                    //         if(data.code == 3){
+                    //             window.location.reload();
+                    //         }
+                    //     })
+                    // }
                 },
                 error: function(){
-                    layer.closeAll();
-                    layer.msg("登录失败，请稍后再试！", function () {
-                        window.location.reload();
-                    });
+                    // layer.closeAll();
+                    // layer.msg("登录失败，请稍后再试！", function () {
+                    //     window.location.reload();
+                    // });
                 }
             });
             return false;

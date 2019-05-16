@@ -7,23 +7,47 @@ use Yii;
 /**
  * This is the model class for table "user".
  *
- * @property int $id
- * @property int $pid 父id
- * @property string $username 用户名
- * @property string $password 密码
- * @property int $type 类型(1:总店,2:门店,3:管理员)
- * @property int $created_time 注册时间
- * @property int $updated_time 修改时间
- * @property int $status 封禁状态，0禁止1正常
- * @property string $login_ip 登录ip
- * @property int $login_time 上一次登录时间
- * @property int $login_count 登陆次数
- * @property int $update_password 修改密码次数
+ * @property integer $id
+ * @property integer $pid
+ * @property string $username
+ * @property string $password
+ * @property integer $type
+ * @property integer $created_time
+ * @property integer $updated_time
+ * @property integer $status
+ * @property string $login_ip
+ * @property integer $login_time
+ * @property integer $login_count
+ * @property integer $update_password
  */
-class User extends \yii\db\ActiveRecord
-{
+class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
+{   public $authKey;
+    /*public $id;
+     public $username;
+     public $password;
+     public $authKey;
+     public $accessToken;
+
+     private static $users = [
+         '100' => [
+             'id' => '100',
+             'username' => 'admin',
+             'password' => 'admin',
+             'authKey' => 'test100key',
+             'accessToken' => '100-token',
+         ],
+         '101' => [
+             'id' => '101',
+             'username' => 'demo',
+             'password' => 'demo',
+             'authKey' => 'test101key',
+             'accessToken' => '101-token',
+         ],
+     ];
+ */
+
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -31,7 +55,7 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -39,12 +63,12 @@ class User extends \yii\db\ActiveRecord
             [['pid', 'type', 'created_time', 'updated_time', 'status', 'login_time', 'login_count', 'update_password'], 'integer'],
             [['username', 'password', 'created_time', 'updated_time', 'login_ip', 'login_time'], 'required'],
             [['username', 'password'], 'string', 'max' => 70],
-            [['login_ip'], 'string', 'max' => 20],
+            [['login_ip'], 'string', 'max' => 20]
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {

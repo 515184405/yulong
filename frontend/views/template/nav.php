@@ -9,8 +9,8 @@
                 <a href="/case" class="lhn-item">案例列表</a>
             <?php }; ?>
 
-            <a <?=is_null($data['prev_id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['prev_id'].'"' ?> class="lhn-item <?=is_null($data['prev_id']) ? 'a-disabled' : ''?>"><i class="iconfont icon-prev">&#xe604;</i>PREV</a>
-            <a <?=is_null($data['next_id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['next_id'].'"' ?> class="lhn-item <?=is_null($data['next_id']) ? 'a-disabled' : ''?>">NEXT<i class="iconfont icon-next">&#xe607;</i></a>
+            <a <?=is_null($data['prev']['id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['prev']['id'].'"' ?> class="lhn-item <?=is_null($data['prev']['id']) ? 'a-disabled' : ''?>"><i class="iconfont icon-prev">&#xe604;</i>PREV</a>
+            <a <?=is_null($data['next']['id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['next']['id'].'"' ?> class="lhn-item <?=is_null($data['next']['id']) ? 'a-disabled' : ''?>">NEXT<i class="iconfont icon-next">&#xe607;</i></a>
         </div>
     </div>
 <?php }else{ ?>

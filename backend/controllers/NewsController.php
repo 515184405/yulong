@@ -76,6 +76,18 @@ class NewsController extends CommonController
         return $this->render('type');
     }
 
+    //设置为推荐
+    public function actionRecommend(){
+        $checked = isset($_POST['checked']) ? $_POST['checked'] : '';
+        $id = isset($_POST['id']) ? $_POST['id'] : '';
+        $checked = $checked == 'true' ? 1 : 0;
+        $news = News::findOne($id);
+        $news->recommend = $checked;
+        if($news->save()){
+            return Json::encode(['code' => 100000,'message' => '设置成功']);
+        }
+        return Json::encode(['code' => 100000,'message' => '设置失败']);
+    }
 
     public function actionDelete(){
         $newsid = isset($_POST['id']) ? $_POST['id'] : '';

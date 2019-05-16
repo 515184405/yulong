@@ -37,7 +37,7 @@ class Cases extends \yii\db\ActiveRecord
     {
         return [
             [['desc'], 'string'],
-            [['create_time'], 'integer'],
+            [['create_time','recommend'], 'integer'],
             [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
         ];
     }
@@ -60,6 +60,7 @@ class Cases extends \yii\db\ActiveRecord
             'content_url' => 'Content Url',
             'type_id' => 'Type ID',
             'tag_id' => 'Tag ID',
+            'recommend' => 'Recommend',
         ];
     }
     /*
@@ -94,8 +95,13 @@ class Cases extends \yii\db\ActiveRecord
            $count = $query->count();
            $query->offset($offset)->limit($limit);
        }
-       $list = $query->joinWith('caseType')->asArray()->all();
+       $list = $query->joinWith('caseType')->orderBy(['id' => SORT_DESC])->asArray()->all();
         return compact('count', 'list');
+    }
+
+    //查询推荐新闻
+    public static function recommend(){
+        return Cases::find()->where(['recommend'=>1])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
     }
 
     /*存与更新数据*/

@@ -4,6 +4,7 @@
 use common\models\Cases;
 use common\models\CaseTagJoin;
 use common\models\CaseType;
+use common\models\News;
 use yii\web\Controller;
 
 class CaseController extends Controller{
@@ -35,7 +36,10 @@ class CaseController extends Controller{
         $params =\Yii::$app->request->get();
         $case_id = isset($params['case_id']) ? $params['case_id'] : "";
         $case_item = Cases::find()->joinWith('tag_join')->where(['Cases.id'=>$case_id])->asArray()->one();
-//        var_dump($case_item);die;
+        //查询推荐新闻
+        $recommend_news = News::recommend();
+        //查询推荐案例
+        $recommend_case = Cases::recommend();
         //查询上-篇文章
         $prev_article = Cases::find()->andFilterWhere(['<', 'id', $case_id])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
@@ -45,9 +49,11 @@ class CaseController extends Controller{
         }
         $data = array(
             'link' => 'case',
-            'prev_id' => $prev_article['id'],
-            'next_id' => $next_article['id'],
-            'data' => $case_item
+            'prev' => $prev_article,
+            'next' => $next_article,
+            'data' => $case_item,
+            'recommend_news' => $recommend_news,
+            'recommend_case' => $recommend_case,
         );
         return $this->renderPartial('item',compact('data','case_id'));
     }

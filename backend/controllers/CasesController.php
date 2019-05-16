@@ -84,6 +84,18 @@ class CasesController extends CommonController
         }
     }
 
+    //设置为推荐
+    public function actionRecommend(){
+        $checked = isset($_POST['checked']) ? $_POST['checked'] : '';
+        $id = isset($_POST['id']) ? $_POST['id'] : '';
+        $checked = $checked == 'true' ? 1 : 0;
+        $cases = Cases::findOne($id);
+        $cases->recommend = $checked;
+        if($cases->save()){
+            return Json::encode(['code' => 100000,'message' => '设置成功']);
+        }
+        return Json::encode(['code' => 100000,'message' => '设置失败']);
+    }
 
     //图片上传
     public function actionUploadImage(){

@@ -37,16 +37,10 @@
         <h2 class="case-title">设计欣赏</h2>
         <?php $contentArr = explode(',',substr($data['data']['content_url'],1));?>
         <img class="case-show-img js_case_list" src="<?=Yii::$app->params['backend_url'].$contentArr[0]?>" alt="">
-        <div class="js_list_box case-swipper" data-show="0">
-            <?php foreach ($contentArr as $val){ ?>
-            <img class="case-show-img" data-src="<?=Yii::$app->params['backend_url'].$val?>" alt="">
-            <?php } ?>
-        </div>
     </div>
 </div>
-<?= $this->render('../template/right_aslide');?>
+<?= $this->render('../template/right_aslide',compact('data'));?>
 <script src="/asset/static/wigdet/share/jquery.share.min.js"></script>
-<script src="/asset/static/js/case-item.js"></script>
 <script>
     //分享功能
     $('#share').share({sites: ['qzone', 'qq', 'weibo','wechat']});
@@ -59,4 +53,11 @@
     // setRightHeight();
 </script>
 <?= $this->render('../template/footer');?>
+<div class="js_list_box transition case-swipper" data-show="0">
+    <i class="iconfont swipper-close js_swipper_close">&#xe61b;</i>
+    <?php foreach ($contentArr as $val){ ?>
+        <img class="case-show-img" data-src="<?=Yii::$app->params['backend_url'].$val?>" alt="">
+    <?php } ?>
+</div>
 <p class="swipper-number none"><span class="sn-current">1</span> / <span class="sn-count">3</span></p>
+<script src="/asset/static/js/case-item.js"></script>

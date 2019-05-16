@@ -16,6 +16,10 @@
             </div>
         </script>
 
+        <script type="text/html" id="switchTpl">
+            <input type="checkbox" name="recommend" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" {{ d.recommend == 1 ? 'checked' : '' }}>
+        </script>
+
         <script type="text/html" id="test-table-toolbar-barDemo">
             <div class="layui-btn-group">
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -32,8 +36,9 @@
         base: '/asset/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'table'], function(){
+    }).use(['index', 'table','form'], function(){
         var $ = layui.$,
+            form = layui.form,
             table = layui.table;
 
         table.render({
@@ -54,6 +59,7 @@
                 ,{field:'caseType' ,title: '类型',templet: function (d) {
                         return d.newsType.title
                     }}
+                ,{field:'recommend',width:100, title: '是否推荐',templet: '#switchTpl'}
                 ,{field:'issue',width:80, title: '状态',templet: function (d) {
                         if(d.issue == 1){
                             return '<span class="red">已存稿</span>'
@@ -85,6 +91,15 @@
         $(document).delegate('.js_banner_url','mouseleave',function(){
             layer.closeAll('tips');
         });
+
+        // 推荐单选开关事件
+        form.on('switch(filter-recommend)',function(res){
+            $.post('/news/recommend',{checked:res.elem.checked,id:res.value},function(data){
+                layer.tips(data.message, $(res.elem).next(), {
+                    tips: [1, '#0FA6D8'] //还可配置颜色
+                });
+            },'json')
+        })
 
 
         //监听行工具事件

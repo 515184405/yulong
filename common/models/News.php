@@ -36,7 +36,7 @@ class News extends \yii\db\ActiveRecord
     {
         return [
             [['desc', 'content'], 'string'],
-            [['create_time', 'look', 'issue'], 'integer'],
+            [['create_time', 'look', 'issue','recommend'], 'integer'],
             [['title', 'banner_url', 'tag_id', 'sourse'], 'string', 'max' => 255],
             [['type_id'], 'string', 'max' => 11],
         ];
@@ -59,6 +59,7 @@ class News extends \yii\db\ActiveRecord
             'sourse' => 'Sourse',
             'content' => 'Content',
             'issue' => 'Issue',
+            'recommend' => 'Recommend',
         ];
     }
     /*关联newsTagJoin*/
@@ -76,6 +77,11 @@ class News extends \yii\db\ActiveRecord
         News::deleteAll(['id'=>$id]);
     }
 
+    //查询推荐新闻
+    public static function recommend(){
+        return News::find()->where(['recommend'=>1,'issue'=>2])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
+    }
+
     /*查数据*/
     public static function search($params){
         $query = static::find();
@@ -91,7 +97,7 @@ class News extends \yii\db\ActiveRecord
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->joinWith('newsType')->asArray()->all();
+        $list = $query->joinWith('newsType')->orderBy(['id' => SORT_DESC])->asArray()->all();
         return compact('count', 'list');
     }
 
