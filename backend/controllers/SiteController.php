@@ -60,8 +60,8 @@ class SiteController extends CommonController
         //var_dump(Yii::$app->security->generatePasswordHash('admin'));die;
         $model = new LoginForm();
         if(Yii::$app->request->isPost){
-            var_dump($_POST['verifyCode']);
-           var_dump($this->createAction('captcha')->validate($_POST['verifyCode'],false));die;
+//            var_dump($_POST['verifyCode']);
+//           var_dump($this->createAction('captcha')->validate($_POST['verifyCode'],false));die;
             if ($model->load(Yii::$app->request->post(),'') && $model->login()) {
                 //return $this->goBack();
                 return Json::encode(array('code'=>'100000','message'=>'登陆成功'));
