@@ -12,6 +12,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
+//    public $verifyCode; //验证码变量，存储验证码变量的值
 
     private $_user;
 
@@ -28,6 +29,8 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            // verifyCode needs to be entered correctly
+//            ['verifyCode', 'captcha','message'=>'Verification Code Error'],
         ];
     }
 
@@ -36,6 +39,7 @@ class LoginForm extends Model
         return [
             'username'=>'用户名',
             'password'=>'密码',
+            'verifyCode'=>'验证码',
             'remember'=>'记住密码',
         ];
     }

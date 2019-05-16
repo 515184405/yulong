@@ -44,6 +44,22 @@ html,body,#LAY_app{height:100%;}
 .ladmin-user-login-theme ul{display: inline-block; padding: 5px; background-color: #fff;}
 .ladmin-user-login-theme ul li{display: inline-block; vertical-align: top; width: 64px; height: 43px; cursor: pointer; transition: all .3s; -webkit-transition: all .3s; background-color: #f2f2f2;}
 .ladmin-user-login-theme ul li:hover{opacity: 0.9}
+/*验证码*/
+.login-code{
+  padding-right:140px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.login-relative{
+  position: relative;
+}
+.login-code-image{
+  position: absolute;
+  top:1px;
+  right:1px;
+}
 
 @media screen and (max-width: 768px) {
   .layadmin-user-login{padding-top: 60px;}

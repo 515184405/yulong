@@ -4,6 +4,7 @@ namespace backend\controllers;
 use common\models\User;
 use Yii;
 use common\models\LoginForm;
+use yii\helpers\Json;
 
 /**
  * Site controller
@@ -18,6 +19,20 @@ class SiteController extends CommonController
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+            ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+//                'class' => 'common\components\Mycaptcha',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                'backColor'=>0xffffff,  //背景颜色
+                'maxLength' => 4,       //最大显示个数
+                'minLength' => 4,       //最少显示个数
+                'padding' => 5,         //间距
+                'height'=>36,           //高度
+                'width' => 100,         //宽度
+                'foreColor'=>0x000000,  //字体颜色
+                'offset'=>4,            //设置字符偏移量 有效果
+                //'controller'=>'login', //拥有这个动作的controller
             ],
         ];
     }
@@ -42,16 +57,20 @@ class SiteController extends CommonController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
+        //var_dump(Yii::$app->security->generatePasswordHash('admin'));die;
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post(),'') && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-            return $this->renderPartial('login', [
-                'model' => $model,
-            ]);
+        if(Yii::$app->request->isPost){
+            var_dump($_POST['verifyCode']);
+           var_dump($this->createAction('captcha')->validate($_POST['verifyCode'],false));die;
+            if ($model->load(Yii::$app->request->post(),'') && $model->login()) {
+                //return $this->goBack();
+                return Json::encode(array('code'=>'100000','message'=>'登陆成功'));
+            } else {
+                return Json::encode(array('code'=>'100001','message'=>'用户名或密码错误'));
+            }
         }
+
+        return $this->renderPartial('login');
     }
 
     /**

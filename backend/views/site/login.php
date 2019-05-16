@@ -45,6 +45,11 @@
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
                 <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" lay-text="密码不能为空" placeholder="密码" class="layui-input">
             </div>
+            <div class="layui-form-item login-relative">
+                <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-password"></label>
+                <input type="text" name="verifyCode" placeholder="验证码" class="layui-input login-code">
+                <img onclick='this.src="/site/captcha?c="+Math.random();' class="login-code-image" src="/site/captcha" alt="验证码">
+            </div>
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
             </div>
@@ -106,6 +111,10 @@
             },
         });
 
+        $.get('/site/captcha',function(res){
+            console.log(res);
+        },'json')
+
         //提交
         form.on('submit(LAY-user-login-submit)', function(data){
             layer.load(1, {shade: .1});
@@ -115,22 +124,21 @@
                 data: data.field,
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
-                    // if(data.code == 100000){
-                    //     layer.msg(data.message, {icon: 1,time:1500}, function(){
-                    //         window.location.href='/';
-                    //     })
-                    // }else{
-                    //     layer.closeAll();
-                    //     layer.msg(data.message,{icon: 5,time:1500}, function(){
-                    //         //异步刷新验证码
-                    //         $(".captcha").attr('src','/common/captcha?t='+Math.random());
-                    //         $("input[name='captcha']").val("");
-                    //         if(data.code == 3){
-                    //             window.location.reload();
-                    //         }
-                    //     })
-                    // }
+                    layer.closeAll();
+                    if(data.code == 100000){
+                        layer.msg(data.message, {icon: 1,time:1500}, function(){
+                           window.location.href='/';
+                        })
+                    }else{
+                        layer.msg(data.message,{icon: 5,time:1500}, function(){
+                            //异步刷新验证码
+                            $(".captcha").attr('src','/common/captcha?t='+Math.random());
+                            $("input[name='captcha']").val("");
+                            if(data.code == 3){
+                                window.location.reload();
+                            }
+                        })
+                    }
                 },
                 error: function(){
                     // layer.closeAll();
