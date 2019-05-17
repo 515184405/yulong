@@ -111,10 +111,6 @@
             },
         });
 
-        $.get('/site/captcha',function(res){
-            console.log(res);
-        },'json')
-
         //提交
         form.on('submit(LAY-user-login-submit)', function(data){
             layer.load(1, {shade: .1});
@@ -127,16 +123,11 @@
                     layer.closeAll();
                     if(data.code == 100000){
                         layer.msg(data.message, {icon: 1,time:1500}, function(){
-                           window.location.href='/';
+                           window.location.href='/console';
                         })
                     }else{
                         layer.msg(data.message,{icon: 5,time:1500}, function(){
-                            //异步刷新验证码
-                            $(".captcha").attr('src','/common/captcha?t='+Math.random());
-                            $("input[name='captcha']").val("");
-                            if(data.code == 3){
-                                window.location.reload();
-                            }
+                           window.location.reload();
                         })
                     }
                 },

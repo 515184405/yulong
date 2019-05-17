@@ -12,7 +12,6 @@ class ConsoleController extends CommonController
 {
     /**
      * Displays homepage.
-     *
      * @return string
      */
     public function actionIndex()

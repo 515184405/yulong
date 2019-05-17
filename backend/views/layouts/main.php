@@ -1,4 +1,4 @@
-
+<?php $userInfo = $this->params['userInfo']; ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html>
@@ -87,8 +87,8 @@
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a href="/console" class="layui-this" lay-tips="控制台" lay-direction="2">
+                    <li data-name="home" class="layui-nav-item">
+                        <a href="/console" class="" lay-tips="控制台" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>控制台</cite>
                         </a>
@@ -99,12 +99,20 @@
                             <cite>精品案例</cite>
                         </a>
                     </li>
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/news" lay-tips="文章列表" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>文章列表</cite>
                         </a>
                     </li>
+                    <?php if($userInfo['type'] == 1){ ?>
+                    <li data-name="home" class="layui-nav-item">
+                        <a href="/user" lay-tips="用户管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>用户管理</cite>
+                        </a>
+                    </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>

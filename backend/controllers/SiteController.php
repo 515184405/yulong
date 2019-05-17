@@ -57,17 +57,22 @@ class SiteController extends CommonController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-        //var_dump(Yii::$app->security->generatePasswordHash('admin'));die;
+//        var_dump(Yii::$app->security->generatePasswordHash('000000'));die;
         $model = new LoginForm();
         if(Yii::$app->request->isPost){
 //            var_dump($_POST['verifyCode']);
-//           var_dump($this->createAction('captcha')->validate($_POST['verifyCode'],false));die;
-            if ($model->load(Yii::$app->request->post(),'') && $model->login()) {
-                //return $this->goBack();
-                return Json::encode(array('code'=>'100000','message'=>'登陆成功'));
-            } else {
-                return Json::encode(array('code'=>'100001','message'=>'用户名或密码错误'));
-            }
+          if($this->createAction('captcha')->validate($_POST['verifyCode'],false)) {
+              if ($model->load(Yii::$app->request->post(), '') && $model->login()) {
+                  //return $this->goBack();
+                  $user = new User();
+
+                  return Json::encode(array('code' => '100000', 'message' => '登陆成功'));
+              } else {
+                  return Json::encode(array('code' => '100001', 'message' => '用户名或密码错误'));
+              }
+          }else{
+              return Json::encode(array('code' => '100001', 'message' => '验证码错误'));
+          }
         }
 
         return $this->renderPartial('login');
