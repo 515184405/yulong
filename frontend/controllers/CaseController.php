@@ -5,6 +5,7 @@ use common\models\Cases;
 use common\models\CaseTagJoin;
 use common\models\CaseType;
 use common\models\News;
+use common\models\Widget;
 use yii\web\Controller;
 
 class CaseController extends Controller{
@@ -36,6 +37,9 @@ class CaseController extends Controller{
         $params =\Yii::$app->request->get();
         $case_id = isset($params['case_id']) ? $params['case_id'] : "";
         $case_item = Cases::find()->joinWith('tag_join')->where(['Cases.id'=>$case_id])->asArray()->one();
+
+        //查询推荐组件
+        $recommend_widget = Widget::recommend();
         //查询推荐新闻
         $recommend_news = News::recommend();
         //查询推荐案例
@@ -54,6 +58,7 @@ class CaseController extends Controller{
             'data' => $case_item,
             'recommend_news' => $recommend_news,
             'recommend_case' => $recommend_case,
+            'recommend_widget' => $recommend_widget
         );
         return $this->renderPartial('item',compact('data','case_id'));
     }

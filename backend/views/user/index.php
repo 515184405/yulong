@@ -1,89 +1,103 @@
 <div class="layui-card">
-    <div class="layui-card-header header-title">添加用户</div>
+    <div class="layui-card-header header-title">案例列表</div>
     <div class="layui-card-body">
-        <form class="layui-form" >
-            <div class="layui-form-item">
-                <label class="layui-form-label">用户名</label>
-                <div class="layui-input-block">
-                    <input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="请输入用户名" class="layui-input">
-                </div>
+        <div class="layui-inline">
+            <input type="text" class="layui-input js_search_title" placeholder="输入作品名搜索">
+        </div>
+        <button type="button" id="search_btn" class="layui-btn layui-btn-normal">搜索</button>
+    </div>
+    <div class="layui-card-body">
+        <table class="layui-hide" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
+
+        <script type="text/html" id="test-table-toolbar-toolbarDemo">
+            <div class="layui-btn-container">
+                <a href="/user/info" class="layui-btn layui-btn-sm">添加用户</a>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">密码</label>
-                <div class="layui-input-block">
-                    <input type="text" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
-                </div>
+        </script>
+
+        <script type="text/html" id="switchTpl">
+            <input type="checkbox" name="recommend" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" {{ d.recommend == 1 ? 'checked' : '' }}>
+        </script>
+
+        <script type="text/html" id="test-table-toolbar-barDemo">
+            <div class="layui-btn-group">
+                <a class="layui-btn layui-btn-xs" lay-event="edit">重置密码</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit="" lay-filter="submit-btn">立即提交</button>
-                    <a href="/user" class="layui-btn layui-btn-primary">返回用户列表</a>
-                </div>
-            </div>
-        </form>
+        </script>
+
     </div>
 </div>
 <script>
+    var site_url = '<?=Yii::$app->params["backend_url"];?>';
+    var site_url2 = '<?=Yii::$app->params["frontend_url"];?>';
     layui.config({
         base: '/asset/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index','form'], function() {
+    }).use(['index', 'table','form'], function(){
         var $ = layui.$,
-            form = layui.form;
+            form = layui.form,
+            table = layui.table;
 
-        //提交
-        /* 自定义验证规则 */
-        form.verify({
-            username: function(value){
-                var errorMsg = '用户名格式为6-15位！';
-                //密码是否必须为6-15位字母或数字
-                if (!(value.length >= 6 && value.length <= 15)) {
-                    return errorMsg;
-                }
-            },
-            password: function(value){
-                var errorMsg = '密码必须为6-15位字母或数字！';
-                //密码是否必须为6-15位字母或数字
-                if (!/^[a-zA-Z0-9]{6,15}$/.test(value)) {
-                    return errorMsg;
-                }
-            },
+        table.render({
+            elem: '#test-table-toolbar'
+            ,toolbar: '#test-table-toolbar-toolbarDemo'
+            ,url: '/user/index'
+            ,cols: [[
+                {field:'id', width:80, title: 'ID', sort: true}
+                ,{field:'username',title: '用户名'}
+                ,{field:'created_time',  title: '创建时间',templet: function (d) {
+                        return getLocalTime(d.created_time);
+                    }}
+                ,{field:'login_ip',title: '登录IP'}
+                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+            ]]
+            ,done(res){
+                console.log(res);
+            }
+            ,page: true
+            ,limit: 10
         });
 
-        form.on('submit(submit-btn)', function(data){
-            layer.load(1, {shade: .1});
-            var _this = this;_this.disabled=true;//防止多次提交
-            var params = data.field;
 
-            $.ajax({
-                type: "post",
-                url: "",
-                data: params,
-                dataType: "json",
-                success: function(data) {
-                    layer.closeAll();
-                    if(data.code == 100000){
-                        layer.msg(data.message, {icon: 1,time:1500}, function(){
-                            window.location.href='/user';
-                        })
-                    }else{
-                        layer.msg(data.message,{icon: 5,time:1500}, function(){
-                            window.location.reload();
-                        })
+        //监听行工具事件
+        table.on('tool(test-table-toolbar)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'del'){
+                layer.confirm('您确定要删除吗', function(index){
+                    obj.del();
+                    layer.close(index);
+                    $.post('/user/delete',{id:data.id},function(res){
+                        if(res.code == 100000){
+                            layer.msg(res.message);
+                        }
+                    },'json')
+                });
+            }else if(obj.event === 'edit'){
+                window.location.href = '/user/info/?id='+data.id;
+            }
+        });
+
+        //搜索
+        $('#search_btn').bind('click',function(){
+            var title = $('.js_search_title').val();
+            if(title){
+                //执行重载
+                table.reload('test-table-toolbar', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
                     }
+                    , where: {
+                        username: title
+                    }
+                });
+            }
+        })
 
-                },
-                error: function(){
-                    layer.closeAll();
-                    _this.disabled=false;
-                    layer.msg('操作失败', {icon: 1}, function(){
-                        //window.location.reload();
-                    })
-                }
-            });
+        function getLocalTime(nS) {
+            return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        }
 
-            return false;
-        });
-    })
+    });
 </script>

@@ -5,10 +5,11 @@
   margin-right:275px;
   background-color: #fff;
   overflow: hidden;
-  .news-hidden-scroll{
+  .news-hidden-scroll {
     //margin-right: -15px;
-    padding:0 20px;
+    padding: 0 20px;
     overflow-y: auto;
+  }
     .content-title {
       padding: 15px;
       font-size: 26px;
@@ -45,7 +46,6 @@
       padding:0 15px;
       padding-bottom:200px;
     }
-  }
 }
 .news-recommend{
   width: 260px;
@@ -259,4 +259,69 @@
   top:0;
   z-index: 999;
   opacity: 1;
+}
+
+//组件模块
+.unit-items{
+  .share-box{
+    padding:0;
+  }
+  .banner-box{
+    width:90%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding:30px;
+    margin:30px auto;
+    img{
+      max-width: 100%;
+    }
+  }
+  .unit-btn-box{
+    height:50px;
+    text-align: center;
+    .fy-btn{
+      padding:10px 40px;
+      margin-right:20px;
+    }
+  }
+  .unit-desc{
+    width: 90%;
+    margin:0 auto;
+    font-size: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .layui-elem-quote {
+    margin-bottom: 10px;
+    padding: 15px;
+    line-height: 22px;
+    border-left: 5px solid #999;
+    border-radius: 0 2px 2px 0;
+    background-color: #f2f2f2;
+  }
+  .unit-rule{
+    width:90%;
+    margin:30px auto;
+    .unit-rule-title{
+      color:#333;
+      font-size: 15px;
+      font-weight: bold;
+    }
+    .unit-rule-content{
+      margin-top:20px;
+      blockquote{
+        padding:10px;
+        background-color: #f2f2f2;
+        color:#595757;
+      }
+    }
+  }
+  .unit-page-box{
+    font-size: 16px;
+    color:#111;
+    margin-top:50px;
+    padding-bottom:100px;
+  }
 }

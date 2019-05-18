@@ -5,6 +5,7 @@ use common\models\Cases;
 use common\models\News;
 use common\models\NewsTagJoin;
 use common\models\NewsType;
+use common\models\Widget;
 use yii\web\Controller;
 
 class NewsController extends Controller{
@@ -47,6 +48,8 @@ class NewsController extends Controller{
 
         $news_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['News.id'=>$news_id])->asArray()->one();
 
+        //查询推荐组件
+        $recommend_widget = Widget::recommend();
         //查询推荐新闻
         $recommend_news = News::recommend();
         //查询推荐案例
@@ -54,9 +57,9 @@ class NewsController extends Controller{
 
 //        var_dump($news_item);die;
         //查询上-篇文章
-        $prev_article = News::find()->andFilterWhere(['<', 'id', $news_id])->orderBy(['id' => SORT_DESC])->limit(1)->one();
+        $prev_article = News::find()->andFilterWhere(['and',['<', 'id', $news_id],['issue'=>2]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
-        $next_article = News::find()->andFilterWhere(['>', 'id', $news_id])->orderBy(['id' => SORT_ASC])->limit(1)->one();
+        $next_article = News::find()->andFilterWhere(['and',['>', 'id', $news_id],['issue'=>2]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
         $data = array(
             'link' => 'news',
             'prev' => $prev_article,
@@ -64,6 +67,7 @@ class NewsController extends Controller{
             'data' => $news_item,
             'recommend_news' => $recommend_news,
             'recommend_case' => $recommend_case,
+            'recommend_widget' => $recommend_widget
         );
         return $this->renderPartial('item',compact('data','news_id'));
     }

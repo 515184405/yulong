@@ -17,6 +17,7 @@
             <a href="/">返回首页</a>
             <a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case">设计案例</a>
             <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news">文章动态</a>
+            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit">组件列表</a>
         </div>
         <img src="/asset/static/image/wx-callme.jpg" alt="联系我们" class="erweima">
         <p>扫一扫微信二维码</p>

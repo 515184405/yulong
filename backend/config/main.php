@@ -20,6 +20,7 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
+            'loginUrl'=>array('site/login'), //设置为登录时跳的路径
         ],
         'session' => [
             // this is the name of the session cookie used for login on the backend

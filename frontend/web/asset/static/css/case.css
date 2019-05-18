@@ -73,6 +73,56 @@
 .case-list .case-item:hover .case-desc {
   color: #fff;
 }
+.unit-list .case-item {
+  overflow: hidden;
+  width: 320px;
+  height: 360px;
+}
+.unit-list .case-item .case-img {
+  height: 200px;
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #586048;
+}
+.unit-list .case-item .case-active-bg .iconfont {
+  line-height: 200px;
+}
+.unit-list .case-item .case-desc {
+  height: 40px;
+}
+.unit-list .case-item .case-type {
+  margin-top: 5px;
+  color: #333;
+  line-height: 20px;
+  margin-top: 10px;
+  padding: 0 15px;
+}
+.unit-list .case-item .case-type .iconfont {
+  position: relative;
+  top: 1px;
+}
+.unit-list .case-item .case-info {
+  border-top: 1px solid #fff;
+  padding: 5px 15px;
+  margin-top: 5px;
+  color: #999;
+  font-size: 12px;
+}
+.unit-list .case-item .case-info .iconfont {
+  margin-right: 3px;
+  font-size: 14px;
+}
+.unit-list .case-item:hover .case-img {
+  transform: scale(1.05);
+}
+.unit-list .case-item:hover .case-title {
+  color: #000;
+}
+.unit-list .case-item:hover .case-desc {
+  color: #999;
+}
 @media screen and (max-width: 500px) {
   .case-list .case-item {
     float: none;

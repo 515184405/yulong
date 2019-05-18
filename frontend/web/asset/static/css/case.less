@@ -74,6 +74,62 @@
     }
   }
 }
+.unit-list{
+  .case-item{
+    overflow: hidden;
+    width: 320px;
+    height:360px;
+    .case-img{
+      height:200px;
+      padding:15px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      background-color: #586048;
+    }
+    .case-active-bg {
+      .iconfont {
+        line-height: 200px;
+      }
+    }
+    .case-desc{
+      height:40px;
+    }
+    .case-type{
+      margin-top:5px;
+      color:#333;
+      line-height: 20px;
+      margin-top:10px;
+      padding:0 15px;
+      .iconfont{
+        position: relative;
+        top:1px;
+      }
+    }
+    .case-info{
+      border-top:1px solid #fff;
+      padding:5px 15px;
+      margin-top:5px;
+      color:#999;
+      font-size: 12px;
+      .iconfont{
+        margin-right:3px;
+        font-size: 14px;
+      }
+    }
+    &:hover{
+      .case-img{
+        transform:scale(1.05);
+      }
+      .case-title{
+        color:#000;
+      }
+      .case-desc{
+        color:#999;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 500px){
   .case-list {

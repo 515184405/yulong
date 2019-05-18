@@ -60,13 +60,13 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;">
-                        <cite>贤心</cite>
+                        <cite><?=Yii::$app->view->params['userInfo']['username']?></cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+<!--                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>-->
+                        <dd><a href="/user/info?id=<?=Yii::$app->user->getId();?>">修改密码 </a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <dd style="text-align: center;"><a href="/site/logout">退出</a></dd>
                     </dl>
                 </li>
 
@@ -80,7 +80,7 @@
         </div>
 
         <!-- 侧边菜单 -->
-        <div class="layui-side layui-side-menu">
+        <div id="layui-side-menu" class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
                 <div class="layui-logo" lay-href="home/console.html">
                     <span><img style="width: 120px;" src="/asset/image/logo-fff.png" alt=""></span>
@@ -94,22 +94,46 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
-                        <a href="/cases"  class="" lay-tips="精品案例" lay-direction="2">
+                        <a href="/cases"  class="" lay-tips="案例管理" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
-                            <cite>精品案例</cite>
+                            <cite>精品管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
-                        <a href="/news" lay-tips="文章列表" lay-direction="2">
+                        <a href="/widget"  class="" lay-tips="组件管理" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
-                            <cite>文章列表</cite>
+                            <cite>组件管理</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
+                        <a href="/news" lay-tips="文章管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>文章管理</cite>
                         </a>
                     </li>
                     <?php if($userInfo['type'] == 1){ ?>
                     <li data-name="home" class="layui-nav-item">
-                        <a href="/user" lay-tips="用户管理" lay-direction="2">
+                        <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>用户管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="/user">用户列表</a>
+                            </dd>
+                            <dd >
+                                <a href="/user/info">添加用户 </a>
+                            </dd>
+                            <dd >
+                                <a href="/user/info?id=<?=Yii::$app->user->getId();?>">修改密码 </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <?php }else{ ?>
+                    <li data-name="home" class="layui-nav-item">
+                        <a href="/user/info?id=<?=Yii::$app->user->getId();?>" lay-tips="修改密码" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>修改密码</cite>
                         </a>
                     </li>
                     <?php } ?>

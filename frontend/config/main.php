@@ -43,6 +43,8 @@ return [
             'rules' => [
                 "news/<action:\w+>/<news_id:\d+>"=>"news/<action>",
                 "case/<action:\w+>/<case_id:\d+>"=>"case/<action>",
+                "unit/<action:\w+>/<widget_id:\d+>"=>"unit/<action>",
+                "widget/<action:\w+>/<create_time:\d+>/<id:\d+>"=>"widget/<action>",
             ],
         ],
     ],

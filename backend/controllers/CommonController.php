@@ -22,7 +22,7 @@ class CommonController extends \yii\web\Controller{
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -31,7 +31,7 @@ class CommonController extends \yii\web\Controller{
             'verbs' => [
                 'class' => \yii\filters\VerbFilter::className() ,
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];

@@ -10,7 +10,7 @@
   padding: 0 20px;
   overflow-y: auto;
 }
-.news-items .news-hidden-scroll .content-title {
+.news-items .content-title {
   padding: 15px;
   font-size: 26px;
   color: #3D3D3D;
@@ -20,30 +20,30 @@
   margin-bottom: 5px;
   text-align: center;
 }
-.news-items .news-hidden-scroll .content-info {
+.news-items .content-info {
   text-align: center;
   color: #999;
 }
-.news-items .news-hidden-scroll .content-info span {
+.news-items .content-info span {
   margin-right: 25px;
 }
-.news-items .news-hidden-scroll .content-text {
+.news-items .content-text {
   margin-top: 30px;
 }
-.news-items .news-hidden-scroll .content-text img {
+.news-items .content-text img {
   max-width: 100%;
 }
-.news-items .news-hidden-scroll .btn-box {
+.news-items .btn-box {
   margin-top: 100px;
   border-top: 1px solid #ddd;
   padding: 20px;
 }
-.news-items .news-hidden-scroll .btn-box .btn-prev,
-.news-items .news-hidden-scroll .btn-box .btn-next {
+.news-items .btn-box .btn-prev,
+.news-items .btn-box .btn-next {
   display: block;
   line-height: 30px;
 }
-.news-items .news-hidden-scroll .share-box {
+.news-items .share-box {
   padding: 0 15px;
   padding-bottom: 200px;
 }
@@ -258,5 +258,66 @@
   top: 0;
   z-index: 999;
   opacity: 1;
+}
+.unit-items .share-box {
+  padding: 0;
+}
+.unit-items .banner-box {
+  width: 90%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 30px;
+  margin: 30px auto;
+}
+.unit-items .banner-box img {
+  max-width: 100%;
+}
+.unit-items .unit-btn-box {
+  height: 50px;
+  text-align: center;
+}
+.unit-items .unit-btn-box .fy-btn {
+  padding: 10px 40px;
+  margin-right: 20px;
+}
+.unit-items .unit-desc {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.unit-items .layui-elem-quote {
+  margin-bottom: 10px;
+  padding: 15px;
+  line-height: 22px;
+  border-left: 5px solid #999;
+  border-radius: 0 2px 2px 0;
+  background-color: #f2f2f2;
+}
+.unit-items .unit-rule {
+  width: 90%;
+  margin: 30px auto;
+}
+.unit-items .unit-rule .unit-rule-title {
+  color: #333;
+  font-size: 15px;
+  font-weight: bold;
+}
+.unit-items .unit-rule .unit-rule-content {
+  margin-top: 20px;
+}
+.unit-items .unit-rule .unit-rule-content blockquote {
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: #595757;
+}
+.unit-items .unit-page-box {
+  font-size: 16px;
+  color: #111;
+  margin-top: 50px;
+  padding-bottom: 100px;
 }
 /*# sourceMappingURL=item.css.map */

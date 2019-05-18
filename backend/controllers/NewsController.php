@@ -89,6 +89,19 @@ class NewsController extends CommonController
         return Json::encode(['code' => 100000,'message' => '设置失败']);
     }
 
+    //设置为发布状态
+    public function actionIssue(){
+        $checked = isset($_POST['checked']) ? $_POST['checked'] : '';
+        $id = isset($_POST['id']) ? $_POST['id'] : '';
+        $checked = $checked == 'true' ? 2 : 1;
+        $news = News::findOne($id);
+        $news->issue = $checked;
+        if($news->save()){
+            return Json::encode(['code' => 100000,'message' => '设置成功']);
+        }
+        return Json::encode(['code' => 100000,'message' => '设置失败']);
+    }
+
     public function actionDelete(){
         $newsid = isset($_POST['id']) ? $_POST['id'] : '';
         if(Yii::$app->request->isPost && $newsid){

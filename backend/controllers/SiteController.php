@@ -57,7 +57,7 @@ class SiteController extends CommonController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-//        var_dump(Yii::$app->security->generatePasswordHash('000000'));die;
+//        var_dump(Yii::$app->security->generatePasswordHash('930313'));die;
         $model = new LoginForm();
         if(Yii::$app->request->isPost){
 //            var_dump($_POST['verifyCode']);
@@ -86,7 +86,6 @@ class SiteController extends CommonController
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->redirect('/site/login');
     }
 }

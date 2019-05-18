@@ -11,7 +11,7 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="submit-btn">立即提交</button>
-                    <a href="/case" class="layui-btn layui-btn-primary">返回列表</a>
+                    <a href="javascript:history.go(-1);" class="layui-btn layui-btn-primary">返回</a>
                 </div>
             </div>
         </form>

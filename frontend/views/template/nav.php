@@ -8,6 +8,9 @@
             <?php if($data['link'] === 'case'){ ?>
                 <a href="/case" class="lhn-item">案例列表</a>
             <?php }; ?>
+            <?php if($data['link'] === 'unit'){ ?>
+                <a href="/unit" class="lhn-item">组件列表</a>
+            <?php }; ?>
 
             <a <?=is_null($data['prev']['id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['prev']['id'].'"' ?> class="lhn-item <?=is_null($data['prev']['id']) ? 'a-disabled' : ''?>"><i class="iconfont icon-prev">&#xe604;</i>PREV</a>
             <a <?=is_null($data['next']['id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['next']['id'].'"' ?> class="lhn-item <?=is_null($data['next']['id']) ? 'a-disabled' : ''?>">NEXT<i class="iconfont icon-next">&#xe607;</i></a>

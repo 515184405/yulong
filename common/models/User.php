@@ -88,6 +88,47 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
         ];
     }
 
+    /*查数据*/
+    public static function search($params){
+        $query = static::find();
+        //按title查找
+        if(isset($params['username'])){
+            $query->andFilterWhere(['and',['like','username',$params['username']],['type'=>2]]);
+        }
+        $query->andFilterWhere(['type'=>2]);
+        $page = isset($params['page']) ? $params['page'] : '';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        return compact('count', 'list');
+    }
+
+    //添加与修改
+    public static function insetUpdate($params,$user_id = null){
+        $user = new User();
+        if($user_id){
+            $user = User::findOne($user_id);
+            $params['login_count'] = intval($user->login_count) + 1;
+        }else{
+            $params['created_time'] = time();
+            $params['login_time'] = time();
+            $params['login_ip'] = $_SERVER["REMOTE_ADDR"];
+            $params['type'] = 2;
+        }
+        $params['updated_time'] = time();
+        $params['password'] = \Yii::$app->security->generatePasswordHash($params['password']);
+        $user->setAttributes($params);
+        if($user->save()){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @inheritdoc
      */
