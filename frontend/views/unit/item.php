@@ -1,8 +1,9 @@
+<?php $unit = $data['data']; ?>
+<?php $this->title='组件列表 - '.$unit['title']; ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">
 <link rel="stylesheet" href="/asset/static/css/item.css">
-<?php $unit = $data['data']; ?>
 <div class="news-items unit-items">
         <h2 class="content-title clearfix"><span class="left"><?=$unit['title']?></span><div id="share" class="share-box right"></div></h2>
         <div class="content-info">

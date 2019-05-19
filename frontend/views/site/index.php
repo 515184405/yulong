@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '宇龙科技 - 专业打造高端网络服务平台';
+$this->title = '宇龙科技 - 北京网站建设,网站制作,网站设计,专业网站建设';
 ?>
 <link rel="stylesheet" href="/asset/static/wigdet/swiper/swiper.min.css">
 <link rel="stylesheet" href="/asset/static/css/index.css">

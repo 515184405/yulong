@@ -1,3 +1,4 @@
+
 <?php
 
 /* @var $this \yii\web\View */
@@ -22,6 +23,9 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <meta name="keywords" content="网站建设,专业网站建设团队,网站设计,网站制作,做网站"/>
+    <meta name="description" content="北京宇龙开发小组团队,专业从事网站建设.为众多集团及公司提供高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发.提供高质量，高效率开发平台."/>
+
     <link rel="stylesheet" href="/asset/static/css/default.css">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
     <script src="/asset/static/wigdet/layer/layer.js"></script>

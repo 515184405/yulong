@@ -1,12 +1,6 @@
                 </div>
             </div>
         </div>
-        <div class="wap-list-nav none">
-            <a href="/"><i class="iconfont">&#xe603;</i>首页</a>
-            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case"><i class="iconfont">&#xe64a;</i>案例</a>
-            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit"><i class="iconfont">&#xe617;</i>组件</a>
-            <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news"><i class="iconfont">&#xe681;</i>文章</a>
-        </div>
         <?=$this->render('./public-footer'); ?>
         <script>
             $(".list-header,.list-content,.list-aslide").addClass('list-layout-animated');

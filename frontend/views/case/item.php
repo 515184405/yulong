@@ -1,3 +1,4 @@
+<?php $this->title='设计案例 - '.$data['data']['title']; ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">
@@ -6,6 +7,7 @@
 <div class="news-items case-items">
     <div class="news-hidden-scroll js_news_items">
         <img class="case-banner" src="<?=Yii::$app->params['backend_url'].$data['data']['header_url']?>" alt="">
+        <h2 class="content-title t-c"><?=$data['data']['title']?></h2>
         <h2 class="case-title">项目简介</h2>
         <div class="case-desc">
             <?=$data['data']['desc']?>

@@ -1,3 +1,4 @@
+<?php $this->title='文章动态 - '.$data['data']['title']; ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">

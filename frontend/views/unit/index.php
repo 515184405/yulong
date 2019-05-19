@@ -1,3 +1,4 @@
+<?php $this->title='宇龙科技 - 组件列表' ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 
@@ -34,7 +35,6 @@
             var oneAWidth = 295;
             //删除已存在的delay-{{}}s;
             var reg = /delay-[0-9]s/g;
-            console.log(i % Math.floor(width/oneAWidth))
             var classes = $('.animated')[i].className.match(reg);
             classes && $($('.animated')[i]).removeClass(classes[0]);
             $($('.animated')[i]).addClass('delay-'+i % Math.floor(width/oneAWidth)+'s')

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/asset/static/css/default.css">
     <link rel="stylesheet" href="/asset/static/css/list-layout.css">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
+    <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>
 <body>
     <div class="list-aslide transition">
