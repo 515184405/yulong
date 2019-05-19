@@ -33,18 +33,18 @@ use kucha\ueditor\UEditor;
             <div class="layui-form-item" pane="">
                 <label class="layui-form-label">案例地址</label>
                 <div class="layui-input-block">
-                    <input type="checkbox" <?=isset($data['case']['pc_link']) ? 'checked' : ''?> lay-filter="filter-link" value="pc" lay-skin="primary" title="PC端地址">
-                    <input type="checkbox" <?=isset($data['case']['wap_link']) ? 'checked' : ''?> lay-filter="filter-link" value="wap" lay-skin="primary" title="移动端地址">
+                    <input type="checkbox" <?=(isset($data['case']['pc_link']) && !empty($data['case']['pc_link'])) ? 'checked' : ''?> lay-filter="filter-link" value="pc" lay-skin="primary" title="PC端地址">
+                    <input type="checkbox" <?=(isset($data['case']['wap_link']) && !empty($data['case']['wap_link'])) ? 'checked' : ''?> lay-filter="filter-link" value="wap" lay-skin="primary" title="移动端地址">
                     <input type="checkbox" <?=(isset($data['case']['wx_link']) && !empty($data['case']['wx_link'])) ? 'checked' : ''?> lay-filter="filter-link" value="wx" lay-skin="primary" title="微信二维码">
                 </div>
             </div>
-            <div id="pc_link" class="layui-form-item  <?=isset($data['case']['pc_link']) ? '' : 'layui-hide'?>">
+            <div id="pc_link" class="layui-form-item  <?=(isset($data['case']['pc_link']) && !empty($data['case']['pc_link'])) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">PC端地址</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['case']['pc_link']) ? $data['case']['pc_link'] : ''?>" name="pc_link" placeholder="请输入PC端地址" autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div id="wap_link" class="layui-form-item <?=isset($data['case']['wap_link']) ? '' : 'layui-hide'?>">
+            <div id="wap_link" class="layui-form-item <?=(isset($data['case']['wap_link']) && !empty($data['case']['wap_link'])) ? '' : 'layui-hide'?>">
                 <label class="layui-form-label">移动端地址</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['case']['pc_link']) ? $data['case']['wap_link'] : ''?>" name="wap_link" placeholder="请输入移动端地址" autocomplete="off" class="layui-input">

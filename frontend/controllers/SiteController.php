@@ -1,6 +1,12 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\CaseType;
+use common\models\Banner;
+use common\models\Cases;
+use common\models\News;
+use common\models\Widget;
+use common\models\WidgetType;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -74,7 +80,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $data = [];
+        /*轮播图数据*/
+        $data['banner'] = Banner::find()->orderBy(['sort'=>SORT_ASC])->asArray()->all();
+        //案例列表数据
+        $data['case'] = Cases::find()->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
+        //案例类型数据
+        $data['case_type'] = CaseType::find()->limit(8)->asArray()->all();
+        //组件列表数据
+        $data['widget'] = Widget::find()->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
+        //组件类型数据
+        $data['widget_type'] = WidgetType::find()->limit(8)->asArray()->all();
+        //新闻列表数据
+        $data['news'] = News::find()->orderBy(['id'=>SORT_DESC])->limit(5)->asArray()->all();
+        return $this->render('index',compact('data'));
     }
 
     /**

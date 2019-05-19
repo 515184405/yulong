@@ -13,24 +13,14 @@ $this->title = '宇龙科技 - 专业打造高端网络服务平台';
 <!-- Swiper -->
 <div id="IE_false" class="swiper-container swiper-container-initialized swiper-container-horizontal none">
     <div class="swiper-wrapper">
-        <div class="swiper-slide swiper-slide-active">
+        <?php foreach ($data['banner'] as $key=>$v1){ ?>
+        <a target="_blank" href="<?=$v1['url']?>" class="swiper-slide <?=$key==0 ? 'swiper-slide-active' : ($key==1 ? 'swiper-slide-next' : '');  ?> ">
             <div class="title">
                 <!--<h3>Adidas NMD</h3>-->
             </div>
-            <div class="img-box"><img src="/asset/static/image/banner/banner_text1.png"></div>
-        </div>
-        <div class="swiper-slide swiper-slide-next">
-            <div class="title">
-                <!--<h3>Marconatto</h3>-->
-            </div>
-            <div class="img-box"><img src="/asset/static/image/banner/banner_text2.png"></div>
-        </div>
-        <div class="swiper-slide">
-            <div class="title">
-                <!--<h3>CHANEL</h3>-->
-            </div>
-            <div class="img-box"><img src="/asset/static/image/banner/banner_text3.png"></div>
-        </div>
+            <div class="img-box"><img src="<?=Yii::$app->params['backend_url'].$v1['banner_url'];?>"/></div>
+        </a>
+        <?php } ?>
     </div>
     <div class="button-prev button disabled">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 160 90">
@@ -64,9 +54,9 @@ $this->title = '宇龙科技 - 专业打造高端网络服务平台';
 <!--ie10-11-->
 <div id="ie-swiper" class="swiper-container ie-swiper none">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image:url('/asset/static/image/banner/banner_text1.png')"></div>
-        <div class="swiper-slide" style="background-image:url('/asset/static/image/banner/banner_text2.png')">Slide 2</div>
-        <div class="swiper-slide" style="background-image:url('/asset/static/image/banner/banner_text3.png')">Slide 3</div>
+        <?php foreach ($data['banner'] as $key=>$v2){ ?>
+        <a target="_blank" href="<?=$v2['url']?>" class="swiper-slide" style="background-image:url('<?=Yii::$app->params['backend_url'].$v2['banner_url'];?>')"></a>
+        <?php } ?>
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
@@ -207,19 +197,18 @@ $this->title = '宇龙科技 - 专业打造高端网络服务平台';
 <!--项目案例-->
 <section class="section-project">
     <div class="fy-container">
-        <h2 animate-type="slideInUp" class="section-title animated theme">客户案例展示</h2>
+        <h2 animate-type="slideInUp" class="section-title animated theme">案例展示</h2>
         <p animate-type="slideInUp" class="section-desc animated">认真服务好每一位客户,让客户满意是我们的宗旨！</p>
-        <p class="section-btn-box">
-            <a href="#">全 部</a>
-            <a href="#">网站建设</a>
-            <a href="#">APP开发</a>
-            <a href="#">O2O系统</a>
-            <a href="#">商城系统</a>
-            <a href="#">网贷系统</a>
+        <p animate-type="slideInUp"  class="section-btn-box animated">
+        <a target="_blank" href="/case">全 部</a>
+            <?php foreach ($data['case_type'] as $v3) { ?>
+                <a target="_blank" href="/case?id=<?=$v3['type_id']?>"><?=$v3['title']?></a>
+            <?php }?>
         </p>
         <div class="sp-list clearfix">
-            <a animate-type="slideInUp" class="sp-item animated" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
+            <?php foreach ($data['case'] as $k4=>$v4) {  ?>
+            <a animate-type="slideInUp" class="sp-item animated delay-<?=$k4%3?>s" target="_blank" href="/case/item/<?=$v4['id'];?>">
+                <div class="sp-item-top transition" style="background-image:url('<?=Yii::$app->params['backend_url'].$v4['banner_url']; ?>')">
                     <div class="spi-top-active transition">
                         <p class="_line transition"></p>
                         <span class="hover-title transition">查看项目</span>
@@ -228,205 +217,93 @@ $this->title = '宇龙科技 - 专业打造高端网络服务平台';
                     <!--<img class="sp-item-img" src="" alt="">-->
                 </div>
                 <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
+                    <p class="sib-title overflow-text"><?=$v4['title'];?></p>
+                    <p class="sib-desc">
+                        <?= str_replace(",",' / ',$v4['tag_id']); ?>
+                    </p>
                     <p class='clearfix sib-btn'>
                         <span class="left">详情</span>
                         <i class="iconfont right transition">&#xe600;</i>
                     </p>
                 </div>
             </a>
-            <a animate-type="slideInUp" class="sp-item animated delay-1s" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
-                    <div class="spi-top-active transition">
-                        <p class="_line transition"></p>
-                        <span class="hover-title transition">查看项目</span>
-                        <p class="_line transition"></p>
-                    </div>
-                    <!--<img class="sp-item-img" src="" alt="">-->
-                </div>
-                <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
-                    <p class='clearfix sib-btn'>
-                        <span class="left">详情</span>
-                        <i class="iconfont right transition">&#xe600;</i>
-                    </p>
-                </div>
-            </a>
-            <a animate-type="slideInUp" class="sp-item animated delay-2s" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
-                    <div class="spi-top-active transition">
-                        <p class="_line transition"></p>
-                        <span class="hover-title transition">查看项目</span>
-                        <p class="_line transition"></p>
-                    </div>
-                    <!--<img class="sp-item-img" src="" alt="">-->
-                </div>
-                <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
-                    <p class='clearfix sib-btn'>
-                        <span class="left">详情</span>
-                        <i class="iconfont right transition">&#xe600;</i>
-                    </p>
-                </div>
-            </a>
-            <a animate-type="slideInUp" class="sp-item animated" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
-                    <div class="spi-top-active transition">
-                        <p class="_line transition"></p>
-                        <span class="hover-title transition">查看项目</span>
-                        <p class="_line transition"></p>
-                    </div>
-                    <!--<img class="sp-item-img" src="" alt="">-->
-                </div>
-                <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
-                    <p class='clearfix sib-btn'>
-                        <span class="left">详情</span>
-                        <i class="iconfont right transition">&#xe600;</i>
-                    </p>
-                </div>
-            </a>
-            <a animate-type="slideInUp" class="sp-item animated delay-1s" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
-                    <div class="spi-top-active transition">
-                        <p class="_line transition"></p>
-                        <span class="hover-title transition">查看项目</span>
-                        <p class="_line transition"></p>
-                    </div>
-                    <!--<img class="sp-item-img" src="" alt="">-->
-                </div>
-                <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
-                    <p class='clearfix sib-btn'>
-                        <span class="left">详情</span>
-                        <i class="iconfont right transition">&#xe600;</i>
-                    </p>
-                </div>
-            </a>
-            <a animate-type="slideInUp" class="sp-item animated delay-2s" href="#">
-                <div class="sp-item-top transition" style="background-image:url('https://www.bocweb.cn/upload/2019/01/21/15480530523842add2w.jpg')">
-                    <div class="spi-top-active transition">
-                        <p class="_line transition"></p>
-                        <span class="hover-title transition">查看项目</span>
-                        <p class="_line transition"></p>
-                    </div>
-                    <!--<img class="sp-item-img" src="" alt="">-->
-                </div>
-                <div class="sp-item-bottom transition">
-                    <p class="sib-title">拉芳lovefun</p>
-                    <p class="sib-desc">用户体验 / 移动平台开发</p>
-                    <p class='clearfix sib-btn'>
-                        <span class="left">详情</span>
-                        <i class="iconfont right transition">&#xe600;</i>
-                    </p>
-                </div>
-            </a>
+
+            <?php } ?>
         </div>
     </div>
 </section>
 <!--项目案例-->
+<!--组件案例-->
+<section class="section-project unit-project">
+    <div class="fy-container">
+        <h2 animate-type="slideInUp" class="section-title animated theme">组件展示</h2>
+        <p animate-type="slideInUp" class="section-desc animated">积攒更多更好的组件，开发效率才是最高的</p>
+        <p animate-type="slideInUp"  class="section-btn-box animated">
+            <a target="_blank" href="/unit">全 部</a>
+            <?php foreach ($data['widget_type'] as $v5) { ?>
+                <a target="_blank" href="/unit?id=<?=$v5['type_id']?>"><?=$v5['title']?></a>
+            <?php }?>
+        </p>
+        <div class="sp-list clearfix">
+            <div class="sp-list clearfix">
+                <?php foreach ($data['widget'] as $k6=>$v6) {  ?>
+                    <a animate-type="slideInUp" class="sp-item animated delay-<?=$k6%3?>s" target="_blank" href="/unit/item/<?=$v6['id'];?>">
+                        <div class="sp-item-top transition" style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>,1);background-image:url('<?=Yii::$app->params['backend_url'].$v6['banner_url']; ?>')">
+                            <div class="spi-top-active transition">
+                                <p class="_line transition"></p>
+                                <span class="hover-title transition">查看组件</span>
+                                <p class="_line transition"></p>
+                            </div>
+                            <!--<img class="sp-item-img" src="" alt="">-->
+                        </div>
+                        <div class="sp-item-bottom transition">
+                            <p class="sib-title overflow-text"><?=$v6['title'];?></p>
+                            <p class="sib-desc unit-desc">
+                                <i class="iconfont">&#xe618;</i><?=$v6['look'];?>
+                                <i style="margin-left:30px;" class="iconfont">&#xe602;</i><?=$v6['down_count'];?>
+                            </p>
+                            <p class='clearfix sib-btn'>
+                                <span class="left">详情</span>
+                                <i class="iconfont right transition">&#xe600;</i>
+                            </p>
+                        </div>
+                    </a>
+
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</section>
+<!--组件案例-->
 <!--新闻列表-->
 <section class="section-news">
     <div class="fy-container">
         <h2 animate-type="slideInUp" class="section-title animated theme">新闻动态</h2>
         <p animate-type="slideInUp" class="section-desc animated">我们一直在学习与进步 对精品网站的追求与研究从未停止</p>
         <div class="news-list clearfix">
-            <div animate-type="slideInUp" class="news-item left animated">
+            <?php foreach ($data['news'] as $index=>$news) {  ?>
+                <div animate-type="slideInUp" class="news-item left animated delay-<?=$index%3?>s">
                 <div class="news-item-insert">
-                    <div class="news-first-image"></div>
-                    <a href="#" class="news-content transition">
+                    <?php if($index == 0){ ?>
+                        <div class="news-first-image"></div>
+                    <?php } ?>
+                    <a target="_blank" href="/news/item/<?=$news['id']?>" class="news-content transition">
                         <div class="clearfix">
                             <div class="left news-date">
-                                <b>19</b>
-                                <p>2018-11</p>
+                                <b><?=date('d',$news['create_time']); ?></b>
+                                <p><?=date('Y-m',$news['create_time']); ?></p>
                             </div>
                             <div class="news-title overflow-text2">
-                                <h2>成功签约鼎汇盈资产管理公司企业官网制作</h2>
+                                <h2><?=$news['title']; ?></h2>
                             </div>
                         </div>
                         <div class="news-text overflow-text2">
-                            北京泰禹行汽车租赁有限公司成立于2012年5月11日，注册资本为650万元。总部位于湖南省会长沙，属于泰禹集团的下属全资子公司，主营业务主要是为各公司、团队、个人等提供长期的汽车租赁服务。
+                            <h2><?=$news['desc']; ?></h2>
                         </div>
                     </a>
                 </div>
             </div>
-            <div animate-type="slideInUp" class="news-item left delay-1s animated">
-                <div class="news-item-insert">
-                    <a href="#" class="news-content transition">
-                        <div class="clearfix">
-                            <div class="left news-date">
-                                <b>19</b>
-                                <p>2018-11</p>
-                            </div>
-                            <div class="news-title">
-                                <h2 class="overflow-text">成功签约鼎汇盈资产管理公司企业官网制作</h2>
-                            </div>
-                        </div>
-                        <div class="news-text overflow-text2">
-                            北京泰禹行汽车租赁有限公司成立于2012年5月11日，注册资本为650万元。总部位于湖南省会长沙，属于泰禹集团的下属全资子公司，主营业务主要是为各公司、团队、个人等提供长期的汽车租赁服务。
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div animate-type="slideInUp" class="news-item left delay-2s animated">
-                <div class="news-item-insert">
-                    <a href="#" class="news-content transition">
-                        <div class="clearfix">
-                            <div class="left news-date">
-                                <b>19</b>
-                                <p>2018-11</p>
-                            </div>
-                            <div class="news-title">
-                                <h2 class="overflow-text">成功签约鼎汇盈资产管理公司企业官网制作成功签约鼎汇盈资产管理公司企业官网制作</h2>
-                            </div>
-                        </div>
-                        <div class="news-text overflow-text2">
-                            北京泰禹行汽车租赁有限公司成立于2012年5月11日，注册资本为650万元。总部位于湖南省会长沙，属于泰禹集团的下属全资子公司，主营业务主要是为各公司、团队、个人等提供长期的汽车租赁服务。
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div animate-type="slideInUp" class="news-item left delay-1s animated">
-                <div class="news-item-insert">
-                    <a href="#" class="news-content transition">
-                        <div class="clearfix">
-                            <div class="left news-date">
-                                <b>19</b>
-                                <p>2018-11</p>
-                            </div>
-                            <div class="news-title">
-                                <h2 class="overflow-text">成功签约鼎汇盈资产管理公司企业官网制作</h2>
-                            </div>
-                        </div>
-                        <div class="news-text overflow-text2">
-                            北京泰禹行汽车租赁有限公司成立于2012年5月11日，注册资本为650万元。总部位于湖南省会长沙，属于泰禹集团的下属全资子公司，主营业务主要是为各公司、团队、个人等提供长期的汽车租赁服务。
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div animate-type="slideInUp" class="news-item left delay-2s animated">
-                <div class="news-item-insert">
-                    <a href="#" class="news-content transition">
-                        <div class="clearfix">
-                            <div class="left news-date">
-                                <b>19</b>
-                                <p>2018-11</p>
-                            </div>
-                            <div class="news-title">
-                                <h2 class="overflow-text">成功签约鼎汇盈资产管理公司企业官网制作成功签约鼎汇盈资产管理公司企业官网制作</h2>
-                            </div>
-                        </div>
-                        <div class="news-text overflow-text2">
-                            北京泰禹行汽车租赁有限公司成立于2012年5月11日，注册资本为650万元。总部位于湖南省会长沙，属于泰禹集团的下属全资子公司，主营业务主要是为各公司、团队、个人等提供长期的汽车租赁服务。
-                        </div>
-                    </a>
-                </div>
-            </div>
+           <?php } ?>
         </div>
     </div>
 </section>

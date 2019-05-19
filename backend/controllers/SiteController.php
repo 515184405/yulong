@@ -78,6 +78,7 @@ class SiteController extends CommonController
         return $this->renderPartial('login');
     }
 
+
     /**
      * Logout action.
      *

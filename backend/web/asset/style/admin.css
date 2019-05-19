@@ -566,6 +566,12 @@ html{background-color: #f2f2f2; color: #666;}
 .red{
   color:#f00;
 }
+/*//单元编辑格样式重定义*/
+.layui-table td[data-edit="text"]{
+}
+.layui-table td[data-edit="text"] div{
+  border:1px solid #e9e9e9;
+}
 /*
 
   响应式补充

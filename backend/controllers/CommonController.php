@@ -22,7 +22,7 @@ class CommonController extends \yii\web\Controller{
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue'],
+                        'actions' => ['sort','logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue','is-down'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -81,6 +81,18 @@ class CommonController extends \yii\web\Controller{
         }
         return json_encode($Json);
 
+    }
+
+    public function getRandomString($len, $chars=null)
+    {
+        if (is_null($chars)){
+            $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+        }
+        mt_srand(10000000*(double)microtime());
+        for ($i = 0, $str = '', $lc = strlen($chars)-1; $i < $len; $i++){
+            $str .= $chars[mt_rand(0, $lc)];
+        }
+        return $str;
     }
 
     //图片上传

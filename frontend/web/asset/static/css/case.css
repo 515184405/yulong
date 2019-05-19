@@ -123,8 +123,12 @@
 .unit-list .case-item:hover .case-desc {
   color: #999;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
+  .case-list {
+    padding: 15px;
+  }
   .case-list .case-item {
+    width: 100%;
     float: none;
     margin: 0 auto;
     margin-top: 15px;

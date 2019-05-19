@@ -103,4 +103,30 @@
   transform: translate3d(0, 0%, 0);
   opacity: 1;
 }
+@media screen and (max-width: 768px) {
+  .news-list {
+    margin-top: -15px;
+    padding: 10px;
+  }
+  .news-list .news-item {
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+    margin-top: 15px;
+    height: auto;
+  }
+  .news-list .news-item .page-shadow1 {
+    display: none;
+  }
+  .news-list .news-item .news-img,
+  .news-list .news-item .news-item-imgbox {
+    float: none;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+  }
+  .news-list .news-item .news-content {
+    margin-left: 0;
+  }
+}
 /*# sourceMappingURL=news.css.map */

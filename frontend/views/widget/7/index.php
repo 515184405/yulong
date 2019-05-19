@@ -26,7 +26,7 @@
 <header class="navbar navbar-light navbar-expand-md">
 
 </header>
-
+<!--<a href="--><?//=$view_url?><!--demo">111111111</a>-->
 <!-- Content -->
 <div class="container">
     <div class="row">

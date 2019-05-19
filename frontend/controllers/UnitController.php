@@ -41,11 +41,19 @@ class UnitController extends Controller{
 
     public function actionItem(){
         $params =\Yii::$app->request->get();
+        //管理员可看
+        $auth = isset($params['auth']) ? $params['auth'] : "";
         $unit_id = isset($params['widget_id']) ? $params['widget_id'] : "";
-        $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['issue'=>'2']])->asArray()->one();
+        if($auth == '0777'){
+            //管理员可看
+            $widget_item = Widget::find()->where(['id'=>$unit_id])->asArray()->one();
+        }else{
+            //所有可见
+            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['issue'=>'2']])->asArray()->one();
+        }
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);
-        if(!$widget_item_look){
+        if(!$widget_item){
             return '项目不存在';
         }
         $widget_item_look->look = intval($widget_item_look->look) + 1;

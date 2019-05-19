@@ -5,7 +5,7 @@
 
 <div class="news-items">
     <div class="news-hidden-scroll js_news_items">
-        <h2 class="content-title"><?=$data['data']['title']?></h2>
+        <h2 class="content-title t-c"><?=$data['data']['title']?></h2>
         <div class="content-info">
             <span>来 源：<?=$data['data']['sourse']?></span>
             <span>发布日期：<?=date('Y-m-d h:m:s',$data['data']['create_time'])?></span>

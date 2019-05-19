@@ -1,5 +1,5 @@
 <div class="layui-card">
-    <div class="layui-card-header header-title">新闻列表</div>
+    <div class="layui-card-header header-title">组件列表</div>
     <div class="layui-card-body">
         <div class="layui-inline">
         <input type="text" class="layui-input js_search_title" placeholder="输入新闻标题搜索">
@@ -21,6 +21,10 @@
 
         <script type="text/html" id="switchTp2">
             <input type="checkbox" name="issue" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-issue" {{ d.issue == 2 ? 'checked' : '' }}>
+        </script>
+
+        <script type="text/html" id="switchTp3">
+            <input type="checkbox" name="issue" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-is_down" {{ d.is_down == 1 ? 'checked' : '' }}>
         </script>
 
         <script type="text/html" id="test-table-toolbar-barDemo">
@@ -51,7 +55,7 @@
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'title',title: '标题',templet: function (d) {
-                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'"> '+d.title+' </a>';
+                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'?auth=0777"> '+d.title+' </a>';
                     }}
                 ,{field:'create_time',  title: '创建时间',templet: function (d) {
                         return getLocalTime(d.create_time);
@@ -61,6 +65,7 @@
                     }}
                 ,{field:'recommend',width:100, title: '是否推荐',templet: '#switchTpl'}
                 ,{field:'issue',width:100, title: '是否发布',templet: '#switchTp2'}
+                ,{field:'is_down',width:120, title: '不允许下载',templet: '#switchTp3'}
                 ,{field:'desc', title: '描述'}
                 ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
@@ -98,6 +103,15 @@
         // 发布单选开关事件
         form.on('switch(filter-issue)',function(res){
             $.post('/widget/issue',{checked:res.elem.checked,id:res.value},function(data){
+                layer.tips(data.message, $(res.elem).next(), {
+                    tips: [1, '#0FA6D8'] //还可配置颜色
+                });
+            },'json')
+        })
+
+        // 是否允许下载单选开关事件
+        form.on('switch(filter-is_down)',function(res){
+            $.post('/widget/is-down',{checked:res.elem.checked,id:res.value},function(data){
                 layer.tips(data.message, $(res.elem).next(), {
                     tips: [1, '#0FA6D8'] //还可配置颜色
                 });

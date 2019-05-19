@@ -18,7 +18,6 @@
       border-bottom: 2px solid #ddd;
       margin-top: 30px;
       margin-bottom: 5px;
-      text-align: center;
     }
     .content-info{
       text-align: center;
@@ -88,6 +87,12 @@
       height: 70px;
       width:100px;
       float: left;
+    }
+    .widget-img{
+      padding:10px;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
     }
     .nr-item-content{
       margin-left:115px;
@@ -214,6 +219,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   img{
+    display: block;
     margin:50px auto!important;
     max-width: 100%;
   }
@@ -273,6 +279,7 @@
     box-sizing: border-box;
     padding:30px;
     margin:30px auto;
+    text-align: center;
     img{
       max-width: 100%;
     }
@@ -323,5 +330,31 @@
     color:#111;
     margin-top:50px;
     padding-bottom:100px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .news-items{
+    margin-right:0;
+  }
+  .news-recommend{
+    width:auto;
+    position: static;
+  }
+  .unit-items .banner-box{
+    padding: 15px;
+  }
+  .unit-items .unit-btn-box {
+    height: auto;
+    .fy-btn{
+      display: block;
+      width:90%;
+      padding:10px 0;
+      margin:0 auto;
+      margin-top:15px;
+    }
+  }
+  .unit-items .layui-elem-quote{
+    margin-top:20px;
   }
 }

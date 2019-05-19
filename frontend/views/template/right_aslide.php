@@ -23,8 +23,8 @@
         </h2>
         <div>
             <?php foreach ($data['recommend_widget'] as $v2){?>
-                <a href="/news/item/<?=$v2['id'];?>" class="nr-item clearfix">
-                    <img class="nr-item-img" src="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>">
+                <a href="/unit/item/<?=$v2['id'];?>" class="nr-item clearfix">
+                    <img style="background:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,1)" class="nr-item-img widget-img" src="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v2['banner_url']?>">
                     <div class="nr-item-content">
                         <h3 class="nric-title overflow-text2" title="<?=$v2['title']?>"><?=$v2['title']?></h3>
                         <p class="nric-info">

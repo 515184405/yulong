@@ -94,9 +94,15 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
+                        <a href="/banner"  class="" lay-tips="轮播管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>轮播管理</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/cases"  class="" lay-tips="案例管理" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
-                            <cite>精品管理</cite>
+                            <cite>案例管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">

@@ -20,10 +20,10 @@
         <h2 class="case-title">项目地址</h2>
         <div class="case-dress">
             <?php if($data['data']['pc_link']){ ?>
-            <p>电脑端：<a href="<?=$data['data']['pc_link']?>"><?=$data['data']['pc_link']?></a></p>
+            <p>电脑端：<a target="_blank" href="<?=$data['data']['pc_link']?>"><?=$data['data']['pc_link']?></a></p>
             <?php } ?>
             <?php if($data['data']['wap_link']){ ?>
-                <p>移动端：<a href="<?=$data['data']['wap_link']?>"><?=$data['data']['wap_link']?></a></p>
+                <p>移动端：<a target="_blank" href="<?=$data['data']['wap_link']?>"><?=$data['data']['wap_link']?></a></p>
             <?php } ?>
             <?php if(!is_null($data['data']['wap_link'])){ ?>
             <div class="case-dress-wxbox">

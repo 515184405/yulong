@@ -21,8 +21,6 @@
         </div>
         <img src="/asset/static/image/wx-callme.jpg" alt="联系我们" class="erweima">
         <p>扫一扫微信二维码</p>
-        <a class="QQ-box" href="tencent://message/?Site=baidu.com&uin=515184405&Menu=yes"><i class="iconfont QQ">&#xe74d;</i>515184405</a>
-        <a class="tel-box" href="TEL:15321353313"><i class="iconfont QQ">&#xe622;</i>15321353313</a>
         <p class="aslide-footer">高端定制 ● 品牌设计</p>
     </div>
     <div class="list-container transition">

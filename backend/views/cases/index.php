@@ -11,7 +11,7 @@
 
         <script type="text/html" id="test-table-toolbar-toolbarDemo">
             <div class="layui-btn-container">
-                <a href="/cases/info" class="layui-btn layui-btn-sm">添加作品</a>
+                <a href="/cases/info" class="layui-btn layui-btn-sm">添加案例</a>
                 <a href="/cases/type" class="layui-btn layui-btn-sm">添加类型</a>
             </div>
         </script>

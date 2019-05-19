@@ -94,6 +94,19 @@ class WidgetController extends CommonController
         return Json::encode(['code' => 100000,'message' => '设置失败']);
     }
 
+    //是否允许下载
+    public function actionIsDown(){
+        $checked = isset($_POST['checked']) ? $_POST['checked'] : '';
+        $id = isset($_POST['id']) ? $_POST['id'] : '';
+        $checked = $checked == 'true' ? 1 : 0;
+        $widget = Widget::findOne($id);
+        $widget->is_down = $checked;
+        if($widget->save()){
+            return Json::encode(['code' => 100000,'message' => '设置成功']);
+        }
+        return Json::encode(['code' => 100000,'message' => '设置失败']);
+    }
+
     public function actionDelete(){
         $widget_id = isset($_POST['id']) ? $_POST['id'] : '';
         if(Yii::$app->request->isPost && $widget_id){
@@ -133,10 +146,26 @@ class WidgetController extends CommonController
                 $name = explode('.',$model->file->name);
                 $zip = array_pop($name);
                 //join('.',$name);
-                $name = 'widget.'.$zip;
+
+                //判断文件名中是否有中文
+                if (preg_match("/[\x7f-\xff]/", $model->file->name)) {
+                    $name = 'widget'.$id.'.'.$zip;
+                }else{
+                    $name = $model->file->name;
+                }
+
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 $fileSrc=$rootDir . $name;
+
                 if($model->file->saveAs($fileSrc)){
+                    //解压缩
+//                    if($zip == 'zip'){
+//                        $this->unZip($_FILES['file'],$rootDir);
+//                    }else{
+//                        $this->unRar($_FILES['file'],$rootDir);
+//                    }
+
+
                     $widget = Widget::findOne($id);
                     $widget->download = '/widget/' . $id . '/' . $name;
                     if($widget->save()){
@@ -173,4 +202,21 @@ class WidgetController extends CommonController
         $data = WidgetType::find()->asArray()->all();
         return Json::encode(array('code'=>'100000','message'=>'查询成功！','data'=>$data));
     }
+
+//    public function unZip($upload_src,$un_zip_src){
+//        $zip = new \ZipArchive();//新建一个ZipArchive的对象
+//        if ($zip->open($upload_src) === TRUE){
+//
+//            $zip->extractTo($un_zip_src);//假设解压缩到在当前路径下images文件夹的子文件夹php
+//            $zip->close();//关闭处理的zip文件
+//        }
+//    }
+//    public function unRar($upload_src,$un_zip_src){
+//        $rar_file = rar_open($upload_src) or die("Failed to open Rar archive");
+//        $entries = rar_list($rar_file);
+//        foreach ($entries as $entry) {
+//            $entry->extract($un_zip_src); /*/dir/extract/to/换成其他路径即可*/
+//        }
+//        rar_close($rar_file);
+//    }
 }

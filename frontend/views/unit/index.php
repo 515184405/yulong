@@ -18,7 +18,9 @@
             <p class="case-info clearfix">
                 <span class="left"><i class="iconfont">&#xe618;</i><?=$val['look'] ?></span>
                 <span style="margin-left:15px;" class="left"><i class="iconfont">&#xe6ca;</i><?=$val['collect'] ?></span>
-                <span class="right"><i class="iconfont">&#xe602;</i><?=$val['down_count'] ?></span>
+                <?php if($val['is_down'] == 0 ){ ?>
+                    <span class="right"><i class="iconfont">&#xe602;</i><?=$val['down_count'] ?></span>
+                <?php } ?>
             </p>
         </a>
     <?php }else{ ?>

@@ -7,7 +7,7 @@
         <!--        delay---><?//= $i % 5 ?><!--s-->
         <div animate-type="slideInUpLeft" class="news-item animated duration0_5">
             <a class="news-item-imgbox" href="/news/item/<?=$val['id'] ?>">
-                <div class="page-shadow1 transition"><i class="iconfont">&#xe618;</i></div>
+                <div class="page-shadow1 transition">点击查看</div>
                 <img class="news-img" src="<?=Yii::$app->params['backend_url'].$val['banner_url']?>" alt="">
             </a>
             <div class="news-content">

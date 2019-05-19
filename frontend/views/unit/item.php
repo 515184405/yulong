@@ -15,11 +15,13 @@
             <img src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
         </div>
         <div class="unit-btn-box">
-            <a class="fy-btn fy-btn-success" target="_blank" href="/widget/widget/<?=$unit['create_time']?>/<?=$unit['id']?>">查看演示</a>
+            <a class="fy-btn fy-btn-success" target="_blank" href="/widget/widget/<?=$unit['create_time']?>/<?=$unit['id']?>/index">查看演示</a>
             <?php if($unit['website']){ ?>
             <a class="fy-btn fy-btn-primary" target="_blank" href="<?=$unit['website']?>">官网地址</a>
             <?php } ?>
+            <?php if($unit['is_down'] == 0){ ?>
             <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger js_download" data-src="<?=$unit['download']?>" target="_blank">立即下载</a>
+            <?php } ?>
         </div>
         <div class="unit-desc layui-elem-quote">
             <span class="theme">插件描述：</span><?=$unit['desc'];?>

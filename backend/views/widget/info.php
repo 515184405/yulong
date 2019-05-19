@@ -59,7 +59,7 @@ use kucha\ueditor\UEditor;
             <div id="wx_link" class="layui-form-item ">
                 <label class="layui-form-label">作品压缩包</label>
                 <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="upload-zip">上传文件</button><span class="theme-red ml10">格式为：zip|rar|7z</span>
+                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="upload-zip">上传文件</button><span class="theme-red ml10">格式为：zip|rar</span>
                     <input type="hidden" value="<?=isset($data['widget']['download']) ? $data['widget']['download'] : ''?>" class="js_website" name="website">
                     <a href="<?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?>" id="zip-upload-demoText"><?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?></a>
                 </div>
@@ -169,8 +169,8 @@ use kucha\ueditor\UEditor;
             elem: '#upload-zip'
             ,url: '/widget/upload-file'
             ,accept: 'file' //普通文件
-            ,exts: 'zip|rar|7z' //只允许上传压缩文件
-            // ,auto: false
+            ,exts: 'zip|rar' //只允许上传压缩文件
+            ,auto: false
             ,bindAction: '#upload-file-submit'
             ,done: function(res){
 
@@ -241,7 +241,7 @@ use kucha\ueditor\UEditor;
                 layer.msg('作品类型必填',{icon:5});
                 return false;
             }
-            if(!zipFile){
+            if(!zipFile && !$('.js_website').val()){
                 layer.msg('请上传文件压缩包',{icon:5});
                 return false;
             }
@@ -259,12 +259,20 @@ use kucha\ueditor\UEditor;
                 success: function(res) {
                     layer.closeAll();
                     _this.disabled=false;
-                    $( '#upload-file-submit').click();
-                    layer.msg('正在上传图片...', {
-                        icon: 16,
-                        time: 0,
-                        shade: [0.1, '#000']
-                    })
+                    if(zipFile) {
+                        $('#upload-file-submit').click();
+                        layer.msg('正在上传图片...', {
+                            icon: 16,
+                            time: 0,
+                            shade: [0.1, '#000']
+                        })
+                    }else{
+                        layer.msg(res.message,{icon:1,time:1500},function(){
+                            window.history.go(-1);
+                        })
+
+
+                    }
                 },
                 error: function(){
                     layer.closeAll();

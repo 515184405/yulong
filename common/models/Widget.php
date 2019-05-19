@@ -20,6 +20,7 @@ use Yii;
  * @property string $website 官网地址
  * @property string $down_count 下载次数
  * @property string $recommend 推荐
+ * @property string $is_down 是否可以下载
  */
 class Widget extends \yii\db\ActiveRecord
 {
@@ -39,7 +40,7 @@ class Widget extends \yii\db\ActiveRecord
         return [
             [['title', 'desc'], 'required'],
             [['desc', 'rule'], 'string'],
-            [['look', 'collect', 'down_count','create_time','recommend','issue'], 'integer'],
+            [['look', 'collect', 'down_count','create_time','recommend','issue','is_down'], 'integer'],
             [['title', 'banner_url', 'type', 'source', 'download', 'website'], 'string', 'max' => 255],
         ];
     }
@@ -65,6 +66,7 @@ class Widget extends \yii\db\ActiveRecord
             'create_time' => 'Create Time',
             'recommend' => 'Recommend',
             'issue' => "Issue",
+            'is_down' => "Is Down",
         ];
     }
 

@@ -193,8 +193,8 @@ body {
 @font-face {
   font-family: 'iconfont';
   /* project id 1174705 */
-  src: url('//at.alicdn.com/t/font_1174705_f308iohkwz7.eot');
-  src: url('//at.alicdn.com/t/font_1174705_f308iohkwz7.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_f308iohkwz7.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_f308iohkwz7.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_f308iohkwz7.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_f308iohkwz7.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1174705_we47q2wx8u.eot');
+  src: url('//at.alicdn.com/t/font_1174705_we47q2wx8u.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_we47q2wx8u.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_we47q2wx8u.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_we47q2wx8u.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_we47q2wx8u.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -230,6 +230,9 @@ body {
 }
 .t-l {
   text-align: left;
+}
+.t-c {
+  text-align: center;
 }
 .t-r {
   text-align: right;
@@ -446,7 +449,6 @@ header .nav-ul li a:hover {
 header .nav-ul .telephone-box {
   height: 0;
   overflow: hidden;
-  background-color: #000;
 }
 header .nav-ul .nav-telephone-number {
   border-left: 1px solid #fff;
@@ -465,9 +467,9 @@ header .nav-ul .right-icon {
   color: #fff;
 }
 header .nav-ul p {
-  padding-left: 66px;
-  padding-right: 28px;
-  margin-bottom: 10px;
+  margin-left: 66px;
+  padding-left: 15px;
+  padding-bottom: 10px;
 }
 header.active {
   position: fixed;
@@ -486,6 +488,71 @@ header.active {
 .footer .footer-msg {
   margin-top: 15px;
   color: #999;
+  font-size: 12px;
+}
+.floated-box {
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #000;
+  opacity: 0.7;
+  width: 50px;
+  z-index: 99;
+}
+.floated-box .floated-item {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: block;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #ddd;
+  cursor: pointer;
+  position: relative;
+}
+.floated-box .floated-item .iconfont {
+  font-size: 24px;
+}
+.floated-box .floated-item:hover {
+  background-color: #000;
+}
+.floated-box .floated-item:hover .iconfont {
+  opacity: 0.7;
+}
+.floated-box .floated-tel-content {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  width: 120px;
+  overflow: hidden;
+  font-size: 12px;
+  height: 100%;
+  background-color: #000;
+  line-height: 20px;
+  padding: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  opacity: 0;
+}
+.floated-box .tel-icon:hover .floated-tel-content {
+  opacity: 1;
+  right: 45px;
+}
+.floated-box .qq-icon .floated-tel-content {
+  line-height: 40px;
+  width: 80px;
+  font-size: 15px;
+  color: #2fd0b5;
+}
+.floated-box .qq-icon:hover .floated-tel-content {
+  opacity: 1;
+  right: 50px;
 }
 @media screen and (max-width: 1366px) {
   .fy-container {

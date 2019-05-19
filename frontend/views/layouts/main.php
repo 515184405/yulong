@@ -24,6 +24,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <link rel="stylesheet" href="/asset/static/css/default.css">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
+    <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -38,18 +39,19 @@ AppAsset::register($this);
                 <li><a href="#">关于</a></li>
                 <li><a href="#">服务</a></li>
                 <li><a href="/case">精品案例</a></li>
+                <li><a href="/unit">前端组件</a></li>
                 <li><a href="/news">新闻动态</a></li>
                 <li><a href="#">合作</a></li>
                 <li><a href="#">联系</a></li>
                 <li class="telephone-box js_telephone_box">
                     <i class="iconfont telephone-icon red">&#xe622;</i>
                     <p class="nav-telephone-number">
-                        <a href="#">029-88661315</a>
+                        <a href="TEL:15321353313">15321353313</a>
                     </p>
-                    <p><a href="#">029-88661315</a></p>
-                    <p><a href="#">029-88661315</a></p>
-                    <p><a href="#">029-88661315</a></p>
-                    <i class="iconfont right-icon">&#xe66f;</i>
+<!--                    <p><a href="#">029-88661315</a></p>-->
+<!--                    <p><a href="#">029-88661315</a></p>-->
+<!--                    <p><a href="#">029-88661315</a></p>-->
+<!--                    <i class="iconfont right-icon">&#xe66f;</i>-->
                 </li>
             </ul>
         </div>
@@ -74,13 +76,12 @@ AppAsset::register($this);
                 <a href="#">联系方式</a>
             </p>
             <p class="footer-msg">
-                <span>Copyright 2008-2019 西安凡高网络科技有限公司 ALL Rights Reserved. 陕西·西安高新区唐延路25号银河产业园3单元24层</span>
-                <span class="margin-left:30px;">工信部备案号：陕ICP备14002553号</span>
+                <span>Copyright 2008-2019 宇龙网络科技有限公司 ALL Rights Reserved. ********************</span>
+                <span class="margin-left:30px;">工信部备案号：辽ICP备******号</span>
             </p>
         </div>
     </footer>
-    <!--尾部-->
-
+    <?=$this->render('../template/public-footer'); ?>
 </div>
 <script>
     //导航固定动画
@@ -91,7 +92,6 @@ AppAsset::register($this);
             if(location.pathname == '/'){
                 topHeight = 600;
             }
-            console.log(location.pathname)
             if(scrollTop >= topHeight){
                 $('#header').addClass('active fadeInDown');
             }else{
@@ -101,15 +101,15 @@ AppAsset::register($this);
     };
 
     //电话号码悬浮显示
-    var telephoneShowFun = function(){
-        $('.js_telephone_box').mouseenter(function(){
-            $(this).css('height','auto');
-        }).mouseleave(function(){
-            $(this).css('height','0');
-        })
-    }
+    // var telephoneShowFun = function(){
+    //     $('.js_telephone_box').mouseenter(function(){
+    //         $(this).css('height','auto');
+    //     }).mouseleave(function(){
+    //         $(this).css('height','0');
+    //     })
+    // }
     navAnimate();
-    telephoneShowFun();
+    //telephoneShowFun();
 </script>
 </body>
 </html>
