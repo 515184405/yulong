@@ -240,7 +240,11 @@ body {
     padding: 10px 0;
   }
   .floated-box {
-    display: none;
+    -webkit-transform: scale(0.6);
+    -moz-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    -o-transform: scale(0.6);
+    transform: scale(0.6);
   }
   .wap-list-nav {
     position: fixed;
