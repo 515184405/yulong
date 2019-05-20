@@ -1,6 +1,7 @@
 .case-list {
   padding: 30px;
   margin: 0 auto;
+  margin-left: -15px;
 }
 .case-list .case-item {
   width: 280px;
@@ -9,7 +10,7 @@
   float: left;
   background-color: #f5f5f5;
   position: relative;
-  margin: 0 15px 15px 0;
+  margin: 0 0 15px 15px;
 }
 .case-list .case-item .case-img {
   width: 100%;
@@ -125,6 +126,7 @@
 }
 @media screen and (max-width: 768px) {
   .case-list {
+    margin-left: 0;
     padding: 15px;
   }
   .case-list .case-item {

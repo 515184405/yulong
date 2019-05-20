@@ -19,7 +19,7 @@
 </div>
 
 <!--wap底部导航-->
-<div data-animate="slideInUp" id="js_other_link" class="other-link">
+<div data-animate="slideInUp" id="js_other_link" class="other-link none">
     <a class="animated" href="">服务</a>
     <a class="animated delay-01s" href="">关于</a>
     <a class="animated delay-02s" href="">合作</a>
@@ -36,7 +36,7 @@
 <script>
     //滚动置顶
     $('#scrollTop').click(function(){
-        $('body,html').animate({
+        $('body,html,.list-container').animate({
             'scrollTop' : 0
         },300);
     })

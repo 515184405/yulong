@@ -5,6 +5,7 @@ use common\models\User;
 use Yii;
 use common\models\LoginForm;
 use yii\helpers\Json;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -89,4 +90,72 @@ class SiteController extends CommonController
         Yii::$app->user->logout();
         return $this->redirect('/site/login');
     }
+
+    public function actionDemo()
+    {
+        return $this->render('demo');
+    }
+
+    public function actionUploadFile(){
+        $model = new \common\models\UploadForm();
+        if (Yii::$app->request->isPost) {
+
+            $rootDir = '../../frontend/web/widget/0000/';
+            $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
+            if ($model->file && $model->validate()) {
+                $name = explode('.',$model->file->name);
+                $zip = array_pop($name);
+
+                //判断文件名中是否有中文
+                if (preg_match("/[\x7f-\xff]/", $model->file->name)) {
+                    $name = 'widget00'.'.'.$zip;
+                }else{
+                    $name = $model->file->name;
+                }
+                    //解压缩
+                    if($zip == 'zip'){
+                        $this->unzip($_FILES['file']['tmp_name'],$rootDir);
+                    }else{
+                        //rar下载
+                        is_dir($rootDir) OR mkdir($rootDir, 0777, true);
+                        //rar解压功能在不好用   搁置
+                        //$this->unrar($_FILES['file']['tmp_name'],$rootDir);
+                    }
+                $fileSrc=$rootDir . $name;
+                if($model->file->saveAs($fileSrc)){
+                    return Json::encode(array('code'=>'100000','message'=>'上传成功！'));
+                }
+                return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
+
+            }
+            return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
+        }
+    }
+
+    /**
+     * 解压一个ZIP文件
+     * @param  [string] $toName   解压到哪个目录下
+     * @param  [string] $fromName 被解压的文件名
+     * @return [bool]             成功返回TRUE, 失败返回FALSE
+     */
+    public function unzip($fromName, $toName)
+    {
+        $zip = new \ZipArchive();//新建一个ZipArchive的对象
+        if ($zip->open($fromName) === TRUE){
+
+            $zip->extractTo($toName);//假设解压缩到在当前路径下images文件夹的子文件夹php
+            $zip->close();//关闭处理的zip文件
+        }
+    }
+
+    public function unrar($fromName, $toName){
+        $fromName = iconv('utf-8','gb2312',$fromName);
+        $rar_file = rar_open($fromName) or die("Failed to open Rar archive");
+        $entries = rar_list($rar_file);
+        foreach ($entries as $entry) {
+            $entry->extract($toName); /*/dir/extract/to/换成其他路径即可*/
+        }
+        rar_close($rar_file);
+    }
+
 }

@@ -202,21 +202,4 @@ class WidgetController extends CommonController
         $data = WidgetType::find()->asArray()->all();
         return Json::encode(array('code'=>'100000','message'=>'查询成功！','data'=>$data));
     }
-
-//    public function unZip($upload_src,$un_zip_src){
-//        $zip = new \ZipArchive();//新建一个ZipArchive的对象
-//        if ($zip->open($upload_src) === TRUE){
-//
-//            $zip->extractTo($un_zip_src);//假设解压缩到在当前路径下images文件夹的子文件夹php
-//            $zip->close();//关闭处理的zip文件
-//        }
-//    }
-//    public function unRar($upload_src,$un_zip_src){
-//        $rar_file = rar_open($upload_src) or die("Failed to open Rar archive");
-//        $entries = rar_list($rar_file);
-//        foreach ($entries as $entry) {
-//            $entry->extract($un_zip_src); /*/dir/extract/to/换成其他路径即可*/
-//        }
-//        rar_close($rar_file);
-//    }
 }
