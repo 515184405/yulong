@@ -1,10 +1,9 @@
-.site-wrapper {
-  padding-bottom: 200px;
-}
 .site-banner {
   height: 255px;
   width: 100%;
   background: url("../image/about-me.jpg") no-repeat center top;
+  -webkit-background-size: auto 100%;
+  background-size: auto 100%;
 }
 .site-content {
   padding: 20px;
@@ -34,18 +33,48 @@
 }
 .site-content .site-text .site-team {
   float: left;
-  width: 200px;
-  margin: 0 4px 5px 4px;
+  width: 240px;
+  margin: 0 4px 8px 4px;
   background-color: #fff;
   padding-bottom: 10px;
 }
 .site-content .site-text .site-team img {
   width: 100%;
-  height: 150px;
+  height: 190px;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .site-content .site-text .site-team p {
   font-size: 14px;
   color: #595757;
   padding-left: 10px;
+}
+@media screen and (max-width: 1366px) {
+  .site-content .site-text .site-team {
+    width: 200px;
+  }
+  .site-content .site-text .site-team img {
+    height: 150px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .site-banner {
+    height: 100px;
+  }
+  .site-content {
+    margin-top: 10px;
+  }
+  .site-content .site-text {
+    padding: 10px 0;
+  }
+  .site-content .site-text .site-team {
+    width: 100%;
+    margin: 0 0 8px 0;
+  }
+  .site-content .site-text .site-team img {
+    height: auto;
+  }
 }
 /*# sourceMappingURL=other.css.map */

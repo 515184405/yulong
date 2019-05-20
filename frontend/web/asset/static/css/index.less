@@ -134,12 +134,6 @@ svg {
   stroke: #fff;
   transform: translate(50px, 42px);
 }
-.button-prev:not(.disabled):hover svg {
-  transform: translateX(-25px);
-}
-.button-next:not(.disabled):hover svg {
-  transform: translateX(25px);
-}
 .button:not(.disabled):hover .cls-1 {
   transform: scale(1.1);
 }
@@ -715,5 +709,144 @@ svg {
 @media screen and (min-width: 1100px){
   html{
     overflow-x: hidden;
+  }
+}
+@media screen and (max-width: 768px){
+  .swiper-container{
+    height:200px;
+  }
+  .img-box img{
+    height:100px;
+    margin:50px auto;
+  }
+  .button-prev,.button-next{
+    top:20vh;
+    width:50px;
+  }
+  .button-prev {
+    left: 6vw;
+  }
+  .button-prev {
+    right: 6vw;
+  }
+  .service-list{
+    margin-top:220px;
+    padding:0;
+  }
+  .section-title{
+    font-size: 16px;
+  }
+  .section-desc{
+    font-size: 14px;
+    padding:0 10px;
+  }
+  .section-ul li{
+    height:auto;
+    padding-top:0;
+    width:100%;
+    .iconfont{
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size:35px;
+    }
+    .li_title{
+      font-size: 16px;
+      margin-top:10px;
+    }
+    .li_desc{
+      font-size:12px ;
+    }
+  }
+  .service-project{
+    .service-item1,.service-item2,.service-item3{
+      width:100%;
+      padding:0;
+      height:auto;
+    }
+    .service-insert{
+      a{
+        display: block;
+      }
+      .si_title{
+        width:100%;
+        text-align: center;
+      }
+      .si_desc{
+        text-align: center;
+      }
+      img{
+        width:150px;
+        display: block;
+        margin:0 auto;
+        float: none;
+      }
+    }
+  }
+  .flow-menu{
+    width:300px;
+    margin:0 auto;
+    li{
+      margin-top:15px;
+      position: static;
+      .flow-i{
+        span{
+          width: 25px;
+          height: 25px;
+          font-size: 20px;
+          line-height: 20px;
+        }
+      }
+      .flow-text{
+        float: right;
+        margin-top:-90px;
+        width:180px;
+      }
+    }
+  }
+  .flow-wrap{
+    margin-top:20px;
+    height:auto;
+    background:transparent;
+    .end,.start{
+      position: static;
+      height:112px;
+      width:112px;
+      margin:0 auto;
+      margin-top:10px;
+      line-height: 112px;
+      display: block;
+      font-size: 25px;
+    }
+  }
+  .section-liucheng{
+    padding:30px 0;
+  }
+  .section-btn-box a{
+    padding:5px 10px;
+    font-size: 13px;
+    &:nth-child(n+6){
+      display: none;
+    }
+  }
+  .sp-list .sp-item{
+    width:100%;
+    &:last-child{
+      margin:0;
+    }
+  }
+  .section-news .news-list .news-item{
+    width:100%;
+    padding:0!important;
+    margin-top:10px;
+    //.news-content{
+    //  margin:10px 0 0 0;
+    //}
+  }
+  .section-news{
+    padding:30px 15px;
+  }
+  .section-project{
+    padding:20px;
   }
 }

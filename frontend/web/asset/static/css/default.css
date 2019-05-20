@@ -560,6 +560,24 @@ header.active {
   }
 }
 @media screen and (max-width: 768px) {
+  body {
+    padding: 0;
+  }
+  .fy-container {
+    width: 100%;
+  }
+  .footer-link {
+    font-size: 12px;
+  }
+  .footer {
+    padding: 10px 0 70px 0;
+  }
+  .footer-msg {
+    padding: 010px;
+  }
+  .header {
+    display: none;
+  }
   .floated-box {
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);

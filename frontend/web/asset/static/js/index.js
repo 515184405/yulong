@@ -65,7 +65,11 @@ var M = {
         var canvas = document.getElementById('canvas'),
             ctx = canvas.getContext('2d'),
             w = canvas.width = window.innerWidth,
-            h = canvas.height = 600,
+            height = 200;
+            if($(window).width() > 768){
+                height=600;
+            }
+            var h = canvas.height = height;
 
             hue = 217,
             stars = [],

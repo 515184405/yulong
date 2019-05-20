@@ -199,7 +199,7 @@ $this->title = '宇龙科技 - 北京网站建设,网站制作,网站设计,专�
     <div class="fy-container">
         <h2 animate-type="slideInUp" class="section-title animated theme">案例展示</h2>
         <p animate-type="slideInUp" class="section-desc animated">认真服务好每一位客户,让客户满意是我们的宗旨！</p>
-        <p animate-type="slideInUp"  class="section-btn-box animated">
+        <p animate-type="slideInUp"  class="section-btn-box animated overflow-text">
         <a target="_blank" href="/case">全 部</a>
             <?php foreach ($data['case_type'] as $v3) { ?>
                 <a target="_blank" href="/case?id=<?=$v3['type_id']?>"><?=$v3['title']?></a>
@@ -238,7 +238,7 @@ $this->title = '宇龙科技 - 北京网站建设,网站制作,网站设计,专�
     <div class="fy-container">
         <h2 animate-type="slideInUp" class="section-title animated theme">组件展示</h2>
         <p animate-type="slideInUp" class="section-desc animated">积攒更多更好的组件，开发效率才是最高的</p>
-        <p animate-type="slideInUp"  class="section-btn-box animated">
+        <p animate-type="slideInUp"  class="section-btn-box animated overflow-text">
             <a target="_blank" href="/unit">全 部</a>
             <?php foreach ($data['widget_type'] as $v5) { ?>
                 <a target="_blank" href="/unit?id=<?=$v5['type_id']?>"><?=$v5['title']?></a>

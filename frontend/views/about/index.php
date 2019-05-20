@@ -23,7 +23,7 @@
         <div class="site-text clearfix">
             <?php for($i=0;$i<50;$i++){ ?>
             <a class="site-team" href="javascript:;">
-                <img src="https://ss0.baidu.com/73F1bjeh1BF3odCf/it/u=2489504700,3060254087&fm=85&s=B68F9D4F106473014E0A5D640300A019" alt="">
+                <img style="background:rgba(<?=rand(0,200)?>,<?=rand(0,200)?>,<?=rand(0,200)?>,.2)" src="http://img4.imgtn.bdimg.com/it/u=150683243,1848598331&fm=15&gp=0.jpg" alt="">
                 <p>姓名：<b>宇龙</b></p>
                 <p>职业：<b>前端开发工程师</b></p>
                 <p>经验：<b>4年</b></p>
