@@ -40,12 +40,11 @@ AppAsset::register($this);
             </div>
             <ul id="nav_ul" class="nav-ul right">
                 <li><a href="/">首页</a></li>
-                <li><a href="#">关于</a></li>
-                <li><a href="#">服务</a></li>
+                <li><a href="/service">服务项目</a></li>
                 <li><a href="/case">精品案例</a></li>
                 <li><a href="/unit">前端组件</a></li>
                 <li><a href="/news">新闻动态</a></li>
-                <li><a href="#">合作</a></li>
+                <li><a href="/about">关于我们</a></li>
                 <li><a href="#">联系</a></li>
                 <li class="telephone-box js_telephone_box">
                     <i class="iconfont telephone-icon red">&#xe622;</i>
