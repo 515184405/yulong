@@ -678,6 +678,9 @@ header.active {
     -o-transform: scale(0.6);
     transform: scale(0.6);
   }
+  .news-recommend .layout-recommend-item {
+    width: 100%;
+  }
   .wap-list-nav {
     position: fixed;
     bottom: 0;

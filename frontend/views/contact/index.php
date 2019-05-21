@@ -1,7 +1,7 @@
 <?php $this->title="宇龙科技 - 关于我们"; ?>
 <link rel="stylesheet" href="/asset/static/css/other.css">
 <div class="site-wrapper service-wrapper">
-    <div class="site-banner" style="background-image:url('/asset/static/image/service.jpg')"></div>
+    <div class="site-banner" style="background-image:url('/asset/static/image/contact.jpg')"></div>
     <div class="service-list clearfix fy-container">
         <div class="site-content">
             <div class="site-title">网页定制开发</div>
@@ -41,67 +41,3 @@
         </div>
     </div>
 </div>
-<!--建站流程-->
-<section class="section-liucheng">
-    <div class="fy-container">
-        <h2 animate-type="slideInUp" class="section-title animated theme">建站流程</h2>
-        <p animate-type="slideInUp" class="section-desc animated">每一步都为您面面俱到，不忽略每个细节！</p>
-        <div animate-type="slideInUp" class="flow-wrap animated">
-            <div class="start">开 始</div>
-            <ul class="flow-menu">
-                <li class="li1">
-                    <div class="flow-i">
-                        <i class="i1"></i><span>1</span>商务洽谈
-                    </div>
-                    <div class="flow-text">
-                        <p><span>1、</span>需求规划</p>
-                        <p><span>2、</span>方案报价</p>
-                        <p><span>3、</span>签订合同</p>
-                    </div>
-                </li>
-                <li class="li2">
-                    <div class="flow-i">
-                        <i class="i2"></i><span>2</span>策划设计
-                    </div>
-                    <div class="flow-text">
-                        <p><span>1、</span>原型图设计</p>
-                        <p><span>2、</span>UI界面设计</p>
-                        <p><span>3、</span>修改确认</p>
-                    </div>
-                </li>
-                <li class="li3">
-                    <div class="flow-i">
-                        <i class="i3"></i><span>3</span>封闭开发
-                    </div>
-                    <div class="flow-text">
-                        <p><span>1、</span>前端页面编写</p>
-                        <p><span>2、</span>后台+功能模块开发</p>
-                        <p><span>3、</span>域名+服务器准备</p>
-                    </div>
-                </li>
-                <li class="li4">
-                    <div class="flow-i">
-                        <i class="i4"></i><span>4</span>上线测试
-                    </div>
-                    <div class="flow-text">
-                        <p><span>1、</span>测试修复BUG</p>
-                        <p><span>2、</span>域名解析+服务器部署</p>
-                        <p><span>3、</span>上线并上传测试内容</p>
-                    </div>
-                </li>
-                <li class="li5">
-                    <div class="flow-i">
-                        <i class="i5"></i><span>5</span>技术支持
-                    </div>
-                    <div class="flow-text">
-                        <p><span>1、</span>项目交付</p>
-                        <p><span>2、</span>免费提供培训</p>
-                        <p><span>3、</span>提供技术支持1年</p>
-                    </div>
-                </li>
-            </ul>
-            <img src="/asset/static/image/kf.png" alt="" class="end">
-        </div>
-    </div>
-</section>
-<!--建站流程-->

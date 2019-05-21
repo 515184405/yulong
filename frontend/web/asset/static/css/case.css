@@ -131,9 +131,17 @@
   }
   .case-list .case-item {
     width: 100%;
+    height: auto;
     float: none;
     margin: 0 auto;
     margin-top: 15px;
+    padding-bottom: 15px;
+  }
+  .case-list .case-item .case-img {
+    height: auto;
+  }
+  .case-list .case-item:hover .case-active-bg {
+    height: 0;
   }
 }
 /*# sourceMappingURL=case.css.map */

@@ -14,16 +14,13 @@
         </div>
     </div>
 </div>
-<div class="none" id="wx-icon-box">
-    <img style="max-width: 100%;" src="/asset/static/image/wx-callme.jpg" alt="">
-</div>
 
 <!--wap底部导航-->
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
-    <a class="animated" href="">服务</a>
+    <a class="animated" href="/service">服务</a>
     <a class="animated delay-01s" href="/about">关于</a>
     <a class="animated delay-02s" href="">合作</a>
-    <a class="animated delay-03s" href="">联系</a>
+    <a class="animated delay-03s" href="/contact">联系</a>
 </div>
 <div class="wap-list-nav none">
     <a class="<?= Yii::$app->request->getPathInfo()=='' ? 'active' : ''?>" href="/"><i class="iconfont">&#xe603;</i>首页</a>
@@ -47,7 +44,7 @@
             anim: 2,
             shade: false,
             title: false, //不显示标题
-            content: $('#wx-icon-box'), //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            content: '<img style="max-width: 100%;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         });
     })
     //底部移动端导航其他链接事件
