@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="<?=$url;?>css/alert.css">
 	<link rel="stylesheet" href="<?=$url;?>css/style.css">
 	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script>var url = '<?=$url;?>';</script>
 	<script src='<?=$url;?>js/SyntaxHighlighter/shCore.js'></script>
 	<script src='<?=$url;?>js/SyntaxHighlighter/makeSy.js'></script>
 	<script src='<?=$url;?>js/alert.js'></script>

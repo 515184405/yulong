@@ -4,7 +4,7 @@ namespace frontend\controllers;
 /**
  * Site controller
  */
-class AboutController extends CommonController
+class ContactController extends CommonController
 {
     /**
      * Displays homepage.

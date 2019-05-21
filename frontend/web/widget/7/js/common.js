@@ -1,9 +1,1 @@
-(function() {
-  var script = document.createElement('script');
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-48260255-1';
-  document.head.appendChild(script);
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-48260255-1');
-})();
+!function(){var a=document.createElement("script");function e(){dataLayer.push(arguments)}a.src="https://www.googletagmanager.com/gtag/js?id=UA-48260255-1",document.head.appendChild(a),window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","UA-48260255-1")}();

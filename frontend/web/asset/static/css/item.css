@@ -47,89 +47,18 @@
   padding-bottom: 200px;
 }
 .news-recommend {
-  width: 260px;
-  padding: 15px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-color: #fff;
   position: absolute;
   top: 15px;
   right: 15px;
-  overflow: hidden;
+  float: right;
+  width: 260px;
+}
+.news-recommend .layout-recommend-item {
+  width: 100%;
+  padding: 0;
 }
 .news-recommend .nr-img {
-  max-width: 100%;
-}
-.news-recommend .nr-title {
-  margin-top: 25px;
-  height: 35px;
-  border-bottom: 2px solid #eee;
-  position: relative;
-  font-weight: bold;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.news-recommend .nr-title:after {
-  content: '';
-  width: 70px;
-  border: 1px solid #5181f1;
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-}
-.news-recommend .nr-item {
   display: block;
-  padding: 7px 0;
-  height: 70px;
-  border-bottom: 1px solid #f1f1f1;
-}
-.news-recommend .nr-item:last-child {
-  border-bottom: 0;
-}
-.news-recommend .nr-item .nr-item-img {
-  height: 70px;
-  width: 100px;
-  float: left;
-}
-.news-recommend .nr-item .widget-img {
-  padding: 5px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.news-recommend .nr-item .nr-item-content {
-  margin-left: 115px;
-}
-.news-recommend .nr-item .nr-item-content .nric-title {
-  font-weight: bold;
-  line-height: 20px;
-  height: 20px;
-}
-.news-recommend .nr-item .nr-item-content .nric-title.overflow-text2 {
-  height: 40px;
-}
-.news-recommend .nr-item .nr-item-content .nric-desc {
-  font-size: 13px;
-  margin-top: 5px;
-  line-height: 20px;
-  height: 40px;
-}
-.news-recommend .nr-item .nr-item-content .nric-info {
-  font-size: 12px;
-  margin-top: 8px;
-}
-.news-recommend .nr-item .nr-item-content .nric-info .iconfont {
-  position: relative;
-  top: 2px;
-  margin-left: 15px;
-}
-.news-recommend .news-recommend-hidden {
-  width: 100%;
-  height: 100%;
-  padding-right: 30px;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 .case-items {
   padding: 15px;

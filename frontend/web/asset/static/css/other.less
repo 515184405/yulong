@@ -1,5 +1,5 @@
 .site-banner{
-  height: 255px;
+  height: 400px;
   width: 100%;
   background:url("../image/about-me.jpg") no-repeat center top;
   -webkit-background-size: auto 100%;
@@ -51,6 +51,227 @@
     }
   }
 }
+//服务内容
+.service-wrapper{
+  padding-bottom:30px;
+  .site-content{
+    width:32%;
+    float: left;
+    display: inline-block;
+    height: 250px;
+    margin-right:2%;
+    position: relative;
+    &:nth-child(3n){
+      margin-right:0;
+    }
+    &:after{
+      font-family: 'iconfont';
+      content: '\e616';
+      font-size: 55px;
+      color:#aaa;
+      position: absolute;
+      right:20px;
+      bottom:0;
+    }
+    &:nth-child(2):after{
+      content: '\e72b';
+    }
+    &:nth-child(3):after{
+      content: '\e619';
+    }
+    &:nth-child(4):after{
+      content: '\e66e';
+    }
+    &:nth-child(5):after{
+      content: '\e61d';
+    }
+    &:nth-child(6):after{
+      content: '\e637';
+    }
+  }
+}
+//流程
+//内容模块统一标题
+.section-title{
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+}
+.section-desc{
+  font-size: 18px;
+  text-align: center;
+  margin-top:5px;
+  color:#999;
+}
+.section-liucheng{
+  background: url("../image/w1_12.jpg") no-repeat top center;
+  padding:50px 0px;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+  .section-title{
+    color:#fff;
+  }
+  .section-desc{
+    color:#f1f1f1;
+  }
+}
+.flow-wrap{
+  margin-top: 50px;
+  position: relative;
+  background: url('../image/flowBg.png') no-repeat center top;
+  height: 545px;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+.flow-wrap .start{
+  position: absolute;
+  top: 209px;
+  left: 17px;
+  width: 82px;
+  height: 82px;
+  line-height: 82px;
+  text-align: center;
+  border-radius: 100%;
+  font-size: 18px;
+  color: #ffffff;
+  background: #ff2c38;
+}
+.flow-menu li{
+  position: absolute;
+}
+.flow-menu li .flow-i{
+  width: 112px;
+  height: 112px;
+  border-radius: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  position: relative;
+}
+.flow-menu li .flow-i i{
+  display: block;
+  padding-top: 20px;
+  margin: 0 auto 10px;
+  width: 45px;
+  height: 45px;
+  background: url('../image/icon.png') no-repeat;
+}
+.flow-menu li .flow-i span{
+  position: absolute;
+  top: 0;
+  left: -10px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 3px solid #e8ab1c;
+  border-radius: 100%;
+  color: #e8ab1c;
+  background: #fff;
+  font-size: 30px;
+}
+.flow-menu li .flow-text{
+  width: 200px;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 26px;
+  color: #666666;
+}
+.flow-menu .li1{
+  left: 196px;
+  top: 0;
+}
+.flow-menu .li2{
+  left: 542px;
+  top: 0;
+}
+.flow-menu .li3{
+  left: 934px;
+  top: 0;
+}
+.flow-menu .li4{
+  left: 934px;
+  top: 335px;
+}
+.flow-menu .li5{
+  left: 542px;
+  top: 335px;
+}
+.flow-menu li .flow-i i.i1{
+  background-position: -5px 15px;
+}
+.flow-menu li .flow-i i.i2{
+  background-position: -97px 10px;
+}
+.flow-menu li .flow-i i.i3{
+  background-position: -195px 6px;
+}
+.flow-menu li .flow-i i.i4{
+  background-position: -287px 10px;
+}
+.flow-menu li .flow-i i.i5{
+  background-position: -358px 10px;
+}
+.flow-menu .li1 .flow-i{
+  background: #e8ab1c;
+}
+.flow-menu .li1 .flow-i span{
+  border-color: #e8ab1c;
+  color: #e8ab1c;
+}
+.flow-menu .li1 .flow-text{
+  color: #e8ab1c;
+}
+.flow-menu .li2 .flow-i{
+  background: #2dcd73;
+}
+.flow-menu .li2 .flow-i span{
+  border-color: #2dcd73;
+  color: #2dcd73;
+}
+.flow-menu .li2 .flow-text{
+  color: #2dcd73;
+}
+.flow-menu .li3 .flow-i{
+  background: #1bc3c7;
+}
+.flow-menu .li3 .flow-i span{
+  border-color: #1bc3c7;
+  color: #1bc3c7;
+}
+.flow-menu .li3 .flow-text{
+  color: #1bc3c7;
+}
+.flow-menu .li4 .flow-i{
+  background: #3d91e1;
+}
+.flow-menu .li4 .flow-i span{
+  border-color: #3d91e1;
+  color: #3d91e1;
+}
+.flow-menu .li4 .flow-text{
+  color: #3d91e1;
+}
+.flow-menu .li5 .flow-i{
+  background: #e8468c;
+}
+.flow-menu .li5 .flow-i span{
+  border-color: #e8468c;
+  color: #e8468c;
+}
+.flow-menu .li5 .flow-text{
+  color: #e8468c;
+}
+.flow-wrap .end{
+  position: absolute;
+  top: 293px;
+  left: 164px;
+  width: 178px;
+  height: 178px;
+  border-radius: 100%;
+}
+
+//流程
 
 @media screen and (max-width: 1366px) {
   .site-content{
@@ -79,6 +300,68 @@
           height: auto;
         }
       }
+    }
+  }
+  .service-wrapper {
+    .site-content {
+      width: 100%;
+    }
+  }
+
+  //流程
+  .section-title{
+    font-size: 16px;
+  }
+  .flow-menu{
+    width:300px;
+    margin:0 auto;
+    li{
+      margin-top:15px;
+      position: static;
+      .flow-i{
+        span{
+          width: 25px;
+          height: 25px;
+          font-size: 20px;
+          line-height: 20px;
+        }
+      }
+      .flow-text{
+        float: right;
+        margin-top:-90px;
+        width:180px;
+      }
+    }
+  }
+  .flow-wrap{
+    margin-top:20px;
+    height:auto;
+    background:transparent;
+    .end,.start{
+      position: static;
+      height:112px;
+      width:112px;
+      margin:0 auto;
+      margin-top:10px;
+      line-height: 112px;
+      display: block;
+      font-size: 25px;
+    }
+  }
+  .section-liucheng{
+    padding:30px 0;
+  }
+  .section-btn-box a{
+    padding:5px 10px;
+    font-size: 13px;
+    &:nth-child(n+6){
+      display: none;
+    }
+  }
+  .sp-list .sp-item{
+    width:100%;
+    &:last-child{
+      margin:0;
     }
   }
 

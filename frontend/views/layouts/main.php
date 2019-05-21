@@ -1,7 +1,7 @@
-
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -45,16 +45,16 @@ AppAsset::register($this);
                 <li><a href="/unit">前端组件</a></li>
                 <li><a href="/news">新闻动态</a></li>
                 <li><a href="/about">关于我们</a></li>
-                <li><a href="#">联系</a></li>
+                <li><a href="/contact">联系我们</a></li>
                 <li class="telephone-box js_telephone_box">
                     <i class="iconfont telephone-icon red">&#xe622;</i>
                     <p class="nav-telephone-number">
                         <a href="TEL:15321353313">15321353313</a>
                     </p>
-<!--                    <p><a href="#">029-88661315</a></p>-->
-<!--                    <p><a href="#">029-88661315</a></p>-->
-<!--                    <p><a href="#">029-88661315</a></p>-->
-<!--                    <i class="iconfont right-icon">&#xe66f;</i>-->
+                    <!--                    <p><a href="#">029-88661315</a></p>-->
+                    <!--                    <p><a href="#">029-88661315</a></p>-->
+                    <!--                    <p><a href="#">029-88661315</a></p>-->
+                    <!--                    <i class="iconfont right-icon">&#xe66f;</i>-->
                 </li>
             </ul>
         </div>
@@ -67,16 +67,22 @@ AppAsset::register($this);
 
     <?php $this->endBody() ?>
     <!--内容部分-->
+    <!--推荐部分-->
+    <?php if (Yii::$app->request->getPathInfo() != '') { ?>
+        <?= $this->render('../template/right_aslide'); ?>
+    <?php } ?>
+    <!--推荐部分-->
     <!--尾部-->
     <footer class="footer">
         <div class="fy-container">
             <p class="footer-link">
-                <a href="#">关于我们</a> |
-                <a href="#">服务项目</a> |
-                <a href="#">网站案例</a> |
-                <a href="#">建站常识</a> |
-                <a href="#">常见问题</a> |
-                <a href="#">联系方式</a>
+                <a href="/">首页</a></li>
+                <a href="/service">服务项目</a>
+                <a href="/case">精品案例</a>
+                <a href="/unit">前端组件</a>
+                <a href="/news">新闻动态</a>
+                <a href="/about">关于我们</a>
+                <a href="/contact">联系我们</a>
             </p>
             <p class="footer-msg">
                 <span>Copyright 2008-2019 宇龙网络科技有限公司 ALL Rights Reserved. ********************</span>
@@ -84,20 +90,20 @@ AppAsset::register($this);
             </p>
         </div>
     </footer>
-    <?=$this->render('../template/public-footer'); ?>
+    <?= $this->render('../template/public-footer'); ?>
 </div>
 <script>
     //导航固定动画
-    var navAnimate = function(){
-        $(window).scroll(function(e){
+    var navAnimate = function () {
+        $(window).scroll(function (e) {
             var scrollTop = $(window).scrollTop();
             var topHeight = 100;
-            if(location.pathname == '/'){
+            if (location.pathname == '/') {
                 topHeight = 600;
             }
-            if(scrollTop >= topHeight){
+            if (scrollTop >= topHeight) {
                 $('#header').addClass('active fadeInDown');
-            }else{
+            } else {
                 $('#header').removeClass('active fadeInDown');
             }
         })

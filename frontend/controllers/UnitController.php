@@ -8,7 +8,7 @@ use common\models\WidgetType;
 use yii\helpers\Json;
 use yii\web\Controller;
 
-class UnitController extends Controller{
+class UnitController extends CommonController {
 
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -59,12 +59,6 @@ class UnitController extends Controller{
         $widget_item_look->look = intval($widget_item_look->look) + 1;
         $widget_item_look->save();
 
-        //查询推荐新闻
-        $recommend_news = News::recommend();
-        //查询推荐组件
-        $recommend_widget = Widget::recommend();
-        //查询推荐案例
-        $recommend_case = Cases::recommend();
         //查询上-篇文章
         $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['issue'=>2]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
@@ -74,9 +68,6 @@ class UnitController extends Controller{
             'prev' => $prev_article,
             'next' => $next_article,
             'data' => $widget_item,
-            'recommend_news' => $recommend_news,
-            'recommend_case' => $recommend_case,
-            'recommend_widget' => $recommend_widget,
         );
         return $this->renderPartial('item',compact('data','unit_id'));
     }

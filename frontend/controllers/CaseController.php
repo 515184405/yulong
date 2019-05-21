@@ -8,7 +8,7 @@ use common\models\News;
 use common\models\Widget;
 use yii\web\Controller;
 
-class CaseController extends Controller{
+class CaseController extends CommonController {
 
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
@@ -38,12 +38,6 @@ class CaseController extends Controller{
         $case_id = isset($params['case_id']) ? $params['case_id'] : "";
         $case_item = Cases::find()->joinWith('tag_join')->where(['Cases.id'=>$case_id])->asArray()->one();
 
-        //查询推荐组件
-        $recommend_widget = Widget::recommend();
-        //查询推荐新闻
-        $recommend_news = News::recommend();
-        //查询推荐案例
-        $recommend_case = Cases::recommend();
         //查询上-篇文章
         $prev_article = Cases::find()->andFilterWhere(['<', 'id', $case_id])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
@@ -56,9 +50,6 @@ class CaseController extends Controller{
             'prev' => $prev_article,
             'next' => $next_article,
             'data' => $case_item,
-            'recommend_news' => $recommend_news,
-            'recommend_case' => $recommend_case,
-            'recommend_widget' => $recommend_widget
         );
         return $this->renderPartial('item',compact('data','case_id'));
     }
