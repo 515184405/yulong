@@ -2,13 +2,14 @@
 namespace backend\controllers;
 
 use common\models\Banner;
+use common\models\Team;
 use Yii;
 use yii\helpers\Json;
 
 /**
  * Site controller
  */
-class BannerController extends CommonController
+class TeamController extends CommonController
 {
     /**
      * Displays homepage.
@@ -20,8 +21,8 @@ class BannerController extends CommonController
         //读数据
         $params = Yii::$app->request->get();
         if(Yii::$app->request->isAjax){
-            $data = Banner::search($params);
-            return $this->convertJson('0','查询成功',$data['data'], $data['count']);
+            $data = Team::search($params);
+            return $this->convertJson('0','查询成功',$data['list'], $data['count']);
         }
         return $this->render('index');
     }
@@ -32,7 +33,7 @@ class BannerController extends CommonController
         if(Yii::$app->request->isPost){
             $params = $_POST;
             //存newsModel数据
-            $banner_id2 = Banner::insertUpdate($params,$banner_id);
+            $banner_id2 = Team::insertUpdate($params,$banner_id);
             if($banner_id2){
                 if($banner_id){
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
@@ -43,9 +44,9 @@ class BannerController extends CommonController
         }
         //查询banner数据
         if($banner_id){
-            $data['banner'] = Banner::find()->where(['id'=>$banner_id])->asArray()->one();
-            if(!$data['banner']){
-                return '轮播图不存在';
+            $data= Team::find()->where(['id'=>$banner_id])->asArray()->one();
+            if(!$data){
+                return '此ID不存在';
             }
         }
         return $this->render('info',compact('data'));
@@ -67,7 +68,7 @@ class BannerController extends CommonController
     public function actionDelete(){
         $banner_id = isset($_POST['id']) ? $_POST['id'] : '';
         if(Yii::$app->request->isPost && $banner_id){
-            Banner::deleteAll(['id'=>$banner_id]);
+            Team::deleteAll(['id'=>$banner_id]);
             return Json::encode(['code' => 100000,'message' => '删除成功']);
         }else{
             return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);

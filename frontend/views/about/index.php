@@ -21,12 +21,12 @@
     <div class="site-content fy-container">
         <div class="site-title">我们的团队</div>
         <div class="site-text clearfix">
-            <?php for($i=0;$i<50;$i++){ ?>
+            <?php foreach ($data as $key=>$val){ ?>
             <a class="site-team" href="javascript:;">
-                <img style="background:rgba(<?=rand(0,200)?>,<?=rand(0,200)?>,<?=rand(0,200)?>,.2)" src="http://p1.qhimgs4.com/t019f1e86a4e0b03f7b.jpg" alt="">
-                <p>姓名：<b>宇龙</b></p>
-                <p>职业：<b>前端开发工程师</b></p>
-                <p>经验：<b>4年</b></p>
+                <img style="background:rgba(<?=rand(0,200)?>,<?=rand(0,200)?>,<?=rand(0,200)?>,.2)" src="<?=Yii::$app->params['backend_url'].$val['avatar']?>" alt="<?=Yii::$app->params['backend_url'].$val['avatar']?>">
+                <p>姓名：<b><?=$val['name']?></b></p>
+                <p>职业：<b><?=$val['profession']?></b></p>
+                <p>经验：<b><?=$val['exp']?>年</b></p>
             </a>
             <?php } ?>
         </div>
