@@ -117,6 +117,12 @@
                             <cite>文章管理</cite>
                         </a>
                     </li>
+                    <li data-name="home" class="layui-nav-item">
+                        <a href="/team" lay-tips="人员管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>人员管理</cite>
+                        </a>
+                    </li>
                     <?php if($userInfo['type'] == 1){ ?>
                     <li data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
