@@ -24,7 +24,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <meta name="keywords" content="网站建设,专业网站建设团队,网站设计,网站制作,做网站"/>
-    <meta name="description" content="北京宇龙开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
+    <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
     <link rel="stylesheet" href="/asset/static/css/default.css">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
@@ -85,7 +85,7 @@ AppAsset::register($this);
                 <a href="/contact">联系我们</a>
             </p>
             <p class="footer-msg">
-                <span>Copyright 2008-2019 宇龙网络科技有限公司 ALL Rights Reserved. ********************</span>
+                <span>Copyright 2008-2019 聚友网络科技有限公司 ALL Rights Reserved. ********************</span>
                 <span class="margin-left:30px;">工信部备案号：辽ICP备******号</span>
             </p>
         </div>

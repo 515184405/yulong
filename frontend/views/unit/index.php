@@ -1,4 +1,4 @@
-<?php $this->title='宇龙科技 - 组件列表' ?>
+<?php $this->title='聚友团队 - 组件列表' ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 

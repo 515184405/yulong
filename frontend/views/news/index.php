@@ -1,4 +1,4 @@
-<?php $this->title='宇龙科技 - 文章动态' ?>
+<?php $this->title='聚友团队 - 文章动态' ?>
 <?= $this->render('../template/header',compact('data'));?>
 
 <link rel="stylesheet" href="/asset/static/css/news.css">

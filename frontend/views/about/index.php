@@ -1,9 +1,9 @@
-<?php $this->title="宇龙科技 - 关于我们"; ?>
+<?php $this->title="聚友团队 - 关于我们"; ?>
 <link rel="stylesheet" href="/asset/static/css/other.css">
 <div class="site-wrapper">
     <div class="site-banner"></div>
     <div class="site-content fy-container">
-        <div class="site-title">宇龙简介</div>
+        <div class="site-title">聚友简介</div>
         <div class="site-text">
             <p>建站人（jianzhanren.cn），隶属于北京中钦软件技术有限公司，致力于为企业提供网络及软件解决方案。公司成立于2002年11月，注册资本1000万元。主要业务包括网站开发、软件开发，为客户提供个性化定制服务解决方案，以及自有品牌软件的研发与销售。</p>
             <p>建站人（jianzhanren.cn），立足全球视野，以现代化的管理理念，融合中国国情，帮助志在创新的公司和个人更加成功。公司汇集一批资深网页设计师、专业的品牌与平面设计师、高级文案策划人员等，具有国际水准的设计理念和突破陈规的创意思维、高超的技术能力和丰富的设计经验与逻辑思维。所有人员的目标只有一个：为您创造价值！</p>
@@ -24,7 +24,7 @@
             <?php for($i=0;$i<50;$i++){ ?>
             <a class="site-team" href="javascript:;">
                 <img style="background:rgba(<?=rand(0,200)?>,<?=rand(0,200)?>,<?=rand(0,200)?>,.2)" src="http://p1.qhimgs4.com/t019f1e86a4e0b03f7b.jpg" alt="">
-                <p>姓名：<b>宇龙</b></p>
+                <p>姓名：<b>聚友</b></p>
                 <p>职业：<b>前端开发工程师</b></p>
                 <p>经验：<b>4年</b></p>
             </a>

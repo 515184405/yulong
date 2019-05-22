@@ -1,4 +1,4 @@
-<?php $this->title="宇龙科技 - 案例列表" ?>
+<?php $this->title="聚友团队 - 案例列表" ?>
 <?= $this->render('../template/header',compact('data'));?>
 
 <link rel="stylesheet" href="/asset/static/css/case.css">

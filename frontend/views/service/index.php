@@ -1,4 +1,4 @@
-<?php $this->title="宇龙科技 - 关于我们"; ?>
+<?php $this->title="聚友团队 - 关于我们"; ?>
 <link rel="stylesheet" href="/asset/static/css/other.css">
 <div class="site-wrapper service-wrapper">
     <div class="site-banner" style="background-image:url('/asset/static/image/service.jpg')"></div>

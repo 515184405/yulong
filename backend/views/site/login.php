@@ -33,8 +33,8 @@
 <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login">
 
     <div class="layadmin-user-login-main">
-        <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2><img style="width: 150px;opacity: .7;" src="<?=Yii::$app->params["frontend_url"]?>/asset/static/image/logo.png" alt=""></h2>
+        <div class="layadmin-user-login-box layadmin-user-login-header" style="padding-bottom:0;">
+            <h2><img style="width: 225px;opacity: .7;" src="<?=Yii::$app->params["frontend_url"]?>/asset/static/image/logo.png" alt=""></h2>
         </div>
         <div style="margin-top:-20px;" class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">

@@ -270,8 +270,33 @@
   height: 178px;
   border-radius: 100%;
 }
-
 //流程
+
+.contact-wrapper{
+  .wx-callme-box{
+    padding-right:30px;
+  }
+  img{
+    max-width: 240px;
+  }
+  .wx-text{
+    margin-top:10px;
+    color:#777;
+    font-size: 14px;
+  }
+  .contact-content{
+    height:auto;
+    padding:50px;
+  }
+  .contact-right{
+    .contact-title{
+      font-size: 22px;
+    }
+    .contact-desc{
+      margin-top:15px;
+    }
+  }
+}
 
 @media screen and (max-width: 1366px) {
   .site-content{
@@ -365,4 +390,15 @@
     }
   }
 
+  //联系我们
+  .contact-wrapper {
+    font-size: 14px;
+    .wx-callme-box {
+      padding:0;
+      margin:0 auto;
+    }
+    .contact-right{
+      margin-top:30px;
+    }
+  }
 }
