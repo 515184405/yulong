@@ -446,6 +446,10 @@ header .nav-ul li a {
 header .nav-ul li a:hover {
   opacity: 0.7;
 }
+header .nav-ul li a.active {
+  color: #5181f1;
+  font-weight: bold;
+}
 header .nav-ul .telephone-box {
   height: 0;
   overflow: hidden;
