@@ -9,7 +9,7 @@
 <div class="container none"></div>
 <div class="mask"></div>
 <div id="stop" class="btn_circle none">停止</div>
-<div class="lucky_title">2018年美迪康年会抽奖活动</div>
+<div class="lucky_title">2018年---年会抽奖活动</div>
 <div class="loader_file">
     用户数据导入中 <span class="current_number"></span><span class="all_number"></span>
 </div>

@@ -12,21 +12,27 @@ class UnitController extends CommonController {
 
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
-
-        $unitData = Widget::find()->where(['issue'=>2])->asArray()->all();
+        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->asArray()->all();
         $unit = [];
+        $is_true = false; //判断当前类型是否存在项目
         foreach ($unitData as $item) {
-            $item['type_tag'] = [];
+            $typeTitle = [];
+            $is_true = false;
             foreach (explode(',',$item['type']) as $type) {
                 $typeModel = WidgetType::findOne($type);
-                array_push($item['type_tag'],$typeModel->title);
-                if($id){
-                    if($type == $id){
-                        array_push($unit,$item);
-                    }
-                }else{
-                    array_push($unit,$item);
+                array_push($typeTitle,$typeModel->title);
+                if($type == $id && $is_true !== true){
+                    $is_true = true; //当前类型中存在项目
                 }
+            }
+            if($id) {
+                if ($is_true) {
+                    $item['type_tag'] = $typeTitle;
+                    array_push($unit, $item);
+                }
+            }else{
+                $item['type_tag'] = $typeTitle;
+                array_push($unit, $item);
             }
         }
 
