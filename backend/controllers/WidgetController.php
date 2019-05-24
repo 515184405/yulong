@@ -49,7 +49,7 @@ class WidgetController extends CommonController
                 $rootDir = '../../frontend/views/widget/'.$widget_id2;
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 //生成静态文件地址
-                $rootDir2 = '../../frontend/web/widget/'.$widget_id2;
+                $rootDir2 = '../../frontend/web/widget_file/'.$widget_id2;
                 is_dir($rootDir2) OR mkdir($rootDir2, 0777, true);
                 Yii::$app->session['widget_create_id'] = $widget_id2;
                 return Json::encode(array('code'=>'100000','message'=>'添加成功！','id'=>$widget_id2));
@@ -140,7 +140,7 @@ class WidgetController extends CommonController
                 return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
             }
 
-            $rootDir = '../../frontend/web/widget/'.$id.'/';
+            $rootDir = '../../frontend/web/widget_file/'.$id.'/';
             $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
             if ($model->file && $model->validate()) {
                 $name = explode('.',$model->file->name);
@@ -167,16 +167,16 @@ class WidgetController extends CommonController
 
 
                     $widget = Widget::findOne($id);
-                    $widget->download = '/widget/' . $id . '/' . $name;
+                    $widget->download = '/minWidget/' . $id . '/' . $name;
                     if($widget->save()){
                         return Json::encode(array('code'=>'100000','message'=>'上传成功！','data'=>array(
                             'name' => $name,
-                            'download' => '/widget/'.$id.'/'.$name,
+                            'download' => '/minWidget/'.$id.'/'.$name,
                         )));
                     }else{
                         return Json::encode(array('code'=>'100000','message'=>'图片上传成功，但并未保存到库中！','data'=>array(
                             'name' => $name,
-                            'download' => '/widget/'.$id.'/'.$name,
+                            'download' => '/minWidget/'.$id.'/'.$name,
                         )));
                     }
 

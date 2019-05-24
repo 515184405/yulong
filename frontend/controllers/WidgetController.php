@@ -31,7 +31,7 @@ class WidgetController extends CommonController
             return '没有此项目';
         }
         //静态文件路由
-        $url = '/widget/'.$id.'/';
+        $url = '/'.Yii::$app->params['widget_dir'].'/'.$id.'/';
         $view_url = '/widget/widget/'.$create_time.'/'.$id.'/';
         return $this->renderPartial($id.'\/'.$title,compact('url','view_url'));
     }
