@@ -244,6 +244,7 @@ body {
   border-radius: 3px;
   border: 0;
   cursor: pointer;
+  outline: none;
 }
 .fy-btn:hover {
   color: #fff;

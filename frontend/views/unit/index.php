@@ -4,6 +4,14 @@
 
 <link rel="stylesheet" href="/asset/static/css/case.css">
 <div class="case-list unit-list clearfix">
+    <a href="/unit/dingzhi" animate-type="slideInUp" class="case-item animated ">
+        <img style="background-color:rgb(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>)" src="/asset/static/image/dingzhi.png" alt="定制开发" class="case-img transition">
+        <h2 class="case-title transition overflow-text">组件定制开发</h2>
+        <p class="case-desc transition overflow-text2">任意发布需求，前端组件开发定制，周期短费用低</p>
+        <p class="case-info">
+            <button class="fy-btn fy-btn-danger" style="width: 100%;padding:8px 0;margin-top:10px;">发布定制</button>
+        </p>
+    </a>
     <?php if(count($data['unit'])) foreach ($data['unit'] as $val){?>
         <!--        delay---><?//= $i % 5 ?><!--s-->
         <a href="/unit/item/<?=$val['id']?>" animate-type="slideInUp" class="case-item animated ">

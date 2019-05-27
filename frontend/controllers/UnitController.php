@@ -90,4 +90,9 @@ class UnitController extends CommonController {
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
     }
+    
+    //定制服务
+    public function actionDingzhi(){
+        return $this->render('dingzhi');
+    }
 }

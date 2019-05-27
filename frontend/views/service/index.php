@@ -44,9 +44,9 @@
 <!--建站流程-->
 <section class="section-liucheng">
     <div class="fy-container">
-        <h2 animate-type="slideInUp" class="section-title animated theme">建站流程</h2>
-        <p animate-type="slideInUp" class="section-desc animated">每一步都为您面面俱到，不忽略每个细节！</p>
-        <div animate-type="slideInUp" class="flow-wrap animated">
+        <h2 animate-type="slideInUp" class="section-title theme">建站流程</h2>
+        <p animate-type="slideInUp" class="section-desc">每一步都为您面面俱到，不忽略每个细节！</p>
+        <div animate-type="slideInUp" class="flow-wrap">
             <div class="start">开 始</div>
             <ul class="flow-menu">
                 <li class="li1">
