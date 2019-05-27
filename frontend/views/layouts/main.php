@@ -32,6 +32,7 @@ AppAsset::register($this);
 </head>
 <body>
 <div class="wrapper">
+    <p class="login-register-box none"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p>
     <!-- 头部 -->
     <header id="header" class="header transition">
         <div class="fy-container clearfix">
