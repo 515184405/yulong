@@ -161,7 +161,7 @@ body {
   content: '\e665';
 }
 .list-header .aslide-switch.active:before {
-  content: '\e62c';
+  content: '\e62c' !important;
 }
 .list-header .list-header-nav {
   margin: 7.5px 15px 0 40px;
@@ -208,22 +208,24 @@ body {
   left: 0;
   width: 100%;
 }
-@media screen and (max-width: 1004px) {
-  .list-aslide {
-    left: -100%;
+/*@media screen and(max-width:1004px) {
+  .list-aslide{
+    left:-100%;
   }
-  .list-container {
-    width: 100%;
-    left: 0;
+  .list-container{
+    width:100%;
+    left:0;
+    .list-header{
+      width:100%;
+      left:0;
+      .aslide-switch{
+        &:before{
+          content: '\e62c';
+        }
+      }
+    }
   }
-  .list-container .list-header {
-    width: 100%;
-    left: 0;
-  }
-  .aslide-switch:before {
-    content: '\e62c';
-  }
-}
+}*/
 @media screen and (max-width: 768px) {
   body {
     padding-bottom: 51px;

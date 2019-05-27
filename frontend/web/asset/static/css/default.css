@@ -193,8 +193,8 @@ body {
 @font-face {
   font-family: 'iconfont';
   /* project id 1174705 */
-  src: url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.eot');
-  src: url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1174705_aibvhgervii.eot');
+  src: url('//at.alicdn.com/t/font_1174705_aibvhgervii.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_aibvhgervii.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_aibvhgervii.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_aibvhgervii.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_aibvhgervii.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -571,6 +571,96 @@ header.active {
   padding-right: 30px;
   overflow-x: hidden;
   overflow-y: auto;
+}
+.login {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+.login-title {
+  color: #000;
+  margin-top: -42px;
+  height: 100px;
+  overflow: hidden;
+}
+.login-title img {
+  width: 220px;
+}
+.login-desc {
+  font-size: 14px;
+  margin-top: 15px;
+  color: #000;
+}
+.login-type {
+  margin-top: 30px;
+}
+.login-type .iconfont {
+  font-size: 40px;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+.login-type a {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  margin: 0 15px;
+}
+.login-type a > p {
+  color: #000;
+  margin-top: 10px;
+  font-size: 14px;
+  display: inline-block;
+}
+.login-type a:first-child i {
+  border-color: #5181f1;
+  color: #5181f1;
+}
+.login-type a:first-child i:hover {
+  background-color: #5181f1;
+  color: #fff;
+}
+.login-type a:nth-child(2) i {
+  border-color: #53ff34;
+  color: #53ff34;
+}
+.login-type a:nth-child(2) i:hover {
+  background-color: #53ff34;
+  color: #fff;
+}
+.login-bottom {
+  padding: 20px;
+  font-size: 14px;
+  position: absolute;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  left: 0;
+  bottom: 10px;
+}
+.login-bottom .register-advice {
+  text-decoration: underline;
+}
+.login-bottom .reigster-agree {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.login-bottom .reigster-agree .iconfont {
+  font-size: 14px;
+  margin-right: 3px;
+  cursor: pointer;
+}
+.layui-login .layui-layer-title {
+  background-color: #fff;
+  border-bottom: 0;
 }
 .footer {
   padding: 50px 0;

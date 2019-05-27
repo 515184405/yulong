@@ -6,7 +6,7 @@
             $(".list-header,.list-content,.list-aslide").addClass('list-layout-animated');
             //左侧导航关闭
             $('.aslide-switch').bind('click',function(){
-                if($(window).width() <= 1004) return;
+                //if($(window).width() <= 1004) return;
                 if($(this).hasClass('active')){
                     $(this).removeClass('active');
                     $('.list-aslide,.list-container').removeClass('active');
@@ -17,10 +17,24 @@
 
                 //案例列表动画改编
                 setTimeout(function(){
-                    !!addAnimateDelay && typeof(addAnimateDelay) == 'function' && addAnimateDelay();
+                    typeof(addAnimateDelay) !== 'undefined' && typeof(addAnimateDelay) == 'function' && addAnimateDelay();
                     $('.list-container').scroll();
                 },300)
-            })
+            });
+
+        $(window).resize(function(){
+            var winW = $(window).width();
+            if($(window).width() < 1100){
+                if(!$('.aslide-switch').hasClass('active')){
+                    $('.aslide-switch').trigger('click');
+                }
+            }else{
+                if($('.aslide-switch').hasClass('active')){
+                    $('.aslide-switch').trigger('click');
+                }
+            };
+        });
+        $(window).resize();
 
 
             //首页增加滚动动画

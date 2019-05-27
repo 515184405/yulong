@@ -15,6 +15,48 @@
     </div>
 </div>
 
+<!--登陆模块-->
+<div class="login t-c none" id="user_login">
+    <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
+    <p class="login-desc">微信、QQ是两个独立账号信息不互通</p>
+    <div class="login-type">
+        <a href="#">
+            <i class="iconfont transition">&#xe608;</i>
+            <p>Q Q 登陆</p>
+        </a>
+        <a href="#">
+            <i class="iconfont transition">&#xe65a;</i>
+            <p>微信登陆</p>
+        </a>
+    </div>
+    <p class="layui-row login-bottom">
+        <a class="left" href="#">账号登陆</a>
+        <span class="right">没有账号？<a class="theme register_btn" href="javascript:;">立即注册</a></span>
+    </p>
+</div>
+<!--登陆模块-->
+
+<!--注册模块-->
+<div class="login t-c none" id="user_register">
+    <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
+    <p class="login-desc">微信、QQ是两个独立账号信息不互通</p>
+    <div class="login-type">
+        <a href="#">
+            <i class="iconfont transition">&#xe608;</i>
+            <p>Q Q 注册</p>
+        </a>
+        <a href="#">
+            <i class="iconfont transition">&#xe65a;</i>
+            <p>微信注册</p>
+        </a>
+    </div>
+    <div class="t-c login-bottom">
+        <p class="reigster-agree"><i id="iagree_btn" class="theme iconfont">&#xe6a2;</i>我已阅读并接受 <a class="register-advice" target="_blank" href="#">《注册声明》</a>、 <a target="_blank" class="register-advice" href="#">《版权声明》</a></p>
+        <span>已有账号？<a class="theme login_btn" href="javascript:;">立即登陆</a></span>
+    </div>
+</div>
+<!--注册模块-->
+
 <!--wap底部导航-->
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
     <a class="animated" href="/service">服务</a>
@@ -58,5 +100,45 @@
             iconfont.addClass('active');
             $("#js_other_link").addClass('active').find('a').addClass(animateType);
         }
+    });
+
+    //弹出登陆
+    $(".login_btn").click(function() {
+        layer.closeAll();
+        layer.open({
+            type: 1,
+            title: ' ',
+            area: ['500px', '380px'],
+            skin: 'layui-login', //没有背景色
+            anim: 4,
+            content: $('#user_login'),
+            end: function () {
+                $('#user_login').hide();
+            }
+        });
     })
+    /*弹出注册*/
+    $(".register_btn").click(function(){
+        layer.closeAll();
+        layer.open({
+            type: 1,
+            title: ' ',
+            area: ['550px','400px'],
+            skin: 'layui-login', //没有背景色
+            anim: 4,
+            content: $('#user_register'),
+            end:function(){
+                $('#user_register').hide();
+            }
+        });
+    })
+
+    //必须统一才能注册
+    $('#iagree_btn').click(function(){
+        layer.msg('登录/注册必须同意该协议',{
+            icon:"4"
+        })
+    })
+
+
 </script>

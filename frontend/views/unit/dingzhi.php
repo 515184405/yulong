@@ -2,10 +2,11 @@
 <style>
     body{
         padding-top:60px;
+        background-color: #f5f5f5;
     }
     .form-container{
         padding:50px 0;
-        background-color: #f1f1f1;
+        background-color: #fff;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -14,7 +15,7 @@
         margin-top:30px;
     }
     .dingzhi{
-        padding:50px 150px;
+        padding:50px 250px;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -31,13 +32,14 @@
         -webkit-background-size: auto 100%;
         background-size: auto 100%;
     }
+    .news-recommend{
+        background-color: transparent;
+    }
     @media screen and (max-width: 768px) {
         body{
             padding-top:0px;
         }
-        .form-container{
-            padding:0px;
-        }
+
         .dingzhi{
             padding:0;
             padding-right:15px;
@@ -72,7 +74,7 @@
         </div>
         <div class="layui-form-item ">
             <div class="layui-input-block">
-                <button style="height:50px;line-height: 50px;" class="layui-btn layui-btn-normal layui-btn-fluid">立即定制</button>
+                <button class="layui-btn layui-btn-normal layui-btn-fluid">立即定制</button>
             </div>
         </div>
     </form>

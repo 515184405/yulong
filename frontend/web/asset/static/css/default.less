@@ -116,12 +116,12 @@ body {
 
 @font-face {
     font-family: 'iconfont';  /* project id 1174705 */
-    src: url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.eot');
-    src: url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.woff') format('woff'),
-    url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_1174705_m24cua9xb3l.svg#iconfont') format('svg');
+    src: url('//at.alicdn.com/t/font_1174705_aibvhgervii.eot');
+    src: url('//at.alicdn.com/t/font_1174705_aibvhgervii.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1174705_aibvhgervii.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1174705_aibvhgervii.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1174705_aibvhgervii.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1174705_aibvhgervii.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -523,6 +523,106 @@ header{
         overflow-y: auto;
     }
 }
+
+//登陆模块
+.login{
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+.login-title{
+    color:#000;
+    margin-top:-42px;
+    height:100px;
+    overflow: hidden;
+    img{
+        width:220px;
+    }
+}
+.login-desc{
+    font-size: 14px;
+    margin-top:15px;
+    color:#000;
+}
+.login-type{
+    margin-top:30px;
+    .iconfont{
+        font-size: 40px;
+        display: inline-block;
+        width:70px;
+        height:70px;
+        text-align: center;
+        line-height:70px;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border:1px solid #aaa;
+        cursor: pointer;
+    }
+    a{
+        display: inline-block;
+        width:100px;
+        text-align: center;
+        margin:0 15px;
+
+    }
+    a>p{
+        color:#000;
+        margin-top:10px;
+        font-size: 14px;
+        display: inline-block;
+    }
+    a:first-child i{
+        border-color: #5181f1;
+        color:#5181f1;
+        &:hover{
+            background-color: #5181f1;
+            color:#fff;
+
+        }
+    }
+    a:nth-child(2){
+        i{
+            border-color: #53ff34;
+            color:#53ff34;
+            &:hover{
+                background-color: #53ff34;
+                color:#fff;
+            }
+        }
+    }
+}
+.login-bottom{
+    padding:20px;
+    font-size: 14px;
+    position: absolute;
+    width:100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    left:0;
+    bottom:10px;
+    .register-advice{
+        text-decoration: underline;
+    }
+    .reigster-agree{
+        font-size: 12px;
+        margin-bottom:10px;
+        .iconfont{
+            font-size: 14px;
+            margin-right:3px;
+            cursor: pointer;
+        }
+    }
+}
+//修改layer央视
+.layui-login{
+    .layui-layer-title{
+        background-color: #fff;
+        border-bottom: 0;
+    }
+}
+
 //尾部
 .footer{
     padding:50px 0;
