@@ -46,7 +46,7 @@ AppAsset::register($this);
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news">新闻动态</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'about')!==false ? 'active' : ''?>" href="/about">关于我们</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'contact')!==false ? 'active' : ''?>" href="/contact">联系我们</a></li>
-                <li style="color:#fff;"><a class="login_btn" href="javascript:;">登 陆</a> | <a class="register_btn" href="javascript:;">注 册</a> </li>
+                <li><p class="login-register-box"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p></li>
                <!-- <li class="telephone-box js_telephone_box">
                     <i class="iconfont telephone-icon red">&#xe622;</i>
                     <p class="nav-telephone-number">

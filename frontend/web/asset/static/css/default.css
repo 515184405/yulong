@@ -452,6 +452,24 @@ header .nav-ul li a.active {
   color: #5181f1;
   font-weight: bold;
 }
+header .nav-ul li:last-child {
+  width: 100px;
+}
+header .nav-ul li .login-register-box {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #97b9ef;
+  padding: 5px 10px;
+  margin: 0;
+  color: #97b9ef;
+  position: absolute;
+  top: 17px;
+}
+header .nav-ul li .login-register-box a {
+  font-size: 14px;
+  color: #97b9ef;
+}
 header .nav-ul .telephone-box {
   height: 0;
   overflow: hidden;
