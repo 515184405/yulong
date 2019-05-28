@@ -120,7 +120,7 @@
             , url: '/site/upload-image'
             ,data:{
                 fileName : 'file_url',
-                caseDir : 'dingzhi/'
+                caseDir : 'dingzhi/',
             }
             , before: function (obj) {
                 layer.msg('上传中...', {
@@ -176,7 +176,7 @@
                 success: function(res) {
                     layer.closeAll();
                     _this.disabled=false;
-                    layer.msg(res.message, {icon: 1}, function(){
+                    layer.msg(res.message, {icon: 1,time:1000}, function(){
                         history.go(-1);
                     })
                 },

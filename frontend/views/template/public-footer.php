@@ -30,7 +30,7 @@
         </a>
     </div>
     <div class="t-c login-bottom">
-        <p class="reigster-agree"><i class="iagree_btn" class="theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
+        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
         <span >没有账号？<a class="theme register_btn" href="javascript:;">立即注册</a></span>
     </div>
 </div>
@@ -51,7 +51,7 @@
         </a>
     </div>
     <div class="t-c login-bottom">
-        <p class="reigster-agree"><i class="iagree_btn" class="theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
+        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
         <span>已有账号？<a class="theme login_btn" href="javascript:;">立即登陆</a></span>
     </div>
 </div>

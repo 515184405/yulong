@@ -118,6 +118,12 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
+                        <a href="/dingzhi" lay-tips="组件定制" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>组件定制</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/team" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>人员管理</cite>

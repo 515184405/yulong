@@ -33,7 +33,7 @@ class MadeToOrder extends \yii\db\ActiveRecord
         return [
             [['title', 'desc', 'u_id', 'tel', 'username', 'file_url','create_time'], 'required'],
             [['desc'], 'string'],
-            [['u_id','create_time'], 'integer'],
+            [['u_id','create_time','status','money'], 'integer'],
             [['title', 'file_url'], 'string', 'max' => 255],
             [['tel'], 'string', 'max' => 15],
             [['username'], 'string', 'max' => 10],
@@ -54,7 +54,24 @@ class MadeToOrder extends \yii\db\ActiveRecord
             'username' => 'Username',
             'file_url' => 'File Url',
             'create_time' => 'Create Time',
+            'status' => 'Status',
+            'money' => 'Money',
         ];
+    }
+
+    //查询与搜索
+    public static function search($params){
+        $query = static::find();
+        $limit = isset($params['limit']) ? $params['limit'] :'';
+        $page = isset($params['page']) ? $params['page'] :'';
+        $count = 0;
+        if($limit && $page){
+            $offset = $limit * ($page - 1);
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $data = $query->orderBy(['id'=>SORT_DESC])->asArray()->all();
+        return compact('count','data');
     }
 
     //    添加与修改
