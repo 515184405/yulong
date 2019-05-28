@@ -40,12 +40,14 @@
     function addAnimateDelay(){
         for(var i = 0,len = $('.animated').length;i < len; i++){
             var width = $('.case-list')[0].clientWidth - 60;
+            var number = Math.floor(width/oneAWidth);
+            number = number ? number : 1;
             var oneAWidth = 295;
             //删除已存在的delay-{{}}s;
             var reg = /delay-[0-9]s/g;
             var classes = $('.animated')[i].className.match(reg);
             classes && $($('.animated')[i]).removeClass(classes[0]);
-            $($('.animated')[i]).addClass('delay-'+i % Math.floor(width/oneAWidth)+'s')
+            $($('.animated')[i]).addClass('delay-'+i % number+'s')
         }
     }
 
