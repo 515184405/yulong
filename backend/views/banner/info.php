@@ -63,7 +63,7 @@ use kucha\ueditor\UEditor;
 
         // 文件上传
         //普通图片上传
-            var uploadInst = upload.render({
+         var uploadInst = upload.render({
                 elem: '#test-upload-normal'
                 , url: '/news/upload-image'
                 ,data:{

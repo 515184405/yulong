@@ -11,6 +11,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -230,5 +231,20 @@ class SiteController extends CommonController
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    //图片上传
+    public function actionUploadImage(){
+        $uploadImage = $this->uploadImage();
+        if(isset($uploadImage)){
+            if($uploadImage['status']) {
+                return Json::encode(array('code'=>'100000','message'=>'添加成功！','data'=>array(
+                    'fileName' => $uploadImage['fileName'],
+                    'fileSrc' => '/'.$uploadImage['fileSrc']
+                )));
+            }else{
+                return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Cases;
+use common\models\MadeToOrder;
 use common\models\News;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -93,6 +94,26 @@ class UnitController extends CommonController {
     
     //定制服务
     public function actionDingzhi(){
-        return $this->render('dingzhi');
+        $dingzhi_id = isset($_GET['id']) ? $_GET['id'] : '';
+        if(\Yii::$app->request->isPost){
+            $params = $_POST;
+            //存newsModel数据
+            $dingzhi_id2 = MadeToOrder::insertUpdate($params,$dingzhi_id);
+            if($dingzhi_id2){
+                if($dingzhi_id){
+                    return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
+                }
+                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+            }
+            return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
+        }
+        //查询banner数据
+        if($dingzhi_id){
+            $data = MadeToOrder::find()->where(['id'=>$dingzhi_id])->asArray()->one();
+            if(!$data){
+                return '定制组件不存在';
+            }
+        }
+        return $this->render('dingzhi',compact('data'));
     }
 }
