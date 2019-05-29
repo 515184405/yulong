@@ -4,6 +4,12 @@
 
 <link rel="stylesheet" href="/asset/static/css/case.css">
 <div class="case-list unit-list clearfix">
+    <div class="search-wrapper">
+        <div class="search-box">
+            <input type="text" id="search_input" autocomplete="off" value="<?=isset($_GET['search']) ? $_GET['search'] : ''?>" class="search-input" placeholder="请输入筛选内容">
+            <button id="search_btn" class="search-btn">搜 索</button>
+        </div>
+    </div>
     <a href="/unit/dingzhi" animate-type="slideInUp" class="case-item animated ">
         <img style="background-color:rgb(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>)" src="/asset/static/image/dingzhi.png" alt="定制开发" class="case-img transition">
         <h2 class="case-title transition overflow-text">组件定制开发</h2>
@@ -32,17 +38,18 @@
                 <?php } ?>
             </p>
         </a>
-    <?php }else{ ?>
-        无数据
     <?php } ?>
+
 </div>
 <script>
     function addAnimateDelay(){
+        var width = $('.case-list')[0].clientWidth - 60;
+        var oneAWidth = 335;
+        var number = Math.floor(width/oneAWidth);
+        //$('.case-list').css('width',number * oneAWidth);
+
         for(var i = 0,len = $('.animated').length;i < len; i++){
-            var width = $('.case-list')[0].clientWidth - 60;
-            var number = Math.floor(width/oneAWidth);
             number = number ? number : 1;
-            var oneAWidth = 295;
             //删除已存在的delay-{{}}s;
             var reg = /delay-[0-9]s/g;
             var classes = $('.animated')[i].className.match(reg);
@@ -52,6 +59,11 @@
     }
 
     addAnimateDelay();
+
+    $("#search_btn").click(function(){
+        var val = $('#search_input').val();
+        window.location.href = '/unit?search='+val;
+    })
 
 </script>
 <?= $this->render('../template/footer');?>

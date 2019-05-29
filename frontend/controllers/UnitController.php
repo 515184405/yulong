@@ -13,7 +13,8 @@ class UnitController extends CommonController {
 
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
-        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->asArray()->all();
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->andFilterWhere(['like','title',$search])->orFilterWhere(['like','desc',$search])->asArray()->all();
         $unit = [];
         $is_true = false; //判断当前类型是否存在项目
         foreach ($unitData as $item) {
