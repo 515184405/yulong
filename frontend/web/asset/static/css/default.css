@@ -464,7 +464,7 @@ header .nav-ul li .login-register-box {
   margin: 0;
   color: #97b9ef;
   position: absolute;
-  top: 17px;
+  top: 15px;
 }
 header .nav-ul li .login-register-box a {
   font-size: 14px;
@@ -473,6 +473,65 @@ header .nav-ul li .login-register-box a {
 header .nav-ul .telephone-box {
   height: 0;
   overflow: hidden;
+}
+header .nav-ul .layui-nav-img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+  margin-top: -4px;
+  vertical-align: middle;
+}
+header .nav-ul .user-icon:before {
+  font-family: 'iconfont';
+  content: '\e66f';
+  color: #fff;
+}
+header .nav-ul .user-box:hover .user-icon:before {
+  opacity: 0.8;
+}
+header .nav-ul .fy-nav-child {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 90px;
+  min-width: 80%;
+  line-height: 36px;
+  padding: 5px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  border: 1px solid #d2d2d2;
+  background-color: #fff;
+  z-index: -1;
+  border-radius: 2px;
+  white-space: nowrap;
+  opacity: 0;
+  transition-duration: 0.2s;
+  -o-transition-duration: 0.2s;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+}
+header .nav-ul .fy-nav-child dd a {
+  padding: 0 25px;
+  color: #595757 !important;
+  font-size: 14px!important;
+}
+header .nav-ul .fy-nav-child dd:last-child a {
+  color: #ff2c38 !important;
+}
+header .nav-ul .fy-nav-child:before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 10px;
+  border-color: transparent transparent #fff transparent;
+  border-style: solid;
+}
+header .nav-ul .fy-nav-child.active {
+  opacity: 1;
+  top: 65px;
+  z-index: 99;
 }
 header .nav-ul .nav-telephone-number {
   border-left: 1px solid #fff;
@@ -509,12 +568,25 @@ header.active {
   color: #97b9ef;
   position: absolute;
   z-index: 999;
-  top: 17px;
-  right: 20px;
+  top: 5px;
+  right: 0px;
 }
 .login-register-box a {
   font-size: 14px;
   color: #97b9ef;
+}
+/*协议*/
+.xieyi {
+  padding: 20px 30px 30px 30px;
+  line-height: 25px;
+}
+.xieyi h2 {
+  margin: 10px 0;
+  font-size: 16px;
+}
+.xieyi p {
+  font-size: 14px;
+  text-indent: 28px;
 }
 .news-recommend {
   padding: 15px;
@@ -696,6 +768,9 @@ header.active {
 .layui-login .layui-layer-title {
   background-color: #fff;
   border-bottom: 0;
+}
+.layui-xieyi .layui-layer-title {
+  background-color: #eee;
 }
 .footer {
   padding: 50px 0;

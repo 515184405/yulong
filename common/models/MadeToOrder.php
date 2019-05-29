@@ -62,7 +62,7 @@ class MadeToOrder extends \yii\db\ActiveRecord
     //查询与搜索
     public static function search($params){
         $query = static::find();
-        $limit = isset($params['limit']) ? $params['limit'] :'';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
         $page = isset($params['page']) ? $params['page'] :'';
         $count = 0;
         if($limit && $page){

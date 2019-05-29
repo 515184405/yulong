@@ -27,5 +27,10 @@
     <div class="list-container transition">
         <?=$this->render('../template/nav',compact('data'));?>
         <div class="list-content transition">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="请输入筛选内容">
+                <button class="search-btn">搜 索</button>
+            </div>
             <div class="lc-content">
+
 

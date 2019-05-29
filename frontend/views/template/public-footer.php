@@ -30,7 +30,7 @@
         </a>
     </div>
     <div class="t-c login-bottom">
-        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
+        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="javascript:;">《注册声明》与《版权声明》</a></p>
         <span >没有账号？<a class="theme register_btn" href="javascript:;">立即注册</a></span>
     </div>
 </div>
@@ -51,11 +51,28 @@
         </a>
     </div>
     <div class="t-c login-bottom">
-        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="#">《用户协议》</a></p>
+        <p class="reigster-agree"><i class="iagree_btn theme iconfont">&#xe6a2;</i>我已阅读并接受 <a target="_blank" class="register-advice" href="javascript:;">《注册声明》与《版权声明》</a></p>
         <span>已有账号？<a class="theme login_btn" href="javascript:;">立即登陆</a></span>
     </div>
 </div>
 <!--注册模块-->
+<!--协议模块-->
+<div class="xieyi none">
+    <h2>注册声明</h2>
+    <p>一、用户注册、登陆，视为接受本协议的约束。</p>
+    <p>二、用户承诺遵守国家的法律法规及部门规章</p>
+    <p>三、用户承诺遵守“聚友团队”的知识产权政策.</p>
+    <p>四、站内插件用于行业交流、学习。</p>
+    <p>五、用户侵犯第三人的知识产权，由该用户承担全部法律责任。</p>
+
+    <h2>版权声明</h2>
+    <p>聚友团队（www.yu313.cn）站内所有涉及插件及代码由会员或站主上传而来，聚友团队不拥有会员上传的插件及代码的版权</p>
+    <p>聚友团队作为网络服务提供者，对非法转载，盗版行为的发生不具备充分的监控能力。但是当版权拥有者提出侵权指控并出示充分的版权证明材料时，聚友团队负有移除盗版和非法转载作品以及停止继续传播的义务。聚友团队在满足前款条件下采取移除等相应措施后不为此向原发布人承担违约责任或其他法律责任，包括不承担因侵权指控不成立而给原发布人带来损害的赔偿责任。</p>
+    <p>如果版权拥有者发现自己作品被侵权，请及时向聚友团队提出权利通知，并将姓名、电话、身份证明、权属证明、具体链接（URL）及详细侵权情况描述发往版权举报专用通道，聚友团队在收到相关举报文件后，在3个工作日内移除相关涉嫌侵权的内容</p>
+    <p>QQ：515184405（周一到周五，9：30-18:00）</p>
+</div>
+<!--协议模块-->
+
 
 <!--wap底部导航-->
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
@@ -86,7 +103,7 @@
             anim: 2,
             shade: false,
             title: false, //不显示标题
-            content: '<img style="max-width: 100%;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            content: '<img style="width: 250px;height:250px;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         });
     })
     //底部移动端导航其他链接事件
@@ -139,6 +156,25 @@
             icon:"4"
         })
     })
+
+    //用户协议
+    $('.register-advice').click(function(){
+
+        layer.open({
+            type: 1,
+            title: '<h1 style="color:#000;font-size:15px;">注册声明与版权声明</h1>',
+            anim: 4,
+            area: ['500px', '80%'],
+            skin: 'layui-login layui-xieyi', //没有背景色
+            content: $('.xieyi'),
+            end:function(){
+                $('.xieyi').hide();
+            }
+        });
+
+    })
+
+
 
 
 </script>
