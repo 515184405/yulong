@@ -6,6 +6,7 @@ use common\models\News;
 use common\models\NewsTagJoin;
 use common\models\NewsType;
 use common\models\Widget;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 class NewsController extends CommonController {
@@ -16,6 +17,8 @@ class NewsController extends CommonController {
         $tag_id = isset($_GET['tag_id']) ? $_GET['tag_id'] : '';
         // 通过tag_id反查出news_id
         $caseTagJoin = NewsTagJoin::find()->where(['tag_id'=>$tag_id])->asArray()->all();
+        $limit = 20; //每页显示20条
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if($tag_id){
             $news = [];
             //获取标签筛选出来的案例结果列表
@@ -27,11 +30,14 @@ class NewsController extends CommonController {
             //获取类型筛选出来的案例结果列表
             $news = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['News.type_id'=>$id,'issue'=>2])->asArray()->all();
         }
+        $pagination = new Pagination(['totalCount' => count($news),'pageSize' => $limit]);
+        $news = array_slice($news,$limit*($page-1),$limit);
         $type = NewsType::find()->asArray()->all();
         $data = array(
             'type' => $type,
             'link' => 'news',
-            'news' => $news
+            'news' => $news,
+            'pagination' => $pagination,
         );
         return $this->renderPartial('index',compact('data'));
     }

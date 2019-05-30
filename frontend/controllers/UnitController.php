@@ -6,6 +6,7 @@ use common\models\MadeToOrder;
 use common\models\News;
 use common\models\Widget;
 use common\models\WidgetType;
+use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -15,6 +16,8 @@ class UnitController extends CommonController {
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         $search = isset($_GET['search']) ? $_GET['search'] : '';
         $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->andFilterWhere(['like','title',$search])->orFilterWhere(['like','desc',$search])->asArray()->all();
+        $limit = 20; //每页显示20条
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $unit = [];
         $is_true = false; //判断当前类型是否存在项目
         foreach ($unitData as $item) {
@@ -37,12 +40,15 @@ class UnitController extends CommonController {
                 array_push($unit, $item);
             }
         }
+        $pagination = new Pagination(['totalCount' => count($unit),'pageSize' => $limit]);
+        $unit = array_slice($unit,$limit*($page-1),$limit);
 
         $type = WidgetType::find()->asArray()->all();
         $data = array(
             'type' => $type,
             'link' => 'unit',
-            'unit' => $unit
+            'unit' => $unit,
+            'pagination' => $pagination
         );
         return $this->renderPartial('index',compact('data'));
     }

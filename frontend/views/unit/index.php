@@ -1,3 +1,6 @@
+<?php
+    use yii\widgets\LinkPager;
+?>
 <?php $this->title='聚友团队 - 组件列表' ?>
 
 <?= $this->render('../template/header',compact('data'));?>
@@ -10,6 +13,7 @@
             <button id="search_btn" class="search-btn">搜 索</button>
         </div>
     </div>
+    <?php if(!isset($_GET['page']) || $_GET['page'] == 1 ){ ?>
     <a href="/unit/dingzhi" animate-type="slideInUp" class="case-item animated ">
         <img style="background-color:rgb(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>)" src="/asset/static/image/dingzhi.png" alt="定制开发" class="case-img transition">
         <h2 class="case-title transition overflow-text">组件定制开发</h2>
@@ -18,6 +22,7 @@
             <button class="fy-btn fy-btn-danger" style="width: 100%;padding:8px 0;margin-top:10px;">发布定制</button>
         </p>
     </a>
+    <?php } ?>
     <?php if(count($data['unit'])) foreach ($data['unit'] as $val){?>
         <!--        delay---><?//= $i % 5 ?><!--s-->
         <a href="/unit/item/<?=$val['id']?>" animate-type="slideInUp" class="case-item animated ">
@@ -39,8 +44,12 @@
             </p>
         </a>
     <?php } ?>
-
 </div>
+    <div class="t-c">
+        <?= LinkPager::widget([
+            'pagination' => $data['pagination'],
+        ]) ?>
+    </div>
 <script>
     function addAnimateDelay(){
         var width = $('.case-list')[0].clientWidth - 60;
@@ -60,10 +69,20 @@
 
     addAnimateDelay();
 
+    // 按钮搜索
     $("#search_btn").click(function(){
         var val = $('#search_input').val();
         window.location.href = '/unit?search='+val;
     })
+
+    //回车搜索
+    $("#search_input").keydown(function(event){
+        event=document.all?window.event:event;
+        if((event.keyCode || event.which)==13){
+            var val = $('#search_input').val();
+            window.location.href = '/unit?search='+val;
+        }
+    });
 
 </script>
 <?= $this->render('../template/footer');?>

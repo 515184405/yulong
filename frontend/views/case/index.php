@@ -1,3 +1,6 @@
+<?php
+use yii\widgets\LinkPager;
+?>
 <?php $this->title="聚友团队 - 案例列表" ?>
 <?= $this->render('../template/header',compact('data'));?>
 
@@ -18,6 +21,12 @@
     <?php }else{ ?>
         无数据
     <?php } ?>
+</div>
+
+<div class="t-c">
+    <?= LinkPager::widget([
+        'pagination' => $data['pagination'],
+    ]) ?>
 </div>
 <script>
     function addAnimateDelay(){

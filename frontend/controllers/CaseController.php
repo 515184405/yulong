@@ -6,6 +6,7 @@ use common\models\CaseTagJoin;
 use common\models\CaseType;
 use common\models\News;
 use common\models\Widget;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 class CaseController extends CommonController {
@@ -15,6 +16,8 @@ class CaseController extends CommonController {
         $tag_id = isset($_GET['tag_id']) ? $_GET['tag_id'] : '';
         // 通过tag_id反查出case_id
         $caseTagJoin = CaseTagJoin::find()->where(['tag_id'=>$tag_id])->asArray()->all();
+        $limit = 20; //每页显示20条
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if($tag_id){
             $case = [];
             foreach ($caseTagJoin as $val){
@@ -24,11 +27,15 @@ class CaseController extends CommonController {
         }else{
             $case = Cases::find()->andFilterWhere(['type_id'=>$id])->asArray()->all();
         }
+
+        $pagination = new Pagination(['totalCount' => count($case),'pageSize' => $limit]);
+        $case = array_slice($case,$limit*($page-1),$limit);
         $type = CaseType::find()->asArray()->all();
         $data = array(
             'type' => $type,
             'link' => 'case',
-            'case' => $case
+            'case' => $case,
+            'pagination' => $pagination
         );
         return $this->renderPartial('index',compact('data'));
     }
