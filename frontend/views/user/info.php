@@ -1,10 +1,10 @@
 <?php
-use kucha\ueditor\UEditor;
+    use kucha\ueditor\UEditor;
 ?>
-<?php //var_dump($data['widget']['type']); ?>
-<?php //var_dump(\yii\helpers\Json::encode($data));die;?>
-<link rel="stylesheet" href="/asset/lib/select2/css/select2.min.css">
-<link rel="stylesheet" href="/asset/style/jquery.tagsinput.css">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/lib/select2/css/select2.min.css">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/style/jquery.tagsinput.css">
+<link rel="stylesheet" href="/asset/static/css/personal.css">
 <style>
     .select2-container--default.select2-container--focus .select2-selection--multiple{
         padding-right:50px;
@@ -18,12 +18,20 @@ use kucha\ueditor\UEditor;
         top:8px;
         z-index: 9;
     }
+    .layui-form-item{
+        clear: none;
+    }
+    .layui-form-item:after{
+         clear: none;
+     }
+    .layui-form{
+        margin-top:30px;
+    }
 </style>
-<?php $this->title="个人中心 - ".(isset($_GET['id']) ? '修改作品' : '添加作品'); ?>
-
-<div class="layui-card">
-    <div class="layui-card-header header-title"><?=isset($_GET['id']) ? '修改作品' : '添加作品'?></div>
-    <div class="layui-card-body">
+<div class="personal fy-container clearfix">
+    <?=$this->render('../template/personal');?>
+    <div class="personal-right">
+        <h2 class="user-title"><?=isset($_GET['id']) ? "组件修改" : '上传组件'?></h2>
         <form class="layui-form" action="">
             <div class="layui-form-item">
                 <label class="layui-form-label">作品名称</label>
@@ -37,27 +45,6 @@ use kucha\ueditor\UEditor;
                     <textarea lay-verify="required" lay-text="作品简介" autocomplete="off" name="desc" class="layui-textarea"   placeholder="请输入作品简介" id="" cols="30" rows="10"><?=isset($data['widget']['desc']) ? $data['widget']['desc'] : ''?></textarea>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">作品类型</label>
-                <div class="layui-input-block relative">
-                    <select2 id="select2"  name="type">
-                    </select2>
-                    <button type="button" class="layui-btn layui-btn-normal layui-btn-xs add_type js_add_type layui-icon layui-icon-add-1"></button>
-                </div>
-            </div>
-            <div id="wx_link" class="layui-form-item ">
-                <label class="layui-form-label">作品缩略图</label>
-                <div class="layui-input-block">
-                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal">上传图片</button><span class="theme-red ml10">建议上传4:3，图片大小不要超过2M</span>
-                    <input type="hidden" lay-verify="required" lay-text="作品缩略图必传" value="<?=isset($data['widget']['banner_url']) ? $data['widget']['banner_url'] : ''?>" class="js_banner_url" name="banner_url">
-                    <div class="layui-upload-list">
-                        <img class="layui-upload-img" <?=isset($data['widget']['banner_url']) ? 'src="'.$data['widget']['banner_url'].'"' : ''?>" id="test-upload-normal-img">
-                        <p id="test-upload-demoText"></p>
-                    </div>
-                </div>
-            </div>
-
-
             <div id="wx_link" class="layui-form-item ">
                 <label class="layui-form-label">作品压缩包</label>
                 <div class="layui-input-block">
@@ -65,7 +52,7 @@ use kucha\ueditor\UEditor;
                     <input type="hidden" value="<?=isset($data['widget']['download']) ? $data['widget']['download'] : ''?>" class="js_website" name="website">
                     <a href="<?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?>" id="zip-upload-demoText"><?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?></a>
                 </div>
-            </div>t
+            </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">作品来源</label>
@@ -116,13 +103,13 @@ use kucha\ueditor\UEditor;
 </div>
 
 
-
+<script src="<?=Yii::$app->params['backend_url']?>/asset/layui/layui.js"></script>
 <script>
 
     var frontend_url = "Yii::$app->params['frontend_url']";
 
     layui.config({
-        base: '/asset/' //静态资源所在路径
+        base: '<?=Yii::$app->params["backend_url"]?>/asset/' //静态资源所在路径
     }).extend({
         index: 'lib/index', //主入口模块
         select2:'../lib/select2/js/select2.min'
@@ -136,7 +123,7 @@ use kucha\ueditor\UEditor;
         //普通图片上传
             var uploadInst = upload.render({
                 elem: '#test-upload-normal'
-                , url: '/widget/upload-image'
+                , url: '/site/upload-image'
                 ,data:{
                     fileName : 'banner_url',
                     caseDir : 'widget/banner_url/'
@@ -177,7 +164,7 @@ use kucha\ueditor\UEditor;
         //选完文件后不自动上传
         upload.render({
             elem: '#upload-zip'
-            ,url: '/widget/upload-file'
+            ,url: '/user/upload-file'
             ,accept: 'file' //普通文件
             ,exts: 'zip|rar' //只允许上传压缩文件
             ,auto: false
@@ -189,75 +176,22 @@ use kucha\ueditor\UEditor;
                     $("#zip-upload-demoText").attr('href',frontend_url+res.download).html(res.name);
                     $('.js_website').val(res.download);
 
-                    layer.confirm(res.message+'是否返回列表？', {
-                        btn: ['确定','取消'] //按钮
-                    }, function(){
-                        window.history.go(-1);
-                    }, function(){
-                        layer.closeAll();
-                        window.location.reload();
-                    });
+                    layer.msg(res.message,{icon:1,time:1500},function(){
+                        window.location.href='/user';
+                    })
                 }
 
             }
         });
 
-
-        // select2初始化
-
-        setSelect("<?=isset($data['widget']['type']) ? $data['widget']['type'] : ''?>".split(','));
-        //传入选中数组
-        function setSelect(selectedArr){
-            $.getJSON('/widget/add-type',function(res){
-                var data = res.data.map(item => {
-                    return {id : item.type_id,text:item.title};
-                });
-                $("#select2").select2("destroy");
-                $('#select2').select2({
-                    placeholder : '请选择类型',
-                    width : '100%',
-                    multiple : true,
-                    language : 'zh-CH',
-                    data : data,
-                });
-                $("#select2").select2("val", selectedArr);
-            })
-        };
-
-
-        //新增type类型
-        $('.js_add_type').bind('click',function(){
-            layer.prompt(function(val, index){
-                $.post('/widget/add-type',{'title':val},function(res){
-                    if(res.code == 100000){
-                        var selected = $("#select2").select2("val").map((item => {
-                            return Number(item);
-                        }));
-                        selected.push(res.type.type_id);
-                        setSelect(selected);
-                    }else{
-                        layer.msg(res.message, {icon: 5});
-                    }
-                },'json')
-                layer.close(index);
-            });
-        });
-
         /* 监听提交 */
         form.on('submit(submit-btn)', function(data) {
-            var type = $("#select2").select2("val").join(',');
             var zipFile = $("#upload-zip").next('input[name="file"]').val();
-            if(!type){
-                layer.msg('作品类型必填',{icon:5});
-                return false;
-            }
             if(!zipFile && !$('.js_website').val()){
                 layer.msg('请上传文件压缩包',{icon:5});
                 return false;
             }
 
-            data.field['type'] = type; //多选
-            // console.log(data.field);return false;
             layer.load(1, {shade: .1});
             var _this = this;_this.disabled=true;//防止多次提交
             var params = data.field;
@@ -271,7 +205,7 @@ use kucha\ueditor\UEditor;
                     _this.disabled=false;
                     if(zipFile) {
                         $('#upload-file-submit').click();
-                        layer.msg('正在上传图片...', {
+                        layer.msg('正在上传文件...', {
                             icon: 16,
                             time: 0,
                             shade: [0.1, '#000']

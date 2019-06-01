@@ -15,7 +15,7 @@ class UnitController extends CommonController {
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         $search = isset($_GET['search']) ? $_GET['search'] : '';
-        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->andFilterWhere(['like','title',$search])->orFilterWhere(['like','desc',$search])->asArray()->all();
+        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['status'=>1])->andFilterWhere(['like','title',$search])->orFilterWhere(['like','desc',$search])->asArray()->all();
         $limit = 20; //每页显示20条
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $unit = [];
@@ -63,7 +63,7 @@ class UnitController extends CommonController {
             $widget_item = Widget::find()->where(['id'=>$unit_id])->asArray()->one();
         }else{
             //所有可见
-            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['issue'=>'2']])->asArray()->one();
+            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['status'=>'1']])->asArray()->one();
         }
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);
@@ -74,9 +74,9 @@ class UnitController extends CommonController {
         $widget_item_look->save();
 
         //查询上-篇文章
-        $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['issue'=>2]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
+        $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
-        $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['issue'=>2]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
+        $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,

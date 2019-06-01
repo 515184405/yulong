@@ -1,3 +1,4 @@
+<?php $this->title="聚友团队 - 组件定制"; ?>
 <link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css">
 <style>
     body{

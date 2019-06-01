@@ -197,7 +197,6 @@
   z-index: 999;
   opacity: 1;
 }
-
 //组件模块
 .unit-items{
   .share-box{
@@ -263,17 +262,67 @@
     padding-bottom:100px;
   }
 }
+//组件右侧用户信息
+.unit-user{
+  .unit-user-info{
+    margin-bottom:21px;
+  }
+  padding:15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  .unit-user-avatar{
+    width:60px;
+    height:60px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border:3px solid #e67c23;
+    float: left;
+  }
+  .unit-user-name{
+    font-size: 16px;
+    font-weight: bold;
+    color:#000;
+    margin-left:75px;
+    margin-top:5px;
+  }
+  .unit-user-dress{
+    font-size: 14px;
+    margin-left:75px;
+    margin-top:5px;
+    color:#555;
+  }
+  .unit-user-btn{
+    margin-top:10px;
+    font-size: 15px;
+    text-align: center;
+    .fy-btn{
+      width:100%;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+  }
+}
 
 @media screen and (max-width: 768px){
   .news-items{
     margin-right:0;
   }
   .news-recommend{
-    width:auto;
+    width:100%;
     position: static;
+    margin-top: 15px;
   }
   .unit-items .banner-box{
     padding: 15px;
+  }
+  .unit-items .unit-page-box{
+    padding-bottom: 20px;
+  }
+  .news-items .btn-box{
+    margin-bottom: 0;
   }
   .unit-items .unit-btn-box {
     height: auto;

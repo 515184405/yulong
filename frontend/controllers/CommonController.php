@@ -52,6 +52,13 @@ class CommonController extends \yii\web\Controller{
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config'=>[
+                    //上传图片配置
+                    //'imageUrlPrefix' => Yii::$app->params['site_url'], /* 图片访问路径前缀 */
+                ]
+            ]
         ];
     }
 

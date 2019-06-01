@@ -94,7 +94,7 @@
                     shadeClose: true,
                     shade: false,
                     maxmin: true, //开启最大化最小化按钮
-                    area: ['600px', '400px'],
+                    area: ['80%', '80%'],
                     content: '/dingzhi/info?id='+data.id
                 });
             }

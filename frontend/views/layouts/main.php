@@ -83,7 +83,7 @@ AppAsset::register($this);
     <?php $this->endBody() ?>
     <!--内容部分-->
     <!--推荐部分-->
-    <?php if (Yii::$app->request->getPathInfo() != '') { ?>
+    <?php if (Yii::$app->request->getPathInfo() != '' && strpos(Yii::$app->request->getPathInfo(),'user')===false) { ?>
         <?= $this->render('../template/right_aslide'); ?>
     <?php } ?>
     <!--推荐部分-->

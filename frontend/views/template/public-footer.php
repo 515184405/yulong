@@ -164,6 +164,7 @@
             type: 1,
             title: '<h1 style="color:#000;font-size:15px;">注册声明与版权声明</h1>',
             anim: 4,
+            scrollbar:false,
             area: ['500px', '80%'],
             skin: 'layui-login layui-xieyi', //没有背景色
             content: $('.xieyi'),

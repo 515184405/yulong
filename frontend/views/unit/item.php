@@ -4,6 +4,11 @@
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">
 <link rel="stylesheet" href="/asset/static/css/item.css">
+    <style>
+        .js_news_recommend{
+            top:235px;
+        }
+    </style>
 <div class="news-items unit-items">
         <h2 class="content-title clearfix"><span class="left"><?=$unit['title']?></span><div id="share" class="share-box right"></div></h2>
         <div class="content-info">
@@ -39,6 +44,19 @@
     </div>
 
 </div>
+<div class="unit-user news-recommend">
+    <div class="clearfix unit-user-info">
+        <img class="unit-user-avatar" src="//t.cn/RCzsdCq" alt="">
+        <h2 class="unit-user-name overflow-text">疯疯癫癫的小伙</h2>
+        <p class="unit-user-dress overflow-text">北京市 - 石景山区</p>
+    </div>
+    <p class="unit-user-btn">
+        <button id="guanzhu" class="fy-btn fy-btn-primary"><span id="guanzhu_text">关注作者</span>（<span id="guanzhu_number">35</span>）</button>
+    </p>
+    <p class="unit-user-btn">
+        <button id="shoucang" class="fy-btn fy-btn-success"><span id="shoucang_text">收藏插件</span>（<span id="shoucang_number">75</span>）</button>
+    </p>
+</div>
 <?= $this->render('../template/right_aslide',compact('data'));?>
 
 <script src="/asset/static/wigdet/share/jquery.share.min.js"></script>
@@ -60,7 +78,32 @@
         $(this).attr('href',href);
         $.post('/unit/down-count',{id:$(this).data('id')},function(){});
         // $(this).click();
+    });
+
+    //关注
+    $("#guanzhu").click(function () {
+        var text = $("#guanzhu_text").text();
+        var number = parseInt($("#guanzhu_number").text());
+        if(text == '已关注'){
+            $("#guanzhu_text").text('关注作者');
+            $("#guanzhu_number").text(number-1);
+        }else{
+            $("#guanzhu_text").text('√ 已关注');
+            $("#guanzhu_number").text(number+1);
+        }
     })
 
+    // 收藏
+    $("#shoucang").click(function () {
+        var text = $("#shoucang_text").text();
+        var number = parseInt($("#shoucang_number").text());
+        if(text == '已收藏'){
+            $("#shoucang_text").text('收藏组件');
+            $("#shoucang_number").text(number-1);
+        }else{
+            $("#shoucang_text").text('√ 已收藏');
+            $("#shoucang_number").text(number+1);
+        }
+    })
 </script>
 <?= $this->render('../template/footer');?>
