@@ -1,8 +1,12 @@
 html {
   font-size: 16px;
 }
-header {
+body {
+  padding-top: 0;
+}
+.header {
   background-color: transparent;
+  top: 0!important;
 }
 .swiper-container {
   position: absolute;
@@ -190,10 +194,10 @@ svg {
 }
 .section-service {
   background-color: #fff;
+  padding-top: 600px;
 }
 .service-list {
   padding: 50px 0;
-  margin-top: 540px;
 }
 .service-project {
   margin-top: 30px;

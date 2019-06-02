@@ -4,6 +4,7 @@
     <h2 class="qiandao-title">你已连续签到 <span class="js_qiandao_day">0</span>天！</h2>
     <p class="qiandao-desc">签到说明：连续签到3天以上,每天签到都会获得1金币</p>
     <ul class="qiandao-progress js_qiandao_progress clearfix">
+        <!--类名为active-->
         <li></li>
         <li></li>
         <li></li>
@@ -30,7 +31,7 @@
         <li class="userInfo-item"><span>100001</span><p>访问量</p></li>
     </ul>
     <ul class="fy-nav-default">
-        <li class="fy-nav-item"><a class="active" href="/user">我的组件</a></li>
+        <li class="fy-nav-item"><a href="/user">我的组件</a></li>
         <li class="fy-nav-item"><a href="/user/dingzhi">我的定制</a></li>
         <li class="fy-nav-item"><a href="/user/collect">我的收藏</a></li>
         <li class="fy-nav-item"><a href="/user/down-history">下载历史</a></li>
@@ -57,6 +58,7 @@
                 title: '<h1 style="color:#000;font-size:15px;">签到</h1>',
                 anim: 2,
                 scrollbar:false,
+                offset:["20%"],
                 area: ['500px', '300px'],
                 skin: 'layui-login layui-xieyi',
                 content: $('#qiandao_box'),
