@@ -118,6 +118,12 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
+                        <a href="/site/zixun" lay-tips="网站咨询" lay-direction="2">
+                            <i class="layui-icon layui-icon-home"></i>
+                            <cite>网站咨询</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/dingzhi" lay-tips="组件定制" lay-direction="2">
                             <i class="layui-icon layui-icon-home"></i>
                             <cite>组件定制</cite>

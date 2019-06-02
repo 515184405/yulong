@@ -48,14 +48,14 @@ AppAsset::register($this);
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'about')!==false ? 'active' : ''?>" href="/about">关于我们</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'contact')!==false ? 'active' : ''?>" href="/contact">联系我们</a></li>
                 <!--登录前-->
-                <?php if(Yii::$app->id){?>
+                <?php if(!Yii::$app->id){?>
                 <li><p class="login-register-box"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p></li>
                 <?php }else{ ?>
                 <!--登录后-->
                 <li class="user-box js_user_box">
                     <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">依鸣</a><i class="iconfont user-icon"></i>
                     <dl class="fy-nav-child transition js_nav_child">
-                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="/user">个人中心</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
                         <dd class="t-c" style="border-top:1px solid #ddd"><a href="javascript:;">退出</a></dd>
                     </dl>

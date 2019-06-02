@@ -28,7 +28,7 @@
         <div class="fy-sub-nav">
             <a class="sub-nav-item <?=$status == 2 ? 'active' : ''?>" href="/user/dingzhi?status=2">已完成</a>
             <a class="sub-nav-item <?=$status == 1 ? 'active' : ''?>" href="/user/dingzhi?status=1">定制中</a>
-            <a class="sub-nav-item <?=$status == 0 ? 'active' : ''?>" href="/user/dingzhi?status=0">未处理</a>
+            <a class="sub-nav-item <?=$status == 0 ? 'active' : ''?>" href="/user/dingzhi?status=0">处理中</a>
             <a class="sub-nav-item right" href="/user/info">上传素材</a>
         </div>
 
@@ -50,7 +50,7 @@
                         <p class="user-unit-desc transition overflow-text2"><?=$val['desc']?></p>
                         <p class="user-unit-info t-c clearfix">
                             <?php if($status == 0 ){ ?>
-                                <b style="color:#f00;line-height: 30px;">等待中</b>
+                                <b style="color:#f00;line-height: 30px;">处理中</b>
                             <?php }else if($status == 1){ ?>
                                 <b class="theme" style="line-height: 30px;">定制中</b>
                             <?php } ?>

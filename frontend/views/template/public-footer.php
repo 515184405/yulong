@@ -1,4 +1,7 @@
 <!--公共尾部-->
+<a id="website_btn" href="javascript:;" class="website-btn">
+    建站咨询
+</a>
 <div class="floated-box">
     <p id="scrollTop" class="floated-item scroll-top"><i class="iconfont transition">&#xe606;</i></p>
     <p class="floated-item wx-icon"><i class="iconfont transition">&#xe65a;</i></p>
@@ -95,6 +98,18 @@
         $('body,html,.list-container').animate({
             'scrollTop' : 0
         },300);
+    });
+
+    //建站留言
+    $("#website_btn").click(function(){
+        layer.open({
+            type: 2,
+            title: '建站咨询',
+            area: ['400px','500px'],
+            skin: 'layui-login  layui-xieyi', //没有背景色
+            anim: 4,
+            content: '/site/website'
+        });
     })
     //微信弹框
     $(".wx-icon").click(function(){

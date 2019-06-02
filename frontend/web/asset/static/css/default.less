@@ -790,6 +790,32 @@ header{
     }
 }
 //右侧悬浮框
+.website-btn{
+  width:50px;
+  text-align: center;
+  bottom:270px;
+  position: fixed;
+  right:10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  opacity: 0.7;
+  z-index: 99;
+  background-color: #000;
+  color:#fff;
+  font-size: 14px;
+    font-weight: bold;
+  height:50px;
+    padding:7px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 1.2;
+    &:hover{
+        color:#fff;
+        opacity: .5;
+    }
+}
 .floated-box{
     position: fixed;
     right:10px;
@@ -901,12 +927,15 @@ header{
     .header{
         display: none;
     }
-    .floated-box{
+    .floated-box,.website-btn{
         -webkit-transform: scale(.6);
         -moz-transform: scale(.6);
         -ms-transform: scale(.6);
         -o-transform: scale(.6);
         transform: scale(.6);
+    }
+    .website-btn{
+        bottom:220px;
     }
     //推荐模块
     .news-recommend .layout-recommend-item{

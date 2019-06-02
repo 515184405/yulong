@@ -823,6 +823,32 @@ header.active {
   color: #999;
   font-size: 12px;
 }
+.website-btn {
+  width: 50px;
+  text-align: center;
+  bottom: 270px;
+  position: fixed;
+  right: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  opacity: 0.7;
+  z-index: 99;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  height: 50px;
+  padding: 7px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+.website-btn:hover {
+  color: #fff;
+  opacity: 0.5;
+}
 .floated-box {
   position: fixed;
   right: 10px;
@@ -920,12 +946,16 @@ header.active {
   .header {
     display: none;
   }
-  .floated-box {
+  .floated-box,
+  .website-btn {
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);
     -ms-transform: scale(0.6);
     -o-transform: scale(0.6);
     transform: scale(0.6);
+  }
+  .website-btn {
+    bottom: 220px;
   }
   .news-recommend .layout-recommend-item {
     width: 100%;

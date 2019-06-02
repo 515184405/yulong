@@ -7,6 +7,7 @@ use common\models\Cases;
 use common\models\News;
 use common\models\Widget;
 use common\models\WidgetType;
+use common\models\Zixun;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -118,6 +119,21 @@ class SiteController extends CommonController
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    //建站咨询
+    public function actionWebsite()
+    {
+        if(Yii::$app->request->isPost){
+            $params = Yii::$app->request->post();
+            if(Zixun::insertUpdate($params)){
+                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+            }else{
+                return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
+            };
+        }
+
+        return $this->renderPartial('website');
     }
 
     /**
