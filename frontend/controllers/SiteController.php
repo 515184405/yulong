@@ -70,9 +70,7 @@ class SiteController extends CommonController
         } else {
             $model->password = '';
 
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            return $this->renderPartial('login');
         }
     }
 

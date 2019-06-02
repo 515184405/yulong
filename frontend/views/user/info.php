@@ -108,12 +108,7 @@
 
     var frontend_url = "Yii::$app->params['frontend_url']";
 
-    layui.config({
-        base: '<?=Yii::$app->params["backend_url"]?>/asset/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index', //主入口模块
-        select2:'../lib/select2/js/select2.min'
-    }).use(['index', 'form','upload','select2'], function(){
+    layui.use([ 'form','upload'], function(){
 
         var $ = layui.$,
             upload = layui.upload,

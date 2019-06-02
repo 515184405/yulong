@@ -54,6 +54,9 @@ var M = {
                 var winTop = $(window).scrollTop();
                 if (pos < winTop + winHeight) {
                     $(this).addClass(animatedType);
+                    if(M.isIE()){
+                        $(this).css('opacity',1);
+                    }
                 }
             });
         });
@@ -174,19 +177,7 @@ var M = {
     //轮播图逻辑处理
     swiperFun:function(){
         if(M.isIE()) {
-            $("#ie-swiper").show();
-            var swiper = new Swiper('#ie-swiper', {
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                loop:true,
-                autoplay:{
-                    delay:3000
-                },
-                speed:500
-            });
-            return false;
+
         };
         $("#IE_false").show();
         lock = false;

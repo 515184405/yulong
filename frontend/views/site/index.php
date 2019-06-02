@@ -51,7 +51,7 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
     </div>
     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
 </div>
-<!--ie10-11-->
+<!--ie9-10-11-->
 <div id="ie-swiper" class="swiper-container ie-swiper none">
     <div class="swiper-wrapper">
         <?php foreach ($data['banner'] as $key=>$v2){ ?>

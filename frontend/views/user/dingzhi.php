@@ -29,6 +29,7 @@
             <a class="sub-nav-item <?=$status == 2 ? 'active' : ''?>" href="/user/dingzhi?status=2">已完成</a>
             <a class="sub-nav-item <?=$status == 1 ? 'active' : ''?>" href="/user/dingzhi?status=1">定制中</a>
             <a class="sub-nav-item <?=$status == 0 ? 'active' : ''?>" href="/user/dingzhi?status=0">处理中</a>
+            <a class="sub-nav-item " href="/unit/dingzhi">去定制</a>
             <a class="sub-nav-item right" href="/user/info">上传素材</a>
         </div>
 
@@ -59,7 +60,7 @@
             </div>
             <?php }}else{ ?>
                 <div class="t-c" style="line-height: 300px;">
-                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/user/info">上传</a>一个吧...
+                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/unit/dingzhi">定制</a>一个吧...
                 </div>
             <?php } ?>
         </div>

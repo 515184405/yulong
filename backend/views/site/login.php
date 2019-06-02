@@ -146,7 +146,6 @@
 
 
         //增加背景动画
-        // 首页banner背景
         var canvasFun = function(){
             var canvas = document.getElementById('canvas'),
                 ctx = canvas.getContext('2d'),

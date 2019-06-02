@@ -81,7 +81,7 @@
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
     <a class="animated" href="/service">服务</a>
     <a class="animated delay-01s" href="/about">关于</a>
-    <a class="animated delay-02s" href="">合作</a>
+    <a class="animated delay-02s" href="news">文章</a>
     <a class="animated delay-03s" href="/contact">联系</a>
 </div>
 <div class="wap-list-nav none">
@@ -89,7 +89,7 @@
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case"><i class="iconfont">&#xe64a;</i>案例</a>
     <a id="js_other_icon" class="icon-other" href="javascript:;"><i class="iconfont transition">&#xe794;</i></a>
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit"><i class="iconfont">&#xe617;</i>组件</a>
-    <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news"><i class="iconfont">&#xe681;</i>文章</a>
+    <a class="<?= strpos(Yii::$app->request->getPathInfo(),'user')!==false ? 'active' : ''?>" href="/user"><i class="iconfont">&#xe625;</i>我的</a>
 </div>
 
 <script>

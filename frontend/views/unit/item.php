@@ -84,7 +84,7 @@
     $("#guanzhu").click(function () {
         var text = $("#guanzhu_text").text();
         var number = parseInt($("#guanzhu_number").text());
-        if(text == '已关注'){
+        if(text == '√ 已关注'){
             $("#guanzhu_text").text('关注作者');
             $("#guanzhu_number").text(number-1);
         }else{
@@ -97,7 +97,7 @@
     $("#shoucang").click(function () {
         var text = $("#shoucang_text").text();
         var number = parseInt($("#shoucang_number").text());
-        if(text == '已收藏'){
+        if(text == '√ 已收藏'){
             $("#shoucang_text").text('收藏组件');
             $("#shoucang_number").text(number-1);
         }else{

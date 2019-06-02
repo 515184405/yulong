@@ -106,11 +106,7 @@
 </div>
 <script src="<?=Yii::$app->params['backend_url']?>/asset/layui/layui.js"></script>
 <script>
-    layui.config({
-        base: '<?=Yii::$app->params["backend_url"]?>/asset/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index','form','upload'], function() {
+    layui.use(['form','upload'], function() {
         var $ = layui.$,
             form = layui.form,
             upload = layui.upload;
