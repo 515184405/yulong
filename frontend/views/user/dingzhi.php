@@ -39,7 +39,7 @@
             <?php if(!empty($data['widget'])){ foreach ($data['widget'] as $val) { ?>
             <div class="user-unit-item" <?= $status != 2 ? 'style="opacity:0.7;"' :''; ?>>
                     <?php if($status == 2){ ?>
-                        <a href="/unit/item/<?=$val['project_join']['id'];?>"><img style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255)?>,<?=rand(0,255)?>,.4)" src="<?=Yii::$app->params['backend_url'].$val['project_join']['banner_url']?>" alt="" class="user-unit-img transition"></a>
+                        <a hr ef="/unit/item/<?=$val['project_join']['id'];?>"><img style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255)?>,<?=rand(0,255)?>,.4)" src="<?=Yii::$app->params['backend_url'].$val['project_join']['banner_url']?>" alt="" class="user-unit-img transition"></a>
                         <a href="/unit/item/<?=$val['project_join']['id'];?>" class="user-unit-title transition overflow-text"><?=$val['project_join']['title']?></a>
                         <p class="user-unit-desc transition overflow-text2"><?=$val['project_join']['desc']?></p>
                         <p style="padding:3px 15px;" class="user-unit-info clearfix">
