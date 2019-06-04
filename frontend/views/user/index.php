@@ -48,8 +48,14 @@
                 </div>
             <?php } ?>
         </div>
-
+        <div class="t-c">
+            <?= \yii\widgets\LinkPager::widget([
+                'pagination' => $data['pagination'],
+            ]) ?>
+        </div>
         <!--内容部分-->
+
+
 
     </div>
 </div>

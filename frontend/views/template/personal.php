@@ -90,6 +90,8 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
         }
     })
 
+    var isTodaySign = '<?=$isTodaySign?>';
+
     //签到事件
     $('.js_qiandao').bind('click', function () {
         var that = this;
@@ -104,7 +106,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
             skin: 'layui-login layui-xieyi',
             content: $('#qiandao_box'),
             success: function () {
-                if ('<?=$isTodaySign?>') {
+                if (isTodaySign) {
                     return false;
                 }
                 slide(function () {
@@ -116,6 +118,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
                             $(".js_qiandao_progress li").not('.active').eq(0).addClass('active');
                             layer.msg(res.message, {icon: 1, time: 1000}, function () {
                                 layer.closeAll();
+                                isTodaySign = true;
                                 $(that).addClass('active').html("已连续签到" + day + "天");
                                 $('.slide_qiandao').html('<p>今天已签到，明天再来吧...</p>');
                             })

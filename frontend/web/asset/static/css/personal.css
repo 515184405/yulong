@@ -293,6 +293,38 @@ header {
 .user-unit-list .user-unit-item:hover .user-unit-edit {
   opacity: 1;
 }
+.record-list .record-item {
+  margin-top: 15px;
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #eee;
+}
+.record-list .record-item .record-item-left {
+  display: inline-block;
+  width: 75%;
+}
+.record-list .record-item .record-item-left h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+.record-list .record-item .record-item-left p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #595757;
+}
+.record-list .record-item .record-item-btn {
+  float: right;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+  background-color: #fff;
+  color: #595757;
+  font-weight: bold;
+}
 .shenheing {
   background-color: #e1e1e1;
   display: flex;

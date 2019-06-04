@@ -4,6 +4,9 @@ namespace frontend\controllers;
 use common\models\Cases;
 use common\models\MadeToOrder;
 use common\models\News;
+use common\models\UserCollect;
+use common\models\UserDownRecord;
+use common\models\UserGuanzhu;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
@@ -77,6 +80,24 @@ class UnitController extends CommonController {
         $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
         $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
+
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $collect = UserCollect::find();
+        $guanzhu = UserGuanzhu::find();
+        $collectCount = $collect->where(['widget_id'=>$unit_id])->count();
+        $guanzhuCount = $guanzhu->where(['widget_id'=>$unit_id])->count();
+        if($user_id || $user_id == 0){
+            $collect = $collect->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
+            $guanzhu = $guanzhu->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
+            $widget_item['user'] = [
+                'collect' => $collect,
+                'guanzhu' => $guanzhu,
+            ];
+        };
+        $widget_item['user']['collectCount'] = $collectCount;
+        $widget_item['user']['guanzhuCount'] = $guanzhuCount;
+
+
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
@@ -87,14 +108,44 @@ class UnitController extends CommonController {
     }
 
     public function actionDownCount(){
-        $id = $_POST['id'];
-        if(isset($id)){
-            $model = Widget::findOne($id);
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        $params['u_id'] = $user_id;
+
+        if(isset($params['widget_id'])){
+            //给项目添加下载次数
+            $model = Widget::findOne($params['widget_id']);
             $model->down_count = intval($model->down_count) + 1;
+            //给个人添加下载记录
+            UserDownRecord::insertUpdate($params);
             if($model->save()){
                 return Json::encode(['code'=>'100000','message'=>'操作成功']);
             }
             return Json::encode(['code'=>'100001','message'=>'操作失败']);
+        }
+        return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
+
+    //收藏
+    public function actionCollect(){
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        $params['widget_id'] = intval($_POST['widget_id']);
+        $params['u_id'] = $user_id;
+        if(UserCollect::insertUpdate($params)){
+            return Json::encode(['code'=>'100000','message'=>'操作成功']);
+        }
+        return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
+
+    //关注
+    public function actionGuanzhu(){
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        $params['widget_id'] = intval($_POST['widget_id']);
+        $params['u_id'] = $user_id;
+        if(UserGuanzhu::insertUpdate($params)){
+            return Json::encode(['code'=>'100000','message'=>'操作成功']);
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
     }

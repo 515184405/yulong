@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\MadeToOrder;
+use common\models\UserDownRecord;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -23,6 +24,7 @@ class UserController extends CommonController
      */
     public function init()
     {
+        //签到信息
         $user_id = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $sign = UserSign::find()->where(['u_id'=>$user_id])->asArray()->one();
         Yii::$app->view->params['sign'] = $sign;
@@ -34,9 +36,14 @@ class UserController extends CommonController
         $uid = 0;
         $params = Yii::$app->request->get();
         $status = isset($params['status']) ? $params['status'] : 1;
-        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status'])->where(['status'=>$status,'u_id'=>$uid])->asArray()->all();
+        $limit =20; //每页显示20条
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status'])->where(['status'=>$status,'u_id'=>$uid]);
+        $pagination = new Pagination(['totalCount' => $widget->count(),'pageSize' => $limit]);
+        $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
             'widget'=>$widget,
+            'pagination' => $pagination
         ];
         return $this->render('index',compact('data'));
     }
@@ -153,14 +160,14 @@ class UserController extends CommonController
     {
         $uid = 0;
         $params = Yii::$app->request->get();
-        //取所有分类
-        $collectTypeData = $this->collectType(['u_id'=>$uid,'status'=>1]);
-        //取所有组件
-        $limitPageData = $this->limitPage($params,['u_id'=>$uid,'status'=>1]);
+        $limit =20; //每页显示20条
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $user_down_record = UserDownRecord::find()->where(['u_id'=>$uid]);
+        $pagination = new Pagination(['totalCount' => $user_down_record->count(),'pageSize' => $limit]);
+        $user_down_record = $user_down_record->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
-            'widget'=>$limitPageData['data']['unit'],
-            'typeArr'=>$collectTypeData['typeArr'],
-            'pagination' => $limitPageData['data']['pagination'],
+            'record'=>$user_down_record,
+            'pagination' => $pagination
         ];
         return $this->render('down-history',compact('data'));
     }
