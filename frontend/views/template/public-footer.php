@@ -1,5 +1,5 @@
 <!--公共尾部-->
-<a id="website_btn" href="javascript:;" class="website-btn">
+<a href="javascript:;" class="website-btn js_website_btn">
     建站咨询
 </a>
 <div class="floated-box">
@@ -101,7 +101,7 @@
     });
 
     //建站留言
-    $("#website_btn").click(function(){
+    $(".js_website_btn").click(function(){
         layer.open({
             type: 2,
             title: '建站咨询',
@@ -116,9 +116,10 @@
         layer.open({
             type: 1,
             anim: 2,
+            area:['300px','250px'],
             shade: false,
-            title: false, //不显示标题
-            content: '<img style="width: 250px;height:250px;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            title: '扫一扫二维码与我联系', //不显示标题
+            content: '<img style="width: 200px;height:200px;display:block;margin:0 auto;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         });
     })
     //底部移动端导航其他链接事件

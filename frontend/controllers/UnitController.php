@@ -85,10 +85,10 @@ class UnitController extends CommonController {
         $collect = UserCollect::find();
         $guanzhu = UserGuanzhu::find();
         $collectCount = $collect->where(['widget_id'=>$unit_id])->count();
-        $guanzhuCount = $guanzhu->where(['widget_id'=>$unit_id])->count();
+        $guanzhuCount = $guanzhu->where(['other_id'=>$widget_item['u_id']])->count();
         if($user_id || $user_id == 0){
             $collect = $collect->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
-            $guanzhu = $guanzhu->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
+            $guanzhu = $guanzhu->where(['u_id'=>$user_id])->asArray()->one();
             $widget_item['user'] = [
                 'collect' => $collect,
                 'guanzhu' => $guanzhu,
@@ -108,6 +108,12 @@ class UnitController extends CommonController {
     }
 
     public function actionDownCount(){
+
+        if(isset($_COOKIE['DownCount'])){
+            setcookie("DownCount", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("DownCount", 1, time()+1,'/');
         $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
         $params = \Yii::$app->request->post();
         $params['u_id'] = $user_id;
@@ -128,8 +134,16 @@ class UnitController extends CommonController {
 
     //收藏
     public function actionCollect(){
+        if(isset($_COOKIE['timeout'])){
+            setcookie("timeout", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("timeout", 1, time()+1,'/');
         $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
         $params = \Yii::$app->request->post();
+        if(!isset($params['widget_id'])){
+            return '组件id存在';
+        }
         $params['widget_id'] = intval($_POST['widget_id']);
         $params['u_id'] = $user_id;
         if(UserCollect::insertUpdate($params)){
@@ -140,9 +154,13 @@ class UnitController extends CommonController {
 
     //关注
     public function actionGuanzhu(){
+        if(isset($_COOKIE['Guanzhu'])){
+            setcookie("Guanzhu", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("Guanzhu", 1, time()+1,'/');
         $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
         $params = \Yii::$app->request->post();
-        $params['widget_id'] = intval($_POST['widget_id']);
         $params['u_id'] = $user_id;
         if(UserGuanzhu::insertUpdate($params)){
             return Json::encode(['code'=>'100000','message'=>'操作成功']);
@@ -152,6 +170,7 @@ class UnitController extends CommonController {
     
     //定制服务
     public function actionDingzhi(){
+
         $dingzhi_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(\Yii::$app->request->isPost){
             $params = $_POST;

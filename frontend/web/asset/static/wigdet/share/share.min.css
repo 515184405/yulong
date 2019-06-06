@@ -161,7 +161,7 @@
   border: 1px solid #eee;
   position: absolute;
   z-index: 9;
-  top: -205px;
+  top: 33px;
   left: -84px;
   width: 200px;
   height: 192px;
@@ -209,12 +209,12 @@
   position: absolute;
   left: 50%;
   margin-left: -6px;
-  bottom: -13px;
+  top: -14px;
   width: 0;
   height: 0;
-  border-width: 8px 6px 6px 6px;
+  border-width: 6px 6px 8px 6px;
   border-style: solid;
-  border-color: #fff transparent transparent transparent;
+  border-color: transparent transparent #fff transparent;
 }
 .social-share .icon-wechat:hover .wechat-qrcode {
   display: block;

@@ -27,8 +27,8 @@ class UserGuanzhu extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['u_id', 'widget_id'], 'required'],
-            [['u_id', 'widget_id'], 'integer'],
+            [['u_id','other_id'], 'required'],
+            [['u_id','other_id'], 'integer'],
         ];
     }
 
@@ -40,16 +40,16 @@ class UserGuanzhu extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'u_id' => 'U ID',
-            'widget_id' => 'Widget ID',
+            'other_id'=> 'Other ID'
         ];
     }
 
     /*数据存与改*/
     public static function insertUpdate($params){
         $model = new static();
-        $modelOne = $model::findOne(['widget_id'=>$params['widget_id'],'u_id'=>$params['u_id']]);
+        $modelOne = $model::findOne(['other_id'=>$params['other_id'],'u_id'=>$params['u_id']]);
         if($modelOne){
-            static::deleteAll(['widget_id' => $params['widget_id'],'u_id'=>$params['u_id'] ]);
+            static::deleteAll(['other_id' => $params['other_id'],'u_id'=>$params['u_id'] ]);
             return true;
         }else{
             $model->setAttributes($params);

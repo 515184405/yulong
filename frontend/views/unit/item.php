@@ -26,7 +26,7 @@
             <a class="fy-btn fy-btn-primary" target="_blank" href="<?=$unit['website']?>">官网地址</a>
             <?php } ?>
             <?php if($unit['is_down'] == 0){ ?>
-            <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger js_download" data-src="<?=$unit['download']?>" target="_blank">立即下载</a>
+            <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger <?=Yii::$app->getUser()->getId() ? 'js_download" data-src="'.$unit["download"].'"' : 'login_btn" href="javascript:;"'?> target="_blank">立即下载</a>
             <?php } ?>
         </div>
         <div class="unit-desc layui-elem-quote">
@@ -52,13 +52,14 @@
         <h2 class="unit-user-name overflow-text">疯疯癫癫的小伙</h2>
         <p class="unit-user-dress overflow-text">北京市 - 石景山区</p>
     </div>
+    <?php if(Yii::$app->getUser()->getId()){ ?>
          <?php if(!empty($userUnit) && $userUnit['guanzhu']){ ?>
             <p class="unit-user-btn">
-                <button data-id="<?=$unit['id']?>" id="guanzhu" class="fy-btn fy-btn-primary"><span id="guanzhu_text">√ 已关注</span>（<span id="guanzhu_number"><?=$userUnit['guanzhuCount']?></span>）</button>
+                <button data-id="<?=$unit['u_id']?>" id="guanzhu" class="fy-btn fy-btn-primary"><span id="guanzhu_text">√ 已关注</span>（<span id="guanzhu_number"><?=$userUnit['guanzhuCount']?></span>）</button>
             </p>
         <?php }else{ ?>
             <p class="unit-user-btn">
-                <button data-id="<?=$unit['id']?>" id="guanzhu" class="fy-btn fy-btn-primary"><span id="guanzhu_text">关注作者</span>（<span id="guanzhu_number"><?=$userUnit['guanzhuCount']?></span>）</button>
+                <button data-id="<?=$unit['u_id']?>" id="guanzhu" class="fy-btn fy-btn-primary"><span id="guanzhu_text">关注作者</span>（<span id="guanzhu_number"><?=$userUnit['guanzhuCount']?></span>）</button>
             </p>
         <?php } ?>
         <?php if(!empty($userUnit) && $userUnit['collect']){ ?>
@@ -70,7 +71,14 @@
                 <button data-id="<?=$unit['id']?>" id="shoucang" class="fy-btn fy-btn-success"><span id="shoucang_text">收藏插件</span>（<span id="shoucang_number"><?=$userUnit['collectCount']?></span>）</button>
             </p>
         <?php } ?>
-
+    <?php }else{ ?>
+        <p class="unit-user-btn">
+            <button class="fy-btn fy-btn-primary login_btn"><span id="guanzhu_text">关注作者</span>（<span id="guanzhu_number"><?=$userUnit['guanzhuCount']?></span>）</button>
+        </p>
+        <p class="unit-user-btn">
+            <button class="fy-btn fy-btn-success login_btn"><span id="shoucang_text">收藏插件</span>（<span id="shoucang_number"><?=$userUnit['collectCount']?></span>）</button>
+        </p>
+    <?php } ?>
 </div>
 <?= $this->render('../template/right_aslide',compact('data'));?>
 
@@ -89,22 +97,32 @@
         if($(this).attr('href')){
             return;
         }
+        var csrfName = $("#form_csrf").attr('name');
+        var csrfVal = $("#form_csrf").val();
         var href = $(this).data('src');
         $(this).attr('href',href);
-        $.post('/unit/down-count',{
-            widget_id:$(this).data('id'), //项目id
-            down_title : $('.js_widget_title').html(), //项目标题
-            down_url : href
-        },function(){});
+        var data = {
+            'widget_id' : $(this).data('id'), //项目id
+            'down_title' : $('.js_widget_title').html(), //项目标题
+            'down_url' : href,
+        };
+        data[csrfName] = csrfVal;
+        $.post('/unit/down-count',data,function(){});
         // $(this).click();
     });
 
     //关注
     $("#guanzhu").click(function () {
         var text = $("#guanzhu_text").text();
+        var csrfName = $("#form_csrf").attr('name');
+        var csrfVal = $("#form_csrf").val();
         var number = parseInt($("#guanzhu_number").text());
         var id = $(this).data('id');
-        $.post('/unit/guanzhu',{'widget_id':id},function(res){
+        var data={
+            'other_id':id
+        };
+        data[csrfName] = csrfVal;
+        $.post('/unit/guanzhu',data,function(res){
             if(res.code == 100000){
                 if(text == '√ 已关注'){
                     $("#guanzhu_text").text('关注作者');
@@ -114,7 +132,7 @@
                     $("#guanzhu_number").text(number+1);
                 }
             }else{
-                layer.msg(res.message);
+                layer.msg(res.message,{icon:5,time:1000});
             }
         },'json');
 
@@ -124,8 +142,15 @@
     $("#shoucang").click(function () {
         var text = $("#shoucang_text").text();
         var number = parseInt($("#shoucang_number").text());
+        var csrfName = $("#form_csrf").attr('name');
+        var csrfVal = $("#form_csrf").val();
         var id = $(this).data('id');
-        $.post('/unit/collect',{'widget_id':id},function(res){
+        var data={
+            'widget_id':id,
+            'other_id':'<?=$unit["u_id"]?>'
+        };
+        data[csrfName] = csrfVal;
+        $.post('/unit/collect',data,function(res){
             if(res.code == 100000){
                 if(text == '√ 已收藏'){
                     $("#shoucang_text").text('收藏组件');
@@ -135,7 +160,7 @@
                     $("#shoucang_number").text(number+1);
                 };
             }else{
-                layer.msg(res.message);
+                layer.msg(res.message,{icon:5,time:1000});
             }
         },'json');
     })

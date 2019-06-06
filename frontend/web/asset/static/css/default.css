@@ -123,6 +123,28 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+/*footer始终在页面最底部*/
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  padding-bottom: 170px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+.header {
+  top: -60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 /* custom */
 a {
   color: #595757;
@@ -913,37 +935,17 @@ header.active {
   opacity: 1;
   right: 50px;
 }
-@media screen and (min-width: 769px) {
-  html,
-  body {
-    height: 100%;
-  }
-  .wrapper {
-    min-height: 100%;
-    padding-bottom: 170px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    position: relative;
-  }
-  .header {
-    top: -60px;
-  }
-  .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-  }
-}
 @media screen and (max-width: 1366px) {
   .fy-container {
     width: 1100px;
   }
 }
 @media screen and (max-width: 768px) {
-  body {
-    padding: 0;
+  .wrapper {
+    padding-bottom: 90px;
+  }
+  .footer {
+    bottom: 50px;
   }
   .fy-container {
     width: 100%;
@@ -955,7 +957,7 @@ header.active {
     display: none;
   }
   .footer {
-    padding: 10px 0 70px 0;
+    padding: 10px 0 20px 0;
   }
   .footer-msg {
     padding: 0 10px;

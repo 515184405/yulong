@@ -26,9 +26,10 @@
 
         <div class="user-unit-list">
             <?php if(!empty($data['widget'])){ foreach ($data['widget'] as $val) { ?>
+                <?php $val = $val['collect_widget']; ?>
                 <a href="/unit/item/<?=$val['id']?>" class="user-unit-item ">
                     <img style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255)?>,<?=rand(0,255)?>,.4)" src="<?=Yii::$app->params['backend_url'].$val['banner_url']?>" alt="" class="user-unit-img transition">
-                    <h2 class="user-unit-title transition overflow-text">选座系统（移动 - PC）</h2>
+                    <h2 class="user-unit-title transition overflow-text"><?=$val['title']?></h2>
                     <p class="user-unit-desc transition overflow-text2"><?=$val['desc']?></p>
                     <p class="user-unit-info clearfix">
                         <span class="left"><i class="iconfont">&#xe618;</i><?=$val['look']?></span>
@@ -38,7 +39,7 @@
                 </a>
             <?php }}else{ ?>
                 <div class="t-c" style="line-height: 300px;">
-                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/user/info">上传</a>一个吧...
+                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/unit">收藏</a>一个吧...
                 </div>
             <?php } ?>
         </div>

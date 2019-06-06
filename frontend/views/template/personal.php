@@ -3,7 +3,6 @@ $sign = $this->params['sign'];
 //今天是否签到
 $time = getdate(time());
 $lastTime = getdate(strtotime($sign['last_change_time']));
-
 //今天是否签到
 function isDiffDays($last_date, $this_date)
 {
@@ -77,7 +76,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
         <li class="fy-nav-item"><a href="/user/dingzhi">我的定制</a></li>
         <li class="fy-nav-item"><a href="/user/collect">我的收藏</a></li>
         <li class="fy-nav-item"><a href="/user/down-history">下载历史</a></li>
-        <li class="fy-nav-item"><a href="/user/message">信息通知</a></li>
+        <li class="fy-nav-item"><a href="/user/guan-zhu">我的关注</a></li>
     </ul>
 </div>
 <script src="/asset/static/wigdet/script.js"></script>
@@ -110,7 +109,11 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
                     return false;
                 }
                 slide(function () {
-                    $.post('/user/sign', {id: 1, name: '2'}, function (res) {
+                    var csrfName = $("#form_csrf").attr('name');
+                    var csrfVal = $("#form_csrf").val();
+                    var data = {};
+                    data[csrfName] = csrfVal;
+                    $.post('/user/sign', data, function (res) {
                         if (res.code == 100000) {
                             var day = parseInt($(".js_qiandao_day").text());
                             day += 1;

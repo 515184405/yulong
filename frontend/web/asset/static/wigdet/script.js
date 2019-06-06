@@ -14,14 +14,14 @@ var locked;
 		return false;
 	});
 }*/
-window.onresize = function () {
+/*window.onresize = function () {
 	if(locked==true){
 		var boxWidth = $('#slide_box').width();
 		$('#slide_xbox').width(boxWidth);
 	}else{
 		slide();
 	}
-}
+}*/
 	  //滑动解锁移动
 function slide(callback) {
 	var slideBox = $('#slide_box')[0];

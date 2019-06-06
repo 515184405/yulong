@@ -3,7 +3,9 @@ namespace frontend\controllers;
 
 
 use common\models\MadeToOrder;
+use common\models\UserCollect;
 use common\models\UserDownRecord;
+use common\models\UserGuanzhu;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -54,14 +56,14 @@ class UserController extends CommonController
         $uid = 0;
         $type_id = isset($params['type']) ? $params['type'] : '';
         $type_id = $type_id != 0 ? $type_id : '';
-        $widgetData = Widget::find()->select(['id','title','desc','banner_url','type','look','collect','down_count','download','status'])->where($condition)->asArray()->all();
+        $widgetData = UserCollect::find()->joinWith('collect_widget')->where($condition)->asArray()->all();
         $limit = 20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
         $unit = [];
         $is_true = false; //判断当前类型是否存在项目
         foreach ($widgetData as $item) {
             $is_true = false;
-            foreach (explode(',',$item['type']) as $type) {
+            foreach (explode(',',$item['collect_widget']['type']) as $type) {
                 if($type == $type_id && $is_true !== true){
                     $is_true = true; //当前类型中存在项目
                 }
@@ -88,10 +90,10 @@ class UserController extends CommonController
         //取分类
         $uid = 0;
         $typeArr = [];
-        $widget = Widget::find()->select(['type'])->where($condition)->asArray()->all();
+        $widget = UserCollect::find()->joinWith('collect_widget')->where($condition)->asArray()->all();
         $typeArr[0] = array('title'=>'全部分类','number'=>count($widget));
         foreach ($widget as $item) {
-            foreach (explode(',',$item['type']) as $type){
+            foreach (explode(',',$item['collect_widget']['type']) as $type){
                 $widgetType = WidgetType::findOne(['type_id'=>$type]);
                 if(isset($typeArr[$widgetType->type_id])){
                     $typeArr[$widgetType->type_id]['number'] += 1;
@@ -109,9 +111,9 @@ class UserController extends CommonController
         $uid = 0;
         $params = Yii::$app->request->get();
         //取所有分类
-        $collectTypeData = $this->collectType(['u_id'=>$uid,'status'=>1]);
+        $collectTypeData = $this->collectType(['user_collect.u_id'=>$uid,'widget.status'=>1]);
         //取所有组件
-        $limitPageData = $this->limitPage($params,['u_id'=>$uid,'status'=>1]);
+        $limitPageData = $this->limitPage($params,['user_collect.u_id'=>$uid,'widget.status'=>1]);
         $data = [
             'widget'=>$limitPageData['data']['unit'],
             'typeArr'=>$collectTypeData['typeArr'],
@@ -190,17 +192,15 @@ class UserController extends CommonController
         return $this->render('dingzhi',compact('data'));
     }
 
-    //信息通知
-    public function actionMessage()
+    //我的关注
+    public function actionGuanZhu()
     {
         $uid = 0;
-        $params = Yii::$app->request->get();
-        $status = isset($params['status']) ? $params['status'] : 1;
-        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status'])->where(['status'=>$status,'u_id'=>$uid])->asArray()->all();
+        $guanZhu = UserGuanzhu::find()->where(['u_id'=>$uid])->asArray()->all();
         $data = [
-            'widget'=>$widget,
+            'guanZhu'=>$guanZhu,
         ];
-        return $this->render('message',compact('data'));
+        return $this->render('guan-zhu',compact('data'));
     }
 
     //用户签到

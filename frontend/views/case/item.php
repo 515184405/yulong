@@ -3,6 +3,7 @@
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">
 <link rel="stylesheet" href="/asset/static/css/item.css">
+<link rel="stylesheet" href="/asset/static/css/item-case-superslide.css">
 
 <div class="news-items case-items">
     <div class="news-hidden-scroll js_news_items">
@@ -42,6 +43,7 @@
     </div>
 </div>
 <?= $this->render('../template/right_aslide',compact('data'));?>
+<script src="/asset/static/wigdet/superslide/jquery.SuperSlide.2.1.3.js"></script>
 <script src="/asset/static/wigdet/share/jquery.share.min.js"></script>
 <script>
     //分享功能
@@ -57,9 +59,24 @@
 <?= $this->render('../template/footer');?>
 <div class="js_list_box transition case-swipper" data-show="0">
     <i class="iconfont swipper-close js_swipper_close">&#xe61b;</i>
-    <?php foreach ($contentArr as $val){ ?>
-        <img class="case-show-img" data-src="<?=Yii::$app->params['backend_url'].$val?>" alt="">
+    <?php foreach ($contentArr as $key=>$val){ ?>
+        <img class="case-show-img" data-key="<?=$key?>" data-src="<?=Yii::$app->params['backend_url'].$val?>" alt="">
     <?php } ?>
 </div>
-<p class="swipper-number none"><span class="sn-current">1</span> / <span class="sn-count">3</span></p>
+<?php if(count($contentArr) > 1){ ?>
+<div class="picScroll-left transition" id="picScroll">
+    <div class="bd">
+        <a class="picScroll-prev" href="javascript:;"><i class="iconfont">&#xe604;</i></a>
+        <a class="picScroll-next" href="javascript:;"><i class="iconfont">&#xe607;</i></a>
+        <ul class="picList">
+            <?php foreach ($contentArr as $key=>$val){ ?>
+                <li>
+                    <div data-key="<?=$key?>" class="pic <?=$key == 0 ? 'active' : '' ?>" style="background-image:url(<?=Yii::$app->params['backend_url'].$val?>)" /></div>
+                </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+<p class="swipper-number none"><span class="sn-current">1</span> / <span class="sn-count"><?=count($contentArr)?></span></p>
+<?php } ?>
 <script src="/asset/static/js/case-item.js"></script>

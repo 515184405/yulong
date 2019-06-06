@@ -31,6 +31,7 @@ AppAsset::register($this);
     <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>
 <body>
+<input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
 <div class="wrapper">
     <p style="transform: scale(0.7);" class="login-register-box none"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p>
     <!-- 头部 -->

@@ -12,6 +12,7 @@
     <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>
 <body>
+    <input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
     <div class="list-aslide transition">
         <img src="/asset/static/image/logo.png" alt="" class="list-logo">
         <div class="list-aslide-nav">
@@ -20,8 +21,7 @@
             <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news">文章动态</a>
             <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit">组件列表</a>
             <!--data-url登录成功后跳转地址 为空时不跳转到任何地方-->
-            <a data-url="/user" class="login_btn" href="javascript:;">个人中心-未</a>
-            <a href="/user">个人中心-已</a>
+            <a data-url="/user" class="<?=Yii::$app->getUser()->getId() ? 'js_download" href="/user"' : 'login_btn" href="javascript:;"'?>">个人中心</a>
         </div>
         <img src="/asset/static/image/wx-callme.jpg" alt="联系我们" class="erweima">
         <p>扫一扫微信二维码</p>
