@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Html;
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +8,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><?= \yii\helpers\Html::encode($this->title) ?></title>
+    <title><?= Html::encode($this->title) ?></title>
+    <meta name="keywords" content="<?=Html::encode($this->keywords)?>"/>
+    <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
+
     <link rel="stylesheet" href="/asset/static/css/default.css">
     <link rel="stylesheet" href="/asset/static/css/list-layout.css">
     <script src="/asset/static/wigdet/jquery.min.js"></script>

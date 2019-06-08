@@ -123,7 +123,7 @@
                     layer.closeAll();
                     if(data.code == 100000){
                         layer.msg(data.message, {icon: 1,time:1500}, function(){
-                           window.location.href='/console';
+                           window.location.href='/site';
                         })
                     }else{
                         layer.msg(data.message,{icon: 5,time:1500}, function(){

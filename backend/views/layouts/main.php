@@ -88,57 +88,57 @@
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
                     <li data-name="home" class="layui-nav-item">
-                        <a href="/console" class="" lay-tips="控制台" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                        <a href="/" class="" lay-tips="控制台" lay-direction="2">
+                            <i class="layui-icon iconfont font-1">&#xe630;</i>
                             <cite>控制台</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/banner"  class="" lay-tips="轮播管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-2">&#xe675;</i>
                             <cite>轮播管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/cases"  class="" lay-tips="案例管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-3">&#xe64a;</i>
                             <cite>案例管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/widget"  class="" lay-tips="组件管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-4">&#xe617;</i>
                             <cite>组件管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/news" lay-tips="文章管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-5">&#xe681;</i>
                             <cite>文章管理</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/site/zixun" lay-tips="网站咨询" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-6">&#xe700;</i>
                             <cite>网站咨询</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/dingzhi" lay-tips="组件定制" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-7">&#xe61a;</i>
                             <cite>组件定制</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
                         <a href="/team" lay-tips="人员管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-8">&#xe76a;</i>
                             <cite>人员管理</cite>
                         </a>
                     </li>
                     <?php if($userInfo['type'] == 1){ ?>
                     <li data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
+                            <i class="layui-icon iconfont font-9">&#xe625;</i>
                             <cite>用户管理</cite>
                         </a>
                         <dl class="layui-nav-child">

@@ -37,12 +37,14 @@
                 <label class="layui-form-label">作品名称</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['widget']['title']) ? $data['widget']['title'] : ''?>" name="title" lay-verify="required" lay-text="作品名称不能为空" autocomplete="off" placeholder="请输入作品名称" class="layui-input">
+                    <p class="red">查询主要筛选项，会根据当前字段内容进行查询</p>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">作品简介</label>
+                <label class="layui-form-label">作品关键字</label>
                 <div class="layui-input-block">
-                    <textarea lay-verify="required" lay-text="作品简介" autocomplete="off" name="desc" class="layui-textarea"   placeholder="请输入作品简介" id="" cols="30" rows="10"><?=isset($data['widget']['desc']) ? $data['widget']['desc'] : ''?></textarea>
+                    <textarea lay-verify="required" lay-text="作品关键字不能为空" autocomplete="off" name="desc" class="layui-textarea"   placeholder="请输入作品关键字以逗号隔开" id="" cols="30" rows="10"><?=isset($data['widget']['desc']) ? $data['widget']['desc'] : ''?></textarea>
+                    <p class="red">作品关键字以逗号隔开，例如：弹框组件，信息框组件，提示组件，主要作用是提示提醒用户为主</p>
                 </div>
             </div>
             <div id="wx_link" class="layui-form-item ">
@@ -112,57 +114,23 @@
 
         var $ = layui.$,
             upload = layui.upload,
-            form = layui.form;
+            form = layui.form,
+            csrfName = $("#form_csrf").attr('name'),
+            csrfVal = $("#form_csrf").val();
 
-        // 文件上传
-        //普通图片上传
-            var uploadInst = upload.render({
-                elem: '#test-upload-normal'
-                , url: '/site/upload-image'
-                ,data:{
-                    fileName : 'banner_url',
-                    caseDir : 'widget/banner_url/'
-                }
-                , before: function (obj) {
-                    layer.msg('上传中...', {
-                        icon: 16,
-                        time: 0,
-                        shade: [0.1, '#000']
-                    });
-                    //预读本地文件示例，不支持ie8
-                    obj.preview(function (index, file, result) {
-                        $('#test-upload-normal-img').attr('src', result); //图片链接（base64）
-                    });
-                }
-                , done: function (res) {
-                    layer.closeAll();
-                    //上传成功
-                    if(res.code == 100000){
-                        $('.js_'+res.data.fileName).val(res.data.fileSrc);
-                    }
-                    //如果上传失败
-                    if (res.code == 100001) {
-                        return layer.msg('上传失败');
-                    }
-                }
-                , error: function () {
-                    //演示失败状态，并实现重传
-                    var demoText = $('#test-upload-demoText');
-                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-                    demoText.find('.demo-reload').on('click', function () {
-                        uploadInst.upload();
-                    });
-                }
-            })
+
 
         //压缩包上传
         //选完文件后不自动上传
+        var uploadInstData = {};
+        uploadInstData[csrfName] = csrfVal;
         upload.render({
             elem: '#upload-zip'
             ,url: '/user/upload-file'
             ,accept: 'file' //普通文件
             ,exts: 'zip|rar' //只允许上传压缩文件
             ,auto: false
+            ,data : uploadInstData
             ,bindAction: '#upload-file-submit'
             ,done: function(res){
 
@@ -190,6 +158,7 @@
             layer.load(1, {shade: .1});
             var _this = this;_this.disabled=true;//防止多次提交
             var params = data.field;
+            params[csrfName] = csrfVal;
             $.ajax({
                 type: "post",
                 url: "",

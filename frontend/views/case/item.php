@@ -1,4 +1,8 @@
-<?php $this->title='设计案例 - '.$data['data']['title']; ?>
+<?php
+$this->title='设计案例 - '.$data['data']['title'];
+$content = strip_tags($data['data']['desc']);
+$this->keywords=mb_substr($content,0,100);
+?>
 
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">

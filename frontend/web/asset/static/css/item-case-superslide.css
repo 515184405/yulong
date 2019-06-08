@@ -1,0 +1,101 @@
+/* 本例子css */
+.picScroll-left {
+  overflow: hidden;
+  border: 1px solid #999;
+  position: fixed;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: -200px;
+  background-color: #fff;
+  padding: 0 30px;
+  z-index: 999;
+}
+.picScroll-left.active {
+  bottom: 50px;
+}
+.picScroll-left .bd {
+  padding: 10px;
+}
+.picScroll-left .bd ul {
+  overflow: hidden;
+  zoom: 1;
+}
+.picScroll-left .bd ul li {
+  margin: 0 8px;
+  float: left;
+  _display: inline;
+  overflow: hidden;
+  text-align: center;
+}
+.picScroll-left .bd ul li .pic {
+  text-align: center;
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ddd;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center top;
+  cursor: pointer;
+}
+.picScroll-left .bd ul li .pic.active {
+  border: 1px solid #f00;
+}
+.picScroll-prev,
+.picScroll-next {
+  position: absolute;
+  height: 100%;
+  line-height: 142px;
+  color: #595757;
+  top: 0;
+  background-color: #fff;
+}
+.picScroll-prev i,
+.picScroll-next i {
+  font-size: 30px;
+}
+.prevStop,
+.nextStop {
+  opacity: 0.5;
+}
+.picScroll-prev {
+  left: 0;
+}
+.picScroll-next {
+  right: 0;
+}
+@media screen and (max-width: 768px) {
+  .swipper-number {
+    bottom: auto;
+    top: 10px;
+    right: auto;
+    left: 10px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+  }
+  .picScroll-left.active {
+    bottom: 0;
+  }
+  .case-swipper {
+    padding: 10px;
+  }
+  .picScroll-left {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .picScroll-left .bd ul li {
+    width: calc(33.33% - 18px);
+  }
+  .picScroll-left .bd ul li .pic {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+/*# sourceMappingURL=item-case-superslide.css.map */

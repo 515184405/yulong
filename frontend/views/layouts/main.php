@@ -23,7 +23,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <meta name="keywords" content="网站建设,专业网站建设团队,网站设计,网站制作,做网站"/>
+    <meta name="keywords" content="<?=html::encode($this->keywords)?>"/>
     <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
     <link rel="stylesheet" href="/asset/static/css/default.css">

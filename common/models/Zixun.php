@@ -53,13 +53,25 @@ class Zixun extends \yii\db\ActiveRecord
             'status' => 'status'
         ];
     }
+
+    public static function zixunStatus(){
+        $model = static::find();
+        /*待联系数据*/
+        $modelStatus0 = $model->where(['status'=>0])->asArray()->count();
+        /*有意向数据*/
+        $modelStatus2 = $model->where(['status'=>2])->asArray()->count();
+        return compact('modelStatus0','modelStatus2');
+
+    }
+
+
+
     /*查数据*/
     public static function search($params){
         $query = static::find();
-        //按title status查找
-        if(isset($params['title'])){
-            $query->andFilterWhere(['like','tel',$params['tel']]);
-        }
+        $status = isset($params['status']) ? $params['status'] : '';
+        //按status查找
+        $query->andFilterWhere(['=','status',$status]);
         $page = isset($params['page']) ? $params['page'] : '';
         $limit = isset($params['limit']) ? $params['limit'] : '';
         $count = 0;

@@ -1,6 +1,18 @@
 
 <div class="layui-card">
     <div class="layui-card-header header-title">定制组件</div>
+    <div class="layui-card-body layui-form">
+
+        <div class="layui-inline">
+            <select id="select-status-search">
+                <option  value="">请选择状态</option>
+                <option  value="0">未处理</option>
+                <option  value="1">处理中</option>
+                <option  value="2">已完成</option>
+            </select>
+        </div>
+        <button type="button" id="search_btn" class="layui-btn layui-btn-normal">搜索</button>
+    </div>
     <div class="layui-card-body">
         <table class="layui-hide" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
 
@@ -29,6 +41,7 @@
             elem: '#test-table-toolbar'
             ,toolbar: '#test-table-toolbar-toolbarDemo'
             ,url: '/dingzhi/index'
+            ,id:'reloaded'
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'username',title: '定制人姓名'}
@@ -99,5 +112,24 @@
                 });
             }
         });
+
+        //搜索
+        $('#search_btn').bind('click',function(){
+            var status = $('#select-status-search').val();
+            //执行重载
+            table.reload('reloaded', {
+                page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+                , where: {
+                    status:status,
+                }
+            });
+        });
+        if('<?=isset($_GET["status"])?>'){
+            $('#select-status-search').val('<?=isset($_GET["status"]) ? $_GET["status"] : ''?>');
+            form.render();
+            $('#search_btn').trigger('click');
+        }
     });
 </script>

@@ -221,7 +221,13 @@
                         sort : sort
                     }
                 });
-        })
+        });
+
+        if('<?=isset($_GET["status"])?>'){
+            $('#select-status-search').val('<?=isset($_GET["status"]) ? $_GET["status"] : ''?>');
+            form.render();
+            $('#search_btn').trigger('click');
+        }
 
         function getLocalTime(nS) {
             return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');

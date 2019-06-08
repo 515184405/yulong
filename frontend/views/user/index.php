@@ -21,11 +21,11 @@
                 <a href="/user/info?id=<?=$val['id']?>" class="user-unit-edit transition">编 辑</a>
                 <a <?=$val['status'] == 1 ? 'href="/unit/item/'.$val['id'].'"' : '' ?> >
                     <?php if($status == 0 ){ ?>
-                        <div class="user-unit-img t-c shenheing">
-                            <b class="theme" style="font-size: 36px">审核中</b>
+                        <div class="user-unit-img t-c shenheing" style="background-image:url(<?=Yii::$app->params['backend_url'].$val['banner_url']?>);">
+                            <b style="font-size: 36px">审核中</b>
                         </div>
                     <?php }else if($status == 2){ ?>
-                        <div style="color:#f00;" class="user-unit-img t-c shenheing">
+                        <div class="user-unit-img t-c shenheing" style="background-image:url(<?=Yii::$app->params['backend_url'].$val['banner_url']?>);">
                             <b style="font-size: 36px ;">未通过</b>
                             <p><?=$val['fail_msg']?></p>
                         </div>
@@ -44,7 +44,7 @@
             </div>
             <?php }}else{ ?>
                 <div class="t-c" style="line-height: 300px;">
-                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/user/info">上传</a>一个吧...
+                    没有找到相关数据...
                 </div>
             <?php } ?>
         </div>

@@ -63,9 +63,18 @@ class MadeToOrder extends \yii\db\ActiveRecord
     public function getProject_join(){
         return $this->hasOne(Widget::className(),['id' => 'widget_id'])->select(['id','title','desc','banner_url','download','status']);
     }
+
+    /*待定制数据*/
+    public static function dingZhiStatus(){
+        return static::find()->where(['status'=>0])->asArray()->count();
+    }
+
     //查询与搜索
     public static function search($params){
         $query = static::find();
+        $status = isset($params['status']) ? $params['status'] : '';
+        //按title status查找
+        $query->andFilterWhere(['=','status',$status]);
         $limit = isset($params['limit']) ? $params['limit'] : '';
         $page = isset($params['page']) ? $params['page'] :'';
         $count = 0;

@@ -1,3 +1,7 @@
+<?php
+//存用户信息
+\common\models\Visit::insertUpdate();
+?>
 <!--公共尾部-->
 <a href="javascript:;" class="website-btn js_website_btn">
     建站咨询
