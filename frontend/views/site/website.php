@@ -21,6 +21,7 @@
         font-size: 14px;
     }
 </style>
+<input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
 <div class="form-container">
     <form class="layui-form dingzhi fy-container">
         <div class="layui-form-item">
@@ -75,6 +76,9 @@
             var _this = this;
             _this.disabled = true;//防止多次提交
             var params = data.field;
+            var csrfName = $("#form_csrf").attr('name');
+            var csrfVal = $("#form_csrf").val();
+            params[csrfName] = csrfVal;
             $.ajax({
                 type: "post",
                 url: "",

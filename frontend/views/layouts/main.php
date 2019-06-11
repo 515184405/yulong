@@ -101,8 +101,8 @@ AppAsset::register($this);
                 <a href="/contact">联系我们</a>
             </p>
             <p class="footer-msg">
-                <span>Copyright 2008-2019 聚友网络科技有限公司 ALL Rights Reserved. ********************</span>
-                <span class="margin-left:30px;">工信部备案号：辽ICP备******号</span>
+                <span>Copyright 2019 聚友之家 ALL Rights Reserved.</span>
+                <span class="margin-left:30px;">工信部备案号：京ICP备19025093号-1</span>
             </p>
         </div>
     </footer>

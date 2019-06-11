@@ -25,7 +25,8 @@
 <!--登陆模块-->
 <div class="login t-c none" id="user_login">
     <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
-<!--    <p class="login-desc">用户登录</p>-->
+    <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
+    <!--    <p class="login-desc">用户登录</p>-->
     <div class="login-type">
         <a href="#">
             <i class="iconfont transition">&#xe608;</i>
@@ -46,7 +47,8 @@
 <!--注册模块-->
 <div class="login t-c none" id="user_register">
     <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
-<!--    <p class="login-desc">用户注册</p>-->
+    <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
+    <!--    <p class="login-desc">用户注册</p>-->
     <div class="login-type">
         <a href="#">
             <i class="iconfont transition">&#xe608;</i>

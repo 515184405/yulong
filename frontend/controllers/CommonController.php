@@ -80,6 +80,20 @@ class CommonController extends \yii\web\Controller{
         \Yii::$app->view->params['recommend'] = $recommend;
     }
 
+    public function sendsMail($title,$htmlBody){
+        //邮件发送
+        $mail = Yii::$app->mailer->compose();
+        $mail->setTo('515184405@qq.com');
+        $mail->setSubject($title);
+        $mail->setHtmlBody($htmlBody);
+        if($mail->send()){
+            return true;
+        }else{
+            return false;
+        };
+        //邮件发送
+    }
+
     //图片上传
     public function uploadImage(){
         $model = new UploadForm();

@@ -45,11 +45,11 @@ class SiteController extends CommonController
         //案例类型数据
         $data['case_type'] = CaseType::find()->limit(8)->asArray()->all();
         //组件列表数据
-        $data['widget'] = Widget::find()->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
+        $data['widget'] = Widget::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
         //组件类型数据
         $data['widget_type'] = WidgetType::find()->limit(8)->asArray()->all();
         //新闻列表数据
-        $data['news'] = News::find()->orderBy(['id'=>SORT_DESC])->limit(5)->asArray()->all();
+        $data['news'] = News::find()->where(['issue'=>2])->orderBy(['id'=>SORT_DESC])->limit(5)->asArray()->all();
         return $this->render('index',compact('data'));
     }
 
@@ -125,7 +125,13 @@ class SiteController extends CommonController
         if(Yii::$app->request->isPost){
             $params = Yii::$app->request->post();
             if(Zixun::insertUpdate($params)){
-                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+                $this->sendsMail('建站咨询','<div style="font-family: \'Microsoft YaHei\';">
+                    咨询人：<b>'.$params["name"].'</b></br>
+                    咨询人电话：<b><a href="tel:'.$params["tel"].'">'.$params["tel"].'</a></b></br>
+                    咨询人邮件：<b>'.$params["email"].'</b></br>
+                    咨询内容：<b>'.$params["content"].'</b></br>
+                </div>');
+                return Json::encode(array('code'=>'100000','message'=>'咨询以发送，我们会尽快与您联系！'));
             }else{
                 return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
             };

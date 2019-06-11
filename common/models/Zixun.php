@@ -31,8 +31,9 @@ class Zixun extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'tel', 'email', 'content', 'create_time'], 'required'],
-            [['tel', 'create_time','status'], 'integer'],
+            [[ 'create_time','status'], 'integer'],
             [['name'], 'string', 'max' => 10],
+            [['tel'], 'string', 'max' => 15],
             [['email'], 'string', 'max' => 40],
             [['content'], 'string', 'max' => 255],
         ];

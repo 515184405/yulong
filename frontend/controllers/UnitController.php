@@ -180,7 +180,13 @@ class UnitController extends CommonController {
                 if($dingzhi_id){
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
                 }
-                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+                $this->sendsMail('组件定制服务通知','<div style="font-family: \'Microsoft YaHei\';">
+                    联系人姓名：<b>'.$params["username"].'</b></br>
+                    联系人电话：<b>'.$params["tel"].'</b></br>
+                    定制标题：<b>'.$params["title"].'</b></br>
+                    定制内容：<b>'.$params["desc"].'</b></br>
+                </div>');
+                return Json::encode(array('code'=>'100000','message'=>'定制成功，我们会尽快与您联系！'));
             }
             return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
         }
