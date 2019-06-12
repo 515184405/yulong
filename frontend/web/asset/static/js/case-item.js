@@ -18,10 +18,12 @@
             }
             $('.js_list_box').addClass('add-animated');
             $('.swipper-number').show();
+            $('#picScroll').addClass('active')
             $('.js_list_box').scrollTop(21);
         } else {
             $('.js_list_box').removeClass('add-animated');
             $('.swipper-number').hide();
+            $('#picScroll').removeClass('active')
         };
     })
 
@@ -32,11 +34,15 @@
         if(scrollTop < 20){
             $('.js_list_box').removeClass('add-animated');
             $('.swipper-number').hide();
+            $('#picScroll').removeClass('active')
             $('.list-container').scrollTop(offsetTop-1);
         }
         for (var i = 0, len = arrTop.length; i < len; i++) {
             if ((arrTop[i] <= scrollTop && arrTop[i + 1] > scrollTop) || (scrollTop) >= arrTop[len - 1]) {
                 $('.sn-current').html(i + 1);
+                $('#picScroll').find('.pic').removeClass('active');
+                $('#picScroll').find('.pic').eq(i).addClass('active');
+                currentImageView();
             }
         }
     })
@@ -46,6 +52,33 @@
         var offsetTop = $('.js_case_list')[0].offsetTop;
         $('.js_list_box').removeClass('add-animated');
         $('.swipper-number').hide();
+        $('#picScroll').removeClass('active')
         $('.list-container').scrollTop(offsetTop-1);
     })
 
+    //轮播
+    jQuery(".picScroll-left").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"left",autoPlay:false,pnLoop:false,vis:3,prevCell:'.picScroll-prev',nextCell:'.picScroll-next'});
+
+    imageOffsetTop();
+    //轮播图点击置顶
+    function imageOffsetTop(){
+        $('.picScroll-left .pic').click(function(){
+            var key = $(this).data('key');
+            var scrollImgElem = $('.js_list_box').find('img[data-key="'+key+'"]');
+            var scrollImgElemScrollTop = scrollImgElem[0].offsetTop;
+            $('.js_list_box').scrollTop(scrollImgElemScrollTop);
+            currentImageView();
+        })
+    }
+
+    //距离当前图片是否在可视区域中
+    function currentImageView(){
+        var currentImage = $("#picScroll").find('.pic.active');
+        var oneImageWidth = currentImage[0].clientWidth;
+        if(currentImage[0].offsetLeft > oneImageWidth && currentImage.parent().next().length > 0){
+            $('.picScroll-next').trigger('click');
+        }
+        if(currentImage[0].offsetLeft < oneImageWidth && currentImage.parent().next().length > 0){
+            $('.picScroll-prev').trigger('click');
+        }
+    }

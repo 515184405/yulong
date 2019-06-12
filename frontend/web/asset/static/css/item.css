@@ -4,11 +4,9 @@
 .news-items {
   margin-right: 275px;
   background-color: #fff;
-  overflow: hidden;
 }
 .news-items .news-hidden-scroll {
   padding: 0 20px;
-  overflow-y: auto;
 }
 .news-items .content-title {
   padding: 15px;
@@ -16,7 +14,7 @@
   color: #3D3D3D;
   font-weight: bold;
   border-bottom: 2px solid #ddd;
-  margin-top: 30px;
+  padding-top: 30px;
   margin-bottom: 5px;
 }
 .news-items .content-info {
@@ -34,7 +32,6 @@
 }
 .news-items .btn-box {
   margin-top: 100px;
-  margin-bottom: 100px;
   border-top: 1px solid #ddd;
   padding: 20px;
 }
@@ -169,15 +166,15 @@
 }
 .swipper-number {
   position: fixed;
-  right: 30px;
+  right: 80px;
   bottom: 30px;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 18px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   text-align: center;
-  line-height: 100px;
-  font-size: 24px;
   color: #fff;
   z-index: 999;
 }
@@ -256,16 +253,65 @@
   margin-top: 50px;
   padding-bottom: 100px;
 }
+.unit-user {
+  padding: 15px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.unit-user .unit-user-info {
+  margin-bottom: 21px;
+}
+.unit-user .unit-user-avatar {
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border: 3px solid #e67c23;
+  float: left;
+}
+.unit-user .unit-user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  margin-left: 75px;
+  margin-top: 5px;
+}
+.unit-user .unit-user-dress {
+  font-size: 14px;
+  margin-left: 75px;
+  margin-top: 5px;
+  color: #555;
+}
+.unit-user .unit-user-btn {
+  margin-top: 10px;
+  font-size: 15px;
+  text-align: center;
+}
+.unit-user .unit-user-btn .fy-btn {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 @media screen and (max-width: 768px) {
   .news-items {
     margin-right: 0;
   }
   .news-recommend {
-    width: auto;
+    width: 100%;
     position: static;
+    margin-top: 15px;
   }
   .unit-items .banner-box {
     padding: 15px;
+  }
+  .unit-items .unit-page-box {
+    padding-bottom: 20px;
+  }
+  .news-items .btn-box {
+    margin-bottom: 0;
   }
   .unit-items .unit-btn-box {
     height: auto;

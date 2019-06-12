@@ -4,62 +4,24 @@
 
 $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专业网站建设';
 ?>
-<link rel="stylesheet" href="/asset/static/wigdet/swiper/swiper.min.css">
 <link rel="stylesheet" href="/asset/static/css/index.css">
 <!--首页背景-->
 <canvas id="canvas" class="canvas-cls"></canvas>
 <!--首页背景-->
 <!--轮播图-->
-<!-- Swiper -->
-<div id="IE_false" class="swiper-container swiper-container-initialized swiper-container-horizontal none">
-    <div class="swiper-wrapper">
-        <?php foreach ($data['banner'] as $key=>$v1){ ?>
-        <a target="_blank" href="<?=$v1['url']?>" class="swiper-slide <?=$key==0 ? 'swiper-slide-active' : ($key==1 ? 'swiper-slide-next' : '');  ?> ">
-            <div class="title">
-                <!--<h3>Adidas NMD</h3>-->
-            </div>
-            <div class="img-box"><img src="<?=Yii::$app->params['backend_url'].$v1['banner_url'];?>"/></div>
-        </a>
-        <?php } ?>
-    </div>
-    <div class="button-prev button disabled">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 160 90">
-            <g id="arrow-svg-home">
-                <g id="circ" class="cls-1">
-                    <circle cx="42" cy="42" r="40" class="cls-4"></circle>
-                </g>
-                <g id="arrow">
-                    <path id="arrow-trg" d="M.983,6.929,4.447,3.464.983,0,0,.983,2.482,3.464,0,5.946Z"></path>
-                </g>
-                <path id="line" d="M120,0H0" class="cls-3"></path>
-            </g>
-        </svg>
-    </div>
-    <div class="button-next button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 160 90">
-            <g id="arrow-svg-home">
-                <g id="circ" class="cls-1">
-                    <circle cx="42" cy="42" r="40" class="cls-4"></circle>
-                </g>
-                <g id="arrow">
-                    <path id="arrow-trg" d="M.983,6.929,4.447,3.464.983,0,0,.983,2.482,3.464,0,5.946Z"
-                          class="cls-2"></path>
-                </g>
-                <path id="line" d="M120,0H0" class="cls-3"></path>
-            </g>
-        </svg>
-    </div>
-    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-</div>
-<!--ie10-11-->
-<div id="ie-swiper" class="swiper-container ie-swiper none">
-    <div class="swiper-wrapper">
+<div id="ie-swiper" class="ie-swiper-box">
+    <div id="prev"></div>
+    <div id="next"></div>
+    <ul id="play">
         <?php foreach ($data['banner'] as $key=>$v2){ ?>
-        <a target="_blank" href="<?=$v2['url']?>" class="swiper-slide" style="background-image:url('<?=Yii::$app->params['backend_url'].$v2['banner_url'];?>')"></a>
+            <li <?=$key == 0 ? 'style="display: block;"' : ''?>><a target="_blank" href="<?=$v2['url']?>" style="background-image:url('<?=Yii::$app->params['backend_url'].$v2['banner_url'];?>')"></a></li>
         <?php } ?>
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    </ul>
+    <ul id="button">
+        <?php foreach ($data['banner'] as $key=>$v2){ ?>
+            <li><div <?=$key == 0 ? 'style="background: #A10000;"' : ''?>></div></li>
+        <?php } ?>
+    </ul>
 </div>
 <!-- Swiper -->
 <!--轮播图-->
@@ -308,5 +270,4 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
     </div>
 </section>
 <!--新闻列表-->
-<script src="/asset/static/wigdet/swiper/swiper.min.js"></script>
 <script src="/asset/static/js/index.js"></script>

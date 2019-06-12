@@ -123,7 +123,7 @@
                     layer.closeAll();
                     if(data.code == 100000){
                         layer.msg(data.message, {icon: 1,time:1500}, function(){
-                           window.location.href='/console';
+                           window.location.href='/site';
                         })
                     }else{
                         layer.msg(data.message,{icon: 5,time:1500}, function(){
@@ -146,7 +146,6 @@
 
 
         //增加背景动画
-        // 首页banner背景
         var canvasFun = function(){
             var canvas = document.getElementById('canvas'),
                 ctx = canvas.getContext('2d'),

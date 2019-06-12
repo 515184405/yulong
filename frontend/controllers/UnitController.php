@@ -4,6 +4,9 @@ namespace frontend\controllers;
 use common\models\Cases;
 use common\models\MadeToOrder;
 use common\models\News;
+use common\models\UserCollect;
+use common\models\UserDownRecord;
+use common\models\UserGuanzhu;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
@@ -15,7 +18,7 @@ class UnitController extends CommonController {
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         $search = isset($_GET['search']) ? $_GET['search'] : '';
-        $unitData = Widget::find()->orderBy(['id'=>SORT_DESC])->where(['issue'=>2])->andFilterWhere(['like','title',$search])->orFilterWhere(['like','desc',$search])->asArray()->all();
+        $unitData = Widget::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->andFilterWhere(['or',['like','title',$search],['like','keyword',$search]])->asArray()->all();
         $limit = 20; //每页显示20条
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $unit = [];
@@ -63,7 +66,7 @@ class UnitController extends CommonController {
             $widget_item = Widget::find()->where(['id'=>$unit_id])->asArray()->one();
         }else{
             //所有可见
-            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['issue'=>'2']])->asArray()->one();
+            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['status'=>'1']])->asArray()->one();
         }
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);
@@ -74,9 +77,27 @@ class UnitController extends CommonController {
         $widget_item_look->save();
 
         //查询上-篇文章
-        $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['issue'=>2]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
+        $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
-        $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['issue'=>2]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
+        $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
+
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $collect = UserCollect::find();
+        $guanzhu = UserGuanzhu::find();
+        $collectCount = $collect->where(['widget_id'=>$unit_id])->count();
+        $guanzhuCount = $guanzhu->where(['other_id'=>$widget_item['u_id']])->count();
+        if($user_id || $user_id == 0){
+            $collect = $collect->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
+            $guanzhu = $guanzhu->where(['u_id'=>$user_id])->asArray()->one();
+            $widget_item['user'] = [
+                'collect' => $collect,
+                'guanzhu' => $guanzhu,
+            ];
+        };
+        $widget_item['user']['collectCount'] = $collectCount;
+        $widget_item['user']['guanzhuCount'] = $guanzhuCount;
+
+
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
@@ -87,10 +108,22 @@ class UnitController extends CommonController {
     }
 
     public function actionDownCount(){
-        $id = $_POST['id'];
-        if(isset($id)){
-            $model = Widget::findOne($id);
+
+        if(isset($_COOKIE['DownCount'])){
+            setcookie("DownCount", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("DownCount", 1, time()+1,'/');
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        $params['u_id'] = $user_id;
+
+        if(isset($params['widget_id'])){
+            //给项目添加下载次数
+            $model = Widget::findOne($params['widget_id']);
             $model->down_count = intval($model->down_count) + 1;
+            //给个人添加下载记录
+            UserDownRecord::insertUpdate($params);
             if($model->save()){
                 return Json::encode(['code'=>'100000','message'=>'操作成功']);
             }
@@ -98,9 +131,46 @@ class UnitController extends CommonController {
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
     }
+
+    //收藏
+    public function actionCollect(){
+        if(isset($_COOKIE['timeout'])){
+            setcookie("timeout", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("timeout", 1, time()+1,'/');
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        if(!isset($params['widget_id'])){
+            return '组件id存在';
+        }
+        $params['widget_id'] = intval($_POST['widget_id']);
+        $params['u_id'] = $user_id;
+        if(UserCollect::insertUpdate($params)){
+            return Json::encode(['code'=>'100000','message'=>'操作成功']);
+        }
+        return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
+
+    //关注
+    public function actionGuanzhu(){
+        if(isset($_COOKIE['Guanzhu'])){
+            setcookie("Guanzhu", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("Guanzhu", 1, time()+1,'/');
+        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $params = \Yii::$app->request->post();
+        $params['u_id'] = $user_id;
+        if(UserGuanzhu::insertUpdate($params)){
+            return Json::encode(['code'=>'100000','message'=>'操作成功']);
+        }
+        return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
     
     //定制服务
     public function actionDingzhi(){
+
         $dingzhi_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(\Yii::$app->request->isPost){
             $params = $_POST;
@@ -110,7 +180,13 @@ class UnitController extends CommonController {
                 if($dingzhi_id){
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
                 }
-                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+                $this->sendsMail('组件定制服务通知','<div style="font-family: \'Microsoft YaHei\';">
+                    联系人姓名：<b>'.$params["username"].'</b></br>
+                    联系人电话：<b>'.$params["tel"].'</b></br>
+                    定制标题：<b>'.$params["title"].'</b></br>
+                    定制内容：<b>'.$params["desc"].'</b></br>
+                </div>');
+                return Json::encode(array('code'=>'100000','message'=>'定制成功，我们会尽快与您联系！'));
             }
             return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
         }

@@ -1,4 +1,11 @@
+<?php
+//存用户信息
+\common\models\Visit::insertUpdate();
+?>
 <!--公共尾部-->
+<a href="javascript:;" class="website-btn js_website_btn">
+    建站咨询
+</a>
 <div class="floated-box">
     <p id="scrollTop" class="floated-item scroll-top"><i class="iconfont transition">&#xe606;</i></p>
     <p class="floated-item wx-icon"><i class="iconfont transition">&#xe65a;</i></p>
@@ -18,7 +25,8 @@
 <!--登陆模块-->
 <div class="login t-c none" id="user_login">
     <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
-<!--    <p class="login-desc">用户登录</p>-->
+    <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
+    <!--    <p class="login-desc">用户登录</p>-->
     <div class="login-type">
         <a href="#">
             <i class="iconfont transition">&#xe608;</i>
@@ -39,7 +47,8 @@
 <!--注册模块-->
 <div class="login t-c none" id="user_register">
     <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
-<!--    <p class="login-desc">用户注册</p>-->
+    <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
+    <!--    <p class="login-desc">用户注册</p>-->
     <div class="login-type">
         <a href="#">
             <i class="iconfont transition">&#xe608;</i>
@@ -78,7 +87,7 @@
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
     <a class="animated" href="/service">服务</a>
     <a class="animated delay-01s" href="/about">关于</a>
-    <a class="animated delay-02s" href="">合作</a>
+    <a class="animated delay-02s" href="news">文章</a>
     <a class="animated delay-03s" href="/contact">联系</a>
 </div>
 <div class="wap-list-nav none">
@@ -86,7 +95,7 @@
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case"><i class="iconfont">&#xe64a;</i>案例</a>
     <a id="js_other_icon" class="icon-other" href="javascript:;"><i class="iconfont transition">&#xe794;</i></a>
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit"><i class="iconfont">&#xe617;</i>组件</a>
-    <a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news"><i class="iconfont">&#xe681;</i>文章</a>
+    <a class="<?= strpos(Yii::$app->request->getPathInfo(),'user')!==false ? 'active' : ''?>" href="/user"><i class="iconfont">&#xe625;</i>我的</a>
 </div>
 
 <script>
@@ -95,15 +104,28 @@
         $('body,html,.list-container').animate({
             'scrollTop' : 0
         },300);
+    });
+
+    //建站留言
+    $(".js_website_btn").click(function(){
+        layer.open({
+            type: 2,
+            title: '建站咨询',
+            area: ['400px','500px'],
+            skin: 'layui-login  layui-xieyi', //没有背景色
+            anim: 4,
+            content: '/site/website'
+        });
     })
     //微信弹框
     $(".wx-icon").click(function(){
         layer.open({
             type: 1,
             anim: 2,
+            area:['300px','250px'],
             shade: false,
-            title: false, //不显示标题
-            content: '<img style="width: 250px;height:250px;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            title: '扫一扫二维码与我联系', //不显示标题
+            content: '<img style="width: 200px;height:200px;display:block;margin:0 auto;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         });
     })
     //底部移动端导航其他链接事件
@@ -164,6 +186,7 @@
             type: 1,
             title: '<h1 style="color:#000;font-size:15px;">注册声明与版权声明</h1>',
             anim: 4,
+            scrollbar:false,
             area: ['500px', '80%'],
             skin: 'layui-login layui-xieyi', //没有背景色
             content: $('.xieyi'),

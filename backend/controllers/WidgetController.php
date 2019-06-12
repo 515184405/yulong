@@ -81,19 +81,6 @@ class WidgetController extends CommonController
         return Json::encode(['code' => 100000,'message' => '设置失败']);
     }
 
-    //是否发布
-    public function actionIssue(){
-        $checked = isset($_POST['checked']) ? $_POST['checked'] : '';
-        $id = isset($_POST['id']) ? $_POST['id'] : '';
-        $checked = $checked == 'true' ? 2 : 1;
-        $widget = Widget::findOne($id);
-        $widget->issue = $checked;
-        if($widget->save()){
-            return Json::encode(['code' => 100000,'message' => '设置成功']);
-        }
-        return Json::encode(['code' => 100000,'message' => '设置失败']);
-    }
-
     //是否允许下载
     public function actionIsDown(){
         $checked = isset($_POST['checked']) ? $_POST['checked'] : '';

@@ -39,9 +39,10 @@ class Widget extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'desc'], 'required'],
-            [['desc', 'rule'], 'string'],
-            [['look', 'collect', 'down_count','create_time','recommend','issue','is_down'], 'integer'],
-            [['title', 'banner_url', 'type', 'source', 'download', 'website'], 'string', 'max' => 255],
+            [[ 'rule'], 'string'],
+            [['u_id','look', 'collect', 'down_count','create_time','recommend','is_down','status','down_money'], 'integer'],
+            [['title', 'banner_url', 'type', 'source', 'download', 'website','desc'], 'string', 'max' => 255],
+            [['fail_msg'],'string','max'=>100],
         ];
     }
 
@@ -65,22 +66,32 @@ class Widget extends \yii\db\ActiveRecord
             'down_count' => 'Down Count',
             'create_time' => 'Create Time',
             'recommend' => 'Recommend',
-            'issue' => "Issue",
             'is_down' => "Is Down",
+            'status' => "Status",
+            'u_id' => "U Id",
+            'down_money' => 'Down Money',
+            'fail_msg' => 'Fail Msg',
         ];
     }
 
     //查询推荐组件
     public static function recommend(){
-        return Widget::find()->where(['and',['recommend'=>1],['issue'=>2]])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
+        return Widget::find()->where(['and',['recommend'=>1],['status'=>1]])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
+    }
+
+    /*待审核数据*/
+    public static function widgetStatus(){
+        return static::find()->where(['status'=>0])->asArray()->count();
     }
 
     /*查数据*/
     public static function search($params){
         $query = static::find();
-        //按title查找
+        $sort = isset($params['sort']) ? $params['sort'] : 1;
+        $status = isset($params['status']) ? $params['status'] : '';
+        //按title status查找
         if(isset($params['title'])){
-            $query->andFilterWhere(['and',['like','Widget.title',$params['title']],['issue'=>2]]);
+            $query->andFilterWhere(['or',['like','Widget.title',$params['title']],['=','Widget.status',$status]]);
         }
         $page = isset($params['page']) ? $params['page'] : '';
         $limit = isset($params['limit']) ? $params['limit'] : '';
@@ -90,7 +101,11 @@ class Widget extends \yii\db\ActiveRecord
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        if($sort == 1){
+            $list = $query->orderBy(['create_time' => SORT_DESC])->asArray()->all();
+        }else{
+            $list = $query->orderBy(['create_time' => SORT_ASC])->asArray()->all();
+        }
         return compact('count', 'list');
     }
 

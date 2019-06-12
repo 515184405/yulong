@@ -3,6 +3,20 @@
         </div>
         <?=$this->render('./public-footer'); ?>
         <script>
+            function IElt10(){
+                var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+                var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+                if(isIE) {
+                    var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+                    reIE.test(userAgent);
+                    var fIEVersion = parseFloat(RegExp["$1"]);
+                    if(fIEVersion < 10) {
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
+            }
             $(".list-header,.list-content,.list-aslide").addClass('list-layout-animated');
             //左侧导航关闭
             $('.aslide-switch').bind('click',function(){
@@ -37,7 +51,7 @@
         $(window).resize();
 
 
-            //首页增加滚动动画
+            //增加滚动动画
             function addScrollAnimate(){
                 $(".animated").each(function(){
                     var pos = $(this).offset().top;
@@ -46,6 +60,10 @@
                     var winTop = $(window).scrollTop();
                     if (pos < winTop + winHeight) {
                         $(this).addClass(animatedType);
+                        //兼容ie10及以下
+                        if(IElt10()){
+                            $(this).css('opacity',1);
+                        }
                     }
                 });
             };

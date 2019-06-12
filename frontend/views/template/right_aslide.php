@@ -2,7 +2,7 @@
 
 <div class="js_news_recommend fy-container news-recommend">
     <div class="news-recommend-hidden">
-        <img class="nr-img" src="/asset/static/image/call-me.jpg" alt="">
+        <img class="nr-img js_website_btn" src="/asset/static/image/call-me.jpg" alt="">
         <div class="layout-recommend-item">
             <h2 class="nr-title">
                 案例推荐

@@ -123,6 +123,28 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+/*footer始终在页面最底部*/
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  padding-bottom: 170px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+}
+.header {
+  top: -60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
 /* custom */
 a {
   color: #595757;
@@ -193,8 +215,8 @@ body {
 @font-face {
   font-family: 'iconfont';
   /* project id 1174705 */
-  src: url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.eot');
-  src: url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_nl2phr0pd88.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.eot');
+  src: url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.woff2') format('woff2'), url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.woff') format('woff'), url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.ttf') format('truetype'), url('//at.alicdn.com/t/font_1174705_003ycjhwrqhcg.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family: "iconfont" !important;
@@ -575,6 +597,40 @@ header.active {
   font-size: 14px;
   color: #97b9ef;
 }
+/*分页样式*/
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #5181f1;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #5181f1;
+  border-color: #5181f1;
+}
 /*协议*/
 .xieyi {
   padding: 20px 30px 30px 30px;
@@ -789,6 +845,32 @@ header.active {
   color: #999;
   font-size: 12px;
 }
+.website-btn {
+  width: 50px;
+  text-align: center;
+  bottom: 270px;
+  position: fixed;
+  right: 10px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  opacity: 0.7;
+  z-index: 99;
+  background-color: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  height: 50px;
+  padding: 7px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.2;
+}
+.website-btn:hover {
+  color: #fff;
+  opacity: 0.5;
+}
 .floated-box {
   position: fixed;
   right: 10px;
@@ -859,8 +941,11 @@ header.active {
   }
 }
 @media screen and (max-width: 768px) {
-  body {
-    padding: 0;
+  .wrapper {
+    padding-bottom: 90px;
+  }
+  .footer {
+    bottom: 50px;
   }
   .fy-container {
     width: 100%;
@@ -869,13 +954,14 @@ header.active {
     display: block;
   }
   .footer-link {
-    font-size: 12px;
+    display: none;
   }
   .footer {
-    padding: 10px 0 70px 0;
+    padding: 10px 0 20px 0;
   }
   .footer-msg {
-    padding: 010px;
+    padding: 0 10px;
+    font-size: 8px!important;
   }
   .layui-login {
     width: 100%!important;
@@ -886,12 +972,16 @@ header.active {
   .header {
     display: none;
   }
-  .floated-box {
+  .floated-box,
+  .website-btn {
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);
     -ms-transform: scale(0.6);
     -o-transform: scale(0.6);
     transform: scale(0.6);
+  }
+  .website-btn {
+    bottom: 220px;
   }
   .news-recommend .layout-recommend-item {
     width: 100%;

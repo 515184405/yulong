@@ -2,6 +2,7 @@
 namespace backend\controllers;
 
 use common\models\User;
+use common\models\Zixun;
 use Yii;
 use common\models\LoginForm;
 use yii\helpers\Json;
@@ -46,6 +47,36 @@ class SiteController extends CommonController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    //咨询列表
+    public function actionZixun()
+    {
+        //读数据
+        $params = Yii::$app->request->get();
+        if(Yii::$app->request->isAjax){
+            $data = Zixun::search($params);
+            return $this->convertJson('0','查询成功',$data['list'], $data['count']);
+        }
+        return $this->render('zixun');
+    }
+
+    //修改咨询状态
+    public function actionInfo()
+    {
+        //读数据
+        $zixun_id = isset($_GET['id']) ? $_GET['id'] : '';
+        if(!$zixun_id){
+            return Json::encode(array('code' => '100000', 'message' => '修改失败'));
+        }
+        $params = Yii::$app->request->post();
+        if(Yii::$app->request->isAjax){
+            if(Zixun::insertUpdate($params,$zixun_id)){
+                return Json::encode(array('code' => '100000', 'message' => '修改成功'));
+            }
+            return Json::encode(array('code' => '100001', 'message' => '修改失败'));
+        }
+        return Json::encode(array('code' => '100001', 'message' => '修改失败'));
     }
 
     /**

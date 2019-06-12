@@ -19,6 +19,8 @@ use kucha\ueditor\UEditor;
         z-index: 9;
     }
 </style>
+<?php $this->title="个人中心 - ".(isset($_GET['id']) ? '修改作品' : '添加作品'); ?>
+
 <div class="layui-card">
     <div class="layui-card-header header-title"><?=isset($_GET['id']) ? '修改作品' : '添加作品'?></div>
     <div class="layui-card-body">
@@ -85,6 +87,14 @@ use kucha\ueditor\UEditor;
                             'toolbars'=>Yii::$app->params['toolbars']
                         ]
                     ]);?>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">下载金币数</label>
+                <div class="layui-input-block">
+                    <input type="text" value="<?=isset($data['widget']['down_money']) ? $data['widget']['down_money'] : ''?>" name="down_money" autocomplete="off" placeholder="请输入下载所需金币" class="layui-input">
+                    <div style="color:#f00;line-height: 25px;">用户下载您将获得对应金币</div>
                 </div>
             </div>
 

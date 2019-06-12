@@ -52,6 +52,13 @@ class CommonController extends \yii\web\Controller{
                 'class' => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config'=>[
+                    //上传图片配置
+                    //'imageUrlPrefix' => Yii::$app->params['site_url'], /* 图片访问路径前缀 */
+                ]
+            ]
         ];
     }
 
@@ -71,6 +78,20 @@ class CommonController extends \yii\web\Controller{
         );
 
         \Yii::$app->view->params['recommend'] = $recommend;
+    }
+
+    public function sendsMail($title,$htmlBody){
+        //邮件发送
+        $mail = Yii::$app->mailer->compose();
+        $mail->setTo('515184405@qq.com');
+        $mail->setSubject($title);
+        $mail->setHtmlBody($htmlBody);
+        if($mail->send()){
+            return true;
+        }else{
+            return false;
+        };
+        //邮件发送
     }
 
     //图片上传

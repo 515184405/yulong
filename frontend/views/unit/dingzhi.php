@@ -1,3 +1,4 @@
+<?php $this->title="聚友团队 - 组件定制"; ?>
 <link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css">
 <style>
     body{
@@ -105,23 +106,23 @@
 </div>
 <script src="<?=Yii::$app->params['backend_url']?>/asset/layui/layui.js"></script>
 <script>
-    layui.config({
-        base: '<?=Yii::$app->params["backend_url"]?>/asset/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index','form','upload'], function() {
+    layui.use(['form','upload'], function() {
         var $ = layui.$,
             form = layui.form,
             upload = layui.upload;
 
+        var csrfName = $("#form_csrf").attr('name');
+        var csrfVal = $("#form_csrf").val();
+        var uploadImageData = {
+            fileName : 'file_url',
+            caseDir : 'dingzhi/',
+        };
+        uploadImageData[csrfName] = csrfVal;
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#upload_image'
             , url: '/site/upload-image'
-            ,data:{
-                fileName : 'file_url',
-                caseDir : 'dingzhi/',
-            }
+            ,data:uploadImageData
             , before: function (obj) {
                 layer.msg('上传中...', {
                     icon: 16,
@@ -168,6 +169,7 @@
             layer.load(1, {shade: .1});
             var _this = this;_this.disabled=true;//防止多次提交
             var params = data.field;
+            params[csrfName] = csrfVal;
             $.ajax({
                 type: "post",
                 url: "",

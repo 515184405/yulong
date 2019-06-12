@@ -13,7 +13,6 @@
         body{
             padding:50px 70px 10px 30px;
             background-color: #fff;
-            height:295px;
         }
         .layui-card{
             -webkit-box-shadow: none;
@@ -29,7 +28,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">定制标题</label>
                 <div class="layui-input-block">
-                    <input style="background-color:#f1f1f1;" disabled type="text" value="<?=isset($data['title']) ? $data['title'] : ''?>" name="title"  autocomplete="off" class="layui-input">
+                    <input type="text" value="<?=isset($data['title']) ? $data['title'] : ''?>" name="title"  autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">定制描述</label>
+                <div class="layui-input-block">
+                    <textarea name="desc" class="layui-textarea"><?=isset($data['desc']) ? $data['desc'] : ''?></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -46,6 +51,12 @@
                         <option  value="1" <?=$data['status'] == 1 ? "selected" : ""?>>处理中</option>
                         <option  value="2" <?=$data['status'] == 2 ? "selected" : ""?>>已完成</option>
                     </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目ID</label>
+                <div class="layui-input-block">
+                    <input type="text" value="<?=isset($data['widget_id']) ? $data['widget_id'] : ''?>" name="widget_id"  autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">

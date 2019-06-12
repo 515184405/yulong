@@ -1,134 +1,88 @@
 html {
   font-size: 16px;
 }
-header {
-  background-color: transparent;
+body {
+  padding-top: 0;
 }
-.swiper-container {
-  position: absolute;
-  left: 0;
-  top: 0;
+.header {
+  background-color: transparent;
+  top: 0!important;
+}
+/*轮播模块*/
+.ie-swiper-box {
   width: 100%;
   height: 600px;
-  transition: 0.5s background-color 0.3s;
+  position: relative;
 }
-.swiper-wrapper {
-  transition-delay: 0.5s;
-  transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
-}
-.ie-swiper .swiper-slide {
-  background-repeat: no-repeat;
-  -webkit-background-size: 100 auto;
-  background-size: 100 auto;
-  background-position: center center;
-}
-.title {
-  transition-delay: 1s;
-  z-index: 10;
-}
-.title h3 {
-  font-size: 4rem;
-  letter-spacing: -1px;
-  color: rgba(255, 255, 255, 0);
-  -webkit-text-stroke: 2px #fff;
-  position: absolute;
-  bottom: 50px;
+.ie-swiper-box #play {
   width: 100%;
-  left: 0;
-  text-align: center;
+  height: 600px;
+  list-style: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
-.img-box {
+.ie-swiper-box #play li {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
-  position: absolute;
-  transform: scale(0.6, 0.6);
-  transition-duration: 0.5s;
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
-  opacity: 0.9;
-  overflow: hidden;
 }
-.img-box img {
-  max-width: 100%;
-  height: 450px;
+.ie-swiper-box #play li a {
   display: block;
-  margin: 100px auto 0;
-  object-fit: cover;
-  transform: scale(1.2, 1.2) translateX(200%);
-  transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
-  transition-property: transform;
+  width: 100%;
+  height: 100%;
+  background-size: auto 450px;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
-.button-prev,
-.button-next {
-  transition: 0.5s;
-  outline: none;
+.ie-swiper-box #play li img {
+  float: left;
+}
+#button {
   position: absolute;
-  width: 140px;
-  z-index: 10;
-  top: 300px;
-  transform: translateY(-34px);
+  bottom: 20px;
+  right: 100px;
+  list-style: none;
+}
+#button li {
+  margin-left: 10px;
+  float: left;
+}
+#button li div {
+  width: 12px;
+  height: 12px;
+  background: #DDDDDD;
+  border-radius: 6px;
   cursor: pointer;
 }
-.button-prev {
-  left: 4vw;
+#prev {
+  width: 40px;
+  height: 63px;
+  background: url(../image/beijing.png) 0px 0px;
+  position: absolute;
+  top: 265px;
+  left: 50px;
+  z-index: 1000;
 }
-.button-next {
-  right: 4vw;
+#next {
+  width: 40px;
+  height: 63px;
+  background: url(../image/beijing.png) -40px 0px;
+  position: absolute;
+  top: 265px;
+  right: 50px;
+  z-index: 1000;
 }
-.button.disabled {
-  opacity: 0.2;
-  cursor: default;
+#prev:hover {
+  background: url(../image/beijing.png) 0px -62px;
 }
-#arrow-svg-home {
-  transform: translateY(353px);
+#next:hover {
+  background: url(../image/beijing.png) -40px -62px;
 }
-.button-next #arrow-svg-home {
-  transform: translateY(353px) rotateY(180deg);
-  transform-origin: 80px 0px 0px;
-}
-svg {
-  transition: 0.5s;
-}
-.cls-1 {
-  transition: 0.5s;
-  opacity: 0.4;
-  transform-origin: -20px 40px;
-  opacity: 1;
-}
-.cls-4 {
-  transition: 0.5s;
-  stroke-width: 2px;
-  stroke: #fff;
-  fill: none;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: 0.4;
-  transform-origin: 0px 0px 0px;
-}
-#arrow-trg {
-  transition: 0.5s;
-  fill: #fff;
-  transform: rotateY(180deg) translate(-53px, 39px);
-}
-#line {
-  transition: 0.5s;
-  stroke: #fff;
-  transform: translate(50px, 42px);
-}
-.button:not(.disabled):hover .cls-1 {
-  transform: scale(1.1);
-}
-.button:not(.disabled):hover .cls-4 {
-  stroke-dasharray: 2px;
-  stroke-dashoffset: 2px;
-  opacity: 1;
-}
-.button:not(.disabled):hover #arrow-trg {
-  transform: rotateY(180deg) translate(-37px, 39px);
-}
-.button:not(.disabled):hover #line {
-  transform: translate(35px, 42px) scaleX(0.33);
-}
+/*轮播模块*/
 .section-title {
   text-align: center;
   font-size: 28px;
@@ -193,7 +147,6 @@ svg {
 }
 .service-list {
   padding: 50px 0;
-  margin-top: 540px;
 }
 .service-project {
   margin-top: 30px;
@@ -677,27 +630,27 @@ svg {
   }
 }
 @media screen and (max-width: 768px) {
-  .swiper-container {
+  .ie-swiper-box {
     height: 200px;
   }
-  .img-box img {
-    height: 100px;
-    margin: 50px auto;
+  .ie-swiper-box #play {
+    height: 200px;
   }
-  .button-prev,
-  .button-next {
-    top: 20vh;
-    width: 50px;
+  .ie-swiper-box #play li a {
+    background-size: auto 150px;
   }
-  .button-prev {
-    left: 6vw;
+  .ie-swiper-box #prev,
+  .ie-swiper-box #next {
+    top: 70px;
   }
-  .button-prev {
-    right: 6vw;
+  .ie-swiper-box #prev {
+    left: 10px;
   }
-  .service-list {
-    margin-top: 220px;
-    padding: 0;
+  .ie-swiper-box #next {
+    right: 10px;
+  }
+  .section-service {
+    padding-top: 20px;
   }
   .section-title {
     font-size: 16px;

@@ -23,7 +23,7 @@ AppAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <meta name="keywords" content="网站建设,专业网站建设团队,网站设计,网站制作,做网站"/>
+    <meta name="keywords" content="<?=html::encode($this->keywords)?>"/>
     <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
     <link rel="stylesheet" href="/asset/static/css/default.css">
@@ -31,6 +31,7 @@ AppAsset::register($this);
     <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>
 <body>
+<input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
 <div class="wrapper">
     <p style="transform: scale(0.7);" class="login-register-box none"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p>
     <!-- 头部 -->
@@ -48,14 +49,14 @@ AppAsset::register($this);
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'about')!==false ? 'active' : ''?>" href="/about">关于我们</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'contact')!==false ? 'active' : ''?>" href="/contact">联系我们</a></li>
                 <!--登录前-->
-                <?php if(Yii::$app->id){?>
+                <?php if(!Yii::$app->id){?>
                 <li><p class="login-register-box"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p></li>
                 <?php }else{ ?>
                 <!--登录后-->
                 <li class="user-box js_user_box">
                     <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">依鸣</a><i class="iconfont user-icon"></i>
                     <dl class="fy-nav-child transition js_nav_child">
-                        <dd><a href="javascript:;">修改信息</a></dd>
+                        <dd><a href="/user">个人中心</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
                         <dd class="t-c" style="border-top:1px solid #ddd"><a href="javascript:;">退出</a></dd>
                     </dl>
@@ -83,7 +84,7 @@ AppAsset::register($this);
     <?php $this->endBody() ?>
     <!--内容部分-->
     <!--推荐部分-->
-    <?php if (Yii::$app->request->getPathInfo() != '') { ?>
+    <?php if (Yii::$app->request->getPathInfo() != '' && strpos(Yii::$app->request->getPathInfo(),'user')===false) { ?>
         <?= $this->render('../template/right_aslide'); ?>
     <?php } ?>
     <!--推荐部分-->
@@ -100,8 +101,8 @@ AppAsset::register($this);
                 <a href="/contact">联系我们</a>
             </p>
             <p class="footer-msg">
-                <span>Copyright 2008-2019 聚友网络科技有限公司 ALL Rights Reserved. ********************</span>
-                <span class="margin-left:30px;">工信部备案号：辽ICP备******号</span>
+                <span>Copyright 2019 聚友之家 ALL Rights Reserved.</span>
+                <span class="margin-left:30px;">工信部备案号：京ICP备19025093号-1</span>
             </p>
         </div>
     </footer>
