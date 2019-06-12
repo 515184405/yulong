@@ -23,12 +23,12 @@ class NewsController extends CommonController {
             $news = [];
             //获取标签筛选出来的案例结果列表
             foreach ($caseTagJoin as $val){
-                $case_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['News.id'=>$val['news_id'],'issue'=>2])->asArray()->one();
+                $case_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.id'=>$val['news_id'],'issue'=>2])->asArray()->one();
                 array_push($news,$case_item);
             }
         }else{
             //获取类型筛选出来的案例结果列表
-            $news = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['News.type_id'=>$id,'issue'=>2])->asArray()->all();
+            $news = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.type_id'=>$id,'issue'=>2])->asArray()->all();
         }
         $pagination = new Pagination(['totalCount' => count($news),'pageSize' => $limit]);
         $news = array_slice($news,$limit*($page-1),$limit);
@@ -52,7 +52,7 @@ class NewsController extends CommonController {
         $news_item_look->look = intval($news_item_look->look) + 1;
         $news_item_look->save();
 
-        $news_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['News.id'=>$news_id])->asArray()->one();
+        $news_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.id'=>$news_id])->asArray()->one();
 
         //查询上-篇文章
         $prev_article = News::find()->andFilterWhere(['and',['<', 'id', $news_id],['issue'=>2]])->orderBy(['id' => SORT_DESC])->limit(1)->one();

@@ -43,7 +43,7 @@ class CaseController extends CommonController {
     public function actionItem(){
         $params =\Yii::$app->request->get();
         $case_id = isset($params['case_id']) ? $params['case_id'] : "";
-        $case_item = Cases::find()->joinWith('tag_join')->where(['Cases.id'=>$case_id])->asArray()->one();
+        $case_item = Cases::find()->joinWith('tag_join')->where(['cases.id'=>$case_id])->asArray()->one();
 
         //查询上-篇文章
         $prev_article = Cases::find()->andFilterWhere(['<', 'id', $case_id])->orderBy(['id' => SORT_DESC])->limit(1)->one();
