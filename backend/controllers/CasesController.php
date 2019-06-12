@@ -65,7 +65,7 @@ class CasesController extends CommonController
         $data['case_type'] = $caseType::find()->asArray()->all();
         if(!empty($case_id)){
             $cases = new Cases();
-            $data['case'] = $cases::find()->joinWith(['tag_join'])->where(['Cases.id'=>$case_id])->asArray()->one();
+            $data['case'] = $cases::find()->joinWith(['tag_join'])->where(['cases.id'=>$case_id])->asArray()->one();
             if(empty($data['case'])){
                 return '此项目不存在';
             }

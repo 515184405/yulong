@@ -51,7 +51,7 @@ class NewsController extends CommonController
         $data['type'] = NewsType::find()->asArray()->all();
         //查询新闻数据
         if($news_id){
-            $data['news'] = News::find()->joinWith(['news_tag_join'])->where(['News.id'=>$news_id])->asArray()->one();
+            $data['news'] = News::find()->joinWith(['news_tag_join'])->where(['news.id'=>$news_id])->asArray()->one();
             if(!$data['news']){
                 return '新闻不存在';
             }
