@@ -85,7 +85,7 @@
 
 <!--wap底部导航-->
 <div data-animate="slideInUp" id="js_other_link" class="other-link none">
-    <a class="animated" href="/service">服务</a>
+    <a class="animated delay-00s" href="/service">服务</a>
     <a class="animated delay-01s" href="/about">关于</a>
     <a class="animated delay-02s" href="news">文章</a>
     <a class="animated delay-03s" href="/contact">联系</a>

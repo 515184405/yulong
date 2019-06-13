@@ -443,6 +443,7 @@ header {
     -ms-transform: translateX(-100%);
     -o-transform: translateX(-100%);
     transform: translateX(-100%);
+    box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.1);
   }
   .personal .personal-left.active {
     -webkit-transform: translateX(0%);
@@ -450,6 +451,9 @@ header {
     -ms-transform: translateX(0%);
     -o-transform: translateX(0%);
     transform: translateX(0%);
+  }
+  .personal .personal-left .fy-nav-default li {
+    margin-top: 10px;
   }
   .personal .personal-right {
     margin-left: 0;
