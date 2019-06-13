@@ -1,15 +1,12 @@
 <?php
 namespace backend\controllers;
 
-use app\models\UploadForm;
-use common\models\widget;
+use common\models\Widget;
 use common\models\widgetTag;
 use common\models\widgetTagJoin;
 use common\models\widgetType;
 use Yii;
 use yii\helpers\Json;
-use yii\web\Controller;
-use common\models\LoginForm;
 use yii\web\UploadedFile;
 
 /**
@@ -27,7 +24,7 @@ class WidgetController extends CommonController
         //读数据
         $params = Yii::$app->request->get();
         if(Yii::$app->request->isAjax){
-            $data = widget::search($params);
+            $data = Widget::search($params);
             return $this->convertJson('0','查询成功',$data['list'], $data['count']);
         }
         return $this->render('index');
