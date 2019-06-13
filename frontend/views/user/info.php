@@ -1,10 +1,10 @@
 <?php
     use kucha\ueditor\UEditor;
 ?>
-<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css" media="all">
-<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/lib/select2/css/select2.min.css">
-<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/style/jquery.tagsinput.css">
-<link rel="stylesheet" href="/asset/static/css/personal.css">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css<?=Yii::$app->params['static_number']?>" media="all">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/lib/select2/css/select2.min.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/style/jquery.tagsinput.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <style>
     .select2-container--default.select2-container--focus .select2-selection--multiple{
         padding-right:50px;

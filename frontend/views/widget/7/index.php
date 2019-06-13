@@ -7,10 +7,10 @@
     <meta name="description" content="A jQuery plugin wrapper for Cropper.js.">
     <meta name="author" content="Chen Fengyuan">
     <title>jquery-cropper</title>
-    <link rel="stylesheet" href="<?=$url;?>css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?=$url;?>css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?=$url;?>css/cropper.css">
-    <link rel="stylesheet" href="<?=$url;?>css/main.css">
+    <link rel="stylesheet" href="<?=$url;?>css/font-awesome.min.css<?=Yii::$app->params['static_number']?>">
+    <link rel="stylesheet" href="<?=$url;?>css/bootstrap.min.css<?=Yii::$app->params['static_number']?>">
+    <link rel="stylesheet" href="<?=$url;?>css/cropper.css<?=Yii::$app->params['static_number']?>">
+    <link rel="stylesheet" href="<?=$url;?>css/main.css<?=Yii::$app->params['static_number']?>">
 </head>
 <body>
 <!--[if lt IE 9]>

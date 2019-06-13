@@ -1,5 +1,5 @@
 <?php $this->title = "聚友团队 - 网站定制"; ?>
-<link rel="stylesheet" href="<?= Yii::$app->params['backend_url'] ?>/asset/layui/css/layui.css">
+<link rel="stylesheet" href="<?= Yii::$app->params['backend_url'] ?>/asset/layui/css/layui.css<?=Yii::$app->params['static_number']?>">
 <style>
     .form-container {
         padding: 35px;

@@ -6,8 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>智能选座系统</title>
-    <link rel="stylesheet" type="text/css" href="<?=$url;?>css/reset.css">
-    <link rel="stylesheet" type="text/css" href="<?=$url;?>js/layer/theme/default/layer.css">
+    <link rel="stylesheet" type="text/css" href="<?=$url;?>css/reset.css<?=Yii::$app->params['static_number']?>">
+    <link rel="stylesheet" type="text/css" href="<?=$url;?>js/layer/theme/default/layer.css<?=Yii::$app->params['static_number']?>">
     <link rel="stylesheet" type="text/css" href="<?=$url;?>css/seat.css?v=2" media="screen">
 
 </head>

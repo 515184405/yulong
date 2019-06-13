@@ -1,7 +1,7 @@
 <?php $this->title="个人中心 - 我的组件"; ?>
 <?php $status = isset($_GET['status']) ? $_GET['status'] : 1; ?>
 
-<link rel="stylesheet" href="/asset/static/css/personal.css">
+<link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <div class="personal fy-container clearfix">
     <?=$this->render('../template/personal');?>
     <div class="personal-right">

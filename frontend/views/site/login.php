@@ -9,7 +9,7 @@
     <meta name="keywords" content="网站建设,专业网站建设团队,网站设计,网站制作,做网站"/>
     <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
-    <link rel="stylesheet" href="/asset/static/css/default.css">
+    <link rel="stylesheet" href="/asset/static/css/default.css<?=Yii::$app->params['static_number']?>">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
     <script src="/asset/static/wigdet/layer/layer.js"></script>
     <style>

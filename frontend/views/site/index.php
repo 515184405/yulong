@@ -4,7 +4,7 @@
 
 $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专业网站建设';
 ?>
-<link rel="stylesheet" href="/asset/static/css/index.css">
+<link rel="stylesheet" href="/asset/static/css/index.css<?=Yii::$app->params['static_number']?>">
 <!--首页背景-->
 <canvas id="canvas" class="canvas-cls"></canvas>
 <!--首页背景-->

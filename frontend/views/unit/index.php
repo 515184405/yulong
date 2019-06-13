@@ -5,7 +5,7 @@
 
 <?= $this->render('../template/header',compact('data'));?>
 
-<link rel="stylesheet" href="/asset/static/css/case.css">
+<link rel="stylesheet" href="/asset/static/css/case.css<?=Yii::$app->params['static_number']?>">
 <div class="case-list unit-list clearfix">
     <div class="search-wrapper">
         <div class="search-box">

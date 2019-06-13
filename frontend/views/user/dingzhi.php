@@ -1,7 +1,7 @@
 <?php $this->title="个人中心 - 我的组件"; ?>
 <?php $status = isset($_GET['status']) ? $_GET['status'] : 2; ?>
 
-<link rel="stylesheet" href="/asset/static/css/personal.css">
+<link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <style>
     .down-btn{
         padding:5px 0;

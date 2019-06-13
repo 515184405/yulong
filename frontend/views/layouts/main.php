@@ -26,7 +26,7 @@ AppAsset::register($this);
     <meta name="keywords" content="<?=html::encode($this->keywords)?>"/>
     <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
-    <link rel="stylesheet" href="/asset/static/css/default.css">
+    <link rel="stylesheet" href="/asset/static/css/default.css<?=Yii::$app->params['static_number']?>">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
     <script src="/asset/static/wigdet/layer/layer.js"></script>
 </head>

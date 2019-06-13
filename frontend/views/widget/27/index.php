@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<meta id="scale" content="initial-scale=1, maximum-scale=1, user-scalable=0" name="viewport">
-	<link rel="stylesheet" href="<?=$url;?>css/common.css">
-	<link rel="stylesheet" href="<?=$url;?>js/SyntaxHighlighter/shCoreDefault.css">
-	<link rel="stylesheet" href="<?=$url;?>css/alert.css">
-	<link rel="stylesheet" href="<?=$url;?>css/style.css">
+	<link rel="stylesheet" href="<?=$url;?>css/common.css<?=Yii::$app->params['static_number']?>">
+	<link rel="stylesheet" href="<?=$url;?>js/SyntaxHighlighter/shCoreDefault.css<?=Yii::$app->params['static_number']?>">
+	<link rel="stylesheet" href="<?=$url;?>css/alert.css<?=Yii::$app->params['static_number']?>">
+	<link rel="stylesheet" href="<?=$url;?>css/style.css<?=Yii::$app->params['static_number']?>">
 	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
     <script>var url = '<?=$url;?>';</script>
 	<script src='<?=$url;?>js/SyntaxHighlighter/shCore.js'></script>

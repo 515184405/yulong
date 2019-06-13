@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 	<script src='<?=$url;?>js/alert.min.js'></script>
-	<link rel="stylesheet" href="<?=$url;?>css/alert.css">
+	<link rel="stylesheet" href="<?=$url;?>css/alert.css<?=Yii::$app->params['static_number']?>">
 </head>
 <body>
 	<button id="sheet-btn">click me</button>

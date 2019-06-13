@@ -1,5 +1,5 @@
 <?php $this->title="聚友团队 - 关于我们"; ?>
-<link rel="stylesheet" href="/asset/static/css/other.css">
+<link rel="stylesheet" href="/asset/static/css/other.css<?=Yii::$app->params['static_number']?>">
 <div class="site-wrapper">
     <div class="site-banner"></div>
     <div class="site-content fy-container">

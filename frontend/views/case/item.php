@@ -5,9 +5,9 @@ $this->keywords=mb_substr($content,0,100);
 ?>
 
 <?= $this->render('../template/header',compact('data'));?>
-<link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css">
-<link rel="stylesheet" href="/asset/static/css/item.css">
-<link rel="stylesheet" href="/asset/static/css/item-case-superslide.css">
+<link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="/asset/static/css/item.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="/asset/static/css/item-case-superslide.css<?=Yii::$app->params['static_number']?>">
 
 <div class="news-items case-items">
     <div class="news-hidden-scroll js_news_items">

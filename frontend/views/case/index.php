@@ -4,7 +4,7 @@ use yii\widgets\LinkPager;
 <?php $this->title="聚友团队 - 案例列表" ?>
 <?= $this->render('../template/header',compact('data'));?>
 
-<link rel="stylesheet" href="/asset/static/css/case.css">
+<link rel="stylesheet" href="/asset/static/css/case.css<?=Yii::$app->params['static_number']?>">
 <div class="case-list clearfix">
     <?php if(count($data['case'])) foreach ($data['case'] as $val){?>
 <!--        delay---><?//= $i % 5 ?><!--s-->

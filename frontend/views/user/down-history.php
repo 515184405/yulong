@@ -10,7 +10,7 @@
 
 <?php $this->title="个人中心 - 我的收藏"; ?>
 
-<link rel="stylesheet" href="/asset/static/css/personal.css">
+<link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <div class="personal fy-container clearfix">
     <?=$this->render('../template/personal');?>
     <div class="personal-right">

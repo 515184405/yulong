@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>3d微信抽奖</title>
-    <link rel="stylesheet" href="<?=$url;?>index.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="<?=$url;?>index.css<?=Yii::$app->params['static_number']?>" media="screen" type="text/css">
 </head>
 <body>
 <div class="container none"></div>
