@@ -17,6 +17,7 @@ class BannerController extends CommonController
      */
     public function actionIndex()
     {
+
         //读数据
         $params = Yii::$app->request->get();
         if(Yii::$app->request->isAjax){
