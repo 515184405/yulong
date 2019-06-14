@@ -35,7 +35,7 @@
         </script>
 
         <script type="text/html" id="switchTp2">
-            <input type="checkbox" name="issue" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-issue" {{ d.is_down == 1 ? 'checked' : '' }}>
+            <input type="checkbox" name="is_down" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-is_down" {{ d.is_down == 1 ? 'checked' : '' }}>
         </script>
 
         <script type="text/html" id="test-table-toolbar-barDemo">
@@ -126,15 +126,6 @@
         // 推荐单选开关事件
         form.on('switch(filter-recommend)',function(res){
             $.post('/widget/recommend',{checked:res.elem.checked,id:res.value},function(data){
-                layer.tips(data.message, $(res.elem).next(), {
-                    tips: [1, '#0FA6D8'] //还可配置颜色
-                });
-            },'json')
-        })
-
-        // 发布单选开关事件
-        form.on('switch(filter-issue)',function(res){
-            $.post('/widget/issue',{checked:res.elem.checked,id:res.value},function(data){
                 layer.tips(data.message, $(res.elem).next(), {
                     tips: [1, '#0FA6D8'] //还可配置颜色
                 });
