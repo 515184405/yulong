@@ -235,11 +235,11 @@
 </div>
 <script>
 
-    //昨日访问量数据
+    //今日访问量数据
     window.todayCount = JSON.parse('<?= \common\models\Visit::todayCount();?>');
-    // 昨日访问量key
+    // 今日访问量key
     window.todayKey = [];
-    // 昨日访问量val
+    // 今日访问量val
     window.todayVal = [];
     for(var key in todayCount){
         window.todayKey.push(key);

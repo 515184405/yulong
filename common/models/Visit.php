@@ -166,7 +166,7 @@ class Visit extends \yii\db\ActiveRecord
 
     //查询昨天访客量
     public static function todayCount(){
-        $today =  date("Y-m-d",time()-24*3600);
+        $today =  date("Y-m-d",time());
         $model = Visit::find()->where(['like','time',$today])->asArray()->all();
         $visitArr = [];
         foreach ($model as $key => $val){
