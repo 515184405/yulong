@@ -236,14 +236,15 @@
 <script>
     //昨日访问量数据
     window.todayCount = JSON.parse('<?= \common\models\Visit::todayCount();?>');
-    // 今日访问量key
+    // 昨日访问量key
     window.todayKey = [];
-    // 今日访问量val
+    // 昨日访问量val
     window.todayVal = [];
     for(var key in todayCount){
         window.todayKey.push(key);
         window.todayVal.push(todayCount[key].length);
     };
+    console.log(todayCount);
 
     //浏览器分布
     var browser = JSON.parse('<?=\common\models\Visit::browser();?>');
@@ -253,7 +254,7 @@
         window.browserKey.push(key1);
         window.browserVal.push({name:key1,value:browser[key1]});
     }
-    console.log(browserVal);
+
     layui.config({
         base: '/asset/' //静态资源所在路径
     }).extend({
