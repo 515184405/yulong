@@ -263,7 +263,7 @@ class SiteController extends CommonController
     //回调函数
     public function actionQqcallback(){
         require_once("../../vendor/qqlogin/qqConnectAPI.php");
-        $auth = new \QA();
+        $auth = new \OAuth();
         $accessToken = $auth->qq_callback();
         $openid = $auth->get_openid();
         $qc = new \QC($accessToken, $openid);
