@@ -980,11 +980,11 @@ header.active {
     -ms-transform: scale(0.6);
     -o-transform: scale(0.6);
     transform: scale(0.6);
-    right: -8px;
+    right: -3px;
   }
   .website-btn {
     bottom: 205px;
-    right: -8px;
+    right: -3px;
   }
   .news-recommend .layout-recommend-item {
     width: 100%;
