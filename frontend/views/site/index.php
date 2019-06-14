@@ -8,21 +8,16 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
 <!--首页背景-->
 <canvas id="canvas" class="canvas-cls"></canvas>
 <!--首页背景-->
-<!--轮播图-->
-<div id="ie-swiper" class="ie-swiper-box">
-    <div id="prev"></div>
-    <div id="next"></div>
-    <ul id="play">
-        <?php foreach ($data['banner'] as $key=>$v2){ ?>
-            <li <?=$key == 0 ? 'style="display: block;"' : ''?>><a target="_blank" href="<?=$v2['url']?>" style="background-image:url('<?=Yii::$app->params['backend_url'].$v2['banner_url'];?>')"></a></li>
-        <?php } ?>
-    </ul>
-    <ul id="button">
-        <?php foreach ($data['banner'] as $key=>$v2){ ?>
-            <li><div <?=$key == 0 ? 'style="background: #A10000;"' : ''?>></div></li>
-        <?php } ?>
-    </ul>
+<div class="js-silder">
+    <div class="silder-scroll">
+        <div class="silder-main">
+            <?php foreach ($data['banner'] as $key=>$v2){ ?>
+                <div class="silder-main-img" <?=$key == 0 ? 'style="display: block;"' : ''?>><a target="_blank" href="<?=$v2['url']?>" style="background-image:url('<?=Yii::$app->params['backend_url'].$v2['banner_url'];?>')"></a></div>
+            <?php } ?>
+        </div>
+    </div>
 </div>
+
 <!-- Swiper -->
 <!--轮播图-->
 <!--服务类目-->
@@ -270,4 +265,5 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
     </div>
 </section>
 <!--新闻列表-->
+<script src="/asset/static/wigdet/wySilder.min.js"></script>
 <script src="/asset/static/js/index.js"></script>
