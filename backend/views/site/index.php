@@ -234,6 +234,7 @@
     </div>
 </div>
 <script>
+
     //昨日访问量数据
     window.todayCount = JSON.parse('<?= \common\models\Visit::todayCount();?>');
     // 昨日访问量key
