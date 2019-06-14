@@ -253,6 +253,25 @@ class SiteController extends CommonController
         ]);
     }
 
+    /*QQ登录*/
+    public function actionQqlogin(){
+        require_once("../../vendor/qqlogin/qqConnectAPI.php");
+        $qc = new \QC();
+        $qc->qq_login();
+    }
+
+    //回调函数
+    public function actionQqcallback(){
+        require_once("../../vendor/qqlogin/qqConnectAPI.php");
+        $auth = new \QA();
+        $accessToken = $auth->qq_callback();
+        $openid = $auth->get_openid();
+        $qc = new \QC($accessToken, $openid);
+        $userinfo = $qc->get_user_info();
+        //打印出个人信息
+        var_dump($userinfo);
+    }
+
     //图片上传
     public function actionUploadImage(){
         $uploadImage = $this->uploadImage();

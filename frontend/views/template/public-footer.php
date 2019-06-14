@@ -28,7 +28,7 @@
     <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
     <!--    <p class="login-desc">用户登录</p>-->
     <div class="login-type">
-        <a href="#">
+        <a target="_blank" href="/site/qqlogin">
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 登陆</p>
         </a>
@@ -50,7 +50,7 @@
     <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
     <!--    <p class="login-desc">用户注册</p>-->
     <div class="login-type">
-        <a href="#">
+        <a target="_blank" href="/qqlogin">
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 注册</p>
         </a>
