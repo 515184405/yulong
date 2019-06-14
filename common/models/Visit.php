@@ -181,7 +181,7 @@ class Visit extends \yii\db\ActiveRecord
     //获取用户访问信息
     public static function insertUpdate(){
         $model = new static();
-        $ip = $_SERVER['SERVER_ADDR'];
+        $ip = $_SERVER['REMOTE_ADDR'];
         $modelOne = $model->find()->where(['ip'=>$ip])->orderBy(['id'=>SORT_DESC])->one();
         $nowDate = getdate(time());
         if($modelOne){
