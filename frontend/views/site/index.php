@@ -265,5 +265,5 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
     </div>
 </section>
 <!--新闻列表-->
-<script src="/asset/static/wigdet/wySilder.min.js"></script>
-<script src="/asset/static/js/index.js"></script>
+<script src="/asset/static/wigdet/wySilder.min.js<?=Yii::$app->params['static_number']?>"></script>
+<script src="/asset/static/js/index.js<?=Yii::$app->params['static_number']?>"></script>
