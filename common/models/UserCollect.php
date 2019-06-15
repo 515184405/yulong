@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "user_collect".
  *
  * @property int $id
- * @property int $u_id
+ * @property int $.css<?=Yii::$app->params['static_number']?>"
  * @property int $widget_id
  */
 class UserCollect extends \yii\db\ActiveRecord

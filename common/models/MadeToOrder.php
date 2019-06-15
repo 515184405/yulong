@@ -10,7 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  * @property string $desc
- * @property int $u_id
+ * @property int $.css<?=Yii::$app->params['static_number']?>"
  * @property string $tel
  * @property string $username
  * @property string $file_url

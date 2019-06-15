@@ -475,7 +475,8 @@ header .nav-ul li a.active {
   font-weight: bold;
 }
 header .nav-ul li:last-child {
-  width: 100px;
+  min-width: 100px;
+  max-width: 200px;
 }
 header .nav-ul li .login-register-box {
   -webkit-border-radius: 2px;

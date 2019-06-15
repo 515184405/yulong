@@ -49,9 +49,9 @@
 </div>
 <div class="unit-user news-recommend">
     <div class="clearfix unit-user-info">
-        <img class="unit-user-avatar" src="//t.cn/RCzsdCq" alt="">
-        <h2 class="unit-user-name overflow-text">疯疯癫癫的小伙</h2>
-        <p class="unit-user-dress overflow-text">北京市 - 石景山区</p>
+        <img class="unit-user-avatar" src="<?=$unit['userInfo']['avatar']?>" alt="">
+        <h2 class="unit-user-name overflow-text"><?=$unit['userInfo']['username']?></h2>
+        <p class="unit-user-dress overflow-text"><?=$unit['userInfo']['province']?> - <?=$unit['userInfo']['city']?></p>
     </div>
     <?php if(Yii::$app->getUser()->getId()){ ?>
          <?php if(!empty($userUnit) && $userUnit['guanzhu']){ ?>

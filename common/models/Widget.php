@@ -79,6 +79,11 @@ class Widget extends \yii\db\ActiveRecord
         return Widget::find()->where(['and',['recommend'=>1],['status'=>1]])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
     }
 
+    /*关联用户表*/
+    public function getUserInfo(){
+        return $this->hasOne(Member::className(),['id'=>'u_id'])->select(['username','province','city','avatar']);
+    }
+
     /*待审核数据*/
     public static function widgetStatus(){
         return static::find()->where(['status'=>0])->asArray()->count();

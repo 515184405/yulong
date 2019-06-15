@@ -63,10 +63,10 @@ class UnitController extends CommonController {
         $unit_id = isset($params['widget_id']) ? $params['widget_id'] : "";
         if($auth == '0777'){
             //管理员可看
-            $widget_item = Widget::find()->where(['id'=>$unit_id])->asArray()->one();
+            $widget_item = Widget::find()->joinWith('userInfo')->where(['widget.id'=>$unit_id])->asArray()->one();
         }else{
             //所有可见
-            $widget_item = Widget::find()->where(['and',['id'=>$unit_id],['status'=>'1']])->asArray()->one();
+            $widget_item = Widget::find()->joinWith('userInfo')->where(['and',['widget.id'=>$unit_id],['widget.status'=>'1']])->asArray()->one();
         }
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);

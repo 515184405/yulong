@@ -24,11 +24,11 @@
     <div class="layui-card-body">
         <table class="layui-hide" id="test-table-toolbar" lay-filter="test-table-toolbar"></table>
 
-        <script type="text/html" id="test-table-toolbar-toolbarDemo">
+       <!-- <script type="text/html" id="test-table-toolbar-toolbarDemo">
             <div class="layui-btn-container">
                 <a href="/widget/info" class="layui-btn layui-btn-sm">添加组件</a>
             </div>
-        </script>
+        </script>-->
 
         <script type="text/html" id="switchTpl">
             <input type="checkbox" name="recommend" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" {{ d.recommend == 1 ? 'checked' : '' }}>

@@ -46,7 +46,7 @@ class UserController extends CommonController
 
     public function actionIndex()
     {
-        $uid = 0;
+        $uid = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $params = Yii::$app->request->get();
         $status = isset($params['status']) ? $params['status'] : 1;
         $limit =20; //每页显示20条
@@ -64,7 +64,7 @@ class UserController extends CommonController
     //按分类取组件
     public function limitPage($params,$condition){
         /*按分类取组件*/
-        $uid = 0;
+        $uid = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $type_id = isset($params['type']) ? $params['type'] : '';
         $type_id = $type_id != 0 ? $type_id : '';
         $widgetData = UserCollect::find()->joinWith('collect_widget')->where($condition)->asArray()->all();
@@ -99,7 +99,7 @@ class UserController extends CommonController
     //取所有收藏的所有分类
     public function collectType($condition){
         //取分类
-        $uid = 0;
+        $uid = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $typeArr = [];
         $widget = UserCollect::find()->joinWith('collect_widget')->where($condition)->asArray()->all();
         $typeArr[0] = array('title'=>'全部分类','number'=>count($widget));
@@ -119,7 +119,7 @@ class UserController extends CommonController
     //我的收藏
     public function actionCollect()
     {
-        $uid = 0;
+        $uid = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $params = Yii::$app->request->get();
         //取所有分类
         $collectTypeData = $this->collectType(['user_collect.u_id'=>$uid,'widget.status'=>1]);
@@ -139,6 +139,7 @@ class UserController extends CommonController
         $widget_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(Yii::$app->request->isPost){
             $params = $_POST;
+            $params['u_id'] = Yii::$app->user->id;
             //存widgetModel数据
             $widget_id2 = Widget::insertUpdate($params,$widget_id);
             if($widget_id2){
@@ -171,7 +172,7 @@ class UserController extends CommonController
     //下载历史
     public function actionDownHistory()
     {
-        $uid = 0;
+        $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
         $params = Yii::$app->request->get();
         $limit =20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
@@ -206,7 +207,7 @@ class UserController extends CommonController
     //我的关注
     public function actionGuanZhu()
     {
-        $uid = 0;
+        $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
         $guanZhu = UserGuanzhu::find()->where(['u_id'=>$uid])->asArray()->all();
         $data = [
             'guanZhu'=>$guanZhu,

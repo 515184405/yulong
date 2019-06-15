@@ -1,1 +1,0 @@
-$(function(){var t=function(){0===$(".syntaxhighlighter").length?setTimeout(t,10):$(".syntaxhighlighter").each(function(){var t=$(this),i=t.find("td.gutter"),h=t.find("td.code");i.children(".line").each(function(t){var i=$(this),n=h.find(".line:nth-child("+(t+1)+")").height()||0;n=n?n+="px":"auto",i.attr("style","height: "+n+" !important")})})};t()});

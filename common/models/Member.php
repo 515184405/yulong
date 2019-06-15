@@ -23,6 +23,7 @@ use yii\web\IdentityInterface;
  * @property int $updated_time 修改时间
  * @property int $login_time 上一次登录时间
  * @property int $update_password 修改密码次数
+ * @property int $status 0为有效用户 1为无效用户
  */
 class Member extends ActiveRecord implements IdentityInterface
 {
@@ -42,7 +43,7 @@ class Member extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'sex', 'created_time', 'updated_time', 'login_time'], 'required'],
-            [['sex', 'type', 'created_time', 'updated_time', 'login_time', 'update_password'], 'integer'],
+            [['sex','status', 'type', 'created_time', 'updated_time', 'login_time', 'update_password'], 'integer'],
             [['username', 'password', 'openid'], 'string', 'max' => 70],
             [['province', 'city'], 'string', 'max' => 25],
             [['avatar', 'accessToken'], 'string', 'max' => 255],
@@ -69,6 +70,7 @@ class Member extends ActiveRecord implements IdentityInterface
             'updated_time' => 'Updated Time',
             'login_time' => 'Login Time',
             'update_password' => 'Update Password',
+            'status' => 'Status'
         ];
     }
 

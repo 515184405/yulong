@@ -1,5 +1,7 @@
 <?php
 $sign = $this->params['sign'];
+/*用户信息*/
+$userInfo = $this->params['userInfo'];
 //今天是否签到
 $time = getdate(time());
 $lastTime = getdate(strtotime($sign['last_change_time']));
@@ -60,8 +62,8 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
         <?php }else{ ?>
             <button class="js_qiandao css_qiandao">签 到</button>
         <?php } ?>
-        <div class="userInfo-avatar-box"><img src="//t.cn/RCzsdCq" class="userInfo-avatar"></div>
-        <p class="userInfo-name">依鸣 <i class="iconfont userInfo-vip">&#xe68e;</i></p>
+        <div class="userInfo-avatar-box"><img src="<?=$userInfo['avatar']?>" class="userInfo-avatar"></div>
+        <p class="userInfo-name"><?=$userInfo['username']?><i class="iconfont userInfo-vip">&#xe68e;</i></p>
     </div>
     <ul class="userInfo-info clearfix">
         <li class="userInfo-item"><span>9999</span>
