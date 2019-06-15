@@ -4,6 +4,7 @@ namespace frontend\controllers;
 use common\models\CaseType;
 use common\models\Banner;
 use common\models\Cases;
+use common\models\Member;
 use common\models\News;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -15,9 +16,7 @@ use yii\base\InvalidArgumentException;
 use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
+use common\models\LoginForm2;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -63,14 +62,36 @@ class SiteController extends CommonController
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            $model->password = '';
-
-            return $this->renderPartial('login');
+        $params = [
+            'username' => '1111',
+            'sex' => 0,
+            'openid' => '222222222',
+            'accessToken' => '111111111',
+            'province' => '辽宁',
+            'city' => '葫芦岛',
+            'avatar' => '1.png',
+            'type' => 1,
+            'created_time' => time(),
+            'updated_time' => time(),
+            'login_time' => time(),
+            'update_password' => 0
+        ];
+        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
+        $model = new LoginForm2();
+        $model->setAttributes($params);
+        if($member){
+            if($model->login()){
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+            }
+        }else{
+            $member = new Member();
+            $member->setAttributes($params);
+            //打印出个人信息
+            if ($member->save() && $model->login()) {
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+            } else {
+                return $this->renderPartial('login');
+            }
         }
     }
 
@@ -268,8 +289,43 @@ class SiteController extends CommonController
         $openid = $auth->get_openid();
         $qc = new \QC($accessToken, $openid);
         $userinfo = $qc->get_user_info();
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
         //打印出个人信息
-        var_dump($userinfo);
+        $params = [
+           'username' => $userinfo->nickname,
+            'sex' => $userinfo->gender == "男" ? 0 : 1,
+            'province' => $userinfo->gprovince,
+            'city' => $userinfo->city,
+            'avatar' => $userinfo->figureurl_2,
+            'accessToken' => $accessToken,
+            'openid' => $openid,
+            'type' => 'QQ',
+            'created_time' => time(),
+            'updated_time' => time(),
+            'login_time' => time(),
+            'update_password' => 0
+        ];
+        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
+        $model = new LoginForm2();
+        $model->setAttributes($params);
+        if($member){
+            if($model->login()){
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+            }
+        }else{
+            $member = new Member();
+            $member->setAttributes($params);
+            //打印出个人信息
+            if ($member->save() && $model->login()) {
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+            } else {
+                return $this->renderPartial('login');
+            }
+        }
     }
 
     //图片上传

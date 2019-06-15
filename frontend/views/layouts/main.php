@@ -56,7 +56,7 @@ AppAsset::register($this);
                 <li class="user-box js_user_box">
                     <a href="javascript:;"><img src="//t.cn/RCzsdCq" class="layui-nav-img">依鸣</a><i class="iconfont user-icon"></i>
                     <dl class="fy-nav-child transition js_nav_child">
-                        <dd><a href="/user">个人中心</a></dd>
+                        <dd><a target="_blank" href="/user">个人中心</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
                         <dd class="t-c" style="border-top:1px solid #ddd"><a href="javascript:;">退出</a></dd>
                     </dl>

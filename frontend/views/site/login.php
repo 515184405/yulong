@@ -53,7 +53,7 @@
     <h2 class="login-title"><img src="/asset/static/image/logo2.png" alt=""></h2>
     <!--    <p class="login-desc">用户登录</p>-->
     <div class="login-type">
-        <a href="#">
+        <a target="_blank" href="/site/qqlogin">
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 登陆</p>
         </a>
