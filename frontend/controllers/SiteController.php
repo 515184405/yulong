@@ -297,7 +297,7 @@ class SiteController extends CommonController
         $params = [
            'username' => $userinfo['nickname'],
             'sex' => $userinfo['gender'] == "男" ? 0 : 1,
-            'province' => $userinfo['gprovince'],
+            'province' => $userinfo['province'],
             'city' => $userinfo['city'],
             'avatar' => $userinfo['figureurl_2'],
             'accessToken' => $accessToken,
