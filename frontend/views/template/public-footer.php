@@ -32,7 +32,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 登陆</p>
         </a>
-        <a href="#">
+        <a target="_blank"  href="javascript:layer.msg('正在开发中...');">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪登陆</p>
         </a>
@@ -50,11 +50,11 @@
     <p class="t-c red">QQ，新浪是独立账号信息不互通</p>
     <!--    <p class="login-desc">用户注册</p>-->
     <div class="login-type">
-        <a target="_blank" href="/qqlogin">
+        <a target="_blank" href="/site/qqlogin">
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 注册</p>
         </a>
-        <a href="#">
+        <a target="_blank"  href="javascript:layer.msg('正在开发中...');">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪注册</p>
         </a>
