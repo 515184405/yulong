@@ -33,7 +33,7 @@ class CommonController extends \yii\web\Controller{
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
