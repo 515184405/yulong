@@ -280,7 +280,7 @@ class SiteController extends CommonController
         $model->setAttributes($params);
         if($member){
             if($model->login()){
-                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();if(location.href.indexOf('login')!=-1){location.href="/user"}</script>";
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();if(location.href.indexOf('login')!=-1){location.href='/user'}</script>";
             }
         }else{
             $member = new Member();
