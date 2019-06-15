@@ -62,7 +62,7 @@ class SiteController extends CommonController
        if (!Yii::$app->user->isGuest) {
             return $this->redirect('/user');
         }
-        /* $params = [
+        $params = [
             'username' => '1111',
             'sex' => 0,
             'openid' => '222222222',
@@ -89,10 +89,10 @@ class SiteController extends CommonController
             //打印出个人信息
             if ($member->save() && $model->login()) {
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
-            } else {*/
+            } else {
                 return $this->renderPartial('login');
-           /* }
-        }*/
+            }
+        }
     }
 
     /**

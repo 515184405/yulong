@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Member;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use Yii;
@@ -76,6 +77,12 @@ class CommonController extends \yii\web\Controller{
             'recommend_case' => $recommend_case,
             'recommend_widget' => $recommend_widget
         );
+
+        //用户信息
+        $user_id = Yii::$app->user->id;
+        $userInfo = Member::findOne($user_id);
+        //向公共页面传递数据
+        Yii::$app->view->params['userInfo'] = $userInfo;
 
         \Yii::$app->view->params['recommend'] = $recommend;
     }
