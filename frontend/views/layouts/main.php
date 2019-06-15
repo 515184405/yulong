@@ -58,7 +58,7 @@ AppAsset::register($this);
                     <dl class="fy-nav-child transition js_nav_child">
                         <dd><a target="_blank" href="/user">个人中心</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
-                        <dd class="t-c" style="border-top:1px solid #ddd"><a href="javascript:;">退出</a></dd>
+                        <dd class="t-c" style="border-top:1px solid #ddd"><a href="/site/logout">退出</a></dd>
                     </dl>
                 </li>
                 <?php } ?>
