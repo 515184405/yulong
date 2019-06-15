@@ -289,18 +289,17 @@ class SiteController extends CommonController
         $openid = $auth->get_openid();
         $qc = new \QC($accessToken, $openid);
         $userinfo = $qc->get_user_info();
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         //打印出个人信息
         $params = [
-           'username' => $userinfo->nickname,
-            'sex' => $userinfo->gender == "男" ? 0 : 1,
-            'province' => $userinfo->gprovince,
-            'city' => $userinfo->city,
-            'avatar' => $userinfo->figureurl_2,
+           'username' => $userinfo['nickname'],
+            'sex' => $userinfo['gender'] == "男" ? 0 : 1,
+            'province' => $userinfo['gprovince'],
+            'city' => $userinfo['city'],
+            'avatar' => $userinfo['figureurl_2'],
             'accessToken' => $accessToken,
             'openid' => $openid,
             'type' => 1,
