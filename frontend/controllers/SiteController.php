@@ -59,10 +59,10 @@ class SiteController extends CommonController
      */
     public function actionLogin()
     {
-       /* if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+       if (!Yii::$app->user->isGuest) {
+            return $this->redirect('/user');
         }
-        $params = [
+        /* $params = [
             'username' => '1111',
             'sex' => 0,
             'openid' => '222222222',
@@ -313,7 +313,7 @@ class SiteController extends CommonController
         $model->setAttributes($params);
         if($member){
             if($model->login()){
-                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();if(location.href.indexOf('login')!=-1){location.href='/user'}</script>";
+                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             }
         }else{
             $member = new Member();
