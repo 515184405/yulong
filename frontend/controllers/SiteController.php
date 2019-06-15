@@ -303,7 +303,7 @@ class SiteController extends CommonController
             'avatar' => $userinfo->figureurl_2,
             'accessToken' => $accessToken,
             'openid' => $openid,
-            'type' => 'QQ',
+            'type' => 1,
             'created_time' => time(),
             'updated_time' => time(),
             'login_time' => time(),
@@ -320,7 +320,6 @@ class SiteController extends CommonController
             $member = new Member();
             $member->setAttributes($params);
             //打印出个人信息
-            var_dump($member->save());die;
             if ($member->save() && $model->login()) {
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {
