@@ -136,12 +136,6 @@ class UserController extends CommonController
     //上传或者修改
     public function actionInfo()
     {
-
-        $rootDir = '../../frontend/web/widget_file/32/';
-        $extractTo = '../../frontend/views/widget/32/';
-        $this->getDir($rootDir,$extractTo);
-
-
         $widget_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(Yii::$app->request->isPost){
             $params = $_POST;
@@ -318,6 +312,8 @@ class UserController extends CommonController
                     }else{
                         $this->unRar($fileSrc,$rootDir);
                     }
+                    $viewDir = '../../frontend/web/widget_file/'.$id.'/';
+                    $this->getDir($rootDir,$viewDir);
                     $widget = Widget::findOne($id);
                     $widget->download = '/widget_file/' . $id . '/' . $name;
                     if($widget->save()){
