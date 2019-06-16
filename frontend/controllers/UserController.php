@@ -136,6 +136,12 @@ class UserController extends CommonController
     //上传或者修改
     public function actionInfo()
     {
+
+        $rootDir = '../../frontend/web/widget_file/32/';
+        $extractTo = '../../frontend/views/widget/32/';
+        $this->getDir($rootDir,$extractTo);
+
+
         $widget_id = isset($_GET['id']) ? $_GET['id'] : '';
         if(Yii::$app->request->isPost){
             $params = $_POST;
@@ -366,5 +372,26 @@ class UserController extends CommonController
             $entry->extract($extractTo); // extract to the current dir
         }
         rar_close($rar_file);
+    }
+
+    //复制.html文件
+    public function getDir($path,$extractTo){
+
+        if(is_dir($path)){
+
+            $dir =  scandir($path);
+            foreach ($dir as $value){
+                $sub_path =$path .'/'.$value;
+                if($value == '.' || $value == '..'){
+                    continue;
+                }else if(is_dir($sub_path)){
+                    $this->getDir($sub_path,$extractTo);
+                }else{
+                    if(end(explode('.',$value)) === 'html'){
+                        copy($path. '/'.$value,$extractTo.$value);
+                    };
+                }
+            }
+        }
     }
 }
