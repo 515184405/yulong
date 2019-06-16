@@ -312,7 +312,7 @@ class UserController extends CommonController
                     }else{
                         $this->unRar($fileSrc,$rootDir);
                     }
-                    $viewDir = '../../frontend/web/widget_file/'.$id.'/';
+                    $viewDir = '../../frontend/views/widget/'.$id.'/';
                     $this->getDir($rootDir,$viewDir);
                     $widget = Widget::findOne($id);
                     $widget->download = '/widget_file/' . $id . '/' . $name;
