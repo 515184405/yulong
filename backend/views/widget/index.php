@@ -40,6 +40,8 @@
 
         <script type="text/html" id="test-table-toolbar-barDemo">
             <div class="layui-btn-group">
+                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="params">静态配置</a>
+                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="views">视图配置</a>
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
@@ -99,7 +101,7 @@
                         }
                     }}
                 ,{field:'desc', title: '描述'}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:250}
             ]]
             ,done(res){
             }
@@ -185,6 +187,10 @@
                     }
                 });
 
+            }else if(obj.event == 'params'){
+                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/widget_file/'+data.id;
+            }else if(obj.event == 'views'){
+                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget/'+data.id;
             }
         });
 

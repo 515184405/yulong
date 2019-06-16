@@ -62,7 +62,21 @@ class WidgetController extends CommonController
         }
 //        var_dump($data);die;
         return $this->render('info',compact('data'));
+
         return $this->render('info');
+    }
+
+    //配置文件
+    public function actionParams()
+    {
+        //读数据
+        $id = isset($_GET['id']) ? $_GET['id'] : '';
+        if(!$id) return 'ID不存在';
+//        $dir = '../../frontend/web/widget_file/'.$id.'/';
+//        $path = isset($_GET['dir']) ? $_GET['dir'] : $dir;
+        //$result = $this->getDir($path);
+
+        return $this->render('params',compact('result','path'));
     }
 
 //    //设置为推荐

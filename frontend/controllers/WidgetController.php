@@ -25,6 +25,7 @@ class WidgetController extends CommonController
     {
         $id = Yii::$app->request->get('id');
         $title = Yii::$app->request->get('title');
+        $dir = Yii::$app->request->get('dir');
         $create_time = Yii::$app->request->get('create_time');
         $model = Widget::findOne($id);
         if(!isset($id) || !isset($create_time) || !$model || ($model->create_time != $create_time)){
@@ -33,6 +34,6 @@ class WidgetController extends CommonController
         //静态文件路由
         $url = '/'.Yii::$app->params['widget_dir'].'/'.$id.'/';
         $view_url = '/widget/widget/'.$create_time.'/'.$id.'/';
-        return $this->renderPartial($id.'/'.$title,compact('url','view_url'));
+        return $this->renderPartial($id.'/'.$title.'.html',compact('url','view_url'));
     }
 }
