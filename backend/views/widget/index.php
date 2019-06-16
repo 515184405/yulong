@@ -188,9 +188,11 @@
                 });
 
             }else if(obj.event == 'params'){
-                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/widget_file/'+data.id;
+                //window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/widget_file/'+data.id;
+                window.location.href = '/widget/params/?id='+data.id+'&dir=/www/wwwroot/www.yu313.cn/yulong/frontend/web/widget_file/'+data.id;
             }else if(obj.event == 'views'){
-                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget/'+data.id;
+                //window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget/'+data.id;
+                window.location.href = '/widget/params/?id='+data.id+'&dir=/www/wwwroot/www.yu313.cn/yulong/frontend/views/widget/'+data.id;
             }
         });
 
