@@ -184,10 +184,10 @@
                 },
                 error: function(){
                     layer.closeAll();
-                    _this.disabled=false;
-                    layer.msg('操作失败', {icon: 1}, function(){
-                        window.location.reload();
-                    })
+                    // _this.disabled=false;
+                    // layer.msg('操作失败', {icon: 1}, function(){
+                    //     window.location.reload();
+                    // })
                 }
             });
             return false;
