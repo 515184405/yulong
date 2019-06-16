@@ -307,24 +307,22 @@ class UserController extends CommonController
 
                 if($model->file->saveAs($fileSrc)){
                     //解压缩
-//                    if($zip == 'zip'){
-//                        $this->unZip($_FILES['file'],$rootDir);
-//                    }else{
-//                        $this->unRar($_FILES['file'],$rootDir);
-//                    }
-
-
+                    if($zip == 'zip'){
+                        $this->unZip($fileSrc,$rootDir);
+                    }else{
+                        $this->unRar($fileSrc,$rootDir);
+                    }
                     $widget = Widget::findOne($id);
-                    $widget->download = '/minWidget/' . $id . '/' . $name;
+                    $widget->download = '/widget_file/' . $id . '/' . $name;
                     if($widget->save()){
                         return Json::encode(array('code'=>'100000','message'=>'上传成功！','data'=>array(
                             'name' => $name,
-                            'download' => '/minWidget/'.$id.'/'.$name,
+                            'download' => '/widget_file/'.$id.'/'.$name,
                         )));
                     }else{
                         return Json::encode(array('code'=>'100000','message'=>'图片上传成功，但并未保存到库中！','data'=>array(
                             'name' => $name,
-                            'download' => '/minWidget/'.$id.'/'.$name,
+                            'download' => '/widget_file/'.$id.'/'.$name,
                         )));
                     }
 
@@ -334,5 +332,39 @@ class UserController extends CommonController
             }
             return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
         }
+    }
+
+    public function unZip($filepath,$extractTo){
+
+        $zip = new \ZipArchive();
+        $res = $zip->open($filepath);
+        if ($res === TRUE) {
+            //解压缩到$extractTo指定的文件夹
+            $zip->extractTo($extractTo);
+            $zip->close();
+        } else {
+            echo 'failed, code:' . $res;
+        }
+    }
+
+    public function unRar($filepath,$extractTo){
+
+        $fileName = iconv('utf-8','gb2312',$filepath);
+//        echo $fileName . '</br>';
+
+        $rar_file = rar_open($fileName) or die('could not open rar');
+        $list = rar_list($rar_file) or die('could not get list');
+//        print_r($list);
+
+        foreach($list as $file) {
+            $pattern = '/\".*\"/';
+            preg_match($pattern, $file, $matches, PREG_OFFSET_CAPTURE);
+            $pathStr=$matches[0][0];
+            $pathStr=str_replace("\"",'',$pathStr);
+//            print_r($pathStr);
+            $entry = rar_entry_get($rar_file, $pathStr) or die('</br>entry not found');
+            $entry->extract($extractTo); // extract to the current dir
+        }
+        rar_close($rar_file);
     }
 }

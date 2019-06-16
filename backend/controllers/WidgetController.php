@@ -157,11 +157,11 @@ class WidgetController extends CommonController
 
                 if($model->file->saveAs($fileSrc)){
                     //解压缩
-//                    if($zip == 'zip'){
-//                        $this->unZip($_FILES['file'],$rootDir);
-//                    }else{
-//                        $this->unRar($_FILES['file'],$rootDir);
-//                    }
+                    if($zip == 'zip'){
+                        $this->unZip($_FILES['file'],$rootDir);
+                    }else{
+                        $this->unRar($_FILES['file'],$rootDir);
+                    }
 
 
                     $widget = Widget::findOne($id);
@@ -199,5 +199,14 @@ class WidgetController extends CommonController
         }
         $data = WidgetType::find()->asArray()->all();
         return Json::encode(array('code'=>'100000','message'=>'查询成功！','data'=>$data));
+    }
+
+    public function unZip($fileSrc,$enterSrc){
+        $zip = new \ZipArchive();//新建一个ZipArchive的对象
+        if ($zip->open($fileSrc) === TRUE){
+
+            $zip->extractTo($enterSrc);//假设解压缩到在当前路径下images文件夹的子文件夹php
+            $zip->close();//关闭处理的zip文件
+        }
     }
 }
