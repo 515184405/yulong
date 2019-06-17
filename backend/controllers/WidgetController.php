@@ -2,9 +2,9 @@
 namespace backend\controllers;
 
 use common\models\Widget;
-use common\models\widgetTag;
-use common\models\widgetTagJoin;
-use common\models\widgetType;
+use common\models\WidgetTag;
+use common\models\WidgetTagJoin;
+use common\models\WidgetType;
 use Yii;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
@@ -55,15 +55,13 @@ class WidgetController extends CommonController
 
         //查询组件数据
         if($widget_id){
-            $data['widget'] = widget::find()->where(['id'=>$widget_id])->asArray()->one();
+            $data['widget'] = Widget::find()->where(['id'=>$widget_id])->asArray()->one();
             if(!$data['widget']){
                 return '组件不存在';
             }
         }
 //        var_dump($data);die;
         return $this->render('info',compact('data'));
-
-        return $this->render('info');
     }
 
     //配置文件
