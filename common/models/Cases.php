@@ -39,6 +39,7 @@ class Cases extends \yii\db\ActiveRecord
             [['desc'], 'string'],
             [['create_time','recommend'], 'integer'],
             [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
+            [['content_url'], 'string', 'max' => 1000],
         ];
     }
 

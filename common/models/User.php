@@ -1,6 +1,9 @@
 <?php
+
 namespace common\models;
+
 use Yii;
+
 /**
  * This is the model class for table "user".
  *
@@ -24,6 +27,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
      public $password;
      public $authKey;
      public $accessToken;
+
      private static $users = [
          '100' => [
              'id' => '100',
@@ -41,6 +45,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
          ],
      ];
  */
+
     /**
      * @inheritdoc
      */
@@ -48,6 +53,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
     {
         return 'user';
     }
+
     /**
      * @inheritdoc
      */
@@ -60,6 +66,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
             [['login_ip'], 'string', 'max' => 20]
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -80,6 +87,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
             'update_password' => 'Update Password',
         ];
     }
+
     /*查数据*/
     public static function search($params){
         $query = static::find();
@@ -99,6 +107,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
         $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
         return compact('count', 'list');
     }
+
     //添加与修改
     public static function insetUpdate($params,$user_id = null){
         $user = new User();
@@ -119,6 +128,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
         }
         return false;
     }
+
     /**
      * @inheritdoc
      */
@@ -127,6 +137,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
         return static::findOne($id);
         //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
+
     /**
      * @inheritdoc
      */
@@ -138,8 +149,10 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
                 return new static($user);
             }
         }
+
         return null;*/
     }
+
     /**
      * Finds user by username
      *
@@ -152,17 +165,21 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
             ->where(['username' => $username])
             ->asArray()
             ->one();
+
         if($user){
             return new static($user);
         }
+
         return null;
         /*foreach (self::$users as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
         }
+
         return null;*/
     }
+
     /**
      * @inheritdoc
      */
@@ -170,6 +187,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
     {
         return $this->id;
     }
+
     /**
      * @inheritdoc
      */
@@ -177,6 +195,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
     {
         return $this->authKey;
     }
+
     /**
      * @inheritdoc
      */
@@ -184,6 +203,7 @@ class User extends \yii\db\ActiveRecord  implements \yii\web\IdentityInterface
     {
         return $this->authKey === $authKey;
     }
+
     /**
      * Validates password
      *
