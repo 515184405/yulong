@@ -148,7 +148,7 @@ class UserController extends CommonController
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
                 }
                 //生成视图地址
-                $rootDir = '../../frontend/views/widget/'.$widget_id2;
+                $rootDir = '../../frontend/views/widget-file/'.$widget_id2;
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 //生成静态文件地址
                 $rootDir2 = '../../frontend/web/widget_file/'.$widget_id2;
@@ -312,7 +312,7 @@ class UserController extends CommonController
                     }else{
                         $this->unRar($fileSrc,$rootDir);
                     }
-                    $viewDir = '../../frontend/views/widget/'.$id.'/';
+                    $viewDir = '../../frontend/views/widget-file/'.$id.'/';
                     $this->getDir($rootDir,$viewDir);
                     $widget = Widget::findOne($id);
                     $widget->download = '/widget_file/' . $id . '/' . $name;
