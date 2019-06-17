@@ -185,9 +185,9 @@
                 error: function(){
                     layer.closeAll();
                     _this.disabled=false;
-                    layer.msg('操作失败', {icon: 5}, function(){
-                        window.location.reload();
-                    })
+                    // layer.msg('操作失败', {icon: 5}, function(){
+                    //     window.location.reload();
+                    // })
                 }
             });
             return false;

@@ -62,37 +62,37 @@ class SiteController extends CommonController
        if (!Yii::$app->user->isGuest) {
             return $this->redirect('/user');
         }
-        $params = [
-            'username' => '1111',
-            'sex' => 0,
-            'openid' => '222222222',
-            'accessToken' => '111111111',
-            'province' => '辽宁',
-            'city' => '葫芦岛',
-            'avatar' => '1.png',
-            'type' => 1,
-            'created_time' => time(),
-            'updated_time' => time(),
-            'login_time' => time(),
-            'update_password' => 0
-        ];
-        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
-        $model = new LoginForm2();
-        $model->setAttributes($params);
-        if($member){
-            if($model->login()){
-                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
-            }
-        }else{
-            $member = new Member();
-            $member->setAttributes($params);
-            //打印出个人信息
-            if ($member->save() && $model->login()) {
-                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
-            } else {
+//        $params = [
+//            'username' => '1111',
+//            'sex' => 0,
+//            'openid' => '222222222',
+//            'accessToken' => '111111111',
+//            'province' => '辽宁',
+//            'city' => '葫芦岛',
+//            'avatar' => '1.png',
+//            'type' => 1,
+//            'created_time' => time(),
+//            'updated_time' => time(),
+//            'login_time' => time(),
+//            'update_password' => 0
+//        ];
+//        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
+//        $model = new LoginForm2();
+//        $model->setAttributes($params);
+//        if($member){
+//            if($model->login()){
+//                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+//            }
+//        }else{
+//            $member = new Member();
+//            $member->setAttributes($params);
+//            //打印出个人信息
+//            if ($member->save() && $model->login()) {
+//                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
+//            } else {
                 return $this->renderPartial('login');
-            }
-        }
+//            }
+//        }
     }
 
     /**
