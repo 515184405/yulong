@@ -19,9 +19,10 @@ Thumbs.db
 
 # composer vendor dir
 /vendor
-/uploads
-/widget-file
-/widget_file
+/backend/web/uploads
+/frontend/web/uploads
+/frontend/views/widget-file
+/frontend/web/widget_file
 
 # composer itself is not needed
 composer.phar
