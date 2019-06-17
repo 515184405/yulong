@@ -65,8 +65,14 @@ use kucha\ueditor\UEditor;
                     <input type="hidden" value="<?=isset($data['widget']['download']) ? $data['widget']['download'] : ''?>" class="js_website" name="website">
                     <a href="<?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?>" id="zip-upload-demoText"><?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?></a>
                 </div>
-            </div>t
-
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">入口文件名</label>
+                <div class="layui-input-block">
+                    <input type="text" value="<?=isset($data['widget']['enter_file']) ? $data['widget']['enter_file'] : ''?>" name="enter_file" autocomplete="off" placeholder="如何入口文件为index可不填" class="layui-input">
+                    <div style="color:#f00;line-height: 25px;">只需要填写文件名即可 例：入口文件名components.html，则只需填写components</div>
+                </div>
+            </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">作品来源</label>
                 <div class="layui-input-block">

@@ -43,6 +43,7 @@ class Widget extends \yii\db\ActiveRecord
             [['u_id','look', 'collect', 'down_count','create_time','recommend','is_down','status','down_money'], 'integer'],
             [['title', 'banner_url', 'type', 'source', 'download', 'website','desc'], 'string', 'max' => 255],
             [['fail_msg'],'string','max'=>100],
+            [['enter_file'],'string','max'=>30],
         ];
     }
 
@@ -71,6 +72,7 @@ class Widget extends \yii\db\ActiveRecord
             'u_id' => "U Id",
             'down_money' => 'Down Money',
             'fail_msg' => 'Fail Msg',
+            'enter_file' => 'Enter File',
         ];
     }
 
