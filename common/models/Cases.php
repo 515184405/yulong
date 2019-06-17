@@ -19,6 +19,7 @@ use Yii;
  * @property string $content_url
  * @property string $type_id
  * @property string $tag_id
+ * @property int $recommend
  */
 class Cases extends \yii\db\ActiveRecord
 {
@@ -37,8 +38,8 @@ class Cases extends \yii\db\ActiveRecord
     {
         return [
             [['desc'], 'string'],
-            [['create_time','recommend'], 'integer'],
-            [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'content_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
+            [['create_time', 'recommend'], 'integer'],
+            [['title', 'pc_link', 'wap_link', 'wx_link', 'banner_url', 'header_url', 'type_id', 'tag_id'], 'string', 'max' => 255],
             [['content_url'], 'string', 'max' => 1000],
         ];
     }
@@ -64,6 +65,7 @@ class Cases extends \yii\db\ActiveRecord
             'recommend' => 'Recommend',
         ];
     }
+
     /*
      * 关联case_tag_join表
      * */
@@ -83,20 +85,20 @@ class Cases extends \yii\db\ActiveRecord
 
     /*查数据*/
     public static function search($params){
-       $query = static::find();
-       //按title查找
-       if(isset($params['title'])){
-           $query->andFilterWhere(['like','Cases.title',$params['title']]);
-       }
-       $page = isset($params['page']) ? $params['page'] : '';
-       $limit = isset($params['limit']) ? $params['limit'] : '';
-       $count = 0;
-       if($page && $limit){
-           $offset = ($page - 1) * $limit;
-           $count = $query->count();
-           $query->offset($offset)->limit($limit);
-       }
-       $list = $query->joinWith('caseType')->orderBy(['id' => SORT_DESC])->asArray()->all();
+        $query = static::find();
+        //按title查找
+        if(isset($params['title'])){
+            $query->andFilterWhere(['like','Cases.title',$params['title']]);
+        }
+        $page = isset($params['page']) ? $params['page'] : '';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->joinWith('caseType')->orderBy(['id' => SORT_DESC])->asArray()->all();
         return compact('count', 'list');
     }
 
@@ -119,6 +121,6 @@ class Cases extends \yii\db\ActiveRecord
             }
             return $case_id;
         };
-       return false;
+        return false;
     }
 }

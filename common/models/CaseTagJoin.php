@@ -54,7 +54,10 @@ class CaseTagJoin extends \yii\db\ActiveRecord
 
     public function insertUpdate($cases_id,$caseTag_id){
         $models = new static();
-        $models::deleteAll('case_id in('.$cases_id.')');
+        $oneModel = $models->findOne(['case_id'=>$cases_id]);
+        if($oneModel){
+            $models::deleteAll('case_id in('.$cases_id.')');
+        }
         foreach ($caseTag_id as $val){
             $model = new static();
             $model->setAttributes(['tag_id' => $val, 'case_id' => $cases_id]);
