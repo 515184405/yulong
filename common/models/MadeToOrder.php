@@ -91,7 +91,7 @@ class MadeToOrder extends \yii\db\ActiveRecord
     public static function insertUpdate($params,$dingzhi_id = null){
         $model = new static();
         $params['create_time'] = time();
-        $params['u_id'] = 0;  //添加登录后改成登录用户的uid
+        $params['u_id'] = Yii::$app->user->id;  //添加登录后改成登录用户的uid
         if($dingzhi_id){
             $model = $model::findOne($dingzhi_id);
         }
