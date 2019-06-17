@@ -190,7 +190,7 @@
             }else if(obj.event == 'params'){
                 window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/widget_file/'+data.id;
             }else if(obj.event == 'views'){
-                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget/'+data.id;
+                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget-file/'+data.id;
             }
         });
 
