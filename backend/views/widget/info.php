@@ -49,7 +49,7 @@ use kucha\ueditor\UEditor;
                 <label class="layui-form-label">作品缩略图</label>
                 <div class="layui-input-block">
                     <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="test-upload-normal">上传图片</button><span class="theme-red ml10">建议上传4:3，图片大小不要超过2M</span>
-                    <input type="hidden" lay-verify="required" lay-text="作品缩略图必传" value="<?=isset($data['widget']['banner_url']) ? $data['widget']['banner_url'] : ''?>" class="js_banner_url" name="banner_url">
+                    <input type="hidden" value="<?=isset($data['widget']['banner_url']) ? $data['widget']['banner_url'] : ''?>" class="js_banner_url" name="banner_url">
                     <div class="layui-upload-list">
                         <img class="layui-upload-img" <?=isset($data['widget']['banner_url']) ? 'src="'.$data['widget']['banner_url'].'"' : ''?>" id="test-upload-normal-img">
                         <p id="test-upload-demoText"></p>
@@ -253,10 +253,6 @@ use kucha\ueditor\UEditor;
         form.on('submit(submit-btn)', function(data) {
             var type = $("#select2").select2("val").join(',');
             var zipFile = $("#upload-zip").next('input[name="file"]').val();
-            if(!type){
-                layer.msg('作品类型必填',{icon:5});
-                return false;
-            }
             if(!zipFile && !$('.js_website').val()){
                 layer.msg('请上传文件压缩包',{icon:5});
                 return false;
