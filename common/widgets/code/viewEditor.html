@@ -1,6 +1,3 @@
-<?php
-	use kucha\ueditor\UEditor;
-?>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -67,19 +64,11 @@
 	<?php if($action == 'updata'){?>
 		<div class="updata" style="width: 998px;">
 			<form action="/widget/params?id=<?=$_GET['id']?>&action=updata&dir=<?php echo $dirPath;?>/&filename=<?php echo $_GET['filename'];?>" method="post" name="myform">
+				<?php
+					$pattern = "/textarea/g";
+					$fileContent = str_replace('textarea','textarea_replace',$fileContent);
+				?>
 				<textarea id="txt" style="padding: 10px;" name="filecontent"><?php echo $fileContent; ?></textarea>
-				<!--<?php /*echo UEditor::widget([
-                    'id'=>'filecontent',
-					'name'=>'filecontent',
-					'value'=>'',
-					'clientOptions'=>[
-						'initialFrameHeight'=>'200',
-						'toolbars'=>[[
-							'source', //源代码
-							'preview', //预览
-						]],
-					]
-				]);*/?>-->
 				<input type="hidden" value="<?php echo $_GET['filename']; ?>" name="filename" />
 				<!--<input class="btn" style="float:right;margin-left:20px;" onclick="clearTxt()" type="button" value="清空" />-->
 				<input class="btn" style="float:right;" type="submit" value="保存" />

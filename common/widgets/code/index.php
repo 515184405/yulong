@@ -63,7 +63,8 @@
 		$fileContent = "坚持就是胜利";
 	if (array_key_exists('filecontent', $_POST)) {
 		// var_dump($_POST);
-		$onlineEditor->putContent(subFilePath($dirPath,$_POST['filename']),$_POST['filecontent']);
+        $fileContent = str_replace('textarea_replace','textarea',$_POST['filecontent']);
+		$onlineEditor->putContent(subFilePath($dirPath,$_POST['filename']),$fileContent);
 		echo "<script>history.go(-2);</script>";
 	}	
 
