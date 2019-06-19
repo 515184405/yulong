@@ -81,7 +81,7 @@ class UnitController extends CommonController {
         //查询下-篇文章
         $next_article = Widget::find()->andFilterWhere(['and',['>', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_ASC])->limit(1)->one();
 
-        $user_id = \Yii::$app->user->id ? \Yii::$app->user->id : 0;
+        $user_id = $widget_item['u_id'];
         $collect = UserCollect::find();
         $guanzhu = UserGuanzhu::find();
         $collectCount = $collect->where(['widget_id'=>$unit_id])->count();
