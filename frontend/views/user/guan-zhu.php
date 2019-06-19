@@ -19,7 +19,7 @@
                 <img class="left user-guanzhu-avatar" src="<?=$val['member']['avatar']?>" alt="">
                 <div class="user-guanzhu-info">
                     <h2 class="overflow-text"><?=$val['member']['username']?></h2>
-                    <p class="overflow-text"><?=$val['member']['province']?><?=$val['member']['province']?></p>
+                    <p class="overflow-text"><?=$val['member']['province']?><?=$val['member']['city']?></p>
                 </div>
             </a>
             <?php }}else{ ?>
