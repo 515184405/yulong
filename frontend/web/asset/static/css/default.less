@@ -417,8 +417,24 @@ header{
                 }
             }
             &:last-child{
-                min-width:100px;
-                max-width: 200px;
+                a{
+                    display: inline-block;
+                    max-width: 200px;
+                    padding-left:37px;
+                    -webkit-box-sizing: border-box;
+                    -moz-box-sizing: border-box;
+                    box-sizing: border-box;
+                    position: relative;
+                }
+                .layui-nav-img{
+                    position: absolute;
+                    left:12px;
+                    top:22px;
+                }
+                i.iconfont{
+                    position: relative;
+                    top:-8px;
+                }
             }
             .login-register-box{
                 -webkit-border-radius: 2px;

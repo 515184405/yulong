@@ -34,7 +34,9 @@ AppAsset::register($this);
 <body>
 <input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
 <div class="wrapper">
+    <?php if(!$userInfo){?>
     <p style="transform: scale(0.7);" class="login-register-box none"><a class="login_btn" href="javascript:;">登 陆</a> <span style="position: relative;top:-1px;">|</span> <a class="register_btn" href="javascript:;">注 册</a></p>
+    <?php } ?>
     <!-- 头部 -->
     <header id="header" class="header transition">
         <div class="fy-container clearfix">
@@ -55,8 +57,9 @@ AppAsset::register($this);
                 <?php }else{ ?>
                 <!--登录后-->
                 <li class="user-box js_user_box">
-                    <a href="javascript:;"><img src="<?=$userInfo['avatar']?>" class="layui-nav-img"><?=$userInfo['username']?></a><i class="iconfont user-icon"></i>
-                    <dl class="fy-nav-child transition js_nav_child">
+                    <img src="<?=$userInfo['avatar']?>" class="layui-nav-img">
+                    <a class="overflow-text" href="javascript:;"><?=$userInfo['username']?></a><i class="iconfont user-icon"></i>
+                    <dl class="fy-nav-child transition js_nav_child t-c">
                         <dd><a href="/user">个人中心</a></dd>
                         <dd><a href="javascript:;">安全管理</a></dd>
                         <dd class="t-c" style="border-top:1px solid #ddd"><a href="/site/logout">退出</a></dd>
