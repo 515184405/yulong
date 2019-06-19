@@ -199,8 +199,6 @@ class Visit extends \yii\db\ActiveRecord
         }else{
             $model->terminal = '电脑访问';
         }
-        var_dump($ip);
-        var_dump($model->save());die;
         $model->save();
     }
 }
