@@ -385,6 +385,12 @@ class UserController extends CommonController
                 }else{
                     if(end(explode('.',$value)) === 'html'){
                         copy($path. '/'.$value,$extractTo.$value);
+//                        $content = file_get_contents($extractTo.$value);
+//                        $filePath = explode('/',$extractTo);
+//                        var_dump($filePath);die;
+/*                        $content = str_replace('<href=','<href=<?=$url?>',$content);*/
+/*                        $content = str_replace('<href=','<href=<?=$url?>',$content);*/
+//                        file_put_contents('1.php',$content);
                     };
                 }
             }
