@@ -44,7 +44,7 @@ class CommonController extends \yii\web\Controller{
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config'=>[
                     //上传图片配置
-                    'imageUrlPrefix' => Yii::$app->params['frontend_url'], /* 图片访问路径前缀 */
+                    'imageUrlPrefix' => Yii::$app->params['backend_url'], /* 图片访问路径前缀 */
                 ]
             ]
         ];
