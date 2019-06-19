@@ -208,7 +208,7 @@ class UserController extends CommonController
     public function actionGuanZhu()
     {
         $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
-        $guanZhu = UserGuanzhu::find()->where(['u_id'=>$uid])->asArray()->all();
+        $guanZhu = UserGuanzhu::find()->joinWith('member')->where(['u_id'=>$uid])->asArray()->all();
         $data = [
             'guanZhu'=>$guanZhu,
         ];

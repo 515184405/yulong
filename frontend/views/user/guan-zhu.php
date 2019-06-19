@@ -16,10 +16,10 @@
         <div class="user-guanzhu-list">
             <?php if(!empty($data['guanZhu'])){ foreach ($data['guanZhu'] as $val) { ?>
             <a href="#" class="user-guanzhu-item ">
-                <img class="left user-guanzhu-avatar" src="//t.cn/RCzsdCq" alt="">
+                <img class="left user-guanzhu-avatar" src="<?=$val['member']['avatar']?>" alt="">
                 <div class="user-guanzhu-info">
-                    <h2 class="overflow-text">伊诺</h2>
-                    <p class="overflow-text">北京市石景山区</p>
+                    <h2 class="overflow-text"><?=$val['member']['username']?></h2>
+                    <p class="overflow-text"><?=$val['member']['province']?><?=$val['member']['province']?></p>
                 </div>
             </a>
             <?php }}else{ ?>
