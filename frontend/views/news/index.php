@@ -18,7 +18,7 @@ use yii\widgets\LinkPager;
                 <p class="nc-info">
                     <i class="iconfont icon-date">&#xe75e;</i><?=date('Y-m-d',$val['create_time'])?>
                     <i class="iconfont">&#xe605;</i><?=is_null($val['look']) ? 0 : $val['look'] ?>
-                    <i class="iconfont icon-type">&#xe6cc;</i><a href="/news/?id=<?=$val['newsType']['title'] ?>"><?=$val['newsType']['title'] ?></a>
+                    <i class="iconfont icon-type">&#xe6cc;</i><a href="/news/?id=<?=$val['newsType']['type_id'] ?>"><?=$val['newsType']['title'] ?></a>
                 </p>
                 <p class="overflow-text2 nc-desc"><?=$val['desc']?></p>
                 <p class="news-tag">
