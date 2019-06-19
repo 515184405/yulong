@@ -46,7 +46,7 @@ class UserGuanzhu extends \yii\db\ActiveRecord
 
     //联查member表
     public function getMember(){
-        return $this->hasOne(Member::className(),['u_id'=>'other_id'])->select(['id','username','province','city','avatar']);
+        return $this->hasOne(Member::className(),['id'=>'other_id'])->select(['id','username','province','city','avatar']);
     }
 
     /*数据存与改*/
