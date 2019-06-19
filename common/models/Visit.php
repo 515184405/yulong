@@ -181,7 +181,7 @@ class Visit extends \yii\db\ActiveRecord
     //获取用户访问信息
     public static function insertUpdate(){
         $model = new static();
-        $user_id = Yii::$app->user->id;
+        $user_id = strval(Yii::$app->user->id);
         $ip = $user_id ? $user_id : $_SERVER['REMOTE_ADDR'];
         $modelOne = $model->find()->where(['or',['ip'=>$ip],['ip'=>$user_id]])->orderBy(['id'=>SORT_DESC])->one();
         $nowDate = getdate(time());
