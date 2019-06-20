@@ -122,10 +122,10 @@
         layer.open({
             type: 1,
             anim: 2,
-            area:['300px','250px'],
+            area:['300px','350px'],
             shade: false,
             title: '扫一扫二维码与我联系', //不显示标题
-            content: '<img style="width: 200px;height:200px;display:block;margin:0 auto;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+            content: '<img style="width: 200px;height:200px;display:block;margin:45px auto 0;" src="/asset/static/image/wx-callme.jpg" alt="">', //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         });
     })
     //底部移动端导航其他链接事件
