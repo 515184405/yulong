@@ -316,9 +316,6 @@ class SiteController extends CommonController
         $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
         $model = new LoginForm2();
         $model->setAttributes($params);
-        if($member->status==1){
-            return '此账户涉嫌多次违规已被封号处理;如有疑问请联系网站管理员解答电话：15321353313 QQ:515184405<a href="/">返回首页</a>';
-        }
         if($member){
             if($model->login()){
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
