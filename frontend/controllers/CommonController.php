@@ -81,6 +81,10 @@ class CommonController extends \yii\web\Controller{
         //用户信息
         $user_id = Yii::$app->user->id;
         $userInfo = Member::findOne($user_id);
+
+        //存用户信息
+        \common\models\Visit::insertUpdate();
+
         //向公共页面传递数据
         Yii::$app->view->params['userInfo'] = $userInfo;
 

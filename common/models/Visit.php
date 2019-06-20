@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\Cookie;
 
 /**
  * This is the model class for table "visit".
@@ -180,6 +181,13 @@ class Visit extends \yii\db\ActiveRecord
 
     //获取用户访问信息
     public static function insertUpdate(){
+
+        if (isset($_COOKIE["user"])){
+            return false;
+        }
+        //明天凌晨
+        $tomorrow = strtotime(date('Y-m-d',strtotime('+1 day')));
+        setcookie("user", "Alex Porter", $tomorrow);
         $model = new static();
         $user_id = strval(Yii::$app->user->id);
         $ip = $user_id ? $user_id : $_SERVER['REMOTE_ADDR'];
