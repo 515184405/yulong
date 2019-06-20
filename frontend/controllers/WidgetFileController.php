@@ -33,7 +33,7 @@ class WidgetFileController extends CommonController
         }
         //静态文件路由
         $url = '/'.Yii::$app->params['widget_dir'].'/'.$id.'/';
-        $view_url = '/widget/widget-file/'.$create_time.'/'.$id.'/';
+        $view_url = '/widget-file/widget/'.$create_time.'/'.$id.'/';
         return $this->renderPartial($id.'/'.$title.'.html',compact('url','view_url'));
     }
 }

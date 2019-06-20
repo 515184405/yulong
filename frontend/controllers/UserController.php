@@ -318,7 +318,7 @@ class UserController extends CommonController
                         $this->unRar($fileSrc,$rootDir);
                     }
                     $viewDir = '../../frontend/views/widget-file/'.$id.'/';
-                    $this->getDir($rootDir,$viewDir);
+                    $this->getDir($rootDir,$viewDir,$rootDir);
                     $widget = Widget::findOne($id);
                     $widget->download = '/widget_file/' . $id . '/' . $name;
                     if($widget->save()){
@@ -375,30 +375,121 @@ class UserController extends CommonController
         rar_close($rar_file);
     }
 
-    //复制.html文件
-    public function getDir($path,$extractTo){
+    //转unicode码
+    public function UnicodeEncode($str){
+        //split word
+        preg_match_all('/./u',$str,$matches);
 
+        $unicodeStr = "";
+        foreach($matches[0] as $m){
+            //拼接
+            $unicodeStr .= "&#".base_convert(bin2hex(iconv('UTF-8',"UCS-4",$m)),16,10);
+        }
+        return $unicodeStr;
+    }
+
+    //根据路由设置文件名
+    public function resetFileName($path,$currentPath){
+       $filename = str_replace($path,'',$currentPath);
+       $filename = explode('/',$filename);
+       if(count($filename) > 1){
+           array_shift($filename);
+       }else{
+           return '';
+       }
+        return join('',$filename);
+    }
+
+    //复制.html文件
+    /*
+     * @path 当前上传文件地址
+     * @extractTo 文件输出地址
+     * @rootDir 文件上传后存放地址
+     * */
+    public function getDir($path,$extractTo,$rootDir){
         if(is_dir($path)){
 
             $dir =  scandir($path);
             foreach ($dir as $value){
-                $sub_path =$path .'/'.$value;
+                if(substr($path,-1) === '/'){
+                    $sub_path = $path.$value;
+                }else{
+                    $sub_path =$path .'/'.$value;
+                }
+
                 if($value == '.' || $value == '..'){
                     continue;
                 }else if(is_dir($sub_path)){
-                    $this->getDir($sub_path,$extractTo);
+                    $this->getDir($sub_path,$extractTo,$rootDir);
                 }else{
-                    if(end(explode('.',$value)) === 'html'){
-                        copy($path. '/'.$value,$extractTo.$value);
-//                        $content = file_get_contents($extractTo.$value);
-//                        $filePath = explode('/',$extractTo);
-//                        var_dump($filePath);die;
-/*                        $content = str_replace('<href=','<href=<?=$url?>',$content);*/
-/*                        $content = str_replace('<href=','<href=<?=$url?>',$content);*/
-//                        file_put_contents('1.php',$content);
+                    $fileNameArr = explode('.',$value);
+                    if(end($fileNameArr) === 'html'){
+                        $this->resetRouter($path,$value,$rootDir);
+                        array_pop($fileNameArr);
+                        if(count($fileNameArr) > 1){
+                            $fileNameArr = $fileNameArr.join('.',$fileNameArr);
+                        }
+                        if(preg_match("/[\x7f-\xff]/", $value)){
+                            $value = $this->UnicodeEncode($fileNameArr);
+                        }
+                        $resetName = $this->resetFileName($rootDir,$path);
+                        rename($path. '/'.$value,$extractTo.$resetName.$value);
                     };
                 }
             }
         }
+    }
+
+    //相对路径
+    public function relativeFile($count = 0){
+        $relative = '';
+        for($i = 0;$i < $count;$i++ ){
+            $relative .= '../';
+        }
+        return $relative;
+    }
+    /*
+     * $path 当前上传文件地址
+     * $pathName 文件名
+     * @rootDir 文件上传后存放地址
+     * */
+    public function resetRouter($path,$pathName,$rootDir){
+        $content = file_get_contents($path.'/'.$pathName);
+        preg_match_all('/(?:href|src)=["|\'](.*?[.css|.js|.png|.jpg|.gif|.JPEG|.JPG|.PNG|.html])["|\']/i', $content, $matchs);
+        $matchs = array_unique($matchs[1]);
+        foreach ($matchs as $key => $match) {
+            $rootUrl = '<?=$url?>';
+            $rootViewUrl = '<?=$view_url?>';
+            $currentUrl = $match;
+            if(!preg_match('/[.css|.js|.png|.jpg|.gif|.JPEG|.JPG|.PNG|.html]/',$currentUrl)){
+                continue;
+            }
+            if($count1 = substr_count($currentUrl,'http')){
+                continue;
+            }
+            if($count4 = substr_count($currentUrl,'.html')){
+                $currentUrlArr = end(explode('/',$currentUrl));
+                $currentUrl = str_replace('.html','',$currentUrlArr);
+                if(preg_match("/[\x7f-\xff]/", $currentUrl)){
+                    $currentUrl = $this->UnicodeEncode($currentUrl);
+                }
+                $pathViewName = $this->resetFileName($rootDir,$path);
+                $content = str_replace($match, $rootViewUrl.$currentUrl.$pathViewName, $content);
+                continue;
+            }
+            if($count3 = substr_count($currentUrl,'../')){
+                $path_arr = explode('/',$path);
+                $newPath = array_slice($path_arr,-$count3);
+                $newPath = join('/',$newPath);
+                $newPath = $newPath ? $newPath . '/' : $newPath;
+                $currentUrl = str_replace($this->relativeFile($count3),$newPath,$currentUrl);
+            }
+            if($count2 = substr_count($currentUrl,'./')){
+                $currentUrl = str_replace('./','',$currentUrl);
+            }
+
+            $content = str_replace($match, $rootUrl.$currentUrl, $content); //正则替换
+        }
+        file_put_contents($path.'/'.$pathName,$content);
     }
 }
