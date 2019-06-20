@@ -106,6 +106,11 @@ class SiteController extends CommonController
 
         return $this->goHome();
     }
+    public function actionStatus()
+    {
+        $error_text = '此账户涉嫌多次违规已被封号处理;如有疑问请联系网站管理员解答电话：15321353313 QQ:515184405<a href="/">返回首页</a>';
+        return $this->renderPartial('status',compact('error_text'));
+    }
 
     /**
      * Displays contact page.
@@ -312,7 +317,7 @@ class SiteController extends CommonController
         $model = new LoginForm2();
         $model->setAttributes($params);
         if($member->status==1){
-            return '此账户涉嫌多次违规已被封号处理;如有疑问请联系网站管理员解答电话：15321353313 QQ:515184405';
+            return '此账户涉嫌多次违规已被封号处理;如有疑问请联系网站管理员解答电话：15321353313 QQ:515184405<a href="/">返回首页</a>';
         }
         if($member){
             if($model->login()){

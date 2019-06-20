@@ -27,6 +27,11 @@ class UserController extends CommonController
             return $this->redirect('/site/login');
         }
 
+        $userInfo = Yii::$app->view->params['userInfo'];
+        if($userInfo['status'] === 1){
+            return $this->redirect('/site/status');
+        }
+
         return true;
 
     }
