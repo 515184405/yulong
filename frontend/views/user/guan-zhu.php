@@ -18,8 +18,8 @@
             <a href="#" class="user-guanzhu-item ">
                 <img class="left user-guanzhu-avatar" src="<?=$val['member']['avatar']?>" alt="">
                 <div class="user-guanzhu-info">
-                    <h2 class="overflow-text"><?=$val['member']['username']?></h2>
-                    <p class="overflow-text"><?=$val['member']['province']?><?=$val['member']['city']?></p>
+                    <h2 class="overflow-text"><?=$val['member']['username']?>&nbsp;</h2>
+                    <p class="overflow-text"><?=$val['member']['province']?><?=$val['member']['city']?>&nbsp;</p>
                 </div>
             </a>
             <?php }}else{ ?>

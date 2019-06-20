@@ -474,7 +474,7 @@ header .nav-ul li a.active {
   color: #5181f1;
   font-weight: bold;
 }
-header .nav-ul li:last-child a {
+header .nav-ul li:last-child a.fy-username {
   display: inline-block;
   max-width: 200px;
   padding-left: 37px;
@@ -492,18 +492,16 @@ header .nav-ul li:last-child i.iconfont {
   position: relative;
   top: -8px;
 }
-header .nav-ul li .login-register-box {
+header .nav-ul li .login-register-box-nav {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
   border: 1px solid #97b9ef;
-  padding: 5px 10px;
-  margin: 0;
+  padding: 2px 10px;
   color: #97b9ef;
-  position: absolute;
-  top: 15px;
+  margin-top: -4px;
 }
-header .nav-ul li .login-register-box a {
+header .nav-ul li .login-register-box-nav a {
   font-size: 14px;
   color: #97b9ef;
 }
@@ -587,7 +585,6 @@ header .nav-ul .right-icon {
   color: #fff;
 }
 header .nav-ul p {
-  margin-left: 66px;
   padding-left: 15px;
   padding-bottom: 10px;
 }

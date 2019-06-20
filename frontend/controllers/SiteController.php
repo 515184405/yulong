@@ -59,9 +59,9 @@ class SiteController extends CommonController
      */
     public function actionLogin()
     {
-       if (!Yii::$app->user->isGuest) {
-            return $this->redirect('/user');
-        }
+//       if (!Yii::$app->user->isGuest) {
+//            return $this->redirect('/user');
+//        }
 //        $params = [
 //            'username' => '1111',
 //            'sex' => 0,
