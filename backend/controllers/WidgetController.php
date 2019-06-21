@@ -199,12 +199,62 @@ class WidgetController extends CommonController
         return Json::encode(array('code'=>'100000','message'=>'查询成功！','data'=>$data));
     }
 
+    //更新组件
+    public function actionUploadWidget(){
+
+        if(Yii::$app->request->post()){
+            $params = Yii::$app->request->post();
+            $id = isset($params['id']) ? $params['id'] : '';
+            if(!$params['id']){
+                return Json::encode(array('code'=>'100001','message'=>'更新失败！'));
+            };
+            $uploadBeforeUrl = '../../frontend/web/upload_file/'.$id;
+            $uploadAfterUrl = '../../frontend/web/widget_file/'.$id;
+            //删除目录下的文件
+            $this->deldir($uploadAfterUrl);
+            rename($uploadBeforeUrl,$uploadAfterUrl);
+            $model = Widget::findOne($id);
+            $model->download = str_replace('upload_file','widget_file',$model->upload_download);
+            $model->enter_file = $model->upload_enter_file;
+            $model->upload_download = '';
+            $model->upload_enter_file = '';
+            if($model->save()){
+                return Json::encode(array('code'=>'100000','message'=>'更新成功！','type'=>$model->attributes));
+            }
+            return Json::encode(array('code'=>'100001','message'=>'更新失败！'));
+        }
+    }
+
     public function unZip($fileSrc,$enterSrc){
         $zip = new \ZipArchive();//新建一个ZipArchive的对象
         if ($zip->open($fileSrc) === TRUE){
 
             $zip->extractTo($enterSrc);//假设解压缩到在当前路径下images文件夹的子文件夹php
             $zip->close();//关闭处理的zip文件
+        }
+    }
+
+    //删除指定文件夹以及文件夹下的所有文件
+    public function deldir($dir) {
+        //先删除目录下的文件：
+        $dh=opendir($dir);
+        while ($file=readdir($dh)) {
+            if($file!="." && $file!="..") {
+                $fullpath=$dir."/".$file;
+                if(!is_dir($fullpath)) {
+                    unlink($fullpath);
+                } else {
+                    $this->deldir($fullpath);
+                }
+            }
+        }
+
+        closedir($dh);
+        //删除当前文件夹：
+        if(rmdir($dir)) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

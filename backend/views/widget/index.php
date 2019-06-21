@@ -41,7 +41,9 @@
         <script type="text/html" id="test-table-toolbar-barDemo">
             <div class="layui-btn-group">
                 <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="params">静态配置</a>
-                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="views">视图配置</a>
+                {{# if(d.upload_download){}}
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="upload">更新</a>
+                {{# } }}
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
@@ -79,7 +81,12 @@
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'title',title: '标题',templet: function (d) {
-                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'?auth=0777"> '+d.title+' </a>';
+                       if(d.upload_download){
+                           var str = 'upload_file=1';
+                       }else{
+                           var str = '';
+                       }
+                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'?auth=0777&"'+str+'> '+d.title+' </a>';
                     }}
                 ,{field:'create_time',  title: '创建时间',templet: function (d) {
                         return getLocalTime(d.create_time);
@@ -188,9 +195,21 @@
                 });
 
             }else if(obj.event == 'params'){
-                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/widget_file/'+data.id;
-            }else if(obj.event == 'views'){
-                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/views/widget-file/'+data.id;
+                if(data.upload_download){
+                    var dir = 'upload_file'
+                }else{
+                    var dir = 'widget_file'
+                }
+                window.location.href = '/widget/params/?id='+data.id+'&dir=../../frontend/web/'+dir+'/'+data.id;
+            }else if(obj.event == 'upload'){
+                layer.confirm('您确定要更新吗', function(index){
+                    layer.close(index);
+                    $.post('/widget/upload-widget',{id:data.id},function(res){
+                        if(res.code == 100000){
+                            layer.msg(res.message);
+                        }
+                    },'json')
+                });
             }
         });
 

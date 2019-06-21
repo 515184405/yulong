@@ -1,5 +1,8 @@
 <?php
     use kucha\ueditor\UEditor;
+
+
+    $widget_id = isset($_GET['id']) ? $_GET['id'] : '';
 ?>
 <link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css<?=Yii::$app->params['static_number']?>" media="all">
 <link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/lib/select2/css/select2.min.css<?=Yii::$app->params['static_number']?>">
@@ -33,6 +36,7 @@
     <div class="personal-right">
         <h2 class="user-title"><?=isset($_GET['id']) ? "组件修改" : '上传组件'?></h2>
         <form class="layui-form" action="">
+           <?php  if(!$widget_id){ ?>
             <div class="layui-form-item">
                 <label class="layui-form-label">作品名称</label>
                 <div class="layui-input-block">
@@ -47,6 +51,13 @@
                     <p class="red">作品关键字以逗号隔开，例如：弹框组件，信息框组件，提示组件，主要作用是提示提醒用户为主</p>
                 </div>
             </div>
+           <div class="layui-form-item">
+               <label class="layui-form-label">作品来源</label>
+               <div class="layui-input-block">
+                   <input type="text" value="<?=isset($data['widget']['source']) ? $data['widget']['source'] : ''?>" name="source" lay-verify="required" lay-text="作品来源不能为空" autocomplete="off" placeholder="请输入作品来源" class="layui-input">
+               </div>
+           </div>
+            <?php } ?>
             <div id="wx_link" class="layui-form-item ">
                 <label class="layui-form-label">作品压缩包</label>
                 <div class="layui-input-block">
@@ -55,13 +66,7 @@
                     <a href="<?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?>" id="zip-upload-demoText"><?=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''?></a>
                 </div>
             </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">作品来源</label>
-                <div class="layui-input-block">
-                    <input type="text" value="<?=isset($data['widget']['source']) ? $data['widget']['source'] : ''?>" name="source" lay-verify="required" lay-text="作品来源不能为空" autocomplete="off" placeholder="请输入作品来源" class="layui-input">
-                </div>
-            </div>
+            <?php if(!$widget_id){ ?>
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">使用方法</label>
                 <div class="layui-input-block">
@@ -78,7 +83,26 @@
                     ]);?>
                 </div>
             </div>
-
+            <?php } ?>
+            <?php if($widget_id){ ?>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">更新说明</label>
+                <div class="layui-input-block">
+                <?php echo UEditor::widget([
+                    'id'=>'upload_txt',
+                    'name'=>'upload_txt',
+                    'value'=>'',
+                    'clientOptions'=>[
+                        'initialFrameHeight'=>'200',
+                        'scaleEnabled'=>true,
+                        //'initialFrameWidth'=>'40%',
+                        'toolbars'=>Yii::$app->params['toolbars']
+                    ]
+                ]);?>
+                </div>
+            </div>
+            <?php } ?>
+            <?php  if(!$widget_id){ ?>
             <div class="layui-form-item">
                 <label class="layui-form-label">下载金币数</label>
                 <div class="layui-input-block">
@@ -93,6 +117,7 @@
                     <input type="text" value="<?=isset($data['widget']['website']) ? $data['widget']['website'] : ''?>" name="website" autocomplete="off" placeholder="请输入官网地址（选填）" class="layui-input">
                 </div>
             </div>
+            <?php } ?>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button type="button" class="layui-hide" id="upload-file-submit">提交过后上传zip包</button>

@@ -56,8 +56,6 @@ use kucha\ueditor\UEditor;
                     </div>
                 </div>
             </div>
-
-
             <div id="wx_link" class="layui-form-item ">
                 <label class="layui-form-label">作品压缩包</label>
                 <div class="layui-input-block">
@@ -70,7 +68,7 @@ use kucha\ueditor\UEditor;
                 <label class="layui-form-label">入口文件名</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['widget']['enter_file']) ? $data['widget']['enter_file'] : ''?>" name="enter_file" autocomplete="off" placeholder="如何入口文件为index可不填" class="layui-input">
-                    <div style="color:#f00;line-height: 25px;">只需要填写文件名即可 例：入口文件名components.html，则只需填写components</div>
+                    <div style="color:#f00;line-height: 25px;">入口文件是用户上传的id+目录结构/文件名,例如：66/demo/index.html</div>
                 </div>
             </div>
             <div class="layui-form-item">

@@ -22,7 +22,11 @@
             <img src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
         </div>
         <div class="unit-btn-box">
-            <a class="fy-btn fy-btn-success" target="_blank" href="/widget-file/widget/<?=$unit['create_time']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
+            <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
+                <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['upload_url']?>/<?=$unit['id']?>/<?=$unit['upload_enter_file']?>">查看演示(upload)</a>
+            <?php }else{ ?>
+                <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
+            <?php } ?>
             <?php if($unit['website']){ ?>
             <a class="fy-btn fy-btn-primary" target="_blank" href="<?=$unit['website']?>">官网地址</a>
             <?php } ?>

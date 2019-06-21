@@ -150,11 +150,10 @@ class UserController extends CommonController
             if($widget_id2){
                 if($widget_id){
                     Yii::$app->session['widget_create_id'] = $widget_id;
+                    $rootDir3 = '../../frontend/web/upload_file/'.$widget_id2;
+                    is_dir($rootDir3) OR mkdir($rootDir3, 0777, true);
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
                 }
-                //生成视图地址
-                $rootDir = '../../frontend/views/widget-file/'.$widget_id2;
-                is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 //生成静态文件地址
                 $rootDir2 = '../../frontend/web/widget_file/'.$widget_id2;
                 is_dir($rootDir2) OR mkdir($rootDir2, 0777, true);
@@ -165,7 +164,7 @@ class UserController extends CommonController
 
         //查询组件数据
         if($widget_id){
-            $data['widget'] = widget::find()->where(['id'=>$widget_id])->asArray()->one();
+            $data['widget'] = widget::find()->where(['id'=>$widget_id,'u_id'=>Yii::$app->user->id])->asArray()->one();
             if(!$data['widget']){
                 return '组件不存在';
             }
@@ -289,11 +288,18 @@ class UserController extends CommonController
         $model = new \common\models\UploadForm();
         if (Yii::$app->request->isPost) {
             $id = Yii::$app->session['widget_create_id'];
+            $widget = Widget::findOne($id);
             if(!$id){
                 return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
             }
-
-            $rootDir = '../../frontend/web/widget_file/'.$id.'/';
+            $time = time();
+            if($widget->download){
+                $rootDir = '../../frontend/web/upload_file/'.$id.'/';
+            }else{
+                $rootDir = '../../frontend/web/widget_file/'.$id.'/';
+            }
+            //删除原有文件
+            $this->deldir($rootDir);
             $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
             if ($model->file && $model->validate()) {
                 $name = explode('.',$model->file->name);
@@ -302,14 +308,14 @@ class UserController extends CommonController
 
                 //判断文件名中是否有中文
                 if (preg_match("/[\x7f-\xff]/", $model->file->name)) {
-                    $name = 'widget'.$id.'.'.$zip;
+                    $name = $time.$id.'.'.$zip;
                 }else{
-                    $name = $model->file->name;
+                    //$name = $model->file->name;
+                    $name = $name[0].$time.'.'.$zip;
                 }
 
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 $fileSrc=$rootDir . $name;
-
                 if($model->file->saveAs($fileSrc)){
                     //解压缩
                     if($zip == 'zip'){
@@ -317,19 +323,29 @@ class UserController extends CommonController
                     }else{
                         $this->unRar($fileSrc,$rootDir);
                     }
+                    //删除压缩包
+                    //unlink($fileSrc);
                     $viewDir = '../../frontend/views/widget-file/'.$id.'/';
-                    $this->getDir($rootDir,$viewDir,$rootDir);
-                    $widget = Widget::findOne($id);
-                    $widget->download = '/widget_file/' . $id . '/' . $name;
+                    $enter_file = $this->getDir($rootDir,$viewDir,$rootDir);
+                    if($widget->download){
+                        $download = '/upload_file/' . $id . '/' . $name;
+                        $widget->upload_download = $download;
+                        $widget->upload_enter_file = $enter_file;
+                    }else{
+                        $download = '/widget_file/' . $id . '/' . $name;
+                        $widget->download = $download;
+                        $widget->enter_file = $enter_file;
+                    }
+
                     if($widget->save()){
                         return Json::encode(array('code'=>'100000','message'=>'上传成功！','data'=>array(
                             'name' => $name,
-                            'download' => '/widget_file/'.$id.'/'.$name,
+                            'download' => $download,
                         )));
                     }else{
                         return Json::encode(array('code'=>'100000','message'=>'图片上传成功，但并未保存到库中！','data'=>array(
                             'name' => $name,
-                            'download' => '/widget_file/'.$id.'/'.$name,
+                            'download' => $download,
                         )));
                     }
 
@@ -375,29 +391,28 @@ class UserController extends CommonController
         rar_close($rar_file);
     }
 
-    //转unicode码
-    public function UnicodeEncode($str){
-        //split word
-        preg_match_all('/./u',$str,$matches);
-
-        $unicodeStr = "";
-        foreach($matches[0] as $m){
-            //拼接
-            $unicodeStr .= "&#".base_convert(bin2hex(iconv('UTF-8',"UCS-4",$m)),16,10);
+    //删除指定文件夹以及文件夹下的所有文件
+    public function deldir($dir) {
+        //先删除目录下的文件：
+        $dh=opendir($dir);
+        while ($file=readdir($dh)) {
+            if($file!="." && $file!="..") {
+                $fullpath=$dir."/".$file;
+                if(!is_dir($fullpath)) {
+                    unlink($fullpath);
+                } else {
+                    $this->deldir($fullpath);
+                }
+            }
         }
-        return $unicodeStr;
-    }
 
-    //根据路由设置文件名
-    public function resetFileName($path,$currentPath){
-       $filename = str_replace($path,'',$currentPath);
-       $filename = explode('/',$filename);
-       if(count($filename) > 1){
-           array_shift($filename);
-       }else{
-           return '';
-       }
-        return join('',$filename);
+        closedir($dh);
+        //删除当前文件夹：
+        if(rmdir($dir)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //复制.html文件
@@ -406,6 +421,7 @@ class UserController extends CommonController
      * @extractTo 文件输出地址
      * @rootDir 文件上传后存放地址
      * */
+    public $fileNameDir = '';
     public function getDir($path,$extractTo,$rootDir){
         if(is_dir($path)){
 
@@ -424,72 +440,18 @@ class UserController extends CommonController
                 }else{
                     $fileNameArr = explode('.',$value);
                     if(end($fileNameArr) === 'html'){
-                        $this->resetRouter($path,$value,$rootDir);
-                        array_pop($fileNameArr);
-                        if(count($fileNameArr) > 1){
-                            $fileNameArr = $fileNameArr.join('.',$fileNameArr);
+                        if($fileNameArr[0] == 'index'){
+                            $this->fileNameDir = str_replace($rootDir,'',$path) . '/index.html';
+                        }else{
+                            if(!$this->fileNameDir){
+                                $this->fileNameDir = str_replace($rootDir,'',$path) . '/'.$fileNameArr[0].'.html';
+                            }
                         }
-                        if(preg_match("/[\x7f-\xff]/", $value)){
-                            $value = $this->UnicodeEncode($fileNameArr);
-                        }
-                        $resetName = $this->resetFileName($rootDir,$path);
-                        rename($path. '/'.$value,$extractTo.$resetName.$value);
+                        //rename($path. '/'.$value,$extractTo.$resetName.$value);
                     };
                 }
             }
         }
-    }
-
-    //相对路径
-    public function relativeFile($count = 0){
-        $relative = '';
-        for($i = 0;$i < $count;$i++ ){
-            $relative .= '../';
-        }
-        return $relative;
-    }
-    /*
-     * $path 当前上传文件地址
-     * $pathName 文件名
-     * @rootDir 文件上传后存放地址
-     * */
-    public function resetRouter($path,$pathName,$rootDir){
-        $content = file_get_contents($path.'/'.$pathName);
-        preg_match_all('/(?:href|src)=["|\'](.*?[.css|.js|.png|.jpg|.gif|.JPEG|.JPG|.PNG|.html])["|\']/i', $content, $matchs);
-        $matchs = array_unique($matchs[1]);
-        foreach ($matchs as $key => $match) {
-            $rootUrl = '<?=$url?>';
-            $rootViewUrl = '<?=$view_url?>';
-            $currentUrl = $match;
-            if(!preg_match('/[.css|.js|.png|.jpg|.gif|.JPEG|.JPG|.PNG|.html]/',$currentUrl)){
-                continue;
-            }
-            if($count1 = substr_count($currentUrl,'http')){
-                continue;
-            }
-            if($count4 = substr_count($currentUrl,'.html')){
-                $currentUrlArr = end(explode('/',$currentUrl));
-                $currentUrl = str_replace('.html','',$currentUrlArr);
-                if(preg_match("/[\x7f-\xff]/", $currentUrl)){
-                    $currentUrl = $this->UnicodeEncode($currentUrl);
-                }
-                $pathViewName = $this->resetFileName($rootDir,$path);
-                $content = str_replace($match, $rootViewUrl.$currentUrl.$pathViewName, $content);
-                continue;
-            }
-            if($count3 = substr_count($currentUrl,'../')){
-                $path_arr = explode('/',$path);
-                $newPath = array_slice($path_arr,-$count3);
-                $newPath = join('/',$newPath);
-                $newPath = $newPath ? $newPath . '/' : $newPath;
-                $currentUrl = str_replace($this->relativeFile($count3),$newPath,$currentUrl);
-            }
-            if($count2 = substr_count($currentUrl,'./')){
-                $currentUrl = str_replace('./','',$currentUrl);
-            }
-
-            $content = str_replace($match, $rootUrl.$currentUrl, $content); //正则替换
-        }
-        file_put_contents($path.'/'.$pathName,$content);
+        return $this->fileNameDir;
     }
 }
