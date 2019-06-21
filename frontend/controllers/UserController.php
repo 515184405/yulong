@@ -298,7 +298,7 @@ class UserController extends CommonController
             }
             is_dir($rootDir) OR mkdir($rootDir, 0777, true);
             //删除原有文件
-            $this->deldir($rootDir);
+            is_dir($rootDir) AND $this->deldir($rootDir);
             $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
             if ($model->file && $model->validate()) {
                 $name = explode('.',$model->file->name);
@@ -398,6 +398,7 @@ class UserController extends CommonController
             if($file!="." && $file!="..") {
                 $fullpath=$dir."/".$file;
                 if(!is_dir($fullpath)) {
+
                     unlink($fullpath);
                 } else {
                     $this->deldir($fullpath);
