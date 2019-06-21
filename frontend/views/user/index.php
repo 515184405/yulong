@@ -31,7 +31,7 @@
                         </div>
                     <?php }else{ ?>
                         <img style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255)?>,<?=rand(0,255)?>,.4)" src="<?=Yii::$app->params['backend_url'].$val['banner_url']?>" alt="" class="user-unit-img transition">
-
+                        <?=$val['upload_download'] ? '<span class="user-unit-edit" style="right:auto;left:10px;opacity: 1;background-color:#f5ad36">更新中</span>' : ''?>
                     <?php } ?>
                 </a>
                 <a <?=$val['status'] == 1 ? 'href="/unit/item/'.$val['id'].'"' : '' ?> class="user-unit-title transition overflow-text"><?=$val['title']?></a>
