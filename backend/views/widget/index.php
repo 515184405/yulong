@@ -186,7 +186,7 @@
                             layer.close(index);
                             table.reload('reloaded', {
                                 page: {
-                                    curr: $('.layui-laypage-curr em:last-child').text() //重新从第 1 页开始
+                                    curr: $('.layui-laypage-curr em:last-child').text(), //重新从第 1 页开始
                                 }
                             });
                             layer.msg(data.message,{icon:1,duration:1500});
@@ -207,6 +207,11 @@
                     $.post('/widget/upload-widget',{id:data.id},function(res){
                         if(res.code == 100000){
                             layer.msg(res.message);
+                            table.reload('reloaded', {
+                                page: {
+                                    curr: $('.layui-laypage-curr em:last-child').text(), //重新从第 1 页开始
+                                }
+                            });
                         }
                     },'json')
                 });

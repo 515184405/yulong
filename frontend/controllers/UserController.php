@@ -56,7 +56,7 @@ class UserController extends CommonController
         $status = isset($params['status']) ? $params['status'] : 1;
         $limit =20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
-        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status'])->where(['status'=>$status,'u_id'=>$uid]);
+        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status'])->where(['status'=>$status,'u_id'=>$uid])->orderBy(['id'=>SORT_DESC]);
         $pagination = new Pagination(['totalCount' => $widget->count(),'pageSize' => $limit]);
         $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
@@ -150,8 +150,6 @@ class UserController extends CommonController
             if($widget_id2){
                 if($widget_id){
                     Yii::$app->session['widget_create_id'] = $widget_id;
-                    $rootDir3 = '../../frontend/web/upload_file/'.$widget_id2;
-                    is_dir($rootDir3) OR mkdir($rootDir3, 0777, true);
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
                 }
                 //生成静态文件地址
@@ -293,11 +291,12 @@ class UserController extends CommonController
                 return Json::encode(array('code'=>'100001','message'=>'上传失败！'));
             }
             $time = time();
-            if($widget->download){
+            if($widget->status == 1){
                 $rootDir = '../../frontend/web/upload_file/'.$id.'/';
             }else{
                 $rootDir = '../../frontend/web/widget_file/'.$id.'/';
             }
+            is_dir($rootDir) OR mkdir($rootDir, 0777, true);
             //删除原有文件
             $this->deldir($rootDir);
             $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
@@ -327,7 +326,7 @@ class UserController extends CommonController
                     //unlink($fileSrc);
                     $viewDir = '../../frontend/views/widget-file/'.$id.'/';
                     $enter_file = $this->getDir($rootDir,$viewDir,$rootDir);
-                    if($widget->download){
+                    if($widget->status == 1){
                         $download = '/upload_file/' . $id . '/' . $name;
                         $widget->upload_download = $download;
                         $widget->upload_enter_file = $enter_file;
