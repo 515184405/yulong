@@ -166,7 +166,7 @@ header {
   border-top: 1px solid #f1f1f1;
   width: 100%;
   background-color: #fff;
-  padding: 15px 30px;
+  padding: 15px 55px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -183,7 +183,15 @@ header {
 }
 .fy-nav-default li a.active {
   background-color: #5181f1;
+  background: linear-gradient(left, #5181f1, #e0e8f5);
+  background: -ms-linear-gradient(left, #5181f1, #e0e8f5);
+  background: -webkit-linear-gradient(left, #5181f1, #e0e8f5);
+  background: -o-linear-gradient(left, #5181f1, #e0e8f5);
+  background: -moz-linear-gradient(left, #5181f1, #e0e8f5);
   color: #fff;
+  -webkit-border-radius: 45px;
+  -moz-border-radius: 45px;
+  border-radius: 45px;
 }
 .fy-nav-default li a:not(.active):hover {
   color: #5181f1;
