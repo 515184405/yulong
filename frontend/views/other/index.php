@@ -27,7 +27,6 @@
         </ul>
     </div>
     <div class="personal-right">
-        <h2 class="user-title">TA的组件</h2>
         <div class="fy-sub-nav t-c">
             <a class="sub-nav-item <?=$type == 1 ? 'active' : ''?>" href="/other/index/<?=$_GET['u_id']?>/1">TA发布的插件</a>
             <a class="sub-nav-item <?=$type == 2 ? 'active' : ''?>" href="/other/index/<?=$_GET['u_id']?>/2">TA收藏的插件</a>
