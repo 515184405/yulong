@@ -15,7 +15,7 @@
 
         <div class="user-guanzhu-list">
             <?php if(!empty($data['guanZhu'])){ foreach ($data['guanZhu'] as $val) { ?>
-            <a href="#" class="user-guanzhu-item ">
+            <a href="/other/index/<?=$val['other_id']?>/1" class="user-guanzhu-item ">
                 <img class="left user-guanzhu-avatar" src="<?=$val['member']['avatar']?>" alt="">
                 <div class="user-guanzhu-info">
                     <h2 class="overflow-text"><?=$val['member']['username']?>&nbsp;</h2>

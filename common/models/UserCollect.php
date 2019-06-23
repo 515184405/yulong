@@ -44,8 +44,13 @@ class UserCollect extends \yii\db\ActiveRecord
         ];
     }
 
+    //联查member表
+    public function getMember(){
+        return $this->hasOne(Member::className(),['id'=>'other_id'])->select(['id','username','province','city','avatar']);
+    }
+
     public function getCollect_widget(){
-        return $this->hasOne(Widget::className(),['id'=>'widget_id'])->select(['id','title','desc','banner_url','type','look','collect','down_count','download','status']);
+        return $this->hasOne(Widget::className(),['id'=>'widget_id'])->select(['id','title','desc','banner_url','type','look','collect','down_count','download','status','upload_download']);
     }
 
     /*数据存与改*/
