@@ -6,6 +6,15 @@
     .userInfo-info{
         min-height: 320px;
     }
+    .userInfo-info li{
+        width:100%;
+        border:0;
+        border-bottom:1px solid #eee;
+        padding:10px;
+    }
+    .userInfo-info li span{
+        font-size: 18px;
+    }
 </style>
 <div class="personal fy-container clearfix">
     <?php
