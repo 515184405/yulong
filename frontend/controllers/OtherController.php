@@ -42,6 +42,9 @@ class OtherController extends CommonController
         $uid = Yii::$app->user->id;
         $other = isset($_GET['u_id']) ? $_GET['u_id'] : 0;
         $type = isset($_GET['type']) ? $_GET['type'] : 1;
+        if($type>2){
+            return $this->redirect('/site/404');
+        }
         $guanzhu = UserGuanzhu::find()->joinWith('member')->where(['u_id'=>$uid,'other_id'=>$other])->one();
         if(!$guanzhu){
             return '没有关注人的信息';
