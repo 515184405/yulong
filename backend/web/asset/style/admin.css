@@ -522,6 +522,13 @@ html{background-color: #f2f2f2; color: #666;}
   -moz-osx-font-smoothing: grayscale;
 }
 
+/*代码块*/
+.view blockquote {
+  padding: 10px;
+  background-color: #f2f2f2;
+  color: #595757;
+}
+
 .font-1{
   color: #4781ff!important;;
 }
