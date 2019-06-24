@@ -93,10 +93,10 @@ AppAsset::register($this);
         <div class="fy-container">
             <p class="footer-link">
                 <a href="/">首页</a></li>
-                <a href="/service">服务项目</a>
                 <a href="/case">精品案例</a>
                 <a href="/unit">前端组件</a>
                 <a href="/news">新闻动态</a>
+                <a href="/service">服务项目</a>
                 <a href="/about">关于我们</a>
                 <a href="/contact">联系我们</a>
             </p>
