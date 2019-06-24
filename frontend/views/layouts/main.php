@@ -103,6 +103,8 @@ AppAsset::register($this);
             <p class="footer-msg">
                 <span>Copyright 2019 聚友之家 ALL Rights Reserved.</span>
                 <span class="margin-left:30px;">工信部备案号：京ICP备19025093号-1</span>
+                <span>如有侵权，请联系站主删除</span>
+
             </p>
         </div>
     </footer>

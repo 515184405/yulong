@@ -18,8 +18,8 @@
             <span>浏览次数：<?=$unit['look']?></span>
             <span>下载量：<?=$unit['down_count']?></span>
         </div>
-        <div style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,1)" class="banner-box">
-            <img src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
+        <div class="banner-box">
+            <img  style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,1);padding:25px;" src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
         </div>
         <div class="unit-btn-box">
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
@@ -43,11 +43,14 @@
                 <?=$unit['rule'];?>
             </div>
         </div>
+        <div class="unit-rule">
+            <div class="unit-rule-content" style="font-size: 10px;color:#aaa">
+                如有侵权，请联系站主删除
+            </div>
+        </div>
     <div class="clearfix btn-box unit-page-box">
-
         <a <?=is_null($data['prev']) ? '' : 'href="/unit/item/'.$data['prev']['id'].'"' ?> class="btn-prev left"><i class="iconfont">&#xe604;</i><?=is_null($data['prev']) ? '没有了...' : $data['prev']['title'] ?></a>
         <a <?=is_null($data['next']) ? '' : 'href="/unit/item/'.$data['next']['id'].'"' ?> class="btn-next right"><?=is_null($data['next']) ? '没有了...' : $data['next']['title'] ?><i class="iconfont">&#xe607;</i></a>
-
     </div>
 
 </div>
