@@ -146,6 +146,17 @@
 
 
 
+        //设置百度编辑器代码块样式
+        var style = $('<style id="setIfameStyle">.view blockquote { padding: 10px; background-color: #f2f2f2; color: #595757; }</style>');
+        var timer = setInterval(function(){
+            var head = $(document.getElementById('ueditor_0').contentWindow.document.head);
+            if(head.length > 0){
+                clearInterval(timer);
+                head.append(style);
+            }
+        },500);
+
+
         //压缩包上传
         //选完文件后不自动上传
         var uploadInstData = {};
