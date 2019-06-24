@@ -25,13 +25,13 @@
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
                 <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['upload_url']?>/<?=$unit['id']?>/<?=$unit['upload_enter_file']?>">查看演示(upload)</a>
             <?php }else{ ?>
-                <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
+                <a class="fy-btn fy-btn-success js_look_widget" data-uid="<?=$unit['u_id']?>" target="_blank" data-href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
             <?php } ?>
             <?php if($unit['website']){ ?>
             <a class="fy-btn fy-btn-primary" target="_blank" href="<?=$unit['website']?>">官网地址</a>
             <?php } ?>
             <?php if($unit['is_down'] == 0){ ?>
-            <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger <?=Yii::$app->getUser()->getId() ? 'js_download" data-src="'.$unit["download"].'"' : 'login_btn" href="javascript:;"'?> target="_blank">立即下载</a>
+            <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger <?=Yii::$app->getUser()->getId() ? 'js_download"' : 'login_btn" href="javascript:;"'?> target="_blank">立即下载</a>
             <?php } ?>
         </div>
         <div class="unit-desc layui-elem-quote">
@@ -98,12 +98,15 @@
     //      $('.js_news_items,.js_news_recommend').css('height',winH - top);
     //  }
     // setRightHeight();
+
+    var csrfName = $("#form_csrf").attr('name');
+    var csrfVal = $("#form_csrf").val();
+
+    //下载
     $(".js_download").click(function(){
         if($(this).attr('href')){
             return;
         }
-        var csrfName = $("#form_csrf").attr('name');
-        var csrfVal = $("#form_csrf").val();
         var href = $(this).data('src');
         $(this).attr('href',href);
         var data = {
@@ -112,15 +115,34 @@
             'down_url' : href,
         };
         data[csrfName] = csrfVal;
-        $.post('/unit/down-count',data,function(){});
+        $.post('/unit/down-count',data,function(res){
+            if(res.code == 100000){
+                location.href = res.download;
+            }else{
+                layer.msg(res.message,{icon:5});
+            }
+        },'json');
         // $(this).click();
     });
+
+    //查看
+    $(".js_look_widget").click(function(){
+        var that = this;
+        var uid = $(this).data('uid');
+        var link = $(this).data('href');
+        var data={
+            uid:uid,
+            type:1, //设置访问量
+        };
+        data[csrfName] = csrfVal;
+        $.post('/unit/user-info',data,function(res){
+            location.href = link;
+        },'json')
+    })
 
     //关注
     $("#guanzhu").click(function () {
         var text = $("#guanzhu_text").text();
-        var csrfName = $("#form_csrf").attr('name');
-        var csrfVal = $("#form_csrf").val();
         var number = parseInt($("#guanzhu_number").text());
         var id = $(this).data('id');
         var data={
@@ -128,13 +150,19 @@
         };
         data[csrfName] = csrfVal;
         $.post('/unit/guanzhu',data,function(res){
+            data['uid'] = id;
+            data['type'] = 2;
             if(res.code == 100000){
                 if(text == '√ 已关注'){
                     $("#guanzhu_text").text('关注作者');
                     $("#guanzhu_number").text(number-1);
+                    data['status'] = 0;
+                    $.post('/unit/user-info',data,function(res){})
                 }else{
                     $("#guanzhu_text").text('√ 已关注');
                     $("#guanzhu_number").text(number+1);
+                    data['status'] = 1;
+                    $.post('/unit/user-info',data,function(res){})
                 }
             }else{
                 layer.msg(res.message,{icon:5,time:1000});
@@ -147,8 +175,6 @@
     $("#shoucang").click(function () {
         var text = $("#shoucang_text").text();
         var number = parseInt($("#shoucang_number").text());
-        var csrfName = $("#form_csrf").attr('name');
-        var csrfVal = $("#form_csrf").val();
         var id = $(this).data('id');
         var data={
             'widget_id':id,

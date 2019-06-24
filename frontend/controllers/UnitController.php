@@ -7,6 +7,7 @@ use common\models\News;
 use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
+use common\models\UserInfo;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
@@ -90,7 +91,7 @@ class UnitController extends CommonController {
         $guanzhuCount = $guanzhu->where(['other_id'=>$widget_item['u_id']])->count();
         if($user_id || $user_id == 0){
             $collect = $collect->where(['u_id'=>$user_id,'widget_id'=>$unit_id])->asArray()->one();
-            $guanzhu = $guanzhu->where(['u_id'=>$user_id])->asArray()->one();
+            $guanzhu = $guanzhu->where(['u_id'=>\Yii::$app->user->id,'other_id'=>$user_id])->asArray()->one();
             $widget_item['user'] = [
                 'collect' => $collect,
                 'guanzhu' => $guanzhu,
@@ -109,6 +110,7 @@ class UnitController extends CommonController {
         return $this->renderPartial('item',compact('data','unit_id'));
     }
 
+    //收集下载量
     public function actionDownCount(){
 
         if(isset($_COOKIE['DownCount'])){
@@ -127,11 +129,44 @@ class UnitController extends CommonController {
             //给个人添加下载记录
             UserDownRecord::insertUpdate($params);
             if($model->save()){
-                return Json::encode(['code'=>'100000','message'=>'操作成功']);
+                return Json::encode(['code'=>'100000','message'=>'操作成功','download'=>$model->download]);
             }
             return Json::encode(['code'=>'100001','message'=>'操作失败']);
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
+
+    //收集访问量
+    public function actionUserInfo(){
+        $params = \Yii::$app->request->post();
+        $type = $params['type']; //1为设置访问量  2设置关注的人数
+        $model = UserInfo::findOne(['uid'=>$params['uid']]);
+        if($type == 1){
+            if($model){
+                $model->count = $model->count + 1;
+            }else{
+                $model = new UserInfo();
+                $model->uid = $params['uid'];
+                $model->count = 1;
+            }
+        }
+        if($type == 2){
+            $guan_status = $params['status']; //关注状态 0取消关注 1已关注
+            if($model){
+                if($guan_status == 0){
+                    $model->collect = $model->collect - 1;
+                }
+                if($guan_status == 1){
+                    $model->collect = $model->collect + 1;
+                }
+            }else{
+                $model = new UserInfo();
+                $model->uid = $params['uid'];
+                $model->collect = 1;
+            }
+        }
+        $model->save();
+        return Json::encode(['code'=>'100000','message'=>'操作成功']);
     }
 
     //收藏

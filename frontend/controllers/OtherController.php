@@ -6,6 +6,7 @@ use common\models\MadeToOrder;
 use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
+use common\models\UserInfo;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -60,9 +61,13 @@ class OtherController extends CommonController
 
         $pagination = new Pagination(['totalCount' => $widget->count(),'pageSize' => $limit]);
         $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
+
+        //个人中心访问量，粉丝量等等
+        $personalInfo = UserInfo::find()->where(['uid'=>$uid])->asArray()->one();
         $data = [
             'widget'=>$widget,
             'pagination' => $pagination,
+            'personalInfo' => $personalInfo,
             'guanzhu' => $guanzhu['member'],
         ];
         return $this->render('index',compact('data'));
