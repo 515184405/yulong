@@ -80,6 +80,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
         <li class="fy-nav-item"><a href="/user/collect">我的收藏</a></li>
         <li class="fy-nav-item"><a href="/user/down-history">下载历史</a></li>
         <li class="fy-nav-item"><a href="/user/guan-zhu">我的关注</a></li>
+        <li class="fy-nav-item"><a href="/site/logout" style="color:#f00;">退 出</a></li>
     </ul>
 </div>
 <script src="/asset/static/wigdet/script.js"></script>
