@@ -172,6 +172,7 @@ header {
   box-sizing: border-box;
   margin-top: 5px;
   font-size: 14px;
+  min-height: 230px;
 }
 .fy-nav-default li {
   text-align: center;
@@ -521,6 +522,18 @@ header {
   .user-guanzhu-list .user-guanzhu-item {
     width: 100%;
     margin-right: 0%;
+  }
+  .fy-logout {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #f00;
+  }
+  .fy-logout a {
+    color: #fff !important;
   }
 }
 /*# sourceMappingURL=personal.css.map */
