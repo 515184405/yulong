@@ -45,7 +45,7 @@
                 ,{field:'banner_url', title: '列表图',templet: function (d) {
                         return '<a class="theme js_banner_url" target="_blank" href='+site_url+d.banner_url+' >'+d.banner_url+'</a>';
                   }}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
             }

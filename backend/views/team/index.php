@@ -47,7 +47,7 @@
                 ,{field:'create_time',  title: '创建时间',templet: function (d) {
                         return getLocalTime(d.create_time);
                     }}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
                 console.log(res);

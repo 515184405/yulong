@@ -108,7 +108,7 @@
                         }
                     }}
                 ,{field:'desc', title: '描述'}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:200}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:200}
             ]]
             ,done(res){
             }
