@@ -2,14 +2,14 @@
     <div class="list-header transition clearfix">
         <i class="iconfont aslide-switch left"></i>
         <div class="list-header-nav list-header-nav2">
-            <?php if($data['link'] === 'news'){ ?>
-                <a href="/news" class="lhn-item">文章列表</a>
+            <?php if($data['link'] === 'unit'){ ?>
+                <a href="/unit" class="lhn-item">组件列表</a>
             <?php }; ?>
             <?php if($data['link'] === 'case'){ ?>
                 <a href="/case" class="lhn-item">案例列表</a>
             <?php }; ?>
-            <?php if($data['link'] === 'unit'){ ?>
-                <a href="/unit" class="lhn-item">组件列表</a>
+            <?php if($data['link'] === 'news'){ ?>
+                <a href="/news" class="lhn-item">文章列表</a>
             <?php }; ?>
 
             <a <?=is_null($data['prev']['id']) ? '' : 'href="/'.$data['link'].'/item/'.$data['prev']['id'].'"' ?> class="lhn-item <?=is_null($data['prev']['id']) ? 'a-disabled' : ''?>"><i class="iconfont icon-prev">&#xe604;</i>PREV</a>
