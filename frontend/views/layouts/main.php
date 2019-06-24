@@ -41,10 +41,10 @@ AppAsset::register($this);
             </div>
             <ul id="nav_ul" class="nav-ul right">
                 <li><a class="<?= Yii::$app->request->getPathInfo()=='' ? 'active' : ''?>" href="/">首页</a></li>
-                <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'service')!==false ? 'active' : ''?>" href="/service">服务项目</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'case')!==false ? 'active' : ''?>" href="/case">精品案例</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit">前端组件</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'news')!==false ? 'active' : ''?>" href="/news">新闻动态</a></li>
+                <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'service')!==false ? 'active' : ''?>" href="/service">服务项目</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'about')!==false ? 'active' : ''?>" href="/about">关于我们</a></li>
                 <li><a class="<?= strpos(Yii::$app->request->getPathInfo(),'contact')!==false ? 'active' : ''?>" href="/contact">联系我们</a></li>
                 <!--登录前-->
