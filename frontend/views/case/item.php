@@ -32,9 +32,9 @@ $this->keywords=mb_substr($content,0,100);
             <?php if($data['data']['wap_link']){ ?>
                 <p>移动端：<a target="_blank" href="<?=$data['data']['wap_link']?>"><?=$data['data']['wap_link']?></a></p>
             <?php } ?>
-            <?php if(!is_null($data['data']['wap_link'])){ ?>
+            <?php if(($data['data']['wx_link'])){ ?>
             <div class="case-dress-wxbox">
-                <img class="case-dress-wx" style="width:120px;height:120px;" src="<?=Yii::$app->params['backend_url'].$data['data']['wx_link']?>" alt="">
+                <img class="case-dress-wx" style="width:120px;" src="<?=Yii::$app->params['backend_url'].$data['data']['wx_link']?>" alt="">
                 <p>扫一扫微信二维码</p>
             </div>
             <?php } ?>
