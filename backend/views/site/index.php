@@ -85,9 +85,9 @@
                                             </a>
                                         </li>
                                         <li class="layui-col-xs6">
-                                            <a href="/site/zixun?status=2" class="layadmin-backlog-body">
-                                                <h3>网站咨询有意向</h3>
-                                                <p><cite class="font-5"><?=Zixun::zixunStatus()['modelStatus2'];?></cite></p>
+                                            <a href="javascript:;" class="layadmin-backlog-body">
+                                                <h3>今日新增用户</h3>
+                                                <p><cite class="font-5"><?=\common\models\Member::todayInsert()?></cite></p>
                                             </a>
                                         </li>
                                     </ul>
@@ -117,7 +117,7 @@
                             </div>
 
                         </div>
-                        <div class="layui-card-body">
+                       <!-- <div class="layui-card-body">
 
                             <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-dataview">
                                 <div carousel-item class="LAY-index-dataview">
@@ -125,7 +125,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -230,7 +230,6 @@
                 </div>
             </div>
         </div>-->
-
     </div>
 </div>
 <script>

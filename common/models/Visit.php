@@ -165,15 +165,15 @@ class Visit extends \yii\db\ActiveRecord
         return json_encode($browserData);
     }
 
-    //查询昨天访客量
+    //查询今天访客量
     public static function todayCount(){
         $today =  date("Y-m-d",time());
-        $model = Visit::find()->where(['like','time',$today])->asArray()->all();
+        $model = Visit::find()->where(['like','time',$today])->orderBy(['time'=>SORT_ASC])->asArray()->all();
         $visitArr = [];
         foreach ($model as $key => $val){
             $hour = getdate(strtotime($val['time']));
             $hour = $hour['hours'];
-            $time = self::addZero($hour);
+            $time = intval(self::addZero($hour));
             $visitArr[$time][] = $val;
         }
         return json_encode($visitArr);

@@ -159,4 +159,12 @@ class Member extends ActiveRecord implements IdentityInterface
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
+
+    //查询今日新增用户量
+    public static function todayInsert(){
+        $today_am = strtotime(date("Y-m-d",time()));
+        $today_pm = strtotime(date("Y-m-d 23:59:59",time()));
+        $count = static::find()->where(['and',['>=','created_time',$today_am],['<=','created_time',$today_pm]])->orderBy(['time'=>SORT_ASC])->count();
+        return $count;
+    }
 }

@@ -52,7 +52,7 @@ layui.define(function(exports){
       //今日流量趋势
       {
         title: {
-          text: '昨日流量趋势',
+          text: '今日流量趋势',
           x: 'center',
           textStyle: {
             fontSize: 14
@@ -109,7 +109,7 @@ layui.define(function(exports){
       },
       
       //新增的用户量
-      {
+      /*{
         title: {
           text: '最近一周新增的用户量',
           x: 'center',
@@ -132,7 +132,7 @@ layui.define(function(exports){
           type: 'line',
           data:[200, 300, 400, 610, 150, 270, 380],
         }]
-      }
+      }*/
     ]
     ,elemDataView = $('.LAY-index-dataview').children('div')
     ,renderDataView = function(index){
