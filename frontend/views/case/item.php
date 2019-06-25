@@ -83,4 +83,4 @@ $this->keywords=mb_substr($content,0,100);
 </div>
 <p class="swipper-number none"><span class="sn-current">1</span> / <span class="sn-count"><?=count($contentArr)?></span></p>
 <?php } ?>
-<script src="/asset/static/js/case-item.js"></script>
+<script src="/asset/static/js/case-item.js<?=Yii::$app->params['static_number']?>"></script>

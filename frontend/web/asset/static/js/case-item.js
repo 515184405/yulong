@@ -1,4 +1,6 @@
     var arrTop = [];
+    var keyDirection = 0; //判断是向上滚动还是向下滚动要素
+    var keyDirection2 = 0; //判断是向上滚动还是向下滚动要素2
     $('.list-container').scroll(function () {
         var scrollTop = $('.list-container').scrollTop();
         var offsetTop = $('.js_case_list')[0].offsetTop;
@@ -40,9 +42,18 @@
         for (var i = 0, len = arrTop.length; i < len; i++) {
             if ((arrTop[i] <= scrollTop && arrTop[i + 1] > scrollTop) || (scrollTop) >= arrTop[len - 1]) {
                 $('.sn-current').html(i + 1);
+                if( $('#picScroll').find('.pic').eq(i).hasClass('active')){
+                    return;
+                }
                 $('#picScroll').find('.pic').removeClass('active');
                 $('#picScroll').find('.pic').eq(i).addClass('active');
-                currentImageView();
+                if(keyDirection2 > i){
+                    var type = 2;
+                }else{
+                    var type = 1;
+                }
+                keyDirection2 = i;
+                currentImageView(type);
             }
         }
     })
@@ -67,18 +78,24 @@
             var scrollImgElem = $('.js_list_box').find('img[data-key="'+key+'"]');
             var scrollImgElemScrollTop = scrollImgElem[0].offsetTop;
             $('.js_list_box').scrollTop(scrollImgElemScrollTop);
-            currentImageView();
+            if(key > keyDirection){
+                var type = 1;
+            }else{
+                var type = 2;
+            }
+            keyDirection = key;
+            currentImageView(type);
         })
     }
 
     //距离当前图片是否在可视区域中
-    function currentImageView(){
+    function currentImageView(type){
         var currentImage = $("#picScroll").find('.pic.active');
         var oneImageWidth = currentImage[0].clientWidth;
-        if(currentImage[0].offsetLeft > oneImageWidth && currentImage.parent().next().length > 0){
+        if(currentImage[0].offsetLeft > oneImageWidth && currentImage.parent().next().length > 0 && type == 1 ){
             $('.picScroll-next').trigger('click');
         }
-        if(currentImage[0].offsetLeft < oneImageWidth && currentImage.parent().next().length > 0){
+        if(currentImage[0].offsetLeft > oneImageWidth && currentImage.parent().prev().length > 0 && type == 2){
             $('.picScroll-prev').trigger('click');
         }
     }
