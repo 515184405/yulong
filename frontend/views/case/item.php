@@ -81,6 +81,11 @@ $this->keywords=mb_substr($content,0,100);
         </ul>
     </div>
 </div>
+<p class="scale_box none">
+    <a class="js_sub_btn css-btn" href="javascript:;">-</a>
+    <a class="css-scale-number" href="javascript:;"><span class="js_scale_number">100</span>%</a>
+    <a class="js_add_btn css-btn" href="javascript:;">+</a>
+</p>
 <p class="swipper-number none"><span class="sn-current">1</span> / <span class="sn-count"><?=count($contentArr)?></span></p>
 <?php } ?>
 <script src="/asset/static/js/case-item.js<?=Yii::$app->params['static_number']?>"></script>

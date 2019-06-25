@@ -10,23 +10,25 @@
                     $(elem).attr('src', $(elem).attr('data-src'));
                     elem.onload = function () {
                         arrTop.push(elem.offsetTop);
+                        console.log(arrTop);
                         arrTop.sort(function (a, b) {
                             return a > b;
                         });
                     }
-                })
+                });
                 $('.sn-count').html($('.js_list_box').find('img').length);
                 $('.js_list_box').attr('data-show', 1);
             }
             $('.js_list_box').addClass('add-animated');
-            $('.swipper-number').show();
+            $('.swipper-number,.scale_box').show();
             $('#picScroll').addClass('active')
             $('.js_list_box').scrollTop(21);
         } else {
             $('.js_list_box').removeClass('add-animated');
-            $('.swipper-number').hide();
+            $('.swipper-number,.scale_box').hide();
             $('#picScroll').removeClass('active')
         };
+        computerScale();
     })
 
     //打开查看图片后的滚动事件 查看当前看到第几张
@@ -35,7 +37,7 @@
         var offsetTop = $('.js_case_list')[0].offsetTop;
         if(scrollTop < 20){
             $('.js_list_box').removeClass('add-animated');
-            $('.swipper-number').hide();
+            $('.swipper-number,.scale_box').hide();
             $('#picScroll').removeClass('active')
             $('.list-container').scrollTop(offsetTop-1);
         }
@@ -62,7 +64,7 @@
     $('.js_swipper_close').bind('click',function(){
         var offsetTop = $('.js_case_list')[0].offsetTop;
         $('.js_list_box').removeClass('add-animated');
-        $('.swipper-number').hide();
+        $('.swipper-number,.scale_box').hide();
         $('#picScroll').removeClass('active')
         $('.list-container').scrollTop(offsetTop-1);
     })
@@ -99,3 +101,47 @@
             $('.picScroll-prev').trigger('click');
         }
     }
+
+    //计算百分比
+    function computerScale(){
+        var oneImageElem = $('.js_list_box').find('img');
+        var viewImageWidth = parseInt(oneImageElem.css('width'));
+        var boxWidth = parseInt($('.case-swipper').css('width')) - 100; //此100为盒子的padding值
+        $('.js_scale_number').html(Math.ceil((viewImageWidth/boxWidth)*100));
+    }
+
+    //绑定增加比例 +
+    $('.js_add_btn').click(function(){
+        var scale = parseInt($('.js_scale_number').html());
+        if(scale > 95){
+            return layer.msg('已经是最大比例了');
+        }
+        scale += 5;
+        $('.js_scale_number').html(scale);
+        $.each($('.js_list_box').find('img'),function(key,elem){
+            $(elem).css('width',scale+'%');
+        })
+
+        //重新计算图片的宽高
+        arrTop = [];
+        $('.js_list_box').attr('data-show', 0);
+        $('.list-container').trigger('scroll');
+    })
+
+    //绑定缩放比例 -
+    $('.js_sub_btn').click(function(){
+        var scale = parseInt($('.js_scale_number').html());
+        if(scale < 10){
+            return layer.msg('再小就啥也看不见了');
+        }
+        scale -= 5;
+        $('.js_scale_number').html(scale);
+        $.each($('.js_list_box').find('img'),function(key,elem){
+            $(elem).css('width',scale+'%');
+        })
+
+        //重新计算图片的宽高
+        arrTop = [];
+        $('.js_list_box').attr('data-show', 0);
+        $('.list-container').trigger('scroll');
+    })
