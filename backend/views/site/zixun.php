@@ -75,7 +75,7 @@
                             return '<span lay-event="change-status" style="color:#00dd00">已签约</span>'
                         }
                     }}
-                 // ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                 // ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
             }

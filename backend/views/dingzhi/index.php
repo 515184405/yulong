@@ -63,7 +63,7 @@
                 ,{field:'file_url', title: '定制素材',templet: function (d) {
                         return '<a class="theme js_banner_url" target="_blank" href='+frontend_url+d.file_url+' >'+d.file_url+'</a>';
                   }}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
             }

@@ -303,6 +303,9 @@
     margin-top: 15px;
   }
   .unit-items .banner-box {
+    padding: 0px;
+  }
+  .unit-items .banner-box img {
     padding: 15px;
   }
   .unit-items .unit-page-box {

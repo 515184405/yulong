@@ -66,7 +66,7 @@
                     }}
                 ,{field:'recommend',width:100, title: '是否推荐',templet: '#switchTpl'}
                 ,{field:'issue',width:100, title: '是否发布',templet: '#switchTp2'}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
                 console.log(res);

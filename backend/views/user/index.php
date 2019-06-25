@@ -51,7 +51,7 @@
                         return getLocalTime(d.created_time);
                     }}
                 ,{field:'login_ip',title: '登录IP'}
-                ,{fixed: 'right', title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
             ,done(res){
                 console.log(res);

@@ -30,17 +30,22 @@
             margin-top: -35px;
         }
         .login{
-            width:500px;
-            height:400px;
-            position: absolute;
-            top:50%;
-            left:50%;
-            margin-top:-210px;
-            margin-left: -250px;
             background-color: #fff;
         }
         .fy-login{
             padding-top:20px;
+        }
+        @media screen and (min-width: 769px){
+            .login{
+                width:500px;
+                height:400px;
+                position: absolute;
+                top:50%;
+                left:50%;
+                margin-top:-210px;
+                margin-left: -250px;
+                background-color: #fff;
+            }
         }
     </style>
 </head>
