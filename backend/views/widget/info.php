@@ -56,6 +56,14 @@ use kucha\ueditor\UEditor;
                     </div>
                 </div>
             </div>
+           <!-- <div id="wx_link" class="layui-form-item ">
+                <label class="layui-form-label">作品压缩包</label>
+                <div class="layui-input-block">
+                    <button type="button" class="layui-btn layui-btn-primary js_upload_image" id="upload-zip">上传文件</button><span class="theme-red ml10">格式为：zip|rar</span>
+                    <input type="hidden" value="<?/*=isset($data['widget']['download']) ? $data['widget']['download'] : ''*/?>" class="js_website" name="website">
+                    <a href="<?/*=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''*/?>" id="zip-upload-demoText"><?/*=isset($data['widget']['download']) ? Yii::$app->params['frontend_url'].$data['widget']['download'] : ''*/?></a>
+                </div>
+            </div>-->
             <div class="layui-form-item">
                 <label class="layui-form-label">入口文件名</label>
                 <div class="layui-input-block">
@@ -85,16 +93,18 @@ use kucha\ueditor\UEditor;
                     ]);?>
                 </div>
             </div>
+
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">审核状态</label>
+                <label class="layui-form-label">使用方法</label>
                 <div class="layui-input-block">
                     <select id="select-status" lay-filter="select-status" name="status" lay-verify="required">
-                        <option  value="0">审核中</option>
-                        <option  value="2">未通过</option>
-                        <option  value="1">已完成</option>
+                        <option <?=$data['widget']['status'] == 0 ? 'selected' : ''?> value="0">审核中</option>
+                        <option <?=$data['widget']['status'] == 2 ? 'selected' : ''?>  value="2">未通过</option>
+                        <option <?=$data['widget']['status'] == 1 ? 'selected' : ''?>  value="1">已完成</option>
                     </select>
                 </div>
             </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">下载金币数</label>
                 <div class="layui-input-block">
@@ -131,9 +141,10 @@ use kucha\ueditor\UEditor;
     }).extend({
         index: 'lib/index', //主入口模块
         select2:'../lib/select2/js/select2.min'
-    }).use(['index', 'form','select2'], function(){
+    }).use(['index', 'form','upload','select2'], function(){
 
         var $ = layui.$,
+            upload = layui.upload,
             form = layui.form;
 
         //设置百度编辑器代码块样式
@@ -186,7 +197,6 @@ use kucha\ueditor\UEditor;
                     });
                 }
             })
-
         // select2初始化
 
         setSelect("<?=isset($data['widget']['type']) ? $data['widget']['type'] : ''?>".split(','));
@@ -230,12 +240,6 @@ use kucha\ueditor\UEditor;
         /* 监听提交 */
         form.on('submit(submit-btn)', function(data) {
             var type = $("#select2").select2("val").join(',');
-            var zipFile = $("#upload-zip").next('input[name="file"]').val();
-            if(!zipFile && !$('.js_website').val()){
-                layer.msg('请上传文件压缩包',{icon:5});
-                return false;
-            }
-
             data.field['type'] = type; //多选
             // console.log(data.field);return false;
             layer.load(1, {shade: .1});
@@ -249,6 +253,9 @@ use kucha\ueditor\UEditor;
                 success: function(res) {
                     layer.closeAll();
                     _this.disabled=false;
+                    layer.msg(res.message,{icon:1,time:1500},function(){
+                        window.history.go(-1);
+                    })
                 },
                 error: function(){
                     layer.closeAll();
