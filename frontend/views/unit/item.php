@@ -115,7 +115,6 @@
         var data = {
             'widget_id' : $(this).data('id'), //项目id
             'down_title' : $('.js_widget_title').html(), //项目标题
-            'down_url' : href,
         };
         data[csrfName] = csrfVal;
         $.post('/unit/down-count',data,function(res){

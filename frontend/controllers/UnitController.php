@@ -126,6 +126,7 @@ class UnitController extends CommonController {
             //给项目添加下载次数
             $model = Widget::findOne($params['widget_id']);
             $model->down_count = intval($model->down_count) + 1;
+            $params['down_url'] = $model->download;
             //给个人添加下载记录
             UserDownRecord::insertUpdate($params);
             if($model->save()){
