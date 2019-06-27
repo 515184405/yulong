@@ -7,7 +7,7 @@ body {
   background-color: #f1f1f1;
 }
 .list-aslide {
-  width: 230px;
+  width: 200px;
   position: fixed;
   left: 0;
   top: 0;
@@ -135,7 +135,7 @@ body {
 }
 .list-container {
   position: fixed;
-  left: 230px;
+  left: 200px;
   top: 0;
   right: 0;
   height: 100%;
@@ -177,7 +177,7 @@ body {
   height: 60px;
   background-color: #fafafa;
   position: fixed;
-  left: 230px;
+  left: 200px;
   top: 0;
   right: 0;
   z-index: 2;
