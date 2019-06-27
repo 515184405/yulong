@@ -137,8 +137,9 @@
             type:1, //设置访问量
         };
         data[csrfName] = csrfVal;
+        var win = window.open();
         $.post('/unit/user-info',data,function(res){
-            location.href = link;
+            win.location.href = link;
         },'json')
     })
 
