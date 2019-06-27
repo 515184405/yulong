@@ -23,7 +23,7 @@ class NewsController extends CommonController {
             $news = [];
             //获取标签筛选出来的案例结果列表
             foreach ($caseTagJoin as $val){
-                $case_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.id'=>$val['news_id'],'issue'=>2])->asArray()->one();
+                $case_item = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.id'=>$val['news_id'],'issue'=>2])->orderBy(['id'=>SORT_DESC])->asArray()->one();
                 array_push($news,$case_item);
             }
         }else{

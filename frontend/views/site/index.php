@@ -205,7 +205,7 @@ $this->title = '聚友团队 - 北京网站建设,网站制作,网站设计,专�
             <div class="sp-list clearfix">
                 <?php foreach ($data['widget'] as $k6=>$v6) {  ?>
                     <a animate-type="slideInUp" class="sp-item animated delay-<?=$k6%3?>s" target="_blank" href="/unit/item/<?=$v6['id'];?>">
-                        <div class="sp-item-top transition" style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>,1);background-image:url('<?=Yii::$app->params['backend_url'].$v6['banner_url']; ?>')">
+                        <div class="sp-item-top transition" style="background-color:rgba(<?=rand(0,255);?>,<?=rand(0,255);?>,<?=rand(0,255);?>,0.4);background-image:url('<?=Yii::$app->params['backend_url'].$v6['banner_url']; ?>')">
                             <div class="spi-top-active transition">
                                 <p class="_line transition"></p>
                                 <span class="hover-title transition">查看组件</span>
