@@ -78,8 +78,8 @@ use yii\widgets\LinkPager;
     </div>
     <script>
         function addAnimateDelay() {
-            var width = $('.case-list')[0].clientWidth - 60;
-            var oneAWidth = 335;
+            var width = $('.case-list')[0].clientWidth;
+            var oneAWidth = 265;
             var number = Math.floor(width / oneAWidth);
             //$('.case-list').css('width',number * oneAWidth);
 
