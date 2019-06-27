@@ -1,5 +1,5 @@
 .case-list {
-  padding: 30px;
+  padding: 25px 0;
 }
 .case-list .case-item {
   width: 280px;
@@ -8,7 +8,7 @@
   float: left;
   background-color: #f5f5f5;
   position: relative;
-  margin: 0 0 15px 15px;
+  margin: 0 0 10px 10px;
 }
 .case-list .case-item .case-img {
   width: 100%;
@@ -74,11 +74,11 @@
 }
 .unit-list .case-item {
   overflow: hidden;
-  width: 320px;
-  height: 360px;
+  width: 255px;
+  height: 325px;
 }
 .unit-list .case-item .case-img {
-  height: 200px;
+  height: 170px;
   padding: 15px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
