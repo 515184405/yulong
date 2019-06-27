@@ -27,6 +27,6 @@
                 <?php } ?>
             </div>
         </div>
-        <i class="iconfont css-filter js_filter none"></i>
     </div>
+    <i class="iconfont css-filter js_filter none"></i>
 <?php } ?>

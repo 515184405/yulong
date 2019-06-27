@@ -16,7 +16,7 @@ use yii\widgets\LinkPager;
             content: '\e641';
             font-family: 'iconfont';
         }
-        .filter-box .css-filter:before{
+        .css-filter.active:before{
             content: '\e644';
         }
         @media screen and (max-width:414px){
@@ -112,8 +112,10 @@ use yii\widgets\LinkPager;
         $('.js_filter').click(function(){
             if($('.list-header').hasClass('filter-box')){
                 $('.list-header').removeClass('filter-box');
+                $(this).removeClass('active');
             }else{
                 $('.list-header').addClass('filter-box');
+                $(this).addClass('active');
             }
 
         })
