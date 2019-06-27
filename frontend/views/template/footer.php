@@ -61,7 +61,7 @@
                     if (pos < winTop + winHeight) {
                         $(this).addClass(animatedType);
                         if($(this).find('.case-img').length > 0){
-                            $(this).attr('src',$(this).data('src'));
+                            $(this).find('.case-img').attr('src',$(this).find('.case-img').data('src'));
                         }
                         //兼容ie10及以下
                         if(IElt10()){
