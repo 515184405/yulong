@@ -94,7 +94,6 @@
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'unit')!==false ? 'active' : ''?>" href="/unit"><i class="iconfont">&#xe617;</i>组件</a>
     <a class="<?= strpos(Yii::$app->request->getPathInfo(),'user')!==false ? 'active' : ''?>" href="/user"><i class="iconfont">&#xe625;</i>我的</a>
 </div>
-<script src="/asset/static/js/tongji.js"></script>
 <script>
     //滚动置顶
     $('#scrollTop').click(function(){

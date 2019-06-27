@@ -26,6 +26,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/asset/static/css/default.css<?=Yii::$app->params['static_number']?>">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
     <script src="/asset/static/wigdet/layer/layer.js"></script>
+    <script src="/asset/static/js/tongji.js"></script>
 </head>
 <body>
 <input type="hidden" id="form_csrf" name="<?=Yii::$app->request->csrfParam?>" value="<?=Yii::$app->request->csrfToken?>">
