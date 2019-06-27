@@ -20,7 +20,7 @@ class UnitController extends CommonController {
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         $search = isset($_GET['search']) ? $_GET['search'] : '';
         $unitData = Widget::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->andFilterWhere(['or',['like','title',$search],['like','desc',$search]])->asArray()->all();
-        $limit = 20; //每页显示20条
+        $limit = 23; //每页显示20条
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $unit = [];
         $is_true = false; //判断当前类型是否存在项目
