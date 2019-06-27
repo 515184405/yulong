@@ -37,7 +37,7 @@ use yii\widgets\LinkPager;
         </div>
         <?php if (!isset($_GET['page']) || $_GET['page'] == 1) { ?>
             <a href="/unit/dingzhi" animate-type="slideInUp" class="case-item animated ">
-                <img style="background-color:rgb(<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,.4)"
+                <img style="background-color:rgba(<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,.4)"
                      src="/asset/static/image/dingzhi.png" alt="定制开发" class="case-img transition">
                 <h2 class="case-title transition overflow-text">组件定制开发</h2>
                 <p class="case-desc transition overflow-text2">任意发布需求，前端组件开发定制，周期短费用低</p>
@@ -50,7 +50,7 @@ use yii\widgets\LinkPager;
         <?php if (count($data['unit'])) foreach ($data['unit'] as $val) { ?>
             <!--        delay---><? //= $i % 5 ?><!--s-->
             <a href="/unit/item/<?= $val['id'] ?>" animate-type="slideInUp" class="case-item animated ">
-                <img style="background-color:rgb(<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,.4)"
+                <img style="background-color:rgba(<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,.4)"
                      src="<?= Yii::$app->params['backend_url'] . $val['banner_url'] ?>" alt=""
                      class="case-img transition">
                 <h2 class="case-title transition overflow-text"><?= $val['title'] ?></h2>
