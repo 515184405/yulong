@@ -60,6 +60,9 @@
                     var winTop = $(window).scrollTop();
                     if (pos < winTop + winHeight) {
                         $(this).addClass(animatedType);
+                        if($(this).find('.case-img').length > 0){
+                            $(this).attr('src',$(this).data('src'));
+                        }
                         //兼容ie10及以下
                         if(IElt10()){
                             $(this).css('opacity',1);

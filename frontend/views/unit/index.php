@@ -51,7 +51,7 @@ use yii\widgets\LinkPager;
             <!--        delay---><? //= $i % 5 ?><!--s-->
             <a href="/unit/item/<?= $val['id'] ?>" animate-type="slideInUp" class="case-item animated ">
                 <img style="background-color:rgba(<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,<?= rand(0, 255); ?>,.4)"
-                     src="<?= Yii::$app->params['backend_url'] . $val['banner_url'] ?>" alt=""
+                     data-src="<?= Yii::$app->params['backend_url'] . $val['banner_url'] ?>" alt=""
                      class="case-img transition">
                 <h2 class="case-title transition overflow-text"><?= $val['title'] ?></h2>
                 <p class="case-desc transition overflow-text2"><?= strip_tags($val['desc']) ?></p>
