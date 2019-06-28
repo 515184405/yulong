@@ -27,6 +27,7 @@
             <?php }else{ ?>
                 <a class="fy-btn fy-btn-success js_look_widget" data-uid="<?=$unit['u_id']?>" target="_blank" data-href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
             <?php } ?>
+            <a target="_blank" class="js_look_btn"></a>
             <?php if($unit['website']){ ?>
             <a class="fy-btn fy-btn-primary" target="_blank" href="<?=$unit['website']?>">官网地址</a>
             <?php } ?>
@@ -139,7 +140,10 @@
         data[csrfName] = csrfVal;
         var win = window.open();
         $.post('/unit/user-info',data,function(res){
-            win.location.href = link;
+            function openWin(){
+                win.location.href = link;
+            }
+            setTimeout(openWin(),800);
         },'json')
     })
 
