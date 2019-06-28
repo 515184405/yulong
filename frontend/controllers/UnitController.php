@@ -72,12 +72,12 @@ class UnitController extends CommonController {
             $widget_item = Widget::find()->joinWith('userInfo')->where(['and',['widget.id'=>$unit_id],['widget.status'=>'1']])->asArray()->one();
         }
         //点击率加1
-        //$widget_item_look = Widget::findOne($unit_id);
+        $widget_item_look = Widget::findOne($unit_id);
         if(!$widget_item){
             return '项目不存在';
         }
-        //$widget_item_look->look = intval($widget_item_look->look) + 1;
-        //$widget_item_look->save();
+        $widget_item_look->look = intval($widget_item_look->look) + 1;
+        $widget_item_look->save();
 
         //查询上-篇文章
         $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
