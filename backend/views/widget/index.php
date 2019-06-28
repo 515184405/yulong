@@ -41,11 +41,12 @@
         <script type="text/html" id="test-table-toolbar-barDemo">
             <div class="layui-btn-group">
                 <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="params">静态配置</a>
-                {{# if(d.upload_download){}}
-                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="upload">更新</a>
-                {{# } }}
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                {{# if(d.upload_download){}}
+                <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="upload_txt">查看</a>
+                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="upload">更新</a>
+                {{# } }}
             </div>
         </script>
 
@@ -108,7 +109,7 @@
                         }
                     }}
                 ,{field:'desc', title: '描述'}
-                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:200}
+                ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:220}
             ]]
             ,done(res){
             }
@@ -215,6 +216,13 @@
                         }
                     },'json')
                 });
+            }else if(obj.event == 'upload_txt'){
+                layer.open({
+                    title:'更新说明',
+                    content:'<div style="padding:10px;">'+data.upload_txt+'</div>',
+                    area:['400px','300px'],
+                    closeBtn:0,
+                })
             }
         });
 
