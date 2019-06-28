@@ -361,5 +361,6 @@ blockquote {
   margin: 10px;
   background-color: #f2f2f2;
   color: #595757;
+  word-break: break-word;
 }
 /*# sourceMappingURL=item.css.map */
