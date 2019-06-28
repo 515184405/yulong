@@ -13,7 +13,9 @@
 <div class="news-items unit-items">
         <h2 class="content-title clearfix"><span class="left js_widget_title"><?=$unit['title']?></span><div id="share" class="share-box right"></div></h2>
         <div class="content-info">
+            <?php if(!($unit['source'] == '无' || $unit['source'] == null)){?>
             <span>来 源：<?=$unit['source']?></span>
+            <?php } ?>
             <span>发布日期：<?=date('Y-m-d h:m:s',$unit['create_time'])?></span>
             <span>浏览次数：<?=$unit['look']?></span>
             <span>下载量：<?=$unit['down_count']?></span>
