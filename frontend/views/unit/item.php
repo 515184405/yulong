@@ -40,6 +40,14 @@
         <div class="unit-desc layui-elem-quote">
             <span class="theme">插件描述：</span><?=$unit['desc'];?>
         </div>
+        <?php if($unit['upload_txt']){ ?>
+        <div class="unit-rule">
+            <h2 class="unit-rule-title">最新更新:</h2>
+            <div class="unit-rule-content">
+                <?=$unit['upload_txt'];?>
+            </div>
+        </div>
+        <?php } ?>
         <div class="unit-rule">
             <h2 class="unit-rule-title">组件介绍:</h2>
             <div class="unit-rule-content">
