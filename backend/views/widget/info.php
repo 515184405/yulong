@@ -74,7 +74,7 @@ use kucha\ueditor\UEditor;
             <div class="layui-form-item">
                 <label class="layui-form-label">作品来源</label>
                 <div class="layui-input-block">
-                    <input type="text" value="<?=isset($data['widget']['source']) ? $data['widget']['source'] : ''?>" name="source" lay-verify="required" lay-text="作品来源不能为空" autocomplete="off" placeholder="请输入作品来源" class="layui-input">
+                    <input type="text" value="<?=isset($data['widget']['source']) ? $data['widget']['source'] : ''?>" name="source" autocomplete="off" placeholder="请输入作品来源" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item layui-form-text">
