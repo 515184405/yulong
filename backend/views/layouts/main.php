@@ -83,7 +83,7 @@
         <div id="layui-side-menu" class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
                 <div class="layui-logo" lay-href="home/console.html">
-                    <span><img style="width: 180px;" src="/asset/image/logo-fff.png" alt=""></span>
+                    <span><img style="width: 135px;margin-top:-15px;" src="/asset/image/logo-fff.png" alt=""></span>
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
