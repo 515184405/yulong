@@ -26,7 +26,7 @@
             height:130px;
         }
         .login-title img {
-             width: auto;
+             width: 220px;
             margin-top: -35px;
         }
         .login{
