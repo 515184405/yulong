@@ -219,6 +219,11 @@ header {
 .personal-right .fy-sub-nav {
   margin-top: 15px;
   border-bottom: 1px solid #eee;
+  padding-right: 120px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
 }
 .personal-right .fy-sub-nav .sub-nav-item {
   line-height: 35px;
@@ -236,6 +241,9 @@ header {
   background-color: #5181f1;
   padding: 0 15px;
   color: #fff;
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 /*个人中心内容部分*/
 .user-unit-list {
