@@ -86,7 +86,7 @@
                        }else{
                            var str = '';
                        }
-                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'?auth=0777&"'+str+'> '+d.title+' </a>';
+                       return '<a target="_blank" class="theme" href="'+frontend_url+'/unit/item/'+d.id+'?auth=0777&'+str+'"> '+d.title+' </a>';
                     }}
                 ,{field:'create_time',  title: '创建时间',templet: function (d) {
                         return getLocalTime(d.create_time);
