@@ -1,7 +1,7 @@
 <?php
 use yii\widgets\LinkPager;
 ?>
-<?php $this->title="聚友团队 - 案例列表" ?>
+<?php $this->title="313组件库 - 案例列表" ?>
 <?= $this->render('../template/header',compact('data'));?>
 
 <link rel="stylesheet" href="/asset/static/css/case.css<?=Yii::$app->params['static_number']?>">

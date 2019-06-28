@@ -1,4 +1,4 @@
-<?php $this->title = "聚友团队 - 网站定制"; ?>
+<?php $this->title = "313组件库 - 网站定制"; ?>
 <link rel="stylesheet" href="<?= Yii::$app->params['backend_url'] ?>/asset/layui/css/layui.css<?=Yii::$app->params['static_number']?>">
 <style>
     .form-container {
@@ -26,7 +26,7 @@
     <form class="layui-form dingzhi fy-container">
         <div class="layui-form-item">
             <div class="website-callme">
-                <h2 class="website-title">聚友团队</h2>
+                <h2 class="website-title">313组件库</h2>
                 <p class="website-tel">咨询电话：15321353313</p>
             </div>
         </div>

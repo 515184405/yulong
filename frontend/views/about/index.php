@@ -1,12 +1,12 @@
-<?php $this->title="聚友团队 - 关于我们"; ?>
+<?php $this->title="313组件库 - 关于我们"; ?>
 <link rel="stylesheet" href="/asset/static/css/other.css<?=Yii::$app->params['static_number']?>">
 <div class="site-wrapper">
     <div class="site-banner"></div>
     <div class="site-content fy-container">
         <div class="site-title">聚友简介</div>
         <div class="site-text">
-            <p>聚友团队（www.yu313.cn），成立于2019年6月，汇集大部分各界网络公司精英人才</p>
-            <p>聚友团队（www.yu313.cn），秉承着公司以最少的价格获取最优的网络服务。团队人员来自各个网络公司的精英人才，产品经理统一分配任务，技术管理人员统一核验代码。各个精英人才以git代码托管方式共同进行模块开发，人员多，效率高，比传统的外包公司固定人员多，开发快。</p>
+            <p>313组件库（www.yu313.cn），成立于2019年6月，汇集大部分各界网络公司精英人才</p>
+            <p>313组件库（www.yu313.cn），秉承着公司以最少的价格获取最优的网络服务。团队人员来自各个网络公司的精英人才，产品经理统一分配任务，技术管理人员统一核验代码。各个精英人才以git代码托管方式共同进行模块开发，人员多，效率高，比传统的外包公司固定人员多，开发快。</p>
         </div>
     </div>
     <div class="site-content fy-container">

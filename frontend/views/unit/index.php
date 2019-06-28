@@ -3,7 +3,7 @@
 use yii\widgets\LinkPager;
 
 ?>
-<?php $this->title = '聚友团队 - 组件列表' ?>
+<?php $this->title = '313组件库 - 组件列表' ?>
 
 <?= $this->render('../template/header', compact('data')); ?>
 

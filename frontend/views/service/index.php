@@ -1,4 +1,4 @@
-<?php $this->title="聚友团队 - 关于我们"; ?>
+<?php $this->title="313组件库 - 关于我们"; ?>
 <link rel="stylesheet" href="/asset/static/css/other.css<?=Yii::$app->params['static_number']?>">
 <div class="site-wrapper service-wrapper">
     <div class="site-banner" style="background-image:url('/asset/static/image/service.jpg')"></div>

@@ -1,4 +1,4 @@
-<?php $this->title="聚友团队 - 组件定制"; ?>
+<?php $this->title="313组件库 - 组件定制"; ?>
 <link rel="stylesheet" href="<?=Yii::$app->params['backend_url']?>/asset/layui/css/layui.css<?=Yii::$app->params['static_number']?>">
 <style>
     body{
