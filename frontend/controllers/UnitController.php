@@ -3,7 +3,9 @@ namespace frontend\controllers;
 
 use common\models\Cases;
 use common\models\MadeToOrder;
+use common\models\Member;
 use common\models\News;
+use common\models\Pinglun;
 use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
@@ -100,12 +102,16 @@ class UnitController extends CommonController {
         $widget_item['user']['collectCount'] = $collectCount;
         $widget_item['user']['guanzhuCount'] = $guanzhuCount;
 
+        //评论数据
+        $pinglun = Pinglun::find()->where(['widget_id'=>$unit_id])->asArray()->all();
+//        var_dump($pinglun);die;
 
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
             'next' => $next_article,
             'data' => $widget_item,
+            'pinglun' => $pinglun,
         );
         return $this->renderPartial('item',compact('data','unit_id'));
     }
@@ -201,6 +207,26 @@ class UnitController extends CommonController {
         $params = \Yii::$app->request->post();
         $params['u_id'] = $user_id;
         if(UserGuanzhu::insertUpdate($params)){
+            return Json::encode(['code'=>'100000','message'=>'操作成功']);
+        }
+        return Json::encode(['code'=>'100001','message'=>'操作失败']);
+    }
+
+    //评论
+    public function actionPinglun(){
+        if(isset($_COOKIE['pinglun'])){
+            setcookie("pinglun", 1, time()+1,'/');
+            return Json::encode(['code'=>'100002','message'=>'请不要频繁操作，1s后再试']);
+        }
+        setcookie("pinglun", 1, time()+1,'/');
+
+        $params = \Yii::$app->request->post();
+        $params['create_time'] = date('Y-m-d h:i:s');
+        $member = Member::find()->where(['id'=>$params['uid']])->select(['username','avatar','id'])->asArray()->one();
+        $params = array_merge($params,$member);
+        $model = new Pinglun();
+        $model->setAttributes($params);
+        if($model->save()){
             return Json::encode(['code'=>'100000','message'=>'操作成功']);
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);

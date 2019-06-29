@@ -5,9 +5,13 @@
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
 <link rel="stylesheet" href="/asset/static/css/item.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="/asset/static/css/pinglun.css<?=Yii::$app->params['static_number']?>">
     <style>
         .js_news_recommend{
             top:235px;
+        }
+        .unit-items .unit-page-box{
+            padding-bottom:0;
         }
     </style>
 <div class="news-items unit-items">
@@ -64,7 +68,87 @@
         <a <?=is_null($data['next']) ? '' : 'href="/unit/item/'.$data['next']['id'].'"' ?> class="btn-next right"><?=is_null($data['next']) ? '没有了...' : $data['next']['title'] ?><i class="iconfont">&#xe607;</i></a>
     </div>
 
+    <!--评论主体-->
+    <?php foreach ($data['pinglun'] as $text) { ?>
+<!--        <div class="commentAll">-->
+<!--            <!--回复区域 begin-->-->
+<!--            <div class="comment-show">-->
+<!--                <div class="comment-show-con clearfix">-->
+<!--                    <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
+<!--                    <div class="comment-show-con-list pull-left clearfix">-->
+<!--                        <div class="pl-text clearfix">-->
+<!--                            <a href="#" class="comment-size-name"><b>张三</b></a>-->
+<!--                        </div>-->
+<!--                        <div class="date-dz">-->
+<!--                            <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
+<!--                            <div class="date-dz-right pull-right comment-pl-block">-->
+<!--                                <a href="javascript:;" class="date-dz-pl js_add_pinglun pl-hf hf-con-block pull-left">回复</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="hf-list-con"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="comment-content">-->
+<!--                违纪违规who如果呢零零人家管理局-->
+<!--                <div class="commentAll sub-content">-->
+<!--                    <!--回复区域 begin-->-->
+<!--                    <div class="comment-show">-->
+<!--                        <div class="comment-show-con clearfix">-->
+<!--                            <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
+<!--                            <div class="comment-show-con-list pull-left clearfix">-->
+<!--                                <div class="pl-text clearfix">-->
+<!--                                    <a href="#" class="comment-size-name"><b>张三</b></a>-->
+<!--                                </div>-->
+<!--                                <div class="date-dz">-->
+<!--                                    <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
+<!--                                    <div class="date-dz-right pull-right comment-pl-block">-->
+<!--                                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="hf-list-con"></div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="comment-content">-->
+<!--                        违纪违规who如果呢零零人家管理局-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="commentAll sub-content">-->
+<!--                    <!--回复区域 begin-->-->
+<!--                    <div class="comment-show">-->
+<!--                        <div class="comment-show-con clearfix">-->
+<!--                            <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
+<!--                            <div class="comment-show-con-list pull-left clearfix">-->
+<!--                                <div class="pl-text clearfix">-->
+<!--                                    <a href="#" class="comment-size-name"><b>张三</b></a>-->
+<!--                                </div>-->
+<!--                                <div class="date-dz">-->
+<!--                                    <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
+<!--                                    <div class="date-dz-right pull-right comment-pl-block">-->
+<!--                                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="comment-content">-->
+<!--                        违纪违规who如果呢零零人家管理局-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    <?php } ?>
+    <!--回复区域 end-->
+    <!--评论区域 begin-->
+    <!--<div class="reviewArea flex-text-wrap clearfix">
+        <textarea class="content comment-input" rows="3" placeholder="Please enter a comment&hellip;"></textarea>
+        <a  data-widgetid="<?/*=$unit['id'] */?>" data-uid="<?/*=$unit['u_id']*/?>" href="javascript:;" class="plBtn <?/*=Yii::$app->getUser()->getId() ? 'js_pinglun"' : 'login_btn" href="javascript:;"'*/?>">评论</a>
+    </div>-->
+    <!--评论区域 end-->
+    <!--评论主体-->
 </div>
+
 <div class="unit-user news-recommend">
     <div class="clearfix unit-user-info">
         <img class="unit-user-avatar" src="<?=$unit['userInfo']['avatar']?>" alt="">
@@ -211,6 +295,35 @@
                 layer.msg(res.message,{icon:5,time:1000});
             }
         },'json');
+    })
+
+    //评论
+    $(".js_add_pinglun").click(function(){
+        var currentElem = $(this).closest('.comment-show').next('.comment-content');
+        if(currentElem.find('.reviewArea').length > 0){
+            return;
+        }
+        currentElem.append($('.reviewArea').clone());
+    })
+
+    //评论
+    $('.js_pinglun').click(function(){
+        var text = $(this).prev('.content').val();
+        var uid = $(this).data('uid');
+        var widgetid = $(this).data('widgetid');
+        var data = {
+            content : text,
+            uid : uid,
+            widget_id : widgetid
+        };
+        data[csrfName] = csrfVal;
+        $.post('/unit/pinglun',data,function(res){
+            if(res.code == 100000){
+                layer.msg(res.message,{icon:1});
+            }else{
+                layer.msg(res.message,{icon:5});
+            }
+        },'json')
     })
 </script>
 <?= $this->render('../template/footer');?>
