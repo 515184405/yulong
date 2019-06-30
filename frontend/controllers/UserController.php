@@ -226,7 +226,7 @@ class UserController extends CommonController
     {
        $uid =  Yii::$app->user->id;
        $params = Yii::$app->request->get();
-       $limit = 20; //每页显示20条
+       $limit = 30; //每页显示20条
        $page = isset($params['page']) ? $params['page'] : 1;
        $message = Pinglun::find()->where(['widget_uid'=>$uid])->orderBy(['id'=>SORT_DESC]);
        $pagination = new Pagination(['totalCount' => $message->count(),'pageSize' => $limit]);

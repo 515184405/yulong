@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="site-content fy-container">
-        <div class="site-title">我们的团队</div>
+        <div class="site-title">技术团队</div>
         <div class="site-text clearfix">
             <?php foreach ($data as $key=>$val){ ?>
             <a class="site-team" href="javascript:;">
