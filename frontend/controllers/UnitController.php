@@ -234,6 +234,7 @@ class UnitController extends CommonController {
 
         $params = \Yii::$app->request->post();
         $params['create_time'] = date('Y-m-d h:i:s');
+        $params['uid'] = \Yii::$app->user->id;
         $member = Member::find()->where(['id'=>$params['uid']])->select(['username','avatar','id'])->asArray()->one();
         $params = array_merge($params,$member);
         $model = new Pinglun();

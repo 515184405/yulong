@@ -15,6 +15,7 @@ use Yii;
  * @property string $create_time 评论时间
  * @property int $parent_id 评论类型，父评论ID
  * @property string $content 评论内容
+ * @property string $widget_uid 组件用户ID
  */
 class Pinglun extends \yii\db\ActiveRecord
 {
@@ -32,8 +33,8 @@ class Pinglun extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['widget_id', 'uid', 'username', 'avatar', 'create_time', 'content'], 'required'],
-            [['widget_id', 'uid', 'parent_id'], 'integer'],
+            [['widget_id', 'uid','widget_uid', 'username', 'avatar', 'create_time', 'content'], 'required'],
+            [['widget_id', 'uid','widget_uid', 'parent_id'], 'integer'],
             [['create_time'], 'safe'],
             [['username', 'avatar'], 'string', 'max' => 255],
             [['content'], 'string', 'max' => 3000],
@@ -54,6 +55,7 @@ class Pinglun extends \yii\db\ActiveRecord
             'create_time' => 'Create Time',
             'parent_id' => 'Parent Id',
             'content' => 'Content',
+            'widget_uid' => 'Widget Uid',
         ];
     }
 }

@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\MadeToOrder;
+use common\models\Pinglun;
 use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
@@ -218,6 +219,23 @@ class UserController extends CommonController
             'guanZhu'=>$guanZhu,
         ];
         return $this->render('guan-zhu',compact('data'));
+    }
+
+    //我的消息
+    public function actionMessage()
+    {
+       $uid =  Yii::$app->user->id;
+       $params = Yii::$app->request->get();
+       $limit = 20; //每页显示20条
+       $page = isset($params['page']) ? $params['page'] : 1;
+       $message = Pinglun::find()->where(['widget_uid'=>$uid])->orderBy(['id'=>SORT_DESC]);
+       $pagination = new Pagination(['totalCount' => $message->count(),'pageSize' => $limit]);
+       $message = $message->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
+       $data = [
+           'message'=>$message,
+           'pagination' => $pagination
+       ];
+        return $this->render('message',compact('data'));
     }
 
     //用户签到

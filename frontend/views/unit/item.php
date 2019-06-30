@@ -295,7 +295,7 @@
         pinglun_id = !!pinglun_id ? pinglun_id : 0;
         var data = {
             content : '<pre>'+text+'</pre>',
-            uid : uid,
+            widget_uid : uid,
             widget_id : widgetid,
             parent_id : pinglun_id,
         };
