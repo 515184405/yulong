@@ -103,7 +103,7 @@ class UnitController extends CommonController {
         $widget_item['user']['guanzhuCount'] = $guanzhuCount;
 
         //评论数据
-        $pinglun = Pinglun::find()->where(['widget_id'=>$unit_id])->asArray()->all();
+        //$pinglun = Pinglun::find()->where(['widget_id'=>$unit_id])->asArray()->all();
 //        var_dump($pinglun);die;
 
         $data = array(
