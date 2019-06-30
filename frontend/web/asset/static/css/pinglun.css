@@ -9,11 +9,15 @@
 /*----------------------------------------------------------------------------------------------------------*/
 .content{float: left;}
 .flex-text-wrap,pre{margin: 0 !important;}
-.commentAll{padding: 10px;border: 1px solid #ededed;margin: 20px auto;}
+.commentAll{padding: 10px;margin: 10px auto;}
+.pinglun-first{border-top: 1px solid #ddd;}
 .plBtn{width: 75px;height: 36px;line-height: 36px;background-color: #339b53;text-align: center;display: block;float: right;color: #FFFFFF;font-size: 12px;border-radius: 6px;margin-right: 2px;}
 .plBtn:hover{background-color: #2f904d;color:#fff;
     cursor: pointer;}
-
+.pinglun-title{
+    font-size: 17px;
+    color:#000;
+}
 /*----------评论区域 begin----------*/
 .comment-show-con {
     width: 100%;
@@ -88,6 +92,7 @@
 }
 .comment-pl-block {
     margin-top: 0;
+    text-align: right;
 }
 .date-dz-right {
     display: block;
@@ -108,8 +113,8 @@
     display: block;
 }
 .date-dz-pl, .date-dz-line, .date-dz-z {
-    font-size: 12px;
-    color: #8b8b8b;
+    font-size: 14px;
+    color: #333;
 }
 .date-dz-line {
     display: block;

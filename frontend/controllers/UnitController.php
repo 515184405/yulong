@@ -103,15 +103,27 @@ class UnitController extends CommonController {
         $widget_item['user']['guanzhuCount'] = $guanzhuCount;
 
         //评论数据
-        //$pinglun = Pinglun::find()->where(['widget_id'=>$unit_id])->asArray()->all();
-//        var_dump($pinglun);die;
-
+        $pinglun = Pinglun::find()->where(['widget_id'=>$unit_id])->asArray()->all();
+        $pinglunCount = count($pinglun);
+        for($i = 0; $i < count($pinglun);$i++){
+            for($j = 0; $j < count($pinglun);$j++){
+                if($pinglun[$i]['id'] == $pinglun[$j]['parent_id']){
+                    if(!isset($pinglun[$i]['child'])){
+                        $pinglun[$i]['child'] = [];
+                    }
+                    $pinglun[$i]['child'][] = $pinglun[$j];
+                    array_splice($pinglun,$j,1);
+                    $j--;
+                }
+            }
+       }
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
             'next' => $next_article,
             'data' => $widget_item,
             'pinglun' => $pinglun,
+            'pinglunCount' => $pinglunCount,
         );
         return $this->renderPartial('item',compact('data','unit_id'));
     }

@@ -11,7 +11,7 @@
             top:235px;
         }
         .unit-items .unit-page-box{
-            padding-bottom:0;
+            padding-bottom:10px;
         }
     </style>
 <div class="news-items unit-items">
@@ -67,84 +67,64 @@
         <a <?=is_null($data['prev']) ? '' : 'href="/unit/item/'.$data['prev']['id'].'"' ?> class="btn-prev left"><i class="iconfont">&#xe604;</i><?=is_null($data['prev']) ? '没有了...' : $data['prev']['title'] ?></a>
         <a <?=is_null($data['next']) ? '' : 'href="/unit/item/'.$data['next']['id'].'"' ?> class="btn-next right"><?=is_null($data['next']) ? '没有了...' : $data['next']['title'] ?><i class="iconfont">&#xe607;</i></a>
     </div>
-
+    <div class="unit-rule">
+        <h2 class="unit-rule-title t-c pinglun-title">项目讨论（<?=$data['pinglunCount']?>）</h2>
+    </div>
     <!--评论主体-->
-<!--    --><?php //foreach ($data['pinglun'] as $text) { ?>
-<!--        <div class="commentAll">-->
-<!--            <!--回复区域 begin-->-->
-<!--            <div class="comment-show">-->
-<!--                <div class="comment-show-con clearfix">-->
-<!--                    <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
-<!--                    <div class="comment-show-con-list pull-left clearfix">-->
-<!--                        <div class="pl-text clearfix">-->
-<!--                            <a href="#" class="comment-size-name"><b>张三</b></a>-->
-<!--                        </div>-->
-<!--                        <div class="date-dz">-->
-<!--                            <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
-<!--                            <div class="date-dz-right pull-right comment-pl-block">-->
-<!--                                <a href="javascript:;" class="date-dz-pl js_add_pinglun pl-hf hf-con-block pull-left">回复</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="hf-list-con"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="comment-content">-->
-<!--                违纪违规who如果呢零零人家管理局-->
-<!--                <div class="commentAll sub-content">-->
-<!--                    <!--回复区域 begin-->-->
-<!--                    <div class="comment-show">-->
-<!--                        <div class="comment-show-con clearfix">-->
-<!--                            <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
-<!--                            <div class="comment-show-con-list pull-left clearfix">-->
-<!--                                <div class="pl-text clearfix">-->
-<!--                                    <a href="#" class="comment-size-name"><b>张三</b></a>-->
-<!--                                </div>-->
-<!--                                <div class="date-dz">-->
-<!--                                    <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
-<!--                                    <div class="date-dz-right pull-right comment-pl-block">-->
-<!--                                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="hf-list-con"></div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="comment-content">-->
-<!--                        违纪违规who如果呢零零人家管理局-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="commentAll sub-content">-->
-<!--                    <!--回复区域 begin-->-->
-<!--                    <div class="comment-show">-->
-<!--                        <div class="comment-show-con clearfix">-->
-<!--                            <div class="comment-show-con-img pull-left"><img src="images/header-img-comment_03.png" alt=""></div>-->
-<!--                            <div class="comment-show-con-list pull-left clearfix">-->
-<!--                                <div class="pl-text clearfix">-->
-<!--                                    <a href="#" class="comment-size-name"><b>张三</b></a>-->
-<!--                                </div>-->
-<!--                                <div class="date-dz">-->
-<!--                                    <span class="date-dz-left pull-left comment-time">2017-5-2 11:11:39</span>-->
-<!--                                    <div class="date-dz-right pull-right comment-pl-block">-->
-<!--                                        <a href="javascript:;" class="date-dz-pl pl-hf hf-con-block pull-left">回复</a>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="comment-content">-->
-<!--                        违纪违规who如果呢零零人家管理局-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    --><?php //} ?>
+    <?php foreach ($data['pinglun'] as $text) { ?>
+        <div class="commentAll pinglun-first" data-pinglun="<?=$text['id']?>">
+            <!--回复区域 begin-->
+            <div class="comment-show">
+                <div class="comment-show-con clearfix">
+                    <div class="comment-show-con-img pull-left"><img src="<?=$text['avatar'];?>" alt="头像"></div>
+                    <div class="comment-show-con-list pull-left clearfix">
+                        <div class="pl-text clearfix">
+                            <a href="#" class="comment-size-name"><b><?=$text['username'];?></b></a>
+                        </div>
+                        <div class="date-dz">
+                            <span class="date-dz-left pull-left comment-time"><?=$text['create_time'];?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="comment-content">
+                <?=$text['content']?>
+                <?php if(isset($text['child'])){
+                    foreach ($text['child'] as $item) { ?>
+                        <div class="commentAll sub-content">
+                    <!--回复区域 begin-->
+                    <div class="comment-show">
+                        <div class="comment-show-con clearfix">
+                            <div class="comment-show-con-img pull-left"><img src="<?=$item['avatar']; ?>" alt="头像"></div>
+                            <div class="comment-show-con-list pull-left clearfix">
+                                <div class="pl-text clearfix">
+                                    <a href="#" class="comment-size-name"><b><?=$item['username']; ?></b></a>
+                                </div>
+                                <div class="date-dz">
+                                    <span class="date-dz-left pull-left comment-time"><?=$item['create_time']; ?></span>
+                                    <div class="date-dz-right pull-right comment-pl-block">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        <?=$item['content']?>
+                    </div>
+                </div>
+                <?php  }} ?>
+                <div class="date-dz-right comment-pl-block">
+                    <a href="javascript:;" class="date-dz-pl js_add_pinglun pl-hf">回复</a>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <!--回复区域 end-->
     <!--评论区域 begin-->
-    <!--<div class="reviewArea flex-text-wrap clearfix">
+    <div class="reviewArea flex-text-wrap clearfix">
         <textarea class="content comment-input" rows="3" placeholder="Please enter a comment&hellip;"></textarea>
-        <a  data-widgetid="<?/*=$unit['id'] */?>" data-uid="<?/*=$unit['u_id']*/?>" href="javascript:;" class="plBtn <?/*=Yii::$app->getUser()->getId() ? 'js_pinglun"' : 'login_btn" href="javascript:;"'*/?>">评论</a>
-    </div>-->
+        <a  data-widgetid="<?=$unit['id'] ?>" data-uid="<?=$unit['u_id']?>" href="javascript:;" class="plBtn <?=Yii::$app->getUser()->getId() ? 'js_pinglun"' : 'login_btn" href="javascript:;"'?>">评论</a>
+    </div>
     <!--评论区域 end-->
     <!--评论主体-->
 </div>
@@ -299,7 +279,7 @@
 
     //评论
     $(".js_add_pinglun").click(function(){
-        var currentElem = $(this).closest('.comment-show').next('.comment-content');
+        var currentElem = $(this).closest('.comment-content');
         if(currentElem.find('.reviewArea').length > 0){
             return;
         }
@@ -307,21 +287,28 @@
     })
 
     //评论
-    $('.js_pinglun').click(function(){
+    $(document).delegate('.js_pinglun','click',function(){
         var text = $(this).prev('.content').val();
         var uid = $(this).data('uid');
         var widgetid = $(this).data('widgetid');
+        var pinglun_id = $(this).closest('.commentAll').data('pinglun');
+        pinglun_id = !!pinglun_id ? pinglun_id : 0;
         var data = {
-            content : text,
+            content : '<pre>'+text+'</pre>',
             uid : uid,
-            widget_id : widgetid
+            widget_id : widgetid,
+            parent_id : pinglun_id,
         };
         data[csrfName] = csrfVal;
         $.post('/unit/pinglun',data,function(res){
             if(res.code == 100000){
-                layer.msg(res.message,{icon:1});
+                layer.msg(res.message,{icon:1,time:1500},function(){
+                    location.reload();
+                });
             }else{
-                layer.msg(res.message,{icon:5});
+                layer.msg(res.message,{icon:5,time:1500},function(){
+                    location.reload();
+                });
             }
         },'json')
     })
