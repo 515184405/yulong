@@ -1,4 +1,23 @@
 <?php $type_id = isset($_GET['type']) ? $_GET['type'] : 0; ?>
+<?php
+function format_date($time){
+    $t=time()-$time;
+    $f=array(
+        '31536000'=>'年',
+        '2592000'=>'个月',
+        '604800'=>'星期',
+        '86400'=>'天',
+        '3600'=>'小时',
+        '60'=>'分钟',
+        '1'=>'秒'
+    );
+    foreach ($f as $k=>$v)    {
+        if (0 !=$c=floor($t/(int)$k)) {
+            return $c.$v.'前';
+        }
+    }
+}
+?>
 <style>
     .sub-nav-item{
         margin-right:15px!important;
@@ -31,7 +50,7 @@
             <?php if(!empty($data['message'])){ foreach ($data['message'] as $val) { ?>
                 <div class="record-item">
                     <a href="/unit/item/<?=$val['widget_id']?>" class="record-item-left">
-                        <p style="margin-top:0;"><?=$val['create_time']?></p>
+                        <p style="margin-top:0;"><?=format_date(strtotime($val['create_time']))?></p>
                         <h2 class="overflow-text message-content"><?=$val['content']?></h2>
                     </a>
                     <a class="record-item-btn" href="/unit/item/<?=$val['widget_id']?>">查 看</a>

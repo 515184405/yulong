@@ -233,7 +233,7 @@ class UnitController extends CommonController {
         setcookie("pinglun", 1, time()+1,'/');
 
         $params = \Yii::$app->request->post();
-        $params['create_time'] = date('Y-m-d h:i:s');
+        $params['create_time'] = date('Y-m-d H:i:s');
         $params['uid'] = \Yii::$app->user->id;
         $member = Member::find()->where(['id'=>$params['uid']])->select(['username','avatar','id'])->asArray()->one();
         $params = array_merge($params,$member);
