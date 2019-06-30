@@ -69,7 +69,7 @@
     </div>
 
     <!--评论主体-->
-    <?php foreach ($data['pinglun'] as $text) { ?>
+<!--    --><?php //foreach ($data['pinglun'] as $text) { ?>
 <!--        <div class="commentAll">-->
 <!--            <!--回复区域 begin-->-->
 <!--            <div class="comment-show">-->
@@ -138,7 +138,7 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-    <?php } ?>
+<!--    --><?php //} ?>
     <!--回复区域 end-->
     <!--评论区域 begin-->
     <!--<div class="reviewArea flex-text-wrap clearfix">
