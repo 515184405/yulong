@@ -51,6 +51,12 @@
     height: 48px;
     overflow: hidden;
     margin-top: 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+.comment-show-con-img img{
+    max-width: 100%;
 }
 .comment-show-con-list {
     width: 85%;
