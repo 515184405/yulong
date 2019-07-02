@@ -53,15 +53,83 @@ class SiteController extends CommonController
     }
 
     /**
+     * 微博登录
+     * @return mixed
+     */
+    public function weiboLogin(){
+//        session_start();
+        include_once( '../../vendor/weiboLogin/config.php' );
+        include_once( '../../vendor/weiboLogin/saetv2.ex.class.php' );
+
+        $o = new \SaeTOAuthV2( WB_AKEY , WB_SKEY );
+
+        $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
+        return $code_url;
+    }
+
+    public function actionWeiboCallback(){
+        //session_start();
+        $site_url = "http:....";
+        include_once( '../../vendor/weiboLogin/config.php' );
+        include_once( '../../vendor/weiboLogin/saetv2.ex.class.php' );
+
+        $o = new \SaeTOAuthV2( WB_AKEY , WB_SKEY );
+
+        if (isset($_REQUEST['code'])) {
+            $keys = array();
+            $keys['code'] = $_REQUEST['code'];
+            $keys['redirect_uri'] = WB_CALLBACK_URL;
+            try {
+                $token = $o->getAccessToken( 'code', $keys ) ;
+            }
+            catch (OAuthException $e) {
+            }
+        }
+
+        if ($token) {
+            $_SESSION['token'] = $token;
+            setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
+            $c = new \saetclientv2(WB_AKEY,WB_SKEY,$token['access_token']);
+            $ms =$c->home_timeline();
+            $uid_get = $c->get_uid();
+            $uid = $uid_get['uid'];
+            $userinfo=$c->show_user_by_id($uid); //微博sdk方法获取用户的信息
+//            var_dump($userinfo);die;
+            if (!Yii::$app->user->isGuest) {
+                return $this->goHome();
+            }
+
+            //打印出个人信息
+            $params = [
+                'username' => $userinfo['name'],
+                'sex' => $userinfo['gender'] == "m" ? 0 : 1,
+                'province' => explode(' ',$userinfo['location'])[0],
+                'city' => explode(' ',$userinfo['location'])[1],
+                'avatar' => $userinfo['avatar_large'],
+                'accessToken' => $token['access_token'],
+                'openid' => $userinfo['idstr'],
+                'type' => 2, //2为微博用户
+                'created_time' => time(),
+                'updated_time' => time(),
+                'login_time' => time(),
+                'update_password' => 0
+            ];
+            $this->loginFun($params);
+        }else {
+            echo '授权失败。';
+        }
+    }
+
+    /**
      * Logs in a user.
      *
      * @return mixed
      */
     public function actionLogin()
     {
-//       if (!Yii::$app->user->isGuest) {
-//            return $this->redirect('/user');
-//        }
+       if (!Yii::$app->user->isGuest) {
+            return $this->redirect('/user');
+        }
 //        $params = [
 //            'username' => '1111',
 //            'sex' => 0,
@@ -90,7 +158,8 @@ class SiteController extends CommonController
 //            if ($member->save() && $model->login()) {
 //                echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
 //            } else {
-                return $this->renderPartial('login');
+                $weiboUrl = $this->weiboLogin();
+                return $this->renderPartial('login',compact('weiboUrl'));
 //            }
 //        }
     }
@@ -313,6 +382,15 @@ class SiteController extends CommonController
             'login_time' => time(),
             'update_password' => 0
         ];
+        $this->loginFun($params);
+    }
+
+    /**
+     * 快捷登录通用方法
+     * @param $params
+     * @return string
+     */
+    public function loginFun($params){
         $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
         $model = new LoginForm2();
         $model->setAttributes($params);
@@ -327,7 +405,8 @@ class SiteController extends CommonController
             if ($member->save() && $model->login()) {
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {
-                return $this->renderPartial('login');
+                $weiboUrl = $this->weiboLogin();
+                return $this->renderPartial('login',compact('weiboUrl'));
             }
         }
     }

@@ -1,4 +1,6 @@
-
+<?php
+    $weiboUrl = $this->params['weiboUrl'];
+?>
 <!--公共尾部-->
 <a href="javascript:;" class="website-btn js_website_btn">
     建站咨询
@@ -29,7 +31,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 登陆</p>
         </a>
-        <a target="_blank"  href="javascript:layer.msg('正在开发中...');">
+        <a target="_blank" class="js_weibo_login" href="<?=$weiboUrl?>">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪登陆</p>
         </a>
@@ -51,7 +53,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 注册</p>
         </a>
-        <a target="_blank"  href="javascript:layer.msg('正在开发中...');">
+        <a target="_blank" class="js_weibo_login" href=" href="<?=$weiboUrl?>"">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪注册</p>
         </a>
@@ -166,7 +168,7 @@
                 $('#user_register').hide();
             }
         });
-    })
+    });
 
     //必须统一才能注册
     $('.iagree_btn').click(function(){

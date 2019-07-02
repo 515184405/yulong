@@ -62,7 +62,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 登陆</p>
         </a>
-        <a target="_blank" href="javascript:layer.msg('正在开发中...');">
+        <a target="_blank" href="<?=$weiboUrl?>">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪登陆</p>
         </a>
@@ -82,7 +82,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 注册</p>
         </a>
-        <a target="_blank"  href="javascript:layer.msg('正在开发中...');">
+        <a target="_blank"  href="<?=$weiboUrl?>">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪注册</p>
         </a>

@@ -87,8 +87,23 @@ class CommonController extends \yii\web\Controller{
 
         //向公共页面传递数据
         Yii::$app->view->params['userInfo'] = $userInfo;
-
         \Yii::$app->view->params['recommend'] = $recommend;
+        \Yii::$app->view->params['weiboUrl'] = $this->weiboLogin();
+    }
+
+    /**
+     * 微博登录
+     * @return mixed
+     */
+    public function weiboLogin(){
+//        session_start();
+        include_once( '../../vendor/weiboLogin/config.php' );
+        include_once( '../../vendor/weiboLogin/saetv2.ex.class.php' );
+
+        $o = new \SaeTOAuthV2( WB_AKEY , WB_SKEY );
+
+        $code_url = $o->getAuthorizeURL( WB_CALLBACK_URL );
+        return $code_url;
     }
 
     public function sendsMail($title,$htmlBody){
