@@ -53,7 +53,7 @@
             <i class="iconfont transition">&#xe608;</i>
             <p>Q Q 注册</p>
         </a>
-        <a target="_blank" class="js_weibo_login" href=" href="<?=$weiboUrl?>"">
+        <a target="_blank" class="js_weibo_login" href="<?=$weiboUrl?>">
             <i class="iconfont transition">&#xe610;</i>
             <p>新浪注册</p>
         </a>
