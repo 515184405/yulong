@@ -26,7 +26,7 @@
             <span>下载量：<?=$unit['down_count']?></span>
         </div>
         <div class="banner-box">
-            <img  style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,1);" src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
+            <img  style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,0.4);" src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
         </div>
         <div class="unit-btn-box">
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
