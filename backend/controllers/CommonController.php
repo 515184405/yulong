@@ -5,6 +5,7 @@ use common\models\User;
 use Yii;
 use common\models\UploadForm;
 use yii\helpers\Json;
+use yii\web\imgcompress;
 use yii\web\UploadedFile;
 
 /**
@@ -96,7 +97,12 @@ class CommonController extends \yii\web\Controller{
     }
 
     //图片上传
-    public function uploadImage(){
+
+    /**
+     * @param bool $iscompress 是否压缩
+     * @return array
+     */
+    public function uploadImage($iscompress = true){
         $model = new UploadForm();
         if (Yii::$app->request->isPost) {
             $date = date('Ymd').'/';
@@ -108,6 +114,15 @@ class CommonController extends \yii\web\Controller{
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
                 $fileSrc=$rootDir . rand(10000, 99999) .time() . '.' . $model->file->extension;
                 $model->file->saveAs($fileSrc);
+
+                //压缩图片
+               /* if($iscompress){
+                    $source = $fileSrc;
+                    $dst_img = $fileSrc; //可加存放路径
+                    $percent = 1;  #原图压缩，不缩放
+                    (new Imgcompress($source,$percent))->compressImg($dst_img);
+                }*/
+
                 return array(
                     'fileName' => $fileName,
                     'fileSrc' => $fileSrc,
