@@ -406,7 +406,7 @@ class SiteController extends CommonController
             //打印出个人信息
             if ($member->save() && $model->login()) {
                 //新用户给5积分
-                UserScope::insertUpdate(5,$model->attributes['id']);
+                UserScope::insertUpdate(5,$member->attributes['id']);
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {
                 $weiboUrl = $this->weiboLogin();
