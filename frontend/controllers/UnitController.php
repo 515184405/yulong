@@ -161,7 +161,7 @@ class UnitController extends CommonController {
                     return $returnVal;
                 };
                 //给组件作者增加积分
-                if(UserDownRecord::find(['widget_id'=>$params['widget_id']])->count() <= 100){
+                if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id']])->count() <= 100){
                     UserScope::insertUpdate($model->down_money,$model->u_id);
                 }
 
