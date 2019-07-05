@@ -1,5 +1,6 @@
 <?php
-$sign = $this->params['scope'];
+$sign = $this->params['sign'];
+$scope = $this->params['scope'];
 $personalInfo = $this->params['personalInfo'];
 /*用户信息*/
 $userInfo = $this->params['userInfo'];

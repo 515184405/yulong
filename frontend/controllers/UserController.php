@@ -47,7 +47,9 @@ class UserController extends CommonController
     {
         //签到信息
         $user_id = Yii::$app->user->id ? Yii::$app->user->id : 0;
+        $sign = UserSign::find()->where(['u_id'=>$user_id])->asArray()->one();
         $scope = UserScope::find()->where(['uid'=>$user_id])->asArray()->one();
+        Yii::$app->view->params['sign'] = $sign;
         Yii::$app->view->params['scope'] = $scope;
         $personalInfo = UserInfo::find()->where(['uid'=>$user_id])->asArray()->one();
         Yii::$app->view->params['personalInfo'] = $personalInfo;
