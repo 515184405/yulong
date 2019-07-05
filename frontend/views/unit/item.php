@@ -15,6 +15,7 @@
             padding-bottom:10px;
         }
     </style>
+    <input type="hidden" id="scrope-value" value="<?=isset($data['scope']) ? $data['scope'] : 0?>">
 <div class="news-items unit-items">
         <h2 class="content-title clearfix"><span class="left js_widget_title"><?=$unit['title']?></span><div id="share" class="share-box right"></div></h2>
         <div class="content-info">
@@ -168,6 +169,7 @@
 
 <script src="/asset/static/wigdet/share/jquery.share.min.js"></script>
 <script>
+
     //分享功能
     $('#share').share({sites: ['qzone', 'qq', 'weibo','wechat']});
     // 动态设置右侧高度固定右侧
@@ -193,14 +195,41 @@
             'down_title' : $('.js_widget_title').html(), //项目标题
         };
         data[csrfName] = csrfVal;
-        $.post('/unit/down-count',data,function(res){
-            if(res.code == 100000){
-                location.href = res.download;
-            }else{
-                layer.msg(res.message,{icon:5});
+
+        <!--下载主体-->
+        var downBox =  '<div id="down-box" class="down-box">\
+                            <div class="down-scrope-box"><p>下载所需积分</p><span class="down-scrope"><?=isset($unit["down_money"]) ? $unit["down_money"] : 0?></span></div>\
+                            <div class="clearfix down-info">\
+                                <div class="left"><span class="user-scrope">'+$('#scrope-value').val()+'</span><p>积分余额</p></div>\
+                                <div class="left"><span class="down-count"><?=$unit["down_count"]?></span><p>下载次数</p></div>\
+                            </div>\
+                            <div class="down-danger-title"><b>注意：</b></div>\
+                            <div class="down-tips">1、下载过一次后，往后再次下载此组件免积分</div>\
+                            <div class="down-tips">2、点击当前弹框中的立即下载后积分就已经扣除，出现下载框取消后不返还积分</div>\
+                    </div>';
+
+        //弹出确认框
+        layer.open({
+            type: 1,
+            title: "<?=$unit['title']?>",
+            area: ['450px'],
+            offset: 'auto',
+            content: downBox,
+            btn: ['立即下载', '取消下载'],
+            yes: function(index, layero){
+                layer.close(index);
+                layer.load(1);
+                $.post('/unit/down-count',data,function(res){
+                    if(res.code == 100000){
+                            location.href = res['down-data'].download;
+                    }else{
+                        layer.msg(res.message,{icon:5});
+                    }
+                    layer.closeAll('loading');
+                },'json');
             }
-        },'json');
-        // $(this).click();
+        });
+
     });
 
     //查看

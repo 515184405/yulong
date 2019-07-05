@@ -6,6 +6,7 @@ use common\models\Banner;
 use common\models\Cases;
 use common\models\Member;
 use common\models\News;
+use common\models\UserScope;
 use common\models\Widget;
 use common\models\WidgetType;
 use common\models\Zixun;
@@ -399,10 +400,13 @@ class SiteController extends CommonController
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             }
         }else{
+            //存用户信息  新用户
             $member = new Member();
             $member->setAttributes($params);
             //打印出个人信息
             if ($member->save() && $model->login()) {
+                //新用户给5积分
+                UserScope::insertUpdate(5,$model->attributes['id']);
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {
                 $weiboUrl = $this->weiboLogin();

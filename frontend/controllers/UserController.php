@@ -8,6 +8,7 @@ use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
 use common\models\UserInfo;
+use common\models\UserScope;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -295,6 +296,7 @@ class UserController extends CommonController
             $model->uid = $uid;
             $model->scope = 1;
         }
+        UserScope::insertUpdate(1);
         $model->save();
     }
 

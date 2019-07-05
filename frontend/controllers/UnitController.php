@@ -10,6 +10,7 @@ use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
 use common\models\UserInfo;
+use common\models\UserScope;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
@@ -117,6 +118,11 @@ class UnitController extends CommonController {
                 }
             }
        }
+
+       //当前用户剩余积分
+        $uid = \Yii::$app->user->id;
+        $scope = UserScope::find(['uid'=>$uid])->asArray()->one();
+
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
@@ -124,6 +130,7 @@ class UnitController extends CommonController {
             'data' => $widget_item,
             'pinglun' => $pinglun,
             'pinglunCount' => $pinglunCount,
+            'scope' => $scope['scope']
         );
         return $this->renderPartial('item',compact('data','unit_id'));
     }
@@ -145,15 +152,34 @@ class UnitController extends CommonController {
             $model = Widget::findOne($params['widget_id']);
             $model->down_count = intval($model->down_count) + 1;
             $params['down_url'] = $model->download;
+
+            //判断当前用户是否已下载过
+            if(!UserDownRecord::find(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count()){
+                //给下载用户减去积分
+                $returnVal = UserScope::insertUpdate(-$model->down_money);
+                if(Json::decode($returnVal)['code'] == 100001){
+                    return $returnVal;
+                };
+                //给组件作者增加积分
+                if(UserDownRecord::find(['widget_id'=>$params['widget_id']])->count() <= 100){
+                    UserScope::insertUpdate($model->down_money,$model->u_id);
+                }
+            }
+
             //给个人添加下载记录
             UserDownRecord::insertUpdate($params);
+            $data = [
+                'download' => $model->download,
+                'down_money' => $model->down_money
+            ];
             if($model->save()){
-                return Json::encode(['code'=>'100000','message'=>'操作成功','download'=>$model->download]);
+                return Json::encode(['code'=>'100000','message'=>'操作成功','down-data'=>$data]);
             }
             return Json::encode(['code'=>'100001','message'=>'操作失败']);
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
     }
+
 
     //收集访问量
     public function actionUserInfo(){
