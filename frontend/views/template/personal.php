@@ -68,7 +68,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
         <p class="userInfo-name"><?=$userInfo['username']?><i class="iconfont userInfo-vip">&#xe68e;</i></p>
     </div>
     <ul class="userInfo-info clearfix">
-        <li class="userInfo-item"><span><?=isset($personalInfo['scope']) ? $personalInfo['scope'] : 0?></span>
+        <li class="userInfo-item"><span><?=isset($scope['scope']) ? $scope['scope'] : 0?></span>
             <p>积分</p></li>
         <li class="userInfo-item"><span><?=isset($personalInfo['collect']) ? $personalInfo['collect'] : 0?></span>
             <p>粉丝</p></li>
