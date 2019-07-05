@@ -157,19 +157,18 @@ class UnitController extends CommonController {
             if(!UserDownRecord::find(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count()){
                 //给下载用户减去积分
                 $returnVal = UserScope::insertUpdate(-$model->down_money);
-                var_dump(Json::decode($returnVal)['code']);
                 if(Json::decode($returnVal)['code'] == 100001){
-                    var_dump($returnVal);
                     return $returnVal;
                 };
                 //给组件作者增加积分
                 if(UserDownRecord::find(['widget_id'=>$params['widget_id']])->count() <= 100){
                     UserScope::insertUpdate($model->down_money,$model->u_id);
                 }
+
+                //给个人添加下载记录
+                UserDownRecord::insertUpdate($params);
             }
 
-            //给个人添加下载记录
-            UserDownRecord::insertUpdate($params);
             $data = [
                 'download' => $model->download,
                 'down_money' => $model->down_money
