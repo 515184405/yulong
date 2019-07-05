@@ -43,6 +43,7 @@
             <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger <?=Yii::$app->getUser()->getId() ? 'js_download"' : 'login_btn" href="javascript:;"'?> target="_blank">立即下载</a>
             <?php } ?>
         </div>
+        <div class="t-c" style="color:#f00;margin-bottom:15px;margin-top:-15px;"><b>新用户注册立送5积分哦...</b></div>
         <div class="unit-desc layui-elem-quote">
             <span class="theme">插件描述：</span><?=$unit['desc'];?>
         </div>
