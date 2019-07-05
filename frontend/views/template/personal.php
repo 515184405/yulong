@@ -1,5 +1,5 @@
 <?php
-$sign = $this->params['sign'];
+$sign = $this->params['scope'];
 $personalInfo = $this->params['personalInfo'];
 /*用户信息*/
 $userInfo = $this->params['userInfo'];
@@ -68,7 +68,7 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
     </div>
     <ul class="userInfo-info clearfix">
         <li class="userInfo-item"><span><?=isset($personalInfo['scope']) ? $personalInfo['scope'] : 0?></span>
-            <p>金币</p></li>
+            <p>积分</p></li>
         <li class="userInfo-item"><span><?=isset($personalInfo['collect']) ? $personalInfo['collect'] : 0?></span>
             <p>粉丝</p></li>
         <li class="userInfo-item"><span><?=isset($personalInfo['count']) ? $personalInfo['count'] : 0?></span>
