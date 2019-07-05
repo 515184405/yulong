@@ -154,7 +154,7 @@ class UnitController extends CommonController {
             $params['down_url'] = $model->download;
 
             //判断当前用户是否已下载过
-            if(!UserDownRecord::find(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count()){
+            if(UserDownRecord::find(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count() == 0){
                 //给下载用户减去积分
                 $returnVal = UserScope::insertUpdate(-$model->down_money);
                 if(Json::decode($returnVal)['code'] == 100001){
