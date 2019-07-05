@@ -153,20 +153,23 @@ class UnitController extends CommonController {
             $model->down_count = intval($model->down_count) + 1;
             $params['down_url'] = $model->download;
 
-            //判断当前用户是否已下载过
-            if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count() == 0){
-                //给下载用户减去积分
-                $returnVal = UserScope::insertUpdate(-$model->down_money);
-                if(Json::decode($returnVal)['code'] == 100001){
-                    return $returnVal;
-                };
-                //给组件作者增加积分
-                if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id']])->count() <= 100){
-                    UserScope::insertUpdate($model->down_money,$model->u_id);
-                }
+            //作者本人下载不收积分
+            if($model->u_id !== $user_id){
+                //判断当前用户是否已下载过
+                if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id'],'u_id'=>$user_id])->count() == 0){
+                    //给下载用户减去积分
+                    $returnVal = UserScope::insertUpdate(-$model->down_money);
+                    if(Json::decode($returnVal)['code'] == 100001){
+                        return $returnVal;
+                    };
+                    //给组件作者增加积分
+                    if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id']])->count() <= 100){
+                        UserScope::insertUpdate($model->down_money,$model->u_id);
+                    }
 
-                //给个人添加下载记录
-                UserDownRecord::insertUpdate($params);
+                    //给个人添加下载记录
+                    UserDownRecord::insertUpdate($params);
+                }
             }
 
             $data = [
