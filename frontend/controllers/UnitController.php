@@ -122,7 +122,8 @@ class UnitController extends CommonController {
        //当前用户剩余积分
         $uid = \Yii::$app->user->id;
         $scope = UserScope::find(['uid'=>$uid])->asArray()->one();
-
+        var_dump($uid);
+        var_dump($scope);die;
         $data = array(
             'link' => 'unit',
             'prev' => $prev_article,
