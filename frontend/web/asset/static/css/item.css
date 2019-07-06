@@ -373,9 +373,17 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+.new-user-tips {
+  color: #f00;
+  margin-bottom: 15px;
+  margin-top: -15px;
+}
 @media screen and (max-width: 768px) {
   .scale_box {
     display: none!important;
+  }
+  .new-user-tips {
+    margin-top: 0;
   }
   .news-items {
     margin-right: 0;
