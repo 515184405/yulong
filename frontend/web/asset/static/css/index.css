@@ -4,10 +4,6 @@ html {
 body {
   padding-top: 0;
 }
-.header {
-  background-color: transparent;
-  top: 0!important;
-}
 /*轮播模块*/
 .js-silder {
   position: relative;

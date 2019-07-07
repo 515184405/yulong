@@ -139,6 +139,9 @@ body {
 .header {
   top: -60px;
 }
+.header.active {
+  top: 0!important;
+}
 .footer {
   position: absolute;
   bottom: 0;
