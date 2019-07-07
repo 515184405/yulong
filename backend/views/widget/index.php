@@ -93,7 +93,7 @@
                         return getLocalTime(d.create_time);
                     }}
                 ,{field:'banner_url', title: '列表图',templet: function (d) {
-                        return '<a class="theme js_banner_url" target="_blank" href='+site_url+d.banner_url+' >'+d.banner_url+'</a>';
+                        return '<a class="theme js_banner_url" target="_blank" href='+site_url+d.banner_url+' >'+d.banner_url.split('/')[d.banner_url.split('/').length-1]+'</a>';
                     }}
                 ,{field:'recommend',width:100, title: '是否推荐',templet: '#switchTpl'}
                 ,{field:'is_down',width:120, title: '不允许下载',templet: '#switchTp2'}
