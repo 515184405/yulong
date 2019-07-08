@@ -30,6 +30,7 @@ use Yii;
  * @property string $upload_enter_file 更新入口
  * @property string $upload_download 更新后的下载地址
  * @property string $upload_txt 更新说明
+ * @property int $is_show_img 0为显示图片，1为显示html效果
  */
 class Widget extends \yii\db\ActiveRecord
 {
@@ -48,7 +49,7 @@ class Widget extends \yii\db\ActiveRecord
     {
         return [
             [['u_id', 'title', 'desc'], 'required'],
-            [['u_id', 'look', 'collect', 'down_count', 'create_time', 'recommend', 'is_down', 'status', 'down_money'], 'integer'],
+            [['u_id', 'look', 'collect', 'down_count', 'create_time', 'recommend', 'is_down', 'status', 'down_money','is_show_img'], 'integer'],
             [['rule'], 'string'],
             [['title', 'desc', 'banner_url', 'type', 'source', 'download', 'website', 'enter_file', 'upload_enter_file', 'upload_download'], 'string', 'max' => 255],
             [['fail_msg'], 'string', 'max' => 100],
@@ -85,6 +86,7 @@ class Widget extends \yii\db\ActiveRecord
             'upload_enter_file' => 'Upload Enter File',
             'upload_download' => 'Upload Download',
             'upload_txt' => 'Upload Txt',
+            'is_show_img' => 'Is Show Img',
         ];
     }
     //查询推荐组件

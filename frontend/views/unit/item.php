@@ -14,6 +14,12 @@
         .unit-items .unit-page-box{
             padding-bottom:10px;
         }
+        iframe{
+            width:100%;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
     </style>
     <input type="hidden" id="scrope-value" value="<?=isset($data['scope']) ? $data['scope'] : 0?>">
 <div class="news-items unit-items">
@@ -27,7 +33,12 @@
             <span>下载量：<?=$unit['down_count']?></span>
         </div>
         <div class="banner-box">
+            <?php if($unit['is_show_img'] == 0){ ?>
             <img  style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,0.4);" src="<?=Yii::$app->params['backend_url'].$unit['banner_url']?>" alt="">
+            <?php }else{ ?>
+                <iframe style="background-color:rgba(<?=rand(0,255)?>,<?=rand(0,255)?>,<?=rand(0,255)?>,0.4);" id="iframe" width="100%" src="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>" frameborder="0"></iframe>
+            <?php } ?>
+
         </div>
         <div class="unit-btn-box">
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
@@ -170,6 +181,14 @@
 
 <script src="/asset/static/wigdet/share/jquery.share.min.js"></script>
 <script>
+
+    //设置iframe高度
+    setIframeHeight();
+    function setIframeHeight(){
+        var width = $("#iframe")[0].clientWidth;
+        var scale = 0.75;
+        $("#iframe").css('height',width*scale);
+    }
 
     //分享功能
     $('#share').share({sites: ['qzone', 'qq', 'weibo','wechat']});
