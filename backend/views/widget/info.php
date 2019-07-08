@@ -56,6 +56,13 @@ use kucha\ueditor\UEditor;
                     </div>
                 </div>
             </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">显示效果</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="is_show_img" value="1" title="显示html特效" <?=$data['widget']['is_show_img'] == 1 ? 'checked' : '' ?>>
+                    <input type="radio" name="is_show_img" value="0" title="显示图片" <?=$data['widget']['is_show_img'] == 0 ? 'checked' : '' ?>>
+                </div>
+            </div>
            <!-- <div id="wx_link" class="layui-form-item ">
                 <label class="layui-form-label">作品压缩包</label>
                 <div class="layui-input-block">
