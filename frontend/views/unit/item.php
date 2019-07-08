@@ -191,6 +191,9 @@
         var scale = 0.75;
         $("#iframe").css('height',width*scale);
     }
+    window.onresize = function () {
+        setIframeHeight();
+    }
 
     //分享功能
     $('#share').share({sites: ['qzone', 'qq', 'weibo','wechat']});
