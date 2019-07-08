@@ -183,7 +183,9 @@
 <script>
 
     //设置iframe高度
-    setIframeHeight();
+    setTimeout(function(){
+        setIframeHeight();
+    },200)
     function setIframeHeight(){
         var width = $("#iframe")[0].clientWidth;  //未知宽度
         var scale = 0.75;
