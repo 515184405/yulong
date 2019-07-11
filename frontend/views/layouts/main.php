@@ -100,6 +100,7 @@ AppAsset::register($this);
                 <a href="/service">服务项目</a>
                 <a href="/about">关于我们</a>
                 <a href="/contact">联系我们</a>
+                <a href="/map">网站地图</a>
             </p>
             <p class="footer-msg">
                 <span>Copyright 2019 聚友之家 ALL Rights Reserved.</span>
