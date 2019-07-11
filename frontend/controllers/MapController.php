@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Team;
 use common\models\Widget;
+use common\models\WidgetType;
 
 /**
  * Site controller
@@ -19,5 +20,11 @@ class MapController extends CommonController
     {
         $data = Widget::find()->orderBy(['id'=>SORT_ASC])->asArray()->all();
         return $this->renderPartial('index',compact('data'));
+    }
+
+    public function actionSearch()
+    {
+        $data = WidgetType::find()->orderBy(['type_id'=>SORT_ASC])->asArray()->all();
+        return $this->renderPartial('search',compact('data'));
     }
 }
