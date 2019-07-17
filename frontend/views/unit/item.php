@@ -54,7 +54,7 @@
             <a data-id="<?=$unit['id'] ?>" class="fy-btn fy-btn-danger <?=Yii::$app->getUser()->getId() ? 'js_download"' : 'login_btn" href="javascript:;"'?> target="_blank">立即下载</a>
             <?php } ?>
         </div>
-        <div class="t-c new-user-tips"><b>新用户注册立送5积分哦...</b></div>
+        <div class="new-user-tips"><i class="iconfont">&#xe6dc;</i><b>新用户注册立送5积分哦...</b></div>
         <div class="unit-desc layui-elem-quote">
             <span class="theme">插件描述：</span><?=$unit['desc'];?>
         </div>
@@ -187,6 +187,7 @@
         setIframeHeight();
     },200)
     function setIframeHeight(){
+        if($("#iframe").length == 0) return false;
         var width = $("#iframe")[0].clientWidth;  //未知宽度
         var scale = 0.75;
         $("#iframe").css('height',width*scale);
@@ -230,7 +231,8 @@
                             </div>\
                             <div class="down-danger-title"><b>注意：</b></div>\
                             <div class="down-tips">1、下载过一次后，往后再次下载此组件免积分</div>\
-                            <div class="down-tips">2、点击当前弹框中的立即下载后积分就已经扣除，出现下载框取消后不返还积分</div>\
+                            <div class="down-tips">2、新用户注册立送5积分哦...</div>\
+                            <div class="down-tips">3、点击当前弹框中的立即下载后积分就已经扣除，出现下载框取消后不返还积分</div>\
                     </div>';
 
         //弹出确认框
