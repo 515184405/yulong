@@ -195,7 +195,7 @@ class UserController extends CommonController
         return $this->render('down-history',compact('data'));
     }
 
-    //积分记录
+    //积分记录  暂未使用
     public function actionScopeRecord()
     {
         $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
