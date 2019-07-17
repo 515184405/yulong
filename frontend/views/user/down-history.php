@@ -8,7 +8,7 @@
     }
 </style>
 
-<?php $this->title="个人中心 - 我的收藏"; ?>
+<?php $this->title="个人中心 - 下载历史"; ?>
 
 <link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <div class="personal fy-container clearfix">

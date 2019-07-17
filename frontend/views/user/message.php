@@ -1,3 +1,4 @@
+<?php $this->title="个人中心 - 我的评论"; ?>
 <?php $type_id = isset($_GET['type']) ? $_GET['type'] : 0; ?>
 <?php
 function format_date($time){

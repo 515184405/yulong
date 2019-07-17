@@ -1,3 +1,4 @@
+<?php $this->title="个人中心 - 上传项目"; ?>
 <?php
     use kucha\ueditor\UEditor;
 
