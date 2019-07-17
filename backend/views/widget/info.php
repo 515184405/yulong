@@ -123,7 +123,7 @@ use kucha\ueditor\UEditor;
             <div class="layui-form-item">
                 <label class="layui-form-label">获得积分</label>
                 <div class="layui-input-block">
-                    <input type="text" <?=$data['scope'] == 0 ? 0 : 'disabled'?> value="<?=$data['scope']?>" name="create_scope" autocomplete="off" placeholder="上传项目所获得的积分" class="layui-input">
+                    <input type="text" <?=$data['scope'] == 0 ? 0 : 'disabled'?> value="<?=$data['scope']?>" name="create_scope" autocomplete="off" placeholder="上传项目所获得的积分" class="layui-input <?=$data['scope'] == 0 ? '' : 'layui-disabled'?>">
                     <div style="color:#f00;line-height: 25px;">上传项目获得的积分</div>
                 </div>
             </div>
