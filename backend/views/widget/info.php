@@ -121,6 +121,14 @@ use kucha\ueditor\UEditor;
             </div>
 
             <div class="layui-form-item">
+                <label class="layui-form-label">获得积分</label>
+                <div class="layui-input-block">
+                    <input type="text" value="<?=$data['scope']?>" name="create_scope" autocomplete="off" placeholder="上传项目所获得的积分" class="layui-input">
+                    <div style="color:#f00;line-height: 25px;">上传项目获得的积分</div>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
                 <label class="layui-form-label">官网地址</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['widget']['website']) ? $data['widget']['website'] : ''?>" name="website" autocomplete="off" placeholder="请输入官网地址（选填）" class="layui-input">

@@ -1,6 +1,8 @@
 <?php
 namespace backend\controllers;
 
+use common\models\UserScope;
+use common\models\UserScopeRecord;
 use common\models\Widget;
 use common\models\WidgetTag;
 use common\models\WidgetTagJoin;
@@ -42,6 +44,23 @@ class WidgetController extends CommonController
                     Yii::$app->session['widget_create_id'] = $widget_id;
                     return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
                 }
+
+                //添加用户积分记录
+                $userScopeRecord = UserScopeRecord::findOne(['widget_id'=>$widget_id]);
+                if(!$userScopeRecord){
+                    $widget_model = Widget::findOne(['id'=>$widget_id]);
+                    $userScopeRecord = new UserScopeRecord();
+                    $userScopeRecord->u_id = $widget_model->u_id;
+                    $userScopeRecord->scope = $params['create_scope'];
+                    $userScopeRecord->widget_id = $widget_id;
+                    $userScopeRecord->type = 1;
+                    $userScopeRecord->save();
+                    //给用户添加积分
+                    UserScope::insertUpdate($params['create_scope'],$widget_model->u_id);
+                }
+
+
+
                 //生成视图地址
                 $rootDir = '../../frontend/views/widget/'.$widget_id2;
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
@@ -58,6 +77,12 @@ class WidgetController extends CommonController
             $data['widget'] = Widget::find()->where(['id'=>$widget_id])->asArray()->one();
             if(!$data['widget']){
                 return '组件不存在';
+            }
+            $scopeRecord = UserScopeRecord::findOne(['widget_id'=>$data['widget']['id']]);
+            if($scopeRecord){
+                $data['scope'] = $scopeRecord->scope;
+            }else{
+                $data['scope'] = 0;
             }
         }
 //        var_dump($data);die;

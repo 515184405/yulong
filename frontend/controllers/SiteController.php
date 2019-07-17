@@ -7,6 +7,7 @@ use common\models\Cases;
 use common\models\Member;
 use common\models\News;
 use common\models\UserScope;
+use common\models\UserScopeRecord;
 use common\models\Widget;
 use common\models\WidgetType;
 use common\models\Zixun;
@@ -407,6 +408,11 @@ class SiteController extends CommonController
             if ($member->save() && $model->login()) {
                 //新用户给5积分
                 UserScope::insertUpdate(5,$member->attributes['id']);
+                //添加积分记录
+                $userScopeRecord = new UserScopeRecord();
+                $userScopeRecord->scope = 5;
+                $userScopeRecord->u_id = $member->attributes['id'];
+                $userScopeRecord->save();
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {
                 $weiboUrl = $this->weiboLogin();
