@@ -49,6 +49,7 @@ class WidgetController extends CommonController
                     $userScopeRecord->u_id = $widget_model->u_id;
                     $userScopeRecord->scope = $params['create_scope'];
                     $userScopeRecord->widget_id = $widget_id;
+                    $userScopeRecord->created_time = date("Y-m-d H:i:s",time());
                     $userScopeRecord->type = 1;
                     $userScopeRecord->save();
                     //给用户添加积分

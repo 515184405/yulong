@@ -11,6 +11,7 @@ use Yii;
  * @property int $widget_id
  * @property int $scope
  * @property int $u_id
+ * @property int $created_time
  * @property int $type 0 新用户注册获得积分； 1 上传项目获得积分
  */
 class UserScopeRecord extends \yii\db\ActiveRecord
@@ -30,6 +31,7 @@ class UserScopeRecord extends \yii\db\ActiveRecord
     {
         return [
             [['widget_id', 'scope', 'type','u_id'], 'integer'],
+            [['created_time'], 'safe'],
         ];
     }
 
@@ -44,6 +46,7 @@ class UserScopeRecord extends \yii\db\ActiveRecord
             'scope' => 'Scope',
             'type' => 'Type',
             'u_id' => 'U Id',
+            'created_time' => 'Created Time',
         ];
     }
 }

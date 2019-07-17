@@ -412,6 +412,7 @@ class SiteController extends CommonController
                 $userScopeRecord = new UserScopeRecord();
                 $userScopeRecord->scope = 5;
                 $userScopeRecord->u_id = $member->attributes['id'];
+                $userScopeRecord->created_time = date("Y-m-d H:i:s",time());
                 $userScopeRecord->save();
                 echo "<script type='text/javascript'>window.opener.location.href = window.opener.location.href;window.close();</script>";
             } else {

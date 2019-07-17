@@ -195,6 +195,23 @@ class UserController extends CommonController
         return $this->render('down-history',compact('data'));
     }
 
+    //积分记录
+    public function actionScopeRecord()
+    {
+        $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
+        $params = Yii::$app->request->get();
+        $limit =20; //每页显示20条
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $user_scope_record = UserDownRecord::find()->where(['u_id'=>$uid]);
+        $pagination = new Pagination(['totalCount' => $user_scope_record->count(),'pageSize' => $limit]);
+        $user_scope_record = $user_scope_record->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
+        $data = [
+            'record'=>$user_scope_record,
+            'pagination' => $pagination
+        ];
+        return $this->render('scope-record',compact('data'));
+    }
+
     //组件定制
     public function actionDingzhi()
     {
