@@ -40,10 +40,6 @@ class WidgetController extends CommonController
             //存widgetModel数据
             $widget_id2 = widget::insertUpdate($params,$widget_id);
             if($widget_id2){
-                if($widget_id){
-                    Yii::$app->session['widget_create_id'] = $widget_id;
-                    return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
-                }
 
                 //添加用户积分记录
                 $userScopeRecord = UserScopeRecord::findOne(['widget_id'=>$widget_id]);
@@ -59,7 +55,10 @@ class WidgetController extends CommonController
                     UserScope::insertUpdate($params['create_scope'],$widget_model->u_id);
                 }
 
-
+                if($widget_id){
+                    Yii::$app->session['widget_create_id'] = $widget_id;
+                    return Json::encode(array('code'=>'100000','message'=>'修改成功！','id'=>$widget_id));
+                }
 
                 //生成视图地址
                 $rootDir = '../../frontend/views/widget/'.$widget_id2;
