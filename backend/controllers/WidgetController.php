@@ -54,6 +54,8 @@ class WidgetController extends CommonController
                         $userScopeRecord->type = 1;
                         $userScopeRecord->save();
                     }else{
+                        $userScopeRecord->scope = $params['create_scope'];
+                        $userScopeRecord->save();
                         UserScope::insertUpdate($params['create_scope'],$widget_model->u_id);
                     }
                     //给用户添加积分
