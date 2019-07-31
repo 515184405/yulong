@@ -393,7 +393,7 @@ class SiteController extends CommonController
      * @return string
      */
     public function loginFun($params){
-        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
+        $member = Member::find()->where(['openid'=>$params['openid']])->one();
         $model = new LoginForm2();
         $model->setAttributes($params);
         if($member){
