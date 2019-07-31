@@ -43,18 +43,23 @@ class WidgetController extends CommonController
 
                 //添加用户积分记录
                 $userScopeRecord = UserScopeRecord::findOne(['widget_id'=>$widget_id]);
-                if(!$userScopeRecord){
-                    $widget_model = Widget::findOne(['id'=>$widget_id]);
-                    $userScopeRecord = new UserScopeRecord();
-                    $userScopeRecord->u_id = $widget_model->u_id;
-                    $userScopeRecord->scope = $params['create_scope'];
-                    $userScopeRecord->widget_id = $widget_id;
-                    $userScopeRecord->created_time = date("Y-m-d H:i:s",time());
-                    $userScopeRecord->type = 1;
-                    $userScopeRecord->save();
+                $widget_model = Widget::findOne(['id'=>$widget_id]);
+                if($params['create_scope'] > 0){
+                    if(!$userScopeRecord){
+                        $userScopeRecord = new UserScopeRecord();
+                        $userScopeRecord->u_id = $widget_model->u_id;
+                        $userScopeRecord->scope = $params['create_scope'];
+                        $userScopeRecord->widget_id = $widget_id;
+                        $userScopeRecord->created_time = date("Y-m-d H:i:s",time());
+                        $userScopeRecord->type = 1;
+                        $userScopeRecord->save();
+                    }else{
+                        UserScope::insertUpdate($params['create_scope'],$widget_model->u_id);
+                    }
                     //给用户添加积分
                     UserScope::insertUpdate($params['create_scope'],$widget_model->u_id);
                 }
+
 
                 if($widget_id){
                     Yii::$app->session['widget_create_id'] = $widget_id;
