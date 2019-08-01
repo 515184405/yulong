@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 
 use common\models\MadeToOrder;
+use common\models\Member;
 use common\models\Pinglun;
 use common\models\UserCollect;
 use common\models\UserDownRecord;
@@ -256,6 +257,23 @@ class UserController extends CommonController
            'pagination' => $pagination
        ];
         return $this->render('message',compact('data'));
+    }
+
+    //个人消息
+    public function actionSetMessage()
+    {
+        $uid =  Yii::$app->user->id;
+        if(Yii::$app->request->isPost){
+            $params = Yii::$app->request->post();
+            $member = Member::findOne(['id'=>$uid]);
+            $member->setAttributes($params);
+            if($member->save()){
+                return Json::encode(array('code'=>'100000','message'=>'修改成功'));
+            }
+            return Json::encode(array('code'=>'100001','message'=>'修改失败'));
+        }
+        $data = Member::find()->where(['id'=>$uid])->asArray()->one();
+        return $this->render('set-message',compact('data'));
     }
 
     //用户签到

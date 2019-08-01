@@ -146,7 +146,7 @@ class SiteController extends CommonController
 //            'login_time' => time(),
 //            'update_password' => 0
 //        ];
-//        $member = Member::find()->where(['openid'=>$params['openid'],'accessToken'=>$params['accessToken']])->one();
+//        $member = Member::find()->where(['openid'=>$params['openid']])->one();
 //        $model = new LoginForm2();
 //        $model->setAttributes($params);
 //        if($member){

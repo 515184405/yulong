@@ -58,6 +58,7 @@ AppAsset::register($this);
                     <a class="overflow-text fy-username" href="javascript:;"><?=$userInfo['username']?></a><i class="iconfont user-icon"></i>
                     <dl class="fy-nav-child transition js_nav_child t-c">
                         <dd><a href="/user">个人中心</a></dd>
+                        <dd style="border-top:1px solid #ddd;"><a href="/user/set-message">我的资料</a></dd>
 <!--                        <dd><a href="javascript:;">安全管理</a></dd>-->
                         <dd class="t-c" style="border-top:1px solid #ddd"><a href="/site/logout">退出</a></dd>
                     </dl>
