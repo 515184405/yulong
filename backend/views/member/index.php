@@ -11,7 +11,6 @@
     </div>
 </div>
 <script>
-    var site_url = '<?=Yii::$app->params["backend_url"];?>';
     var site_url2 = '<?=Yii::$app->params["frontend_url"];?>';
     layui.config({
         base: '/asset/' //静态资源所在路径
@@ -29,11 +28,15 @@
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'username',title: '用户名'}
-                ,{field:'avatar',title: '用户头像'}
+                ,{field:'avatar',title: '用户头像',templet:function(d){
+                        return '<img class="layui-nav-img" src="'+(d.avatar.indexOf('http') == -1 ? site_url2+d.avatar : d.avatar)+'"/>'
+                    }}
                 ,{field:'created_time',  title: '创建时间',templet: function (d) {
                         return getLocalTime(d.created_time);
                     }}
-                ,{field:'province',title: '地址'}
+                ,{field:'province',title: '地址',templet:function(d){
+                    return d.province + '/' + d.city;
+                    }}
             ]]
             ,done(res){
                 console.log(res);
