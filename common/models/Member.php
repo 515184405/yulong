@@ -167,4 +167,23 @@ class Member extends ActiveRecord implements IdentityInterface
         $count = static::find()->where(['and',['>=','created_time',$today_am],['<=','created_time',$today_pm]])->orderBy(['time'=>SORT_ASC])->count();
         return $count;
     }
+
+    /*查数据*/
+    public static function search($params){
+        $query = static::find();
+        //按title查找
+        if(isset($params['username'])){
+            $query->andFilterWhere(['and',['like','username',$params['username']]]);
+        }
+        $page = isset($params['page']) ? $params['page'] : '';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        return compact('count', 'list');
+    }
 }

@@ -130,6 +130,12 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
+                        <a href="/member" lay-tips="用户列表" lay-direction="2">
+                            <i class="layui-icon iconfont font-8">&#xe625;</i>
+                            <cite>用户列表</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/team" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon iconfont font-8">&#xe76a;</i>
                             <cite>人员管理</cite>
@@ -139,14 +145,14 @@
                     <li data-name="home" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="用户管理" lay-direction="2">
                             <i class="layui-icon iconfont font-9">&#xe625;</i>
-                            <cite>用户管理</cite>
+                            <cite>管理员管理</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd>
-                                <a href="/user">用户列表</a>
+                                <a href="/user">管理员列表</a>
                             </dd>
                             <dd >
-                                <a href="/user/info">添加用户 </a>
+                                <a href="/user/info">添加管理员 </a>
                             </dd>
                             <dd >
                                 <a href="/user/info?id=<?=Yii::$app->user->getId();?>">修改密码 </a>
