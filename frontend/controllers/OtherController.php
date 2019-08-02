@@ -63,7 +63,7 @@ class OtherController extends CommonController
         $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
 
         //个人中心访问量，粉丝量等等
-        $personalInfo = UserInfo::find()->where(['uid'=>$uid])->asArray()->one();
+        $personalInfo = UserInfo::find()->where(['uid'=>$other])->asArray()->one();
         $data = [
             'widget'=>$widget,
             'pagination' => $pagination,
