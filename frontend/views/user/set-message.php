@@ -50,7 +50,7 @@ $this->title = '个人信息';
                     <label style="line-height: 60px;" class="layui-form-label">用户头像</label>
                     <div class="layui-input-block">
                         <img id="user_avatar" class="layui-nav-img set-avatar" src="<?=$data['avatar']?>" alt="用户头像">
-                        <input type="hidden" name="avatar" autocomplete="off" placeholder="用户头像" class="js_user_avatar">
+                        <input type="hidden" value="<?=$data['avatar']?>" name="avatar" autocomplete="off" placeholder="用户头像" class="js_user_avatar">
                         <p style="display: inline-block;" class="red">点击当前图片切换头像</p>
                     </div>
                 </div>
