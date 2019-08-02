@@ -8,15 +8,15 @@
     }
 </style>
 
-<?php $this->title="个人中心 - 下载历史"; ?>
+<?php $this->title="个人中心 - 我的积分记录"; ?>
 
 <link rel="stylesheet" href="/asset/static/css/personal.css<?=Yii::$app->params['static_number']?>">
 <div class="personal fy-container clearfix">
     <?=$this->render('../template/personal');?>
     <div class="personal-right">
-        <h2 class="user-title">下载历史</h2>
+        <h2 class="user-title">积分记录</h2>
         <div class="fy-sub-nav">
-            <a class="sub-nav-item" href="javascript:;">最近下载历史记录</a>
+            <a class="sub-nav-item" href="javascript:;">最近积分动态</a>
             <a class="sub-nav-item right" href="/user/info">上传素材</a>
         </div>
 
@@ -33,7 +33,7 @@
                 </div>
             <?php }}else{ ?>
                 <div class="t-c" style="line-height: 300px;">
-                    还没有？去<a style="padding:3px 8px" class="fy-btn fy-btn-primary" href="/unit">下载</a>一个吧...
+                    您还没有任何记录...
                 </div>
             <?php } ?>
         </div>

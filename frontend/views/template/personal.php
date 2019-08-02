@@ -77,11 +77,12 @@ $isTodaySign = isDiffDays($lastTime, $time); //今天是否签到
     </ul>
     <ul class="fy-nav-default">
         <li class="fy-nav-item"><a href="/user">我的组件</a></li>
+        <li class="fy-nav-item"><a href="/user/message">我的评论</a></li>
         <li class="fy-nav-item"><a href="/user/dingzhi">我的定制</a></li>
         <li class="fy-nav-item"><a href="/user/collect">我的收藏</a></li>
+        <li class="fy-nav-item"><a href="/user/scope-record">积分记录</a></li>
         <li class="fy-nav-item"><a href="/user/down-history">下载历史</a></li>
         <li class="fy-nav-item"><a href="/user/guan-zhu">我的关注</a></li>
-        <li class="fy-nav-item"><a href="/user/message">我的评论</a></li>
         <li class="fy-nav-item none fy-logout"><a href="/site/logout" >退 出</a></li>
     </ul>
 </div>
