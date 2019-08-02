@@ -11,6 +11,7 @@ use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
 use common\models\UserInfo;
 use common\models\UserScope;
+use common\models\UserScopeRecord;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
@@ -162,10 +163,17 @@ class UnitController extends CommonController {
                     if(Json::decode($returnVal)['code'] == 100001){
                         return $returnVal;
                     };
+
+                    //增加下载用户积分记录
+                    UserScopeRecord::insetUpdate(['u_id'=>$user_id,'type'=>3,'widget_id'=>$params['widget_id'],'scope'=>-$model->down_money]);
+
                     //给组件作者增加积分
                     if(UserDownRecord::find()->where(['widget_id'=>$params['widget_id']])->count() <= 100){
                         UserScope::insertUpdate($model->down_money,$model->u_id);
                     }
+                    //给组件作者增加积分记录
+                    UserScopeRecord::insetUpdate(['u_id'=>$model->u_id,'type'=>4,'widget_id'=>$params['widget_id'],'scope'=>$model->down_money]);
+
 
                     //给个人添加下载记录
                     UserDownRecord::insertUpdate($params);

@@ -10,6 +10,7 @@ use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
 use common\models\UserInfo;
 use common\models\UserScope;
+use common\models\UserScopeRecord;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -335,6 +336,9 @@ class UserController extends CommonController
         }
         UserScope::insertUpdate(1);
         $model->save();
+        //增加签到用户积分记录
+        UserScopeRecord::insetUpdate(['u_id'=>$uid,'type'=>2,'widget_id'=>0,'scope'=>1]);
+
     }
 
     //判断两天是否相连

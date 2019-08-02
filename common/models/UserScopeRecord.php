@@ -12,7 +12,7 @@ use Yii;
  * @property int $scope
  * @property int $u_id
  * @property int $created_time
- * @property int $type 0 新用户注册获得积分； 1 上传项目获得积分
+ * @property int $type 0 新用户注册获得积分； 1 上传项目获得积分；2 签到获得积分；3 消费积分；4 其他用户下载获得积分
  */
 class UserScopeRecord extends \yii\db\ActiveRecord
 {
@@ -48,5 +48,12 @@ class UserScopeRecord extends \yii\db\ActiveRecord
             'u_id' => 'U Id',
             'created_time' => 'Created Time',
         ];
+    }
+
+    public static function insetUpdate($params){
+        $params['created_time'] = date("Y-m-d H:i:s",time());
+        $model = new static();
+        $model->setAttributes($params);
+        $model->save();
     }
 }
