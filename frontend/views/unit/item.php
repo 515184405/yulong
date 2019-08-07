@@ -44,7 +44,7 @@
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
                 <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['upload_url']?>/<?=$unit['id']?>/<?=$unit['upload_enter_file']?>">查看演示(upload)</a>
             <?php }else{ ?>
-                <a class="fy-btn fy-btn-success js_look_widget" data-uid="<?=$unit['u_id']?>" target="_blank" data-href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
+                <a class="fy-btn fy-btn-success js_look_widget" data-uid="<?=$unit['u_id']?>" target="_blank" href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
             <?php } ?>
             <a target="_blank" class="js_look_btn"></a>
             <?php if($unit['website']){ ?>
@@ -261,23 +261,23 @@
     });
 
     //查看
-    $(".js_look_widget").click(function(){
-        var that = this;
-        var uid = $(this).data('uid');
-        var link = $(this).data('href');
-        var data={
-            uid:uid,
-            type:1, //设置访问量
-        };
-        data[csrfName] = csrfVal;
-        var win = window.open();
-        $.post('/unit/user-info',data,function(res){
-            function openWin(){
-                win.location.href = link;
-            }
-            setTimeout(openWin(),800);
-        },'json')
-    })
+    // $(".js_look_widget").click(function(){
+    //     var that = this;
+    //     var uid = $(this).data('uid');
+    //     var link = $(this).data('href');
+    //     var data={
+    //         uid:uid,
+    //         type:1, //设置访问量
+    //     };
+    //     data[csrfName] = csrfVal;
+    //     var win = window.open();
+    //     $.post('/unit/user-info',data,function(res){
+    //         function openWin(){
+    //             win.location.href = link;
+    //         }
+    //         setTimeout(openWin(),800);
+    //     },'json')
+    // })
 
     //关注
     $("#guanzhu").click(function () {

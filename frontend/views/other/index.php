@@ -30,8 +30,8 @@
             <p class="userInfo-name"><?=$data['guanzhu']['username']?><i class="iconfont userInfo-vip">&#xe68e;</i></p>
         </div>
         <ul class="userInfo-info clearfix">
-            <li class="userInfo-item"><span><?=isset($personalInfo['scope']) ? $personalInfo['scope'] : 0?></span>
-                <p>金币</p></li>
+           <li class="userInfo-item"><span><?=isset($data['scope']) ? $data['scope']['scope'] : 0?></span>
+                <p>积分</p></li>
             <li class="userInfo-item"><span><?=isset($personalInfo['collect']) ? $personalInfo['collect'] : 0?></span>
                 <p>粉丝</p></li>
             <li class="userInfo-item"><span><?=isset($personalInfo['count']) ? $personalInfo['count'] : 0?></span>

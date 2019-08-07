@@ -7,6 +7,7 @@ use common\models\UserCollect;
 use common\models\UserDownRecord;
 use common\models\UserGuanzhu;
 use common\models\UserInfo;
+use common\models\UserScope;
 use common\models\UserSign;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -64,11 +65,14 @@ class OtherController extends CommonController
 
         //个人中心访问量，粉丝量等等
         $personalInfo = UserInfo::find()->where(['uid'=>$other])->asArray()->one();
+        //积分总量
+        $scope = UserScope::find()->where(['uid'=>$other])->asArray()->one();
         $data = [
             'widget'=>$widget,
             'pagination' => $pagination,
             'personalInfo' => $personalInfo,
             'guanzhu' => $guanzhu['member'],
+            'scope' => $scope,
         ];
         return $this->render('index',compact('data'));
     }

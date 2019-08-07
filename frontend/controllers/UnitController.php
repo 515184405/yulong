@@ -77,6 +77,18 @@ class UnitController extends CommonController {
         }
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);
+
+        //收集个人所有访问量
+        $userInfoNumber = UserInfo::findOne(['uid'=>$widget_item['u_id']]);
+        if($userInfoNumber){
+            $userInfoNumber->count = $userInfoNumber->count + 1;
+        }else{
+            $userInfoNumber = new UserInfo();
+            $userInfoNumber->uid = $params['uid'];
+            $userInfoNumber->count = 1;
+        }
+        $userInfoNumber->save();
+
         if(!$widget_item){
             return '项目不存在';
         }
@@ -193,20 +205,11 @@ class UnitController extends CommonController {
     }
 
 
-    //收集访问量
+    //收集关注人数
     public function actionUserInfo(){
         $params = \Yii::$app->request->post();
         $type = $params['type']; //1为设置访问量  2设置关注的人数
         $model = UserInfo::findOne(['uid'=>$params['uid']]);
-        if($type == 1){
-            if($model){
-                $model->count = $model->count + 1;
-            }else{
-                $model = new UserInfo();
-                $model->uid = $params['uid'];
-                $model->count = 1;
-            }
-        }
         if($type == 2){
             $guan_status = $params['status']; //关注状态 0取消关注 1已关注
             if($model){
