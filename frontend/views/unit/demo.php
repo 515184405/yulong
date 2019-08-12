@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title><?=$widget['title']?></title>
     <link href="/asset/static/demo-look/css/index.css" rel="stylesheet" media="screen" />
     <script type="text/javascript" src="/asset/static/wigdet/jquery.min.js"></script>
     <script type="text/javascript" src="/asset/static/demo-look/js/jquery.qrcode.min.js"></script>
