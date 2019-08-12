@@ -86,15 +86,15 @@
                 </div>
             </li>
             <li class="title">
-                <a href="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>?>"><?=$widget['title']?></a>
+                <a href="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>"><?=$widget['title']?></a>
             </li>
-            <li class="remove_frame"><a href="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>?>" title="移除框架"></a></li>
+            <li class="remove_frame"><a href="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>" title="移除框架"></a></li>
         </ul>
     </div>
 </div>
 
 <div id="iframe-wrap">
-    <iframe id="iframe" src="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>?>" frameborder="0"  width="100%"></iframe>
+    <iframe id="iframe" src="<?=Yii::$app->params['static_url']?>/<?=$widget['id']?>/<?=$widget['enter_file']?>" frameborder="0"  width="100%"></iframe>
 </div>
 
 </body>
