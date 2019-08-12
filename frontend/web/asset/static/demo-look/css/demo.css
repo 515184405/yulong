@@ -38,7 +38,7 @@ li.remove_frame a:hover{background-position:0 -21px}
 .yu-mobile-2:hover, .yu-mobile-2.active{background-position:-71px -16px}
 .yu-mobile-3:hover, .yu-mobile-3.active{background-position:-94px -16px}
 
-#iframe-wrap{height:100%;overflow:visible;position:relative;top:45px;z-index:50}
+#iframe-wrap{height:100%;overflow:visible;position:relative;top:45px;z-index:50;box-shadow:0 0 20px #000;}
 .tablet-width{height:1024px;margin:0 auto;width:768px;margin-top:20px;}
 .tablet-width iframe{height:1024px}
 .mobile-width{height:768px;margin:0 auto;width:1024px;margin-top:20px;}
