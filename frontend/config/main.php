@@ -44,6 +44,7 @@ return [
                 "news/<action:\w+>/<news_id:\d+>"=>"news/<action>",
                 "case/<action:\w+>/<case_id:\d+>"=>"case/<action>",
                 "unit/<action:\w+>/<widget_id:\d+>"=>"unit/<action>",
+                "unit/<action:\w+>/yanshi<widget_id:\d+>"=>"unit/<action>",
                 "other/<action:\w+>/<u_id:\d+>/<type:\d+>"=>"other/<action>",
                 //"widget-file/<action:\w+>/<create_time:\d+>/<id:\d+>/<title:\w+>"=>"widget-file/<action>",
             ],

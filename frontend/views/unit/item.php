@@ -42,7 +42,7 @@
         </div>
         <div class="unit-btn-box">
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
-                <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['upload_url']?>/<?=$unit['id']?>/<?=$unit['upload_enter_file']?>">查看演示(upload)</a>
+                <a class="fy-btn fy-btn-success" target="_blank" href="/unit/demo/yanshi<?=$unit['id']?>">查看演示(upload)</a>
             <?php }else{ ?>
                 <a class="fy-btn fy-btn-success js_look_widget" data-uid="<?=$unit['u_id']?>" target="_blank" href="<?=Yii::$app->params['static_url']?>/<?=$unit['id']?>/<?=$unit['enter_file']?>">查看演示</a>
             <?php } ?>

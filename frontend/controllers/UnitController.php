@@ -285,6 +285,20 @@ class UnitController extends CommonController {
         }
         return Json::encode(['code'=>'100001','message'=>'操作失败']);
     }
+
+    //demo演示
+    public function actionDemo(){
+        $params =\Yii::$app->request->get();
+        $unit_id = isset($params['widget_id']) ? $params['widget_id'] : "";
+        if(!$unit_id){
+            return "当前项目不存在";
+        };
+        $widget = Widget::find()->where(['and',['widget.id'=>$unit_id],['widget.status'=>'1']])->asArray()->one();
+        if(!$widget){
+            return "当前项目不存在";
+        }
+        return $this->renderPartial('demo',compact('widget'));
+    }
     
     //定制服务
     public function actionDingzhi(){
