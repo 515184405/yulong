@@ -10,60 +10,7 @@
     <script type="text/javascript" src="/asset/static/wigdet/jquery.min.js"></script>
     <script type="text/javascript" src="/asset/static/demo-look/js/jquery.qrcode.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            function fixHeight() {
-                var headerHeight = $("#switcher").height();
-                $("#iframe").attr("height", $(window).height()-49+ "px");
-            }
-            $(window).resize(function () {
-                fixHeight();
-            }).resize();
-
-            $('.yu-monitor').addClass('active');
-
-            /*点击通用方法*/
-            function commonClickFun(domClassName,addClassName){
-                $(domClassName).click(function () {
-
-                    $('#iframe-wrap').removeClass().addClass(addClassName);
-                    $('#Device li div[class^="yu"]').removeClass('active');
-                    $(this).addClass('active');
-                    return false;
-                });
-            }
-
-            //绑定点击事件
-            commonClickFun(".yu-mobile-3",'mobile-width-3');
-            commonClickFun(".yu-mobile-2",'mobile-width-2');
-            commonClickFun(".yu-mobile-1",'mobile-width');
-            commonClickFun(".yu-tablet",'tablet-width');
-            commonClickFun(".yu-monitor",'full-width');
-
-
-            function fyAlertTips(){
-                // alert('无效操作');
-                // return false;
-            }
-
-            document.onkeydown=function(){
-                var e = window.event||arguments[0];
-                if(e.keyCode==123){
-                    return fyAlertTips();
-                }else if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){
-                    return fyAlertTips();
-                }else if((e.ctrlKey)&&(e.keyCode==85)){
-                    return fyAlertTips();
-                }else if((e.ctrlKey)&&(e.keyCode==83)){
-                    return fyAlertTips();
-                }
-            }
-            document.oncontextmenu=function(){
-                return fyAlertTips();
-            }
-            //生成二维码
-            jQuery('#qrcode').qrcode({width:150,height: 150,text: window.location.href});
-        });
-
+        $(document).ready(function(){function fixHeight(){var headerHeight=$("#switcher").height();$("#iframe").attr("height",$(window).height()-49+"px")}$(window).resize(function(){fixHeight()}).resize();$(".yu-monitor").addClass("active");function commonClickFun(domClassName,addClassName){$(domClassName).click(function(){$("#iframe-wrap").removeClass().addClass(addClassName);$('#Device li div[class^="yu"]').removeClass("active");$(this).addClass("active");return false})}commonClickFun(".yu-mobile-3","mobile-width-3");commonClickFun(".yu-mobile-2","mobile-width-2");commonClickFun(".yu-mobile-1","mobile-width");commonClickFun(".yu-tablet","tablet-width");commonClickFun(".yu-monitor","full-width");function fyAlertTips(){alert("无效操作");return false}document.onkeydown=function(){var e=window.event||arguments[0];if(e.keyCode==123){return fyAlertTips()}else{if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){return fyAlertTips()}else{if((e.ctrlKey)&&(e.keyCode==85)){return fyAlertTips()}else{if((e.ctrlKey)&&(e.keyCode==83)){return fyAlertTips()}}}}};document.oncontextmenu=function(){return fyAlertTips()};jQuery("#qrcode").qrcode({width:150,height:150,text:window.location.href})});
     </script>
 </head>
 <body>
