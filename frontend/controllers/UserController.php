@@ -197,7 +197,7 @@ class UserController extends CommonController
         return $this->render('down-history',compact('data'));
     }
 
-    //积分记录  暂未使用
+    //积分记录
     public function actionScopeRecord()
     {
         $uid =  Yii::$app->user->id ? Yii::$app->user->id : 0;
@@ -430,7 +430,7 @@ class UserController extends CommonController
                             'download' => $download,
                         )));
                     }else{
-                        return Json::encode(array('code'=>'100000','message'=>'图片上传成功，但并未保存到库中！','data'=>array(
+                        return Json::encode(array('code'=>'100000','message'=>'文件上传成功，但并未保存到库中！','data'=>array(
                             'name' => $name,
                             'download' => $download,
                         )));
@@ -535,11 +535,20 @@ class UserController extends CommonController
                                 $this->fileNameDir = str_replace($rootDir,'',$path) . '/'.$fileNameArr[0].'.html';
                             }
                         }
+                        $this->setFileContent($rootDir.$this->fileNameDir);
                         //rename($path. '/'.$value,$extractTo.$resetName.$value);
                     };
                 }
             }
         }
         return $this->fileNameDir;
+    }
+
+    //修改.html文件中内容   解决小白防盗问题
+    public function setFileContent($file_src){
+        $origin_str = file_get_contents($file_src);
+        $update_str = str_replace('<body', '<body oncontextmenu="self.event.returnValue=false" onselectstart="return false" ', $origin_str);
+        $update_str = str_replace('</body>', '</body><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/addElem.js"></script><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/stylesheet.js"></script><script src="'.Yii::$app->params["frontend_url"].'/asset/common/common.js"></script>', $update_str);
+        file_put_contents($file_src, $update_str);
     }
 }

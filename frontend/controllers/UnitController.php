@@ -293,10 +293,7 @@ class UnitController extends CommonController {
         if(!$unit_id){
             return "当前项目不存在";
         };
-        $widget = Widget::find()->where(['and',['widget.id'=>$unit_id],['widget.status'=>'1']])->asArray()->one();
-        if(!$widget){
-            return "当前项目不存在";
-        }
+        $widget = Widget::find()->where(['widget.id'=>$unit_id])->asArray()->one();
         return $this->renderPartial('demo',compact('widget'));
     }
     
