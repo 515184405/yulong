@@ -547,7 +547,7 @@ class UserController extends CommonController
     //修改.html文件中内容   解决小白防盗问题
     public function setFileContent($file_src){
         $origin_str = file_get_contents($file_src);
-        $update_str = str_replace('<body', '<body oncontextmenu="self.event.returnValue=false" onselectstart="return false" ', $origin_str);
+        $update_str = str_replace('</head>', '<script>function fyAlertTips(){alert("无效操作");return false}document.onkeydown=function(){var e=window.event||arguments[0];if(e.keyCode==123){return fyAlertTips()}else{if((e.ctrlKey)&&(e.shiftKey)&&(e.keyCode==73)){return fyAlertTips()}else{if((e.ctrlKey)&&(e.keyCode==85)){return fyAlertTips()}else{if((e.ctrlKey)&&(e.keyCode==83)){return fyAlertTips()}}}}};document.oncontextmenu=function(){return fyAlertTips()};</script></head>', $origin_str);
         $update_str = str_replace('</body>', '</body><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/addElem.js"></script><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/stylesheet.js"></script><script src="'.Yii::$app->params["frontend_url"].'/asset/common/common.js"></script>', $update_str);
         file_put_contents($file_src, $update_str);
     }
