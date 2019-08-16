@@ -352,7 +352,7 @@
         var pinglun_id = $(this).closest('.commentAll').data('pinglun');
         pinglun_id = !!pinglun_id ? pinglun_id : 0;
         var data = {
-            content : '<pre>'+text+'</pre>',
+            content : text,
             widget_uid : uid,
             widget_id : widgetid,
             parent_id : pinglun_id,

@@ -15,6 +15,7 @@ use common\models\UserScopeRecord;
 use common\models\Widget;
 use common\models\WidgetType;
 use yii\data\Pagination;
+use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -274,6 +275,7 @@ class UnitController extends CommonController {
         setcookie("pinglun", 1, time()+1,'/');
 
         $params = \Yii::$app->request->post();
+        $params['content'] =  '<pre>'.Html::encode($params['content']).'</pre>';
         $params['create_time'] = date('Y-m-d H:i:s');
         $params['uid'] = \Yii::$app->user->id;
         $member = Member::find()->where(['id'=>$params['uid']])->select(['username','avatar','id'])->asArray()->one();
