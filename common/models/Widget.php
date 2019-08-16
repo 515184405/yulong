@@ -111,7 +111,7 @@ class Widget extends \yii\db\ActiveRecord
         $status = isset($params['status']) ? $params['status'] : '';
         //按title status查找
         if(isset($params['title'])){
-            $query->andFilterWhere(['or',['like','Widget.title',$params['title']],['=','widget.status',$status]]);
+            $query->andFilterWhere(['or',['like','widget.title',$params['title']],['=','widget.status',$status]]);
         }
         $page = isset($params['page']) ? $params['page'] : '';
         $limit = isset($params['limit']) ? $params['limit'] : '';
