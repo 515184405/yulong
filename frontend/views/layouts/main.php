@@ -9,6 +9,7 @@ use frontend\assets\AppAsset;
 
 $userInfo = $this->params['userInfo'];
 AppAsset::register($this);
+$this->keywords = '313组件库提供组件免费下载，组件定制，快速建站，网站开发等一站式服务';
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <meta name="keywords" content="<?=html::encode($this->keywords)?>"/>
-    <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
+    <meta name="description" content="313组件库，专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
 
     <link rel="stylesheet" href="/asset/static/css/default.css<?=Yii::$app->params['static_number']?>">
     <script src="/asset/static/wigdet/jquery.min.js"></script>
