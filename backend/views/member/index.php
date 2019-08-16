@@ -42,7 +42,7 @@
                 console.log(res);
             }
             ,page: true
-            ,limit: 30
+            ,limit: 50
         });
 
         //搜索

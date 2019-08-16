@@ -114,7 +114,7 @@
             ,done(res){
             }
             ,page: true
-            ,limit: 10
+            ,limit: 50
         });
 
         //小图tip
