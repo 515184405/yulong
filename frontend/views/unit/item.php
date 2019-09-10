@@ -1,5 +1,5 @@
 <?php $unit = $data['data']; ?>
-<?php $this->title='组件列表 - '.$unit['title']; ?>
+<?php $this->title='313组件库 - '.$unit['title']; ?>
 <?php $this->keywords=$unit['desc'].',313组件库'; ?>
 <?php $userUnit = isset($data['data']['user']) ? $data['data']['user'] : []; ?>
 <?= $this->render('../template/header',compact('data'));?>
