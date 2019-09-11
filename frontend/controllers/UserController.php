@@ -547,7 +547,7 @@ class UserController extends CommonController
     //修改.html文件中内容   解决小白防盗问题
     public function setFileContent($file_src){
         $origin_str = file_get_contents($file_src);
-        $update_str = str_replace('</body>', '</body><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/addElem.js"></script><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/stylesheet.js"></script><script src="'.Yii::$app->params["frontend_url"].'/asset/common/common.js"></script>', $update_str);
+        $update_str = str_replace('</body>', '</body><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/addElem.js"></script><script type="text/javascript" src="'.Yii::$app->params["frontend_url"].'/asset/common/stylesheet.js"></script><script src="'.Yii::$app->params["frontend_url"].'/asset/common/common.js"></script>', $origin_str);
         file_put_contents($file_src, $update_str);
     }
 }
