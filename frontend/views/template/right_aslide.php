@@ -5,24 +5,6 @@
         <img class="nr-img js_website_btn" src="/asset/static/image/call-me.jpg" alt="">
         <div class="layout-recommend-item">
             <h2 class="nr-title">
-                案例推荐
-            </h2>
-            <div>
-                <?php foreach ($recommend['recommend_case'] as $v){?>
-                    <a href="/case/item/<?=$v['id']?>" class="nr-item clearfix">
-                        <img class="nr-item-img" src="<?=Yii::$app->params['backend_url'].$v['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v['banner_url']?>">
-                        <div class="nr-item-content">
-                            <h3 class="nric-title overflow-text"><?=$v['title']?></h3>
-                            <p class="overflow-text2 nric-desc">
-                                <?=mb_substr(strip_tags($v['desc']),0,30)?>
-                            </p>
-                        </div>
-                    </a>
-                <?php } ?>
-            </div>
-        </div>
-        <div class="layout-recommend-item">
-            <h2 class="nr-title">
                 组件推荐
             </h2>
             <div>
@@ -57,6 +39,24 @@
                     </div>
                 </a>
             <?php } ?>
+            </div>
+        </div>
+        <div class="layout-recommend-item">
+            <h2 class="nr-title">
+                案例推荐
+            </h2>
+            <div>
+                <?php foreach ($recommend['recommend_case'] as $v){?>
+                    <a href="/case/item/<?=$v['id']?>" class="nr-item clearfix">
+                        <img class="nr-item-img" src="<?=Yii::$app->params['backend_url'].$v['banner_url']?>" alt="<?=Yii::$app->params['backend_url'].$v['banner_url']?>">
+                        <div class="nr-item-content">
+                            <h3 class="nric-title overflow-text"><?=$v['title']?></h3>
+                            <p class="overflow-text2 nric-desc">
+                                <?=mb_substr(strip_tags($v['desc']),0,30)?>
+                            </p>
+                        </div>
+                    </a>
+                <?php } ?>
             </div>
         </div>
     </div>
