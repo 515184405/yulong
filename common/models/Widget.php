@@ -91,7 +91,14 @@ class Widget extends \yii\db\ActiveRecord
     }
     //查询推荐组件
     public static function recommend(){
-        return Widget::find()->where(['and',['recommend'=>1],['status'=>1]])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
+        $widget_id = Yii::$app->request->get('widget_id');
+        if($widget_id){
+            $widgetModel = Widget::findOne($widget_id);
+            $where = ['and',['and',['not in','id',$widgetModel->id],['type'=>$widgetModel->type]],['status'=>1]];
+        }else{
+            $where = ['and',['recommend'=>1],['status'=>1]];
+        }
+        return Widget::find()->where($where)->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
     }
 
     /*关联用户表*/

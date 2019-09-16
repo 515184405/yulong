@@ -79,7 +79,14 @@ class News extends \yii\db\ActiveRecord
 
     //查询推荐新闻
     public static function recommend(){
-        return News::find()->where(['recommend'=>1,'issue'=>2])->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
+        $news_id = Yii::$app->request->get('news_id');
+        if($news_id){
+            $newsModel = News::findOne($news_id);
+            $where = ['and',['not in','id',$newsModel->id],['type_id'=>$newsModel->type_id],['issue'=>2]];
+        }else{
+            $where = ['and',['recommend'=>1,'issue'=>2]];
+        }
+        return News::find()->where($where)->orderBy('id',SORT_DESC)->limit(3)->asArray()->all();
     }
 
     /*查数据*/
