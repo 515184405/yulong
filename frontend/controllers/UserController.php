@@ -187,9 +187,9 @@ class UserController extends CommonController
         $params = Yii::$app->request->get();
         $limit =20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
-        $user_down_record = UserDownRecord::find()->where(['u_id'=>$uid])->orderBy('create_time',SORT_DESC);
+        $user_down_record = UserDownRecord::find()->where(['u_id'=>$uid]);
         $pagination = new Pagination(['totalCount' => $user_down_record->count(),'pageSize' => $limit]);
-        $user_down_record = $user_down_record->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
+        $user_down_record = $user_down_record->orderBy('create_time',SORT_DESC)->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
             'record'=>$user_down_record,
             'pagination' => $pagination
