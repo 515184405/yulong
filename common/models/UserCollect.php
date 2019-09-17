@@ -50,7 +50,7 @@ class UserCollect extends \yii\db\ActiveRecord
     }
 
     public function getCollect_widget(){
-        return $this->hasOne(Widget::className(),['id'=>'widget_id'])->select(['id','title','desc','banner_url','type','look','collect','down_count','download','status','upload_download']);
+        return $this->hasOne(Widget::className(),['id'=>'widget_id'])->select(['id','title','desc','banner_url','type','look','collect','down_count','download','status','upload_download'])->orderBy(['id'=>SORT_DESC]);
     }
 
     /*数据存与改*/
