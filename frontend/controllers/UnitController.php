@@ -79,17 +79,6 @@ class UnitController extends CommonController {
         //点击率加1
         $widget_item_look = Widget::findOne($unit_id);
 
-        //收集个人所有访问量
-        $userInfoNumber = UserInfo::findOne(['uid'=>$widget_item['u_id']]);
-        if($userInfoNumber){
-            $userInfoNumber->count = $userInfoNumber->count + 1;
-        }else{
-            $userInfoNumber = new UserInfo();
-            $userInfoNumber->uid = $params['uid'];
-            $userInfoNumber->count = 1;
-        }
-        $userInfoNumber->save();
-
         if(!$widget_item){
             return '项目不存在';
         }
