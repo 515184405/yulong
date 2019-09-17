@@ -211,6 +211,8 @@ class UserController extends CommonController
             $where = ['and',['u_id'=>$uid],['not',['type'=>3]]];
         }elseif($type == 2){
             $where = ['and',['u_id'=>$uid],['type'=>3]];
+        }elseif($type == 3){
+            $where = ['and',['u_id'=>$uid],['type'=>4]];
         }
         $user_scope_record = UserScopeRecord::find()->where($where)->orderBy(['id'=>SORT_DESC]);
         $pagination = new Pagination(['totalCount' => $user_scope_record->count(),'pageSize' => $limit]);
