@@ -189,7 +189,7 @@ class UserController extends CommonController
         $page = isset($params['page']) ? $params['page'] : 1;
         $user_down_record = UserDownRecord::find()->where(['u_id'=>$uid]);
         $pagination = new Pagination(['totalCount' => $user_down_record->count(),'pageSize' => $limit]);
-        $user_down_record = $user_down_record->orderBy('create_time',SORT_DESC)->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
+        $user_down_record = $user_down_record->orderBy(['create_time'=>SORT_DESC])->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
             'record'=>$user_down_record,
             'pagination' => $pagination
