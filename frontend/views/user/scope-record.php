@@ -36,6 +36,7 @@
             <a class="sub-nav-item <?=$type_id == 0 ? 'active' : ''?>" href="/user/scope-record?type=0">全部</a>
             <a class="sub-nav-item <?=$type_id == 1 ? 'active' : ''?>" href="/user/scope-record?type=1">积分赚取记录</a>
             <a class="sub-nav-item <?=$type_id == 2 ? 'active' : ''?>" href="/user/scope-record?type=2">积分消费记录</a>
+            <a class="sub-nav-item <?=$type_id == 3 ? 'active' : ''?>" href="/user/scope-record?type=3">用户下载获得积分</a>
             <a class="sub-nav-item right" href="/user/info">上传素材</a>
         </div>
 
