@@ -115,7 +115,7 @@ class UserController extends CommonController
         //取分类
         $uid = Yii::$app->user->id ? Yii::$app->user->id : 0;
         $typeArr = [];
-        $widget = UserCollect::find()->joinWith('collect_widget')->where($condition)->asArray()->all();
+        $widget = UserCollect::find()->joinWith('collect_widget')->where($condition)->->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $typeArr[0] = array('title'=>'全部分类','number'=>count($widget));
         foreach ($widget as $item) {
             foreach (explode(',',$item['collect_widget']['type']) as $type){
