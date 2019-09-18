@@ -56,11 +56,12 @@ class OtherController extends CommonController
         }else{
             $widget = UserCollect::find()->where(['user_collect.u_id'=>$other])->joinWith('collect_widget');
         }
+
         $params = Yii::$app->request->get();
         $limit =20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
 
-        $pagination = new Pagination(['totalCount' => $widget->count(),'pageSize' => $limit]);
+        $pagination = new Pagination(['totalCount' => count($widget),'pageSize' => $limit]);
         $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
 
         //个人中心访问量，粉丝量等等
