@@ -85,6 +85,17 @@ class UnitController extends CommonController {
         $widget_item_look->look = intval($widget_item_look->look) + 1;
         $widget_item_look->save();
 
+        //收集个人所有访问量
+        $userInfoNumber = UserInfo::findOne(['uid'=>$widget_item['u_id']]);
+        if($userInfoNumber){
+            $userInfoNumber->count = $userInfoNumber->count + 1;
+        }else{
+            $userInfoNumber = new UserInfo();
+            $userInfoNumber->uid = $params['uid'];
+            $userInfoNumber->count = 1;
+        }
+        $userInfoNumber->save();
+
         //查询上-篇文章
         $prev_article = Widget::find()->andFilterWhere(['and',['<', 'id', $unit_id],['status'=>1]])->orderBy(['id' => SORT_DESC])->limit(1)->one();
         //查询下-篇文章
