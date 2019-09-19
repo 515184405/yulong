@@ -40,4 +40,15 @@
    //  }
    // setRightHeight();
 </script>
+    <script src="<?=Yii::$app->params['backend_url']?>/asset/layui/layui.js"></script>
+    <script>
+        layui.use(['code'],function(){
+            var $ = layui.$,
+                code = layui.code;
+
+            code({
+                elem : 'blockquote,pre'
+            })
+        })
+    </script>
 <?= $this->render('../template/footer');?>
