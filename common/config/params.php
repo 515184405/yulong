@@ -7,7 +7,7 @@ return [
     'toolbars'=>[[
         'source', //源代码
         // 'anchor', //锚点
-        //'insertcode', //代码语言3
+        'insertcode', //代码语言3
         'fontfamily', //字体3
         'fontsize', //字号3
         'paragraph', //段落格式3
@@ -136,7 +136,7 @@ return [
         //'deletetable', //删除表格
 
         //'insertparagraphbeforetable', //"表格前插入行"
-        //'insertcode', //代码语言
+        'insertcode', //代码语言
         'fontfamily', //字体
         'fontsize', //字号
         //'paragraph', //段落格式

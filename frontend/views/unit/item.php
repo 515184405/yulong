@@ -20,6 +20,13 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
+        blockquote {
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
     <input type="hidden" id="scrope-value" value="<?=isset($data['scope']) ? $data['scope'] : 0?>">
 <div class="news-items unit-items">
@@ -378,7 +385,7 @@
             code = layui.code;
 
         code({
-            elem : 'blockquote'
+            elem : 'blockquote,pre'
         })
     })
 </script>
