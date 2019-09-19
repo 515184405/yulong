@@ -384,6 +384,13 @@
         var $ = layui.$,
             code = layui.code;
 
+        $.each($('pre'),function(index,elem){
+            var className = $(elem).attr('class');
+            var title = className.match(/^\w+:\w+/)[0].split(':')[1];
+            title = title == 'js' ? 'javascript': title;
+            $(elem).attr('lay-title',title);
+        })
+
         code({
             elem : 'blockquote,pre'
         })
