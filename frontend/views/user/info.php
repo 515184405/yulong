@@ -82,7 +82,7 @@
                             'toolbars'=>Yii::$app->params['toolbars']
                         ]
                     ]);?>
-                    <p class="red">温馨提示：代码段使用insert code或《<img src="/asset/static/image/yinhao.png" alt="">》来排版,前台已定义了样式...</p>
+                    <p class="red">温馨提示：代码段使用《<b style="color:#000">insert code</b>》或《<img src="/asset/static/image/yinhao.png" alt="">》来排版,前台已定义了样式...</p>
                 </div>
             </div>
             <?php } ?>
