@@ -17,9 +17,4 @@
             <li class="lks"><span><?=$key?></span><a href="/unit/item/<?=$val['id']?>" title="<?=$val['title']?>" target="_blank"><?=$val['title']?></a></li>
         <?php } ?>
     </ul>
-    <div style="display: none;">
-        <?php foreach ($data as $key=>$val) { ?>
-            <?= '<p>http://www.yu313.cn/unit/item/'.$val['id'].'</p>'; ?>
-        <?php } ?>
-    </div>
 </div>
