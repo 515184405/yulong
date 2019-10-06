@@ -65,7 +65,7 @@ class UserController extends CommonController
         $status = isset($params['status']) ? $params['status'] : 1;
         $limit =20; //每页显示20条
         $page = isset($params['page']) ? $params['page'] : 1;
-        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status','upload_download'])->where(['status'=>$status,'u_id'=>$uid])->orderBy(['id'=>SORT_DESC])->orderBy(['upload_download'=>SORT_ASC]);
+        $widget = Widget::find()->select(['id','title','desc','banner_url','look','fail_msg','collect','down_count','status','upload_download'])->where(['status'=>$status,'u_id'=>$uid])->orderBy([['id'=>SORT_DESC],['upload_download'=>SORT_ASC]]);
         $pagination = new Pagination(['totalCount' => $widget->count(),'pageSize' => $limit]);
         $widget = $widget->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
