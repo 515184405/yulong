@@ -1,5 +1,6 @@
 <?php $this->title='文章动态 - '.$data['data']['title']; ?>
 <?php $this->keywords=$data['data']['desc']; ?>
+<?php $this->description = $data['data']['desc']; ?>
 
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
