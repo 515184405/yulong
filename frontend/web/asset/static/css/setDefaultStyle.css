@@ -1,0 +1,172 @@
+.content-text a {
+  color: #00f;
+}
+.content-text li {
+  display: list-item;
+  list-style: inherit;
+}
+.content-text ul {
+  list-style-type: circle;
+}
+.content-text ol {
+  list-style-type: decimal;
+}
+.content-text ol ul,
+.content-text ul ol,
+.content-text ul ul,
+.content-text ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.content-text h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.content-text h2 {
+  font-size: 1.5em;
+  margin: 0.75em 0;
+}
+.content-text h3 {
+  font-size: 1.17em;
+  margin: 0.83em 0;
+}
+.content-text h4,
+.content-text p,
+.content-text blockquote,
+.content-text ul,
+.content-text fieldset,
+.content-text form,
+.content-text ol,
+.content-text dl,
+.content-text dir,
+.content-text menu {
+  margin: 1.12em 0;
+}
+.content-text h5 {
+  font-size: 0.83em;
+  margin: 1.5em 0;
+}
+.content-text h6 {
+  font-size: 0.75em;
+  margin: 1.67em 0;
+}
+.content-text h1,
+.content-text h2,
+.content-text h3,
+.content-text h4,
+.content-text h5,
+.content-text h6,
+.content-text b,
+.content-text strong {
+  font-weight: bolder;
+}
+.content-text br:before {
+  content: "\A";
+}
+.content-text :before,
+.content-text :after {
+  white-space: pre-line;
+}
+.content-text :link,
+.content-text :visited {
+  text-decoration: underline;
+}
+.content-text :focus {
+  outline: thin dotted invert;
+}
+.content-text table {
+  display: table;
+}
+.content-text tr {
+  display: table-row;
+}
+.content-text thead {
+  display: table-header-group;
+}
+.content-text tbody {
+  display: table-row-group;
+}
+.content-text tfoot {
+  display: table-footer-group;
+}
+.content-text col {
+  display: table-column;
+}
+.content-text colgroup {
+  display: table-column-group;
+}
+.content-text td,
+.content-text th {
+  display: table-cell;
+}
+.content-text caption {
+  display: table-caption;
+}
+.content-text th {
+  font-weight: bolder;
+  text-align: center;
+}
+.content-text caption {
+  text-align: center;
+}
+.content-text table {
+  border-spacing: 2px;
+}
+.content-text thead,
+.content-text tbody,
+.content-text tfoot {
+  vertical-align: middle;
+}
+.content-text td,
+.content-text th {
+  vertical-align: inherit;
+}
+.content-text blockquote {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.content-text pre,
+.content-text tt,
+.content-text code,
+.content-text kbd,
+.content-text samp {
+  font-family: monospace;
+}
+.content-text pre {
+  white-space: pre;
+}
+.content-text big {
+  font-size: 1.17em;
+}
+.content-text small,
+.content-text sub,
+.content-text sup {
+  font-size: 0.83em;
+}
+.content-text sub {
+  vertical-align: sub;
+}
+.content-text sup {
+  vertical-align: super;
+}
+.content-text s,
+.content-text strike,
+.content-text del {
+  text-decoration: line-through;
+}
+.content-text hr {
+  border: 1px inset;
+}
+.content-text u,
+.content-text ins {
+  text-decoration: underline;
+}
+.content-text center {
+  text-align: center;
+}
+.content-text abbr,
+.content-text acronym {
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+}
+/*# sourceMappingURL=setDefaultStyle.css.map */

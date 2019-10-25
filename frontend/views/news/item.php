@@ -2,9 +2,12 @@
 <?php $this->keywords=$data['data']['desc']; ?>
 <?php $this->description = $data['data']['desc']; ?>
 
+
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
 <link rel="stylesheet" href="/asset/static/css/item.css<?=Yii::$app->params['static_number']?>">
+<link rel="stylesheet" href="/asset/static/css/setDefaultStyle.css<?=Yii::$app->params['static_number']?>">
+
 
 <div class="news-items">
     <div class="news-hidden-scroll js_news_items">
