@@ -16,7 +16,7 @@ class NewsController extends CommonController {
         //标签筛选id;
         $tag_id = isset($_GET['tag_id']) ? $_GET['tag_id'] : '';
         // 通过tag_id反查出news_id
-        $caseTagJoin = NewsTagJoin::find()->where(['tag_id'=>$tag_id])->asArray()->all();
+        $caseTagJoin = NewsTagJoin::find()->where(['tag_id'=>$tag_id])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         $limit = 20; //每页显示20条
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         if($tag_id){
