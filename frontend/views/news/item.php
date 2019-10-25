@@ -6,8 +6,19 @@
 <?= $this->render('../template/header',compact('data'));?>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
 <link rel="stylesheet" href="/asset/static/css/item.css<?=Yii::$app->params['static_number']?>">
-<link rel="stylesheet" href="/asset/static/css/setDefaultStyle.css<?=Yii::$app->params['static_number']?>">
-
+<!--<link rel="stylesheet" href="/asset/static/css/setDefaultStyle.css--><?//=Yii::$app->params['static_number']?><!--"><!---->-->
+<style>
+    h1, h2, h3, h4,h5, h6, b,strong  {
+    *{
+        font-weight:bold;
+    }
+    }
+    //列表元素
+      li{ display:list-item;list-style: inherit}
+    ul{list-style-type: circle;}
+    ol{list-style-type: decimal }
+    ol ul, ul ol,ul ul, ol ol  { margin-top: 0; margin-bottom: 0 }
+</style>
 
 <div class="news-items">
     <div class="news-hidden-scroll js_news_items">
