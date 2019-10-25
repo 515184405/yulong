@@ -1,3 +1,11 @@
+.content-text {
+  /*  h1{ font-size:2em; margin: .67em 0 }
+  h2{ font-size:1.5em; margin: .75em 0 }
+  h3{ font-size:1.17em; margin: .83em 0 }
+  h4, p,blockquote, ul,fieldset, form,ol, dl, dir,menu { margin: 1.12em 0}
+  h5 { font-size:.83em; margin: 1.5em 0 }
+  h6{ font-size:.75em; margin: 1.67em 0 }*/
+}
 .content-text a {
   color: #00f;
 }
@@ -17,38 +25,6 @@
 .content-text ol ol {
   margin-top: 0;
   margin-bottom: 0;
-}
-.content-text h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-.content-text h2 {
-  font-size: 1.5em;
-  margin: 0.75em 0;
-}
-.content-text h3 {
-  font-size: 1.17em;
-  margin: 0.83em 0;
-}
-.content-text h4,
-.content-text p,
-.content-text blockquote,
-.content-text ul,
-.content-text fieldset,
-.content-text form,
-.content-text ol,
-.content-text dl,
-.content-text dir,
-.content-text menu {
-  margin: 1.12em 0;
-}
-.content-text h5 {
-  font-size: 0.83em;
-  margin: 1.5em 0;
-}
-.content-text h6 {
-  font-size: 0.75em;
-  margin: 1.67em 0;
 }
 .content-text h1 *,
 .content-text h2 *,
