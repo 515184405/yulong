@@ -28,7 +28,7 @@ class NewsController extends CommonController {
             }
         }else{
             //获取类型筛选出来的案例结果列表
-            $news = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.type_id'=>$id,'issue'=>2])->asArray()->all();
+            $news = News::find()->joinWith(['newsType','news_tag_join'])->andFilterWhere(['news.type_id'=>$id,'issue'=>2])->orderBy(['id'=>SORT_DESC])->asArray()->all();
         }
         $pagination = new Pagination(['totalCount' => count($news),'pageSize' => $limit]);
         $news = array_slice($news,$limit*($page-1),$limit);
