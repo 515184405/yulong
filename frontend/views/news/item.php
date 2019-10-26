@@ -4,6 +4,11 @@
 
 
 <?= $this->render('../template/header',compact('data'));?>
+    <style>
+        .layui-code-h3 a{
+            display: none;
+        }
+    </style>
 <link rel="stylesheet" href="/asset/static/wigdet/share/share.min.css<?=Yii::$app->params['static_number']?>">
 <link rel="stylesheet" href="/asset/static/css/item.css<?=Yii::$app->params['static_number']?>">
 <link rel="stylesheet" href="/asset/static/css/setDefaultStyle.css<?=Yii::$app->params['static_number']?>"><!---->
