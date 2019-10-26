@@ -24,7 +24,7 @@ class UnitController extends CommonController {
     public function actionIndex(){
         $id = isset($_GET['id']) ? $_GET['id'] : '';
         $search = isset($_GET['search']) ? $_GET['search'] : '';
-        $unitData = Widget::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->andFilterWhere(['or',['like','title',$search],['like','desc',$search]])->asArray()->all();
+        $unitData = Widget::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->andFilterWhere(['or',['like','title',$search],['like','desc',$search],['like','rule',$search]])->asArray()->all();
         $limit = 23; //每页显示20条
         $page = isset($_GET['page']) ? $_GET['page'] : 1;
         $unit = [];
