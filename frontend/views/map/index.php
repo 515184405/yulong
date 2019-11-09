@@ -13,8 +13,13 @@
     <ul>
         <li class="title"><h1><a href="/">313组件库</a></h1></li>
         <li class="title"><h2><a href="/unit">组件</a></h2></li>
-        <?php foreach ($data as $key=>$val) { ?>
+        <?php foreach ($unit as $key=>$val) { ?>
             <li class="lks"><span><?=$key?></span><a href="/unit/item/<?=$val['id']?>" title="<?=$val['title']?>" target="_blank"><?=$val['title']?></a></li>
+        <?php } ?>
+
+        <li class="title"><h2><a href="/news">文章</a></h2></li>
+        <?php foreach ($news as $key2=>$val2) { ?>
+            <li class="lks"><span><?=$key2?></span><a href="/news/item/<?=$val2['id']?>" title="<?=$val2['title']?>" target="_blank"><?=$val2['title']?></a></li>
         <?php } ?>
     </ul>
 </div>

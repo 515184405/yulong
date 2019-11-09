@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 
+use common\models\News;
 use common\models\Team;
 use common\models\Widget;
 use common\models\WidgetType;
@@ -18,8 +19,9 @@ class MapController extends CommonController
      */
     public function actionIndex()
     {
-        $data = Widget::find()->orderBy(['id'=>SORT_ASC])->asArray()->all();
-        return $this->renderPartial('index',compact('data'));
+        $unit = Widget::find()->orderBy(['id'=>SORT_ASC])->asArray()->all();
+        $news = News::find()->orderBy(['id'=>SORT_ASC])->asArray()->all();
+        return $this->renderPartial('index',compact('unit','news'));
     }
 
     public function actionSearch()
