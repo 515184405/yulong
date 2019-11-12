@@ -62,7 +62,7 @@
            <div class="layui-form-item">
                <label class="layui-form-label">IE兼容</label>
                <div class="layui-input-block">
-                   <?php $arr =array(0=>'请选择',6=>'IE6',7=>'IE7',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11'); ?>
+                   <?php $arr =array(0=>'请选择',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11','not'=>'不兼容IE'); ?>
                    <select name="ie">
                        <?php foreach ($arr as $k=>$v){?>
                            <option value="<?=$k?>"><?=$v?></option>

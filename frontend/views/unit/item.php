@@ -21,6 +21,12 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
+        .ie-img{
+            max-width: 400px;
+            display: block;
+            margin:30px auto;
+            margin-bottom: 15px;
+        }
     </style>
     <input type="hidden" id="scrope-value" value="<?=isset($data['scope']) ? $data['scope'] : 0?>">
 <div class="news-items unit-items">
@@ -41,6 +47,7 @@
             <?php } ?>
 
         </div>
+        <?= $unit['ie'] == 0 ? '':'<img class="ie-img" src="/asset/static/image/ie'.$unit["ie"].'.jpg" alt="浏览器兼容性">'?>
         <div class="unit-btn-box">
             <?php $upload_file = isset($_GET['upload_file']) ? $_GET['upload_file'] : ''; if($upload_file){ ?>
                 <a class="fy-btn fy-btn-success" target="_blank" href="<?=Yii::$app->params['upload_url']?>/<?=$unit['id']?>/<?=$unit['upload_enter_file']?>">查看演示(upload)</a>
