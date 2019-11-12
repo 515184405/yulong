@@ -31,6 +31,7 @@
     .layui-form{
         margin-top:30px;
     }
+    .layui-form-select dl{z-index:99999};
 </style>
 <div class="personal fy-container clearfix">
     <?=$this->render('../template/personal');?>
@@ -56,6 +57,17 @@
                <label class="layui-form-label">作品来源</label>
                <div class="layui-input-block">
                    <input type="text" value="<?=isset($data['widget']['source']) ? $data['widget']['source'] : ''?>" name="source" autocomplete="off" placeholder="请输入作品来源" class="layui-input">
+               </div>
+           </div>
+           <div class="layui-form-item">
+               <label class="layui-form-label">IE兼容</label>
+               <div class="layui-input-block">
+                   <?php $arr =array(0=>'请选择',6=>'IE6',7=>'IE7',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11'); ?>
+                   <select name="ie">
+                       <?php foreach ($arr as $k=>$v){?>
+                           <option value="<?=$k?>"><?=$v?></option>
+                       <?php } ?>
+                   </select>
                </div>
            </div>
             <?php } ?>

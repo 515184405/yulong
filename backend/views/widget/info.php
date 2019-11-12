@@ -18,6 +18,7 @@ use kucha\ueditor\UEditor;
         top:8px;
         z-index: 9;
     }
+    .layui-form-select dl{z-index:99999};
 </style>
 <?php $this->title="个人中心 - ".(isset($_GET['id']) ? '修改作品' : '添加作品'); ?>
 
@@ -98,6 +99,17 @@ use kucha\ueditor\UEditor;
                             'toolbars'=>Yii::$app->params['toolbars']
                         ]
                     ]);?>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">IE兼容</label>
+                <div class="layui-input-block">
+                    <?php $arr =array(0=>'请选择',6=>'IE6',7=>'IE7',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11'); ?>
+                    <select name="ie">
+                        <?php foreach ($arr as $k=>$v){?>
+                            <option value="<?=$k?>"><?=$v?></option>
+                        <?php } ?>
+                    </select>
                 </div>
             </div>
 
