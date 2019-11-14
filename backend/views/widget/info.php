@@ -104,7 +104,7 @@ use kucha\ueditor\UEditor;
             <div class="layui-form-item">
                 <label class="layui-form-label">IE兼容</label>
                 <div class="layui-input-block">
-                    <?php $arr =array(0=>'请选择',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11','not'=>'不兼容IE'); ?>
+                    <?php $arr =array(0=>'请选择',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11',12=>'不兼容IE'); ?>
                     <select name="ie">
                         <?php foreach ($arr as $k=>$v){?>
                             <option <?=$data['widget']['ie'] == $k ? 'selected' : ''?> value="<?=$k?>"><?=$v?></option>
