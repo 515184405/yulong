@@ -107,14 +107,14 @@ use kucha\ueditor\UEditor;
                     <?php $arr =array(0=>'请选择',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11','not'=>'不兼容IE'); ?>
                     <select name="ie">
                         <?php foreach ($arr as $k=>$v){?>
-                            <option value="<?=$k?>"><?=$v?></option>
+                            <option <?=$data['widget']['ie'] == $v ? 'selected' : ''?> value="<?=$k?>"><?=$v?></option>
                         <?php } ?>
                     </select>
                 </div>
             </div>
 
             <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">使用方法</label>
+                <label class="layui-form-label">组件状态</label>
                 <div class="layui-input-block">
                     <select id="select-status" lay-filter="select-status" name="status" lay-verify="required">
                         <option <?=$data['widget']['status'] == 0 ? 'selected' : ''?> value="0">审核中</option>
