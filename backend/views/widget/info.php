@@ -107,7 +107,7 @@ use kucha\ueditor\UEditor;
                     <?php $arr =array(0=>'请选择',8=>'IE8',9=>'IE9',10=>'IE10',11=>'IE11','not'=>'不兼容IE'); ?>
                     <select name="ie">
                         <?php foreach ($arr as $k=>$v){?>
-                            <option <?=$data['widget']['ie'] == $v ? 'selected' : ''?> value="<?=$k?>"><?=$v?></option>
+                            <option <?=$data['widget']['ie'] == $k ? 'selected' : ''?> value="<?=$k?>"><?=$v?></option>
                         <?php } ?>
                     </select>
                 </div>
