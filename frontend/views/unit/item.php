@@ -21,11 +21,14 @@
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
-        .ie-img{
-            max-width: 400px;
+        .ie-img {
+            max-width: 100%;
             display: block;
-            margin:30px auto;
-            margin-bottom: 15px;
+            margin: 30px auto;
+            width: 90%;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
         }
     </style>
     <input type="hidden" id="scrope-value" value="<?=isset($data['scope']) ? $data['scope'] : 0?>">
