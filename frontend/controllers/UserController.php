@@ -214,7 +214,7 @@ class UserController extends CommonController
         }elseif($type == 3){
             $where = ['and',['u_id'=>$uid],['type'=>4]];
         }
-        $user_scope_record = UserScopeRecord::find()->where($where)->filterWhere(['not',['scope'=>0]])->orderBy(['id'=>SORT_DESC]);
+        $user_scope_record = UserScopeRecord::find()->where($where)->filterWhere(['!=',['scope'=>0]])->orderBy(['id'=>SORT_DESC]);
         $pagination = new Pagination(['totalCount' => $user_scope_record->count(),'pageSize' => $limit]);
         $user_scope_record = $user_scope_record->offset(($page-1)*$limit)->limit($limit)->asArray()->all();
         $data = [
