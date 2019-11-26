@@ -28,7 +28,6 @@
             ,cols: [[
                 {field:'u_id', width:80, title: '用户ID', sort: true}
                 ,{field:'member',title: '用户名',templet:function(d){
-                            console.log(d);
                             return d.member ? d.member.username : '';
                         }}
                 ,{field:'member',title: '头像',templet:function(d){
