@@ -22,7 +22,7 @@
             box-sizing: border-box;
         }
         .ie-img {
-            max-width: 100%;
+            max-width: 770px;
             display: block;
             margin: 30px auto;
             width: 90%;
