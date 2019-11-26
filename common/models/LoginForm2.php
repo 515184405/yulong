@@ -65,8 +65,8 @@ class LoginForm2 extends Model
     public function login()
     {
         if ($this->validate()) {
-            //一天后自动过期
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 : 0);
+            //30天后自动过期
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
 
         return false;
