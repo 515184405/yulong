@@ -27,10 +27,10 @@
             ,url: '/down-history/index'
             ,cols: [[
                 {field:'u_id', width:80, title: '用户ID', sort: true}
-                ,{field:'username',title: '用户名',templet:function(d){
+                ,{field:'member',title: '用户名',templet:function(d){
                             return d.member.username;
                         }}
-                ,{field:'avatar',title: '头像',templet:function(d){
+                ,{field:'member',title: '头像',templet:function(d){
                         return '<img class="layui-nav-img" src="'+(d.member.avatar.indexOf('http') == -1 ? site_url2+d.member.avatar : d.member.avatar)+'"/>'
                     }}
                 ,{field:'down_title',title: '组件名称',templet:function(d){
