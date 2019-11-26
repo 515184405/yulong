@@ -54,6 +54,30 @@ class UserDownRecord extends \yii\db\ActiveRecord
         ];
     }
 
+    //联查member表
+    public function getMember(){
+        return $this->hasOne(Member::className(),['id'=>'u_id'])->select(['id','username','province','city','avatar']);
+    }
+
+    //数据查询
+    public static function search($params){
+        $query = static::find();
+        //按title查找
+        if(isset($params['u_id'])){
+            $query->andFilterWhere(['u_id' => $params['u_id']]);
+        }
+        $page = isset($params['page']) ? $params['page'] : '';
+        $limit = isset($params['limit']) ? $params['limit'] : '';
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->joinWith('member')->orderBy(['id' => SORT_DESC])->asArray()->all();
+        return compact('count', 'list');
+    }
+
     /*数据存与改*/
     public static function insertUpdate($params){
         $model = new static();

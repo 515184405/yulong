@@ -136,6 +136,12 @@
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">
+                        <a href="/down-history" lay-tips="下载历史" lay-direction="2">
+                            <i class="layui-icon iconfont font-8">&#xe602;</i>
+                            <cite>下载历史</cite>
+                        </a>
+                    </li>
+                    <li data-name="home" class="layui-nav-item">
                         <a href="/team" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon iconfont font-8">&#xe76a;</i>
                             <cite>人员管理</cite>
