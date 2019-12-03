@@ -91,7 +91,7 @@ class UnitController extends CommonController {
             $userInfoNumber->count = $userInfoNumber->count + 1;
         }else{
             $userInfoNumber = new UserInfo();
-            $userInfoNumber->uid = $params['uid'];
+            $userInfoNumber->uid = $widget_item['u_id'];
             $userInfoNumber->count = 1;
         }
         $userInfoNumber->save();
