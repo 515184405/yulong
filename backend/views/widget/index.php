@@ -111,7 +111,7 @@
                 ,{field:'desc', title: '描述'}
                 ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:220}
             ]]
-            ,done(res){
+            ,done:function(res){
             }
             ,page: true
             ,limit: 50

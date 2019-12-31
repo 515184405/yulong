@@ -68,7 +68,7 @@
                 ,{field:'issue',width:100, title: '是否发布',templet: '#switchTp2'}
                 ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
-            ,done(res){
+            ,done:function(res){
                 console.log(res);
             }
             ,page: true

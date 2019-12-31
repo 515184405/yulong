@@ -49,7 +49,7 @@
                     }}
                 ,{ title:'操作', toolbar: '#test-table-toolbar-barDemo', width:150}
             ]]
-            ,done(res){
+            ,done:function(res){
                 console.log(res);
             }
             ,page: true

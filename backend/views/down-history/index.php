@@ -39,7 +39,7 @@
                 ,{field:'create_time',  title: '创建时间'}
 
             ]]
-            ,done(res){
+            ,done:function(res){
                 console.log(res);
             }
             ,page: true

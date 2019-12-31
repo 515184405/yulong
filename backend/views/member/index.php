@@ -38,7 +38,7 @@
                     return d.province + '/' + d.city;
                     }}
             ]]
-            ,done(res){
+            ,done:function(res){
                 console.log(res);
             }
             ,page: true
