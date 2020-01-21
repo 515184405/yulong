@@ -2,6 +2,11 @@
 $this->title='设计案例 - '.$data['data']['title'];
 $content = strip_tags($data['data']['desc']);
 $this->keywords=mb_substr($content,0,100);
+$description = mb_substr($content,0,100);
+if(!$description){
+    $description = '313组件库，专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发';
+}
+$this->description = $description;
 ?>
 
 <?= $this->render('../template/header',compact('data'));?>

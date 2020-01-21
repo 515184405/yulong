@@ -1,7 +1,13 @@
 <?php $unit = $data['data']; ?>
 <?php $this->title='313组件库 - '.$unit['title']; ?>
 <?php $this->keywords=$unit['desc'].',313组件库'; ?>
-<?php $this->description = $unit['rule']; ?>
+<?php
+    $description = substr(strip_tags($unit['rule']),0,100);
+    if(!$description){
+        $description = '313组件库，专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发';
+    }
+    $this->description = $description;
+?>
 <?php $userUnit = isset($data['data']['user']) ? $data['data']['user'] : []; ?>
 <?= $this->render('../template/header',compact('data'));?>
 

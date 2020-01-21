@@ -10,7 +10,7 @@ use yii\helpers\Html;
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= Html::encode($this->title) ?></title>
     <meta name="keywords" content="<?=Html::encode($this->keywords)?>"/>
-    <meta name="description" content="北京聚友开发小组团队,专业从事网站建设.高品质建站服务.丰富的网站建设经验,响应式网站设计、网站制作开发"/>
+    <meta name="description" content="<?=Html::encode($this->description)?>"/>
 
     <link rel="stylesheet" href="/asset/static/css/default.css<?=Yii::$app->params['static_number']?>">
     <link rel="stylesheet" href="/asset/static/css/list-layout.css<?=Yii::$app->params['static_number']?>">
