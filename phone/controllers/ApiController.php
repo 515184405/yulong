@@ -52,7 +52,7 @@ class ApiController extends Controller
         $nav = TelNav::find()->where(['is_recommend'=>1])->orderBy(['sort'=>SORT_DESC])->asArray()->all();
 
         /* 推荐列表 */
-        $recommend = TelList::find()->limit(20)->asArray()->all();
+        $recommend = TelList::find()->where(['is_recommend'=>1])->limit(20)->asArray()->all();
 
         /* 最新列表 */
         $news = TelList::find()->orderBy(['id'=>SORT_DESC])->limit(20)->asArray()->all();
