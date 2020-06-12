@@ -34,14 +34,11 @@ class NumberListController extends CommonController
         if(Yii::$app->request->isPost){
             $params = $_POST;
             //存newsModel数据
-            $num_id2 = TelList::insertUpdate($params,$num_id);
-            if($num_id2){
-                if($num_id){
-                    return Json::encode(array('code'=>'100000','message'=>'修改成功！'));
-                }
-                return Json::encode(array('code'=>'100000','message'=>'添加成功！'));
+            if(!empty($_FILES['file']) && !$num_id){
+                return TelList::insertImport($params);
+            }else{
+                return TelList::insertUpdate($params,$num_id);
             }
-            return Json::encode(array('code'=>'100001','message'=>'添加失败！'));
         }
         $data['number_list'] = [];
         $data['contact'] = TelContact::find()->asArray()->all();
@@ -50,11 +47,36 @@ class NumberListController extends CommonController
         if($num_id){
             $data['number_list'] = TelList::find()->where(['id'=>$num_id])->asArray()->one();
             if(!$data['number_list']){
-                return '轮播图不存在';
+                return '数据不存在';
             }
         }
         return $this->render('info',compact('data'));
     }
+
+    /**
+     * 下载表字段
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
+     * @throws \PHPExcel_Writer_Exception
+     */
+    public function actionDownSample()
+    {
+        //先生成excel下载
+        $header = [
+            'tel' => '手机号',
+            'price' => '单价',
+            'address' => '归属地',
+        ];
+        //end
+        $list = [
+            [
+            ]
+        ];
+        $filename = '导入手机号信息表';
+        \common\helpers\Excel::createExcelFromData($header, $list, $filename);
+
+    }
+
 
     public function actionRecommend(){
         $num_id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -80,5 +102,4 @@ class NumberListController extends CommonController
             return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);
         }
     }
-
 }

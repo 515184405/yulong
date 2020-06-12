@@ -1,6 +1,7 @@
 <?php
 namespace phone\controllers;
 
+use phone\models\uploadFormExcel;
 use phone\models\User;
 use Yii;
 use phone\models\UploadForm;
@@ -23,7 +24,7 @@ class CommonController extends \yii\web\Controller{
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['upload-widget','params','zixun','demo','sort','logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue','is-down'],
+                        'actions' => ['upload-widget','down-sample','params','zixun','demo','sort','logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue','is-down'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -133,6 +134,15 @@ class CommonController extends \yii\web\Controller{
                 'status' => false,
             );
         }
+    }
+
+    /*
+     * 上传excel
+     *
+     * */
+    public function actionImport(){
+        $model = new uploadFormExcel();
+
     }
 
 }

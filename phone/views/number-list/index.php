@@ -18,7 +18,7 @@
 
        <script type="text/html" id="test-table-toolbar-toolbarDemo">
             <div class="layui-btn-container">
-                <a href="/number-list/info" class="layui-btn layui-btn-sm">添加组件</a>
+                <a href="/number-list/info" class="layui-btn layui-btn-sm">添加手机号</a>
             </div>
         </script>
 

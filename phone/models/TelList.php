@@ -4,6 +4,8 @@ namespace phone\models;
 
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\helpers\Json;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "tel_list".
@@ -58,6 +60,19 @@ class TelList extends \yii\db\ActiveRecord
             'createtime' => 'Createtime',
             'is_recommend' => 'Is Recommend',
         ];
+    }
+
+    /**
+     * 检查是否重复
+     * @param $mobile
+     * @param $meeting_id
+     * @return null|static
+     */
+    public static function IsMobile($mobile)
+    {
+
+        $is_mobile = TelList::findOne(['tel' => $mobile]);
+        return $is_mobile;
     }
 
     //查询与搜索
@@ -235,10 +250,57 @@ class TelList extends \yii\db\ActiveRecord
         $model->setAttributes($params);
         if($model->save()){
             if(!$num_id) {
-                return $model->attributes['id'];
+                return Json::encode(array('code' => '100000', 'message' => '添加成功！'));
             }
-            return $num_id;
+            return Json::encode(array('code' => '100000', 'message' => '修改成功！'));
         };
-        return false;
+        return Json::encode(array('code' => '100001', 'message' => '操作失败！'));
+    }
+
+    // 导入并添加
+    public static function insertImport($params){
+        $header = [
+            0 => '手机号',
+            1 => '单价',
+            2 => '归属地',
+        ];
+        $reply = array();//重复数据
+        if(!empty($_FILES['file'])) {
+            $tag_data = \common\helpers\Excel::getExcelData($_FILES['file']['tmp_name']);
+            if (count($tag_data) < 2 || $header != $tag_data[1]) {
+                return Json::encode(array('code' => '100001', 'message' => '上传文件模板不正确！'));
+            }
+            unset($tag_data[1]);
+            foreach ($tag_data as $k => $v) {    //循环插入
+                $model = new static();
+                $now_time= time();
+                $params['createtime']= date('Y-m-d H:i:s',$now_time);//2018-11-28 15:29:29
+
+                $preg_phone='/^1[3456789]\d{9}$/ims';
+                if(preg_match($preg_phone,$v[0]) == false){
+                    return Json::encode(array('code' => '100001', 'message' => "手机号" . $v[0] . '格式不正确'));
+                }
+
+                if (TelList::isMobile($v[0])) {
+                    array_push($reply, array('tel' => $v[0]));
+                    continue;
+                }
+
+                $model->setAttributes($params);
+
+                $model->tel = isset($v[0]) ? $v[0] : '';
+                $model->price = isset($v[1]) ? $v[1] : '';
+                $model->address = isset($v[2]) ? $v[2] : $params->address;
+                $model->save();
+                if ($model->errors) {
+                     foreach ($model->errors as $val) {
+                         return Json::encode(array('code' => '100001', 'message' => $val[0]));
+                     }
+                 }
+            }
+            return Json::encode(array('code' => '100000', 'message' => '导入成功！','reply' => $reply));
+        }
+        return Json::encode(array('code' => '100001', 'message' => '导入失败'));
+
     }
 }
