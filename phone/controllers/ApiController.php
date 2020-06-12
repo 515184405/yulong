@@ -8,6 +8,8 @@ use phone\models\TelLunbo;
 use phone\models\TelNav;
 use yii\web\Controller;
 
+header("Access-Control-Allow-Origin: *");
+
 class ApiController extends Controller
 {
 
