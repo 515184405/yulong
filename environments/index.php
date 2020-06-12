@@ -37,6 +37,8 @@ return [
             'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
+            'phone/runtime',
+            'phone/web/assets',
         ],
         'setExecutable' => [
             'yii',
@@ -46,11 +48,14 @@ return [
             'backend/config/main-local.php',
             'common/config/codeception-local.php',
             'frontend/config/main-local.php',
+            'phone/config/main-local.php',
         ],
     ],
     'Production' => [
         'path' => 'prod',
         'setWritable' => [
+            'phone/runtime',
+            'phone/web/assets',
             'backend/runtime',
             'backend/web/assets',
             'console/runtime',
@@ -61,6 +66,7 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
+            'phone/config/main-local.php',
             'backend/config/main-local.php',
             'frontend/config/main-local.php',
         ],
