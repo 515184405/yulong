@@ -42,7 +42,7 @@
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'name',title: '描述'}
-                ,{field:'url',title: '筛选条件'}
+                ,{field:'url',title: '匹配规则'}
                 ,{field:'is_recommend', title: '设为首页快捷方式',templet: '#switchTpl'}
                 ,{field:'sort',width:100, title: '排序',edit:'text'}
                 ,{field:'imgsrc', title: '列表图',templet: function (d) {

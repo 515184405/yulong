@@ -102,7 +102,7 @@
                     <li data-name="home" class="layui-nav-item">
                         <a href="/nav"  class="" lay-tips="轮播管理" lay-direction="6">
                             <i class="layui-icon iconfont font-2">&#xe675;</i>
-                            <cite>快捷导航管理</cite>
+                            <cite>筛选规则</cite>
                         </a>
                     </li>
                     <li data-name="home" class="layui-nav-item">

@@ -201,8 +201,7 @@
             }
             layer.load(1, {shade: .1});
             params['address'] =  params['province'] + '-' + params['city'];
-            console.log($("#upload_btn").siblings('input')[0].files[0]);
-            params['file'] = $("#upload_btn").siblings('input')[0].files[0];
+            params['file'] = params['file'] ? $("#upload_btn").siblings('input')[0].files[0] : '';
             var formData = new FormData();
             for(var key in params){
                 formData.append(key,params[key]);

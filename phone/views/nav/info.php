@@ -9,7 +9,7 @@
     }
 </style>
 <div class="layui-card">
-    <div class="layui-card-header header-title"><?=isset($_GET['id']) ? '修改轮播图' : '添加轮播图'?></div>
+    <div class="layui-card-header header-title"><?=isset($_GET['id']) ? '修改筛选规则' : '添加筛选规则'?></div>
     <div class="layui-card-body">
         <form class="layui-form" action="">
 
@@ -17,13 +17,19 @@
                 <label class="layui-form-label">标题</label>
                 <div class="layui-input-block">
                     <input type="text" value="<?=isset($data['nav']['name']) ? $data['nav']['name'] : ''?>" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                    <span class="theme-red ml10">筛选规则前台显示文字</span>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label class="layui-form-label">筛选条件</label>
                 <div class="layui-input-block">
-                    <input type="text" value="<?=isset($data['nav']['url']) ? $data['nav']['url'] : ''?>" name="url" autocomplete="off" placeholder="请输入活动链接（选填）" class="layui-input">
+                    <div class="layui-inline">
+                        <input type="text" value="<?=isset($data['nav']['url']) ? $data['nav']['url'] : ''?>" name="url" autocomplete="off" placeholder="请输入活动链接（选填）" class="layui-input">
+                    </div>
+                    <div class="layui-inline">
+                        <button type="button" class="layui-btn lookRule">点击查看规则（可自行组合）</button>
+                    </div>
                 </div>
             </div>
 
@@ -48,7 +54,7 @@
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">是否设置快捷导航</label>
+                <label class="layui-form-label">是否设置首页快捷入口</label>
                 <div class="layui-input-block">
                     <input type="checkbox" name="is_recommend" value="" <?=(isset($data['nav']['is_recommend']) && $data['nav']['is_recommend']==1) ? 'checked' : '';?> lay-skin="switch" lay-text="是|否" >
                 </div>
@@ -80,6 +86,56 @@
         </form>
     </div>
 </div>
+
+<div class="layui-hide" style="padding:30px;line-height: 1.5;" id="ruleAlert">
+    <p style="font-weight: bold">筛选规则需注意：</p>
+    <p>1.匹配手机号中是否有四个连续相同的号码 例：（AAAA）</p>
+    <p>2.匹配手机号中尾部是否有五个连续相同的号码 例：（尾AAAAA）</p>
+    <p>3.匹配的手机号码不能大于8位，即（AAAAAAAA 或 BBBBBBBB 或 尾ABCDEFGH 等）字母不能超过8位</p>
+    <p>4.匹配两个或三个类型中间用-隔开 例（尾AAAA-尾AAAAA）</p>
+    <p>5.以下为可定义规则，可随意组合，例（尾AAA-尾AAAA）</p>
+    <pre>
+        'AA'
+        'AAA'
+        'AAAA'
+        'AAAAA'
+        'AAAAAA'
+        'AAAAAAA'
+        'AAAAAAAA'
+        'AAAAAAAAA'
+        'AAAAAAAAAA'
+        'ABC'
+        'ABCD'
+        'ABCDE'
+        'ABCDEF'
+        'ABCDEFG'
+        'ABCDEFGH'
+        'AAB'
+        'AABB'
+        'AABBB'
+        'AABBBB'
+        'AABBBBB'
+        'AABBBBBB'
+        'AAAB'
+        'AAABB'
+        'AAABBB'
+        'AAABBBB'
+        'AAABBBBB'
+        'AAAAB'
+        'AAAABB'
+        'AAAABBB'
+        'AAAABBBB'
+        'AAAAAB'
+        'AAAAABB'
+        'AAAAABBB'
+        'AAAAAAB'
+        'AAAAAABB'
+        'AAAAAAAB'
+        'ABAB'
+        'ABCABC'
+        'ABCDABCD'
+    </pre>
+</div>
 <script>
     layui.config({
         base: '/asset/' //静态资源所在路径
@@ -91,6 +147,18 @@
             upload = layui.upload,
             colorpicker = layui.colorpicker,
             form = layui.form;
+
+        $(".lookRule").click(function(){
+            layer.open({
+                type : 1,
+                title : '靓号匹配规则',
+                content : $("#ruleAlert").removeClass('layui-hide')[0].outerHTML,
+                area : ['600px','80%'],
+                end:function(){
+                    $("#ruleAlert").addClass('layui-hide');
+                }
+            })
+        })
 
         colorpicker.render({
             elem: '#colorpicker',  //绑定元素
