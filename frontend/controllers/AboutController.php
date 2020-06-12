@@ -19,4 +19,8 @@ class AboutController extends CommonController
         $data = Team::find()->orderBy(['id'=>SORT_ASC])->asArray()->all();
         return $this->render('index',compact('data'));
     }
+    public function actionMy()
+    {
+        return $this->render('my');
+    }
 }
