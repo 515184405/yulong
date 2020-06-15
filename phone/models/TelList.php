@@ -75,9 +75,14 @@ class TelList extends \yii\db\ActiveRecord
         return $is_mobile;
     }
 
+    /*关联用户表*/
+    public function getUserInfo(){
+        return $this->hasOne(TelContact::className(),['id'=>'user_tel']);
+    }
+
     //查询与搜索
     public static function search($params){
-        $query = static::find();
+        $query = static::find()->joinWith('userInfo');
 
         $limit = isset($params['limit']) ? 100 : $params['limit'];
         $page = isset($params['page']) ? 1 : $params['page'];
@@ -117,35 +122,38 @@ class TelList extends \yii\db\ActiveRecord
                     break;
             }
         }
-        /* 按位搜索 */
-        if(isset($params['search_number_num']) && $params['search_number_num'] != '0' && $params['search_number_num'] != ''){
-            $data = $query->asArray()->all();
-            $tel_reg = str_replace('*','\d',$params['search_number_num']);
-            $result = [];
-            foreach ($data as $key => $item) {
-                if(preg_match('#'.$tel_reg.'#', $item['tel'],$is_tel_bool)){
-                    var_dump($is_tel_bool);die;
-                    $result[] = $item;
-                }
-            }
-            return self::setPageFun($result,$limit,$page);
-        }
-        /* 模糊搜索 */
+
         if(isset($params['search_number']) && $params['search_number'] != '0' && $params['search_number'] != ''){
+
             $data = $query->asArray()->all();
-            $tel_reg = '#';
-            if(strstr($params['search_number'], '尾')){
-                $tel_reg = '$#';
-                $params['search_number'] = str_replace('尾','',$params['search_number']);
-            };
-            $result = [];
-            foreach ($data as $key => $item) {
-                if(preg_match('#'.$params['search_number'].$tel_reg, $item['tel'],$is_tel_bool)){
-                    $item['tel'] = preg_replace('#'.$is_tel_bool[0].$tel_reg,'<span style="color:#f00">'.$is_tel_bool[0].'</span>',$item['tel']);
-                    $result[] = $item;
+            /* 模糊搜索 */
+            if($params['search_type'] == 1){
+                $tel_reg = '#';
+                if(strstr($params['search_number'], '尾')){
+                    $tel_reg = '$#';
+                    $params['search_number'] = str_replace('尾','',$params['search_number']);
+                };
+                $result = [];
+                foreach ($data as $key => $item) {
+                    if(preg_match('#'.$params['search_number'].$tel_reg, $item['tel'],$is_tel_bool)){
+                        $item['tel'] = preg_replace('#'.$is_tel_bool[0].$tel_reg,'<span style="color:#f00">'.$is_tel_bool[0].'</span>',$item['tel']);
+                        $result[] = $item;
+                    }
                 }
+                return self::setPageFun($result,$limit,$page);
+
+            /* 按位搜索 */
+            }elseif($params['search_type'] == 2){
+                $tel_reg = str_replace('*','\d',$params['search_number']);
+                $result = [];
+                foreach ($data as $key => $item) {
+                    if(preg_match('#'.$tel_reg.'#', $item['tel'],$is_tel_bool)){
+                        $result[] = $item;
+                    }
+                }
+                return self::setPageFun($result,$limit,$page);
             }
-            return self::setPageFun($result,$limit,$page);
+
         }
         /* 手机号类型筛选 */
         if(isset($params['type']) && $params['type'] != '0' && $params['type'] != ''){
@@ -167,7 +175,7 @@ class TelList extends \yii\db\ActiveRecord
                 'ABCDEFG' => '(1234567|2345678|3456789|0123456)',
                 'ABCDEFGH' => '(12345678|23456789|01234567)',
                 'AAB' => '(\d)\1((?!\1)\d)',
-                'AABB' => '(\d)\1((?!\1)\d{2})',
+                'AABB' => '(\d)\1(\d)\2',
                 'AABBB' => '(\d)\1((?!\1)\d{3})',
                 'AABBBB' => '(\d)\1((?!\1)\d{4})',
                 'AABBBBB' => '(\d)\1((?!\1)\d{5})',
