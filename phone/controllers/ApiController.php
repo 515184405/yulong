@@ -81,7 +81,7 @@ class ApiController extends Controller
         $numberList = TelList::search($params);
         $nav = TelNav::find()->orderBy(['sort'=>SORT_DESC])->asArray()->all();
         $data = [
-            'numerList' => $numberList['data'],
+            'numberList' => array('data'=>$numberList['data'],'count'=>$numberList['count']),
             'online' => $this->getOnline(),
             'nav' => $nav,
         ];

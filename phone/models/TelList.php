@@ -84,8 +84,8 @@ class TelList extends \yii\db\ActiveRecord
     public static function search($params){
         $query = static::find()->joinWith('userInfo');
 
-        $limit = isset($params['limit']) ? 100 : $params['limit'];
-        $page = isset($params['page']) ? 1 : $params['page'];
+        $limit = isset($params['limit']) ? $params['limit'] : 100;
+        $page = isset($params['page']) ? $params['page'] : 1;
 
         $tel = isset($params['tel']) ? $params['tel'] : '';
         //按title status查找
