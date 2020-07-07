@@ -94,7 +94,10 @@ class TelList extends \yii\db\ActiveRecord
         $tel = isset($params['tel']) ? $params['tel'] : '';
         //按title status查找
         if(isset($params['tel'])){
-            $query->andFilterWhere(['like','tel_list.tel',$params['tel']]);
+            $query->andFilterWhere(['like','tel_list.tel',$params['tel']])->orderBy(['id'=>SORT_DESC]);
+        }
+        if(isset($params['backend'])){
+            $query->orderBy(['id'=>SORT_DESC]);
         }
         /* 网络筛选 */
         if(isset($params['online']) && $params['online'] != '0' && $params['online'] != ''){

@@ -46,6 +46,9 @@
             ,toolbar: '#test-table-toolbar-toolbarDemo'
             ,url: '/number-list/index'
             ,id : 'reloaded'
+            ,where:{
+                backend : true,
+            }
             ,cols: [[
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'tel',title: '手机号'}
