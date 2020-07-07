@@ -92,7 +92,7 @@
                 layer.confirm('您确定要删除吗', function(index){
                     obj.del();
                     layer.close(index);
-                    $.post('/widget/delete',{id:data.id},function(res){
+                    $.post('/number-list/delete',{id:data.id},function(res){
                         if(res.code == 100000){
                             layer.msg(res.message);
                         }
