@@ -105,7 +105,7 @@ class TelList extends \yii\db\ActiveRecord
         }
         /* 归属地筛选 */
         if(isset($params['address']) && $params['address'] != '0' && $params['address'] != ''){
-            $query->andFilterWhere(['=','tel_list.address',$params['address']]);
+            $query->andFilterWhere(['like','tel_list.address',$params['address']]);
         }
         /* 手机号价格筛选 */
         if(isset($params['price']) && $params['price'] !='0' && $params['price'] != ''){
