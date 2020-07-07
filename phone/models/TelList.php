@@ -18,6 +18,8 @@ use yii\web\UploadedFile;
  * @property string $content 套餐信息
  * @property int $user_tel 联系人电话
  * @property int $is_recommend 是否推荐
+ * @property int $is_miaosha 是否秒杀
+ * @property int $is_tejia 是否特价
  */
 class TelList extends \yii\db\ActiveRecord
 {
@@ -36,7 +38,7 @@ class TelList extends \yii\db\ActiveRecord
     {
         return [
             [['tel', 'online', 'address', 'user_tel'], 'required'],
-            [['price', 'online', 'user_tel', 'is_recommend'], 'integer'],
+            [['price', 'online', 'user_tel', 'is_recommend','is_miaosha','is_tejia'], 'integer'],
             [['tel'], 'string', 'max' => 11],
             [['createtime'], 'safe'],
             [['address'], 'string', 'max' => 255],
@@ -59,6 +61,8 @@ class TelList extends \yii\db\ActiveRecord
             'user_tel' => 'User Tel',
             'createtime' => 'Createtime',
             'is_recommend' => 'Is Recommend',
+            'is_miaosha' => 'Is Miaosha',
+            'is_tejia' => 'Is tejia',
         ];
     }
 

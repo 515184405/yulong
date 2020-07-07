@@ -22,10 +22,6 @@
             </div>
         </script>
 
-        <script type="text/html" id="switchTpl">
-            <input type="checkbox" name="recommend" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" {{ d.is_recommend == 1 ? 'checked' : '' }}>
-        </script>
-
         <script type="text/html" id="test-table-toolbar-barDemo">
             <div class="layui-btn-group">
                 <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -54,7 +50,15 @@
                 {field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'tel',title: '手机号'}
                 ,{field:'createtime',  title: '创建时间'}
-                ,{field:'is_recommend',width:100, title: '是否推荐',templet: '#switchTpl'}
+                ,{field:'is_recommend',width:100, title: '是否推荐',templet:function (d) {
+                        return '<input type="checkbox" name="is_recommend" value="'+d.id+'" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" '+(d.is_recommend == 1 ? "checked" : "")+'>'
+                    }}
+                ,{field:'is_miaosha',width:100, title: '是否秒杀',templet:function (d) {
+                        return '<input type="checkbox" name="is_miaosha" value="'+d.id+'" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" '+(d.is_miaosha == 1 ? "checked" : "")+'>'
+                    }}
+                ,{field:'is_tejia',width:100, title: '是否特价',templet:function (d) {
+                        return '<input type="checkbox" name="is_tejia" value="'+d.id+'" lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend" '+(d.is_tejia == 1 ? "checked" : "")+'>'
+                    }}
                 ,{field:'online', title: '网络类型',templet:function(d){
                         if(d.online == 1){
                             return '中国移动';
@@ -77,7 +81,10 @@
 
         // 推荐单选开关事件
         form.on('switch(filter-recommend)',function(res){
-            $.post('/number-list/recommend',{is_recommend:(res.elem.checked ? 1 : 0),id:res.value},function(data){
+            var type = $(res.elem).attr('name');
+            var data = {id:res.value};
+            data[type] = (res.elem.checked ? 1 : 0);
+            $.post('/number-list/switch',data,function(data){
                 layer.tips(data.message, $(res.elem).next(), {
                     tips: [1, '#0FA6D8'] //还可配置颜色
                 });

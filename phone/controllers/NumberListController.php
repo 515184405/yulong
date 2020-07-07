@@ -78,7 +78,7 @@ class NumberListController extends CommonController
     }
 
 
-    public function actionRecommend(){
+    public function actionSwitch(){
         $num_id = isset($_POST['id']) ? $_POST['id'] : '';
         if(Yii::$app->request->isPost){
             $params = $_POST;

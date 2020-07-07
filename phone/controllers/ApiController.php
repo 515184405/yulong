@@ -54,12 +54,20 @@ class ApiController extends Controller
         /* 推荐列表 */
         $recommend = TelList::find()->joinWith('userInfo')->where(['is_recommend'=>1])->limit(20)->asArray()->all();
 
+        /* 秒杀列表 */
+        $miaosha = TelList::find()->joinWith('userInfo')->where(['is_miaosha'=>1])->limit(20)->asArray()->all();
+
+        /* 特价列表 */
+        $tejia = TelList::find()->joinWith('userInfo')->where(['is_tejia'=>1])->limit(20)->asArray()->all();
+
         /* 最新列表 */
         $news = TelList::find()->joinWith('userInfo')->orderBy(['id'=>SORT_DESC])->limit(20)->asArray()->all();
         $data = [
             'banner' => $banner,
             'nav'    => $nav,
             'recommend' => $recommend,
+            'miaosha' => $miaosha,
+            'tejia' => $tejia,
             'news'   => $news,
             'online' => $this->getOnline(),
             'site_url' => \Yii::$app->params['backend_url'],

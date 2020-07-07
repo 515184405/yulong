@@ -91,6 +91,20 @@
                 </div>
             </div>
 
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">是否秒杀</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="is_miaosha" <?=(isset($data['number_list']['is_miaosha']) && $data['number_list']['is_miaosha']) == 1 ? 'checked' : ''?> lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend">
+                </div>
+            </div>
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">是否特价</label>
+                <div class="layui-input-block">
+                    <input type="checkbox" name="is_tejia" <?=(isset($data['number_list']['is_tejia']) && $data['number_list']['is_tejia']) == 1 ? 'checked' : ''?> lay-skin="switch" lay-text="是|否" lay-filter="filter-recommend">
+                </div>
+            </div>
+
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="submit-btn">立即提交</button>
@@ -196,6 +210,8 @@
             var _this = this;_this.disabled=true;//防止多次提交
             var params = data.field;
             params['is_recommend'] =  params['is_recommend'] == 'on' ? 1 : 0;
+            params['is_miaosha'] =  params['is_miaosha'] == 'on' ? 1 : 0;
+            params['is_tejia'] =  params['is_tejia'] == 'on' ? 1 : 0;
             if(params['is_excel'] == 'on' && params['file'] == ''){
                 return layer.msg('未导入excel文件',{icon:2});
             }

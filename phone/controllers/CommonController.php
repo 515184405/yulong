@@ -24,7 +24,7 @@ class CommonController extends \yii\web\Controller{
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['upload-widget','down-sample','params','zixun','demo','sort','logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue','is-down'],
+                        'actions' => ['upload-widget','switch','down-sample','params','zixun','demo','sort','logout', 'index','info','type','change-pwd','delete','add-type','recommend','upload-image','upload','upload-file','issue','is-down'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
