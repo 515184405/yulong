@@ -39,6 +39,8 @@ return [
             'frontend/web/assets',
             'phone/runtime',
             'phone/web/assets',
+            'photolive/runtime',
+            'photolive/web/assets',
         ],
         'setExecutable' => [
             'yii',
@@ -49,6 +51,7 @@ return [
             'common/config/codeception-local.php',
             'frontend/config/main-local.php',
             'phone/config/main-local.php',
+            'photolive/config/main-local.php',
         ],
     ],
     'Production' => [
@@ -61,6 +64,8 @@ return [
             'console/runtime',
             'frontend/runtime',
             'frontend/web/assets',
+            'photolive/runtime',
+            'photolive/web/assets',
         ],
         'setExecutable' => [
             'yii',
@@ -69,6 +74,7 @@ return [
             'phone/config/main-local.php',
             'backend/config/main-local.php',
             'frontend/config/main-local.php',
+            'photolive/config/main-local.php',
         ],
     ],
 ];
