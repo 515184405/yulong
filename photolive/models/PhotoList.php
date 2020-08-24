@@ -77,4 +77,30 @@ class PhotoList extends CommonModel
             'photo_number' => 'Photo Number',
         ];
     }
+
+    /*关联photo_cover*/
+    public function getPhotoCover(){
+        return $this->hasOne(PhotoCoverSettings::className(),['project_id' => 'id']);
+    }
+
+    /*关联photo_group*/
+    public function getPhotoGroup(){
+        return $this->hasMany(PhotoGroupSettings::className(),['project_id' => 'id']);
+    }
+
+    /*关联photo_top_share*/
+    public function getPhotoTopShare(){
+        return $this->hasOne(PhotoTopShareSettings::className(),['project_id' => 'id']);
+    }
+
+    /*关联photo_Water*/
+    public function getPhotoWater(){
+        return $this->hasOne(PhotoWaterSettings::className(),['project_id' => 'id']);
+    }
+
+    /*关联photo_wx_share*/
+    public function getPhotoWxShare(){
+        return $this->hasOne(PhotoWxShareSettings::className(),['project_id' => 'id']);
+    }
+
 }
