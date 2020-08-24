@@ -5,22 +5,21 @@ namespace photolive\models;
 use Yii;
 
 /**
- * This is the model class for table "photo_group".
+ * This is the model class for table "photo_water_array".
  *
- * @property int $id 相册类型id
- * @property string $name 姓名类型名字
+ * @property int $id
  * @property string $createtime 创建时间
- * @property int $sort 排序
- * @property int $project_id 项目id
+ * @property string $imgsrc 水印图片
+ * @property int $project_id
  */
-class PhotoGroup extends CommonModel
+class PhotoWaterArray extends CommonModel
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'photo_group';
+        return 'photo_water_array';
     }
 
     /**
@@ -29,10 +28,10 @@ class PhotoGroup extends CommonModel
     public function rules()
     {
         return [
-            [['name', 'createtime', 'project_id'], 'required'],
+            [['createtime', 'imgsrc', 'project_id'], 'required'],
             [['createtime'], 'safe'],
-            [['sort', 'project_id'], 'integer'],
-            [['name'], 'string', 'max' => 100],
+            [['project_id'], 'integer'],
+            [['imgsrc'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,9 +42,8 @@ class PhotoGroup extends CommonModel
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
             'createtime' => 'Createtime',
-            'sort' => 'Sort',
+            'imgsrc' => 'Imgsrc',
             'project_id' => 'Project ID',
         ];
     }

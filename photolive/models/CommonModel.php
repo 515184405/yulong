@@ -40,7 +40,7 @@ class CommonModel extends \yii\db\ActiveRecord
     }
 
     /**
-     * 查找方法
+     * 查找列表方法
      * @param array $arr
      * @return string
      */
@@ -50,30 +50,42 @@ class CommonModel extends \yii\db\ActiveRecord
     }
 
     /**
+     * 查找单个方法
+     * @param array $arr
+     * @return string
+     */
+    public static function getOne($arr = []){
+        if(empty($arr)){
+            return self::convertJson('100001','没有要查找的目标');
+        }
+        $result = static::find()->where($arr)->asArray()->one();
+        return self::convertJson('100000','查询成功',$result);
+    }
+
+    /**
      * 新增与更新方法
      * @param $params
      * @return string
      */
     public static function insertUpdate($params){
-        $params['id'] = isset($params['id']) ? $params['id'] : '';
-        $params['createtime'] = date('Y-m-d H:i:s',time());
         $model = new static();
         if($params['id']) {
+            $message = '修改';
             $model = static::findOne($params['id']);
+        }else{
+            $message = '添加';
+            $params['createtime'] = date('Y-m-d H:i:s',time());
         }
         $model->setAttributes($params);
         if($model->save()){
-            if(isset($model->attributes['sort'])){
-                $model->updateAll(['sort'=>$model->attributes['id']],['id'=>$model->attributes['id']]);
-            }
-            return self::convertJson('100000','操作成功');
+            return self::convertJson('100000',$message.'成功');
         }else{
             if ($model->getFirstErrors()) {
                 foreach ($model->getFirstErrors() as $val) {
                     return self::convertJson('100001', $val);
                 }
             }
-            return self::convertJson('100001','操作失败');
+            return self::convertJson('100001',$message.'失败');
         }
     }
 }

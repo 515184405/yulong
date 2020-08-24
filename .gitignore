@@ -45,6 +45,7 @@ phpunit.phar
 /backend/web/index.php
 /backend/web/index-test.php
 /backend/web/robots.txt
+/photolive/web/uploads
 
 [credential]
      helper = store
