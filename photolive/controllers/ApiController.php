@@ -151,15 +151,14 @@ class ApiController extends Controller
                 );
                 return $this->convertJson('100000', '登录成功',$one);
             } else {
-                if ($user->errors) {
-                    foreach ($user->errors as $val) {
-                        return $this->convertJson('100001', $val[0]);
+                if ($model->getFirstErrors()) {
+                    foreach ($model->getFirstErrors() as $val) {
+                        return $this->convertJson('100001', $val);
                     }
-                } else {
-                    return $this->convertJson('100001', '登录失败');
                 }
             }
-        };
+        }
+        return $this->convertJson('100001', '登录失败');
     }
 
     /**
@@ -169,7 +168,8 @@ class ApiController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(\Yii::$app->request->post(), '')) { //载入post所获取的数据
-            if ($user = $model->signup()) {
+            $user = $model->signup();
+            if ($user) {
                 if (\Yii::$app->getUser()->login($user, 3600 * 24 * 7)) {
                     //return $this->goHome();
                     $id = $user->id;
@@ -177,15 +177,14 @@ class ApiController extends Controller
                     return $this->convertJson('100000', '注册成功', $one);
                 }
             } else {
-                if ($user->errors) {
-                    foreach ($user->errors as $val) {
-                        return $this->convertJson('100001', $val[0]);
+                if ($model->getFirstErrors()) {
+                    foreach ($model->getFirstErrors() as $val) {
+                        return $this->convertJson('100001', $val);
                     }
                 }
-                return $this->convertJson('100001', '注册失败');
-
             }
-        };
+            return $this->convertJson('100001', '注册失败');
+        }
     }
 
     /**
@@ -577,5 +576,46 @@ class ApiController extends Controller
     }
 
 
+
+    /**************************************************  以上为个人中心部分 ******************************************************/
+
+
+
+    /**************************************************  以下为网站信息部分 ******************************************************/
+
+    /**
+     * 获取相册列表
+     */
+    public function actionCaseList(){
+            $params = \Yii::$app->request->post();
+            $query = PhotoList::find();
+            //按name查找
+            if(isset($params['name'])){
+                $query->andFilterWhere(['like','name',$params['name']]);
+            }
+            //按type查找
+            if(isset($params['type'])){
+                $query->andFilterWhere(['type_id'=>$params['type']]);
+            }
+            //按时间查找
+            if(isset($params['starttime']) && isset($params['endtime'])){
+                $query->andFilterWhere(['and',['>=','starttime',$params['starttime']],['<=','endtime',$params['endtime']]]);
+            }
+            //按地点查找
+            if(isset($params['province_id']) && isset($params['city_id']) && isset($params['area_id'])){
+                $query->andFilterWhere(['and', 'province_id='.$params['province_id'], ['and', 'city_id='.$params['city_id'], 'area_id='.$params['area_id']]]);
+            }
+            $page = isset($params['page']) ? $params['page'] : 1;
+            $limit = isset($params['limit']) ? $params['limit'] : 50;
+            $count = 0;
+            if($page && $limit){
+                $offset = ($page - 1) * $limit;
+                $count = $query->count();
+                $query->offset($offset)->limit($limit);
+            }
+            //$list = $query->joinWith('caseType')->orderBy(['id' => SORT_DESC])->asArray()->all();
+            $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+            return self::convertJson(100000,'查询成功',$list,$count);
+    }
 
 }
