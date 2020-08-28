@@ -103,4 +103,9 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoWxShareSettings::className(),['project_id' => 'id']);
     }
 
+    /*关联类型表*/
+    public function getPhotoType(){
+        return $this->hasOne(PhotoType::className(),['id' => 'type_id']);
+    }
+
 }
