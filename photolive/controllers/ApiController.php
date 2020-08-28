@@ -242,7 +242,7 @@ class ApiController extends Controller
         if(!$id){
             return self::convertJson('100001','没有要查找的目标');
         }
-        $result = PhotoList::find()->joinWith(['photoCover','photoGroup','photoTopShare','photoWater','photoWxShare'])->where(['photo_list.id'=>$id])->asArray()->one();
+        $result = PhotoList::find()->joinWith(['photoCover','photoGroup','photoTopShare','photoWater','photoWxShare','photoType'])->where(['photo_list.id'=>$id])->asArray()->one();
         return self::convertJson('100000','查询成功',$result);
     }
 
@@ -617,5 +617,33 @@ class ApiController extends Controller
             $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
             return self::convertJson(100000,'查询成功',$list,$count);
     }
+
+    /**
+     * 获取相册详情
+     */
+    public function actionCaseDetail(){
+        $params = \Yii::$app->request->post();
+        $query = PictureList::find();
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $limit = isset($params['limit']) ? $params['limit'] : 50;
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        return self::convertJson(100000,'查询成功',$list,$count);
+    }
+
+    /**
+     * 收藏功能
+     */
+    /*public function actionCollect(){
+        $params = \Yii::$app->request->post();
+        if(!$params['u_id']){
+
+        }
+    }*/
 
 }
