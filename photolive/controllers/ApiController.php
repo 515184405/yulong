@@ -594,7 +594,7 @@ class ApiController extends Controller
                 $query->andFilterWhere(['like','name',$params['name']]);
             }
             //按type查找
-            if(isset($params['type'])){
+            if(isset($params['type']) && $params['type'] != '0'){
                 $query->andFilterWhere(['type_id'=>$params['type']]);
             }
             //按时间查找
@@ -624,6 +624,18 @@ class ApiController extends Controller
     public function actionCaseDetail(){
         $params = \Yii::$app->request->post();
         $query = PictureList::find();
+        if(!$params['project_id']){
+            return self::convertJson(100001,'项目不存在');
+        }
+        $query->where(['project_id'=>$params['project_id']]);
+        if(isset($params)){
+            $query->andFilterWhere(['groupId'=>$params['groupId']]);
+        }
+        if(isset($params) && $params['type'] !== '0'){
+            $query->orderBy([$params['type'] => SORT_DESC]);
+        }else{
+            $query ->orderBy(['id' => SORT_DESC]);
+        }
         $page = isset($params['page']) ? $params['page'] : 1;
         $limit = isset($params['limit']) ? $params['limit'] : 50;
         $count = 0;
@@ -632,7 +644,7 @@ class ApiController extends Controller
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        $list = $query->asArray()->all();
         return self::convertJson(100000,'查询成功',$list,$count);
     }
 

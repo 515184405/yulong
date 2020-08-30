@@ -71,7 +71,7 @@ class PictureList extends CommonModel
      * @return string
      */
     public static function getPictureList($arr = []){
-        $result = static::find()->where($arr)->asArray()->all();
+        $result = static::find()->where($arr)->orderBy(['id'=>SORT_DESC])->asArray()->all();
         foreach ($result as $index => $item) {
             $item['minsrc'] = $item['src'].'!msrc'; // 小图
             #item['maxsrc'] = $item['src'].'!msrc'; // 大图
