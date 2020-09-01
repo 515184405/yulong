@@ -14,6 +14,7 @@ use photolive\models\PhotoWaterArray;
 use photolive\models\PhotoWaterSettings;
 use photolive\models\PhotoWxShareSettings;
 use photolive\models\PictureList;
+use photolive\models\PyList;
 use photolive\models\SignupForm;
 use photolive\models\User;
 use yii\helpers\Json;
@@ -657,5 +658,34 @@ class ApiController extends Controller
 
         }
     }*/
+
+    /**
+     * 品牌列表
+     */
+    public function actionPyList()
+    {
+        $u_id = \Yii::$app->request->post('u_id');
+        if ($u_id) {
+            return PyList::getList(['u_id'=>$u_id]);
+        }else{
+            return self::convertJson(100001,'查询失败，用户不存在');
+        }
+    }
+
+    /**
+     * 品牌更新与修改
+     */
+    public function actionPyInsertUpdate(){
+        $params = \Yii::$app->request->post();
+        return PyList::insertUpdate($params);
+    }
+
+    /**
+     * 品牌删除
+     */
+    public function actionPyDelete(){
+        $id = \Yii::$app->request->post('id');
+        return PyList::deleteOne($id);
+    }
 
 }
