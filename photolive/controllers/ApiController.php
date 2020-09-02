@@ -243,7 +243,7 @@ class ApiController extends Controller
         if(!$id){
             return self::convertJson('100001','没有要查找的目标');
         }
-        $result = PhotoList::find()->joinWith(['photoCover','photoGroup','photoTopShare','photoWater','photoWxShare','photoType'])->where(['photo_list.id'=>$id])->asArray()->one();
+        $result = PhotoList::find()->joinWith(['photoCover','photoGroup','photoTopShare','photoWater','photoWxShare','photoType','pyInfo'])->where(['photo_list.id'=>$id])->asArray()->one();
         return self::convertJson('100000','查询成功',$result);
     }
 
@@ -589,7 +589,7 @@ class ApiController extends Controller
      */
     public function actionCaseList(){
             $params = \Yii::$app->request->post();
-            $query = PhotoList::find();
+            $query = PhotoList::find()->where(['status'=>1]);
             //按name查找
             if(isset($params['name'])){
                 $query->andFilterWhere(['like','name',$params['name']]);
