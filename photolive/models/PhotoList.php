@@ -110,4 +110,9 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoType::className(),['id' => 'type_id']);
     }
 
+    /*关联企业表*/
+    public function getPyInfo(){
+        return $this->hasOne(PyList::className(),['id' => 'py_id']);
+    }
+
 }
