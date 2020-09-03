@@ -42,7 +42,8 @@ class LoginForm extends Model
         if($user !== null){
             if(Yii::$app->security->validatePassword($this->password,$user->password)){
                 //密码校验，第一个参数为用户输入的密码，第二个为通过用户名选出来用户原本的hash加密的密码
-                Yii::$app->user->login($user,3600*24*7);//rememberMe是“是否记住我”的选项值为bool型
+                //半天后过期
+                Yii::$app->user->login($user,3600*12);//rememberMe是“是否记住我”的选项值为bool型
                 //这是User类中的方法，第一个参数必须是IdentityInterface的实例。第二个参数就是你的cookie存活时间
                 return $user;
             }
