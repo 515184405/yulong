@@ -15,6 +15,7 @@ use photolive\models\PhotoWaterSettings;
 use photolive\models\PhotoWxShareSettings;
 use photolive\models\PictureList;
 use photolive\models\PyList;
+use photolive\models\PyMessage;
 use photolive\models\SignupForm;
 use photolive\models\User;
 use yii\helpers\Json;
@@ -127,7 +128,7 @@ class ApiController extends TokenController
     /**************************************************  以下为网站信息部分 ******************************************************/
 
     /**
-     * 获取相册列表
+     * 获取相册图片列表
      */
     public function actionCaseList()
     {
@@ -163,7 +164,7 @@ class ApiController extends TokenController
     }
 
     /**
-     * 获取相册详情
+     * 获取相册图片详情
      */
     public function actionCaseDetail()
     {
@@ -172,7 +173,7 @@ class ApiController extends TokenController
         if (!$params['project_id']) {
             return self::convertJson(100001, '项目不存在');
         }
-        $query->where(['project_id' => $params['project_id']]);
+        $query->where(['and',['project_id' => $params['project_id']],['status'=>1]]);
         if (isset($params) && $params['groupId'] != 0) {
             $query->andFilterWhere(['groupId' => $params['groupId']]);
         }
@@ -204,4 +205,32 @@ class ApiController extends TokenController
     }*/
 
 
+    /* 企业引流人选填写信息 */
+    public function actionPyMessageInsertUpdate(){
+        $params = \Yii::$app->request->post();
+        if(!isset($params['id'])){
+            $data = PyMessage::find()->where(['phone'=>$params['phone']])->one();
+            if($data){
+                return self::convertJson('100001','您已约拍成功，请勿重复约拍');
+            }else{
+                $model = new PyMessage();
+                $message = '添加';
+                $params['createtime'] = date('Y-m-d H:i:s',time());
+            }
+        }else{
+            $message = "设置";
+            $model = PyMessage::findOne($params['id']);
+        }
+        $model->setAttributes($params);
+        if($model->save()){
+            return self::convertJson('100000',$message.'成功');
+        }else{
+            if ($model->getFirstErrors()) {
+                foreach ($model->getFirstErrors() as $val) {
+                    return self::convertJson('100001', $val);
+                }
+            }
+            return self::convertJson('100001',$message.'失败');
+        }
+    }
 }
