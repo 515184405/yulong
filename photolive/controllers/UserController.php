@@ -69,25 +69,6 @@ class UserController extends TokenController
     }
 
     /**
-     * 获取当前相册信息
-     */
-    public function actionPhotoOne()
-    {
-        $id = \Yii::$app->request->post('project_id');
-        // 是否不获取其他关联项
-        $no_other = \Yii::$app->request->post('no_other');
-        if (!$id) {
-            return self::convertJson('100001', '没有要查找的目标');
-        }
-        if (isset($no_other)) {
-            $result = PhotoList::find()->where(['id' => $id])->asArray()->one();
-        } else {
-            $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo'])->where(['photo_list.id' => $id])->asArray()->one();
-        }
-        return self::convertJson('100000', '查询成功', $result);
-    }
-
-    /**
      * 创建与更新相册
      */
     public function actionCreateUpdate()

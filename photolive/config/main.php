@@ -17,7 +17,7 @@ return [
             'csrfParam' => '_csrf-photolive',
         ],
         'user' => [
-            'identityClass' => 'photolive\models\User',
+            'identityClass' => 'photolive\models\AdminUser',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-photolive', 'httpOnly' => true],
             'loginUrl'=>array('site/login'), //设置为登录时跳的路径

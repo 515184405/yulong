@@ -4,13 +4,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>登入 - layuiAdmin</title>
+    <title>登入 - 摄影派管理系统</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="/asset/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/asset/style/admin.css" media="all">
-    <link rel="stylesheet" href="/asset/style/login.css" media="all">
+    <link rel="stylesheet" href="<?=Yii::$app->params["backend_url"]?>/asset/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="<?=Yii::$app->params["backend_url"]?>/asset/style/admin.css" media="all">
+    <link rel="stylesheet" href="<?=Yii::$app->params["backend_url"]?>/asset/style/login.css" media="all">
     <style>
         html{
             overflow: hidden;
@@ -57,7 +57,7 @@
     </div>
 </div>
 
-<script src="/asset/layui/layui.js"></script>
+<script src="<?=Yii::$app->params["backend_url"]?>/asset/layui/layui.js"></script>
 <script>
 
     // window.requestAnimFrame 做兼容
@@ -89,7 +89,7 @@
     }());
 
     layui.config({
-        base: '/asset/' //静态资源所在路径
+        base: '<?=Yii::$app->params["backend_url"]?>/asset/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
     }).use(['index','form'], function(){
@@ -123,11 +123,11 @@
                     layer.closeAll();
                     if(data.code == 100000){
                         layer.msg(data.message, {icon: 1,time:1500}, function(){
-                           window.location.href='/site';
+                           window.location.href='/site/index';
                         })
                     }else{
                         layer.msg(data.message,{icon: 5,time:1500}, function(){
-                           window.location.reload();
+                            window.location.reload();
                         })
                     }
                 },
