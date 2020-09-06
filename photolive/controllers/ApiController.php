@@ -201,6 +201,20 @@ class ApiController extends TokenController
     }
 
     /**
+     * 图片点赞
+     */
+    public function actionPictureZan()
+    {
+        $params = \Yii::$app->request->post();
+        $model = PictureList::findOne($params['id']);
+        $model->like = $params['like'];
+        if($model->save()){
+            return self::convertJson('100000','点赞成功');
+        };
+        return self::convertJson('100001','点赞失败');
+    }
+
+    /**
      * 收藏功能
      */
     /*public function actionCollect(){
@@ -267,16 +281,23 @@ class ApiController extends TokenController
     public function actionNewsDetails(){
         $news_id = \Yii::$app->request->post('id');
         $data = [];
-        $data['list'] = News::find()->where(['and',['id'=>$news_id],['issue'=>2]])->asArray()->one();
+        $data['list'] = News::find()->where(['and',['id'=>$news_id],['issue'=>2]])->one();
+        if(!$data['list']){
+            return self::convertJson('100001','新闻不存在');
+        }
+        // 添加观看量
+        $data['list']->look = $data['list']->look + 1;
+        $data['list']->save();
+        $data['list'] = $data['list']->attributes;
+        // 推荐新闻
+        $data['recommend'] = News::find(['issue'=>2])->where(['recommend'=>1])->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
+        // 最新相册
+        $data['phtoList'] = PhotoList::find(['status'=>1])->orderBy(['createtime'=>SORT_DESC])->limit(3)->asArray()->all();
         //查询上-篇文章
         $data['prev'] = News::find()->where(['and',['<', 'id', $news_id],['issue'=>2]])->limit(1)->asArray()->one();
         //查询下-篇文章
         $data['next'] = News::find()->where(['and',['>', 'id', $news_id],['issue'=>2]])->limit(1)->asArray()->one();
 
-        if($data){
-            return self::convertJson('100000','查询成功',$data);
-        }else{
-            return self::convertJson('100001','新闻不存在');
-        }
+        return self::convertJson('100000','查询成功',$data);
     }
 }
