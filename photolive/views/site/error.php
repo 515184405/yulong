@@ -31,7 +31,7 @@
         .error_div a:hover {background:#7B4A26;}
         .info {line-height:20px;color:#000}
     </style>
-    <script type="text/javascript">
+   <!-- <script type="text/javascript">
         var InterValObj; //timer变量，控制时间
         var count=5;
         var curCount;
@@ -46,18 +46,18 @@
                 document.getElementById("redirect_info").innerHTML=(curCount+"秒后返回首页");
             }
         }
-    </script>
+    </script>-->
 </head>
 <body>
 <div class="mian">
-    <div class="error_div">
+    <!--<div class="error_div">
         <a href="/">返回首页</a>
         <div id="redirect_info" class="info">5秒后返回首页</div>
         <script type="text/javascript">
             curCount=count;
             InterValObj = window.setInterval(SetRemainTime, 1000);
         </script>
-    </div>
+    </div>-->
 </div>
 </body>
 </html>

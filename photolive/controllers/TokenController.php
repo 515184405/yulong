@@ -35,16 +35,17 @@ class TokenController extends Controller
         $Json['code'] = $code;
         $Json['message'] = $message;
         $Json['data'] = $data;
+        $Json['oss'] = Yii::$app->params['oss_url'];
         if (!empty($count)) {
             $Json['count'] = $count;
         }
         return json_encode($Json);
     }
 
-    //删除文件  $path为绝对路径
-    public function actionDelFile()
+    //本地删除文件  $path为绝对路径
+    public function actionDelFile($file)
     {
-        $file = \Yii::$app->request->post('fileSrc');
+        $file = $file ? $file : \Yii::$app->request->post('fileSrc');
         if (file_exists($file)) {
             $url = iconv('utf-8', 'gbk', $file);
             if (PATH_SEPARATOR == ':') { //linux
@@ -98,7 +99,6 @@ class TokenController extends Controller
         }
     }
 
-
     /**
      * @return array
      * 图片上传
@@ -108,27 +108,52 @@ class TokenController extends Controller
         $model = new UploadForm();
         if (\Yii::$app->request->isPost) {
             $params = \Yii::$app->request->post();
+            // oss上新目录
             $dress = isset($params['dir']) ? $params['dir'] . '/' : 'common/';
-            $rootDir = 'uploads/' . $dress;
+            // 本地暂存目录
+            $rootDir = 'uploads/oss/';
 
             $model->file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
+            // 文件名
             $image_name = $model->file->name;
+            // 文件大小
             $image_size = $model->file->size;
             if ($model->file && $model->validate()) {
+                // 如果不存在则创建目录
                 is_dir($rootDir) OR mkdir($rootDir, 0777, true);
+                // 获取年月日
                 $date = date('Ymd') . '_';
-                $fileSrc = $rootDir . $date . rand(10000, 99999) . time() . '.' . $model->file->extension;
-                $model->file->saveAs($fileSrc);
-                $photoInfo = getimagesize($fileSrc);
+                // 更改后的名
+                $fileName = $date . rand(10000, 99999) . time() . '.' . $model->file->extension;
+                // 缓存文件相对路径
+                $fileSrc = $rootDir . $fileName;
+                // 保存文件
+                if(!$model->file->saveAs($fileSrc)){
+                    return $this->convertJson('100001', '上传失败');
+                };
+                // 获取文件绝对路径
+                $local_abs_src_tmp = dirname(dirname(__FILE__)).'/web/uploads/oss/'.$fileName;
+                $local_abs_src= str_replace("\\", "/",$local_abs_src_tmp);//绝对路径，上传第二个参数
+                // 上传到oss上的文件路径
+                $oss_abs_src  = $dress.$fileName;
+                // 上传到oss
+                if(Yii::$app->Aliyunoss->upload($oss_abs_src,$local_abs_src)){
+                    // 获取文件到校
+                    $photoInfo = getimagesize($fileSrc);
+                    // 删除本地缓存文件
+                    $this->actionDelFile($fileSrc);
 
-                //压缩图片
-                /* if($iscompress){
-                     $source = $fileSrc;
-                     $dst_img = $fileSrc; //可加存放路径
-                     $percent = 1;  #原图压缩，不缩放
-                     (new Imgcompress($source,$percent))->compressImg($dst_img);
-                 }*/
-                return $this->convertJson('100000', '上传成功', array('fileSrc' => $fileSrc, 'filesize' => $image_size, 'name' => $image_name, 'width' => $photoInfo[0], 'height' => $photoInfo[1]));
+                    //压缩图片
+                    /* if($iscompress){
+                         $source = $fileSrc;
+                         $dst_img = $fileSrc; //可加存放路径
+                         $percent = 1;  #原图压缩，不缩放
+                         (new Imgcompress($source,$percent))->compressImg($dst_img);
+                     }*/
+
+                    // 上传成功
+                    return $this->convertJson('100000', '上传成功', array('fileSrc' => $oss_abs_src, 'filesize' => $image_size, 'name' => $image_name, 'width' => $photoInfo[0], 'height' => $photoInfo[1]));
+                };
             }
             return $this->convertJson('100001', '上传失败');
         }
