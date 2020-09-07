@@ -92,10 +92,6 @@ class ApiController extends TokenController
         return PhotoType::getList();
     }
 
-
-
-
-
     /**************************************************  以上为个人中心部分 ******************************************************/
 
 

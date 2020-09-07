@@ -7,6 +7,7 @@
  */
 
 namespace common\components;
+use OSS\Core\OssException;
 use Yii;
 use yii\base\Component;
 use OSS\OssClient;
@@ -51,11 +52,56 @@ class Aliyunoss extends Component
     {
         $res = false;
         $bucket = Yii::$app->params['oss']['bucket'];    //获取阿里云oss的bucket
-        if (self::$oss->deleteObject($bucket, $object)){ //调用deleteObject方法把服务器文件上传到阿里云oss
+        if (self::$oss->deleteObjects($bucket, $object)){ //调用deleteObject方法把服务器文件上传到阿里云oss
             $res = true;
         }
 
         return $res;
+    }
+
+    /**
+     * @param $fileSrc 目录地址
+     * 删除当前文件夹下所有的图片
+     */
+    public function deleteDir($fileSrc){
+        $nextMarker = '';
+        $deleteArr = [];
+        while (true) {
+            try {
+                $options = array(
+                    'delimiter' => '',
+                    'marker' => $nextMarker,
+                );
+                $bucket = Yii::$app->params['oss']['bucket'];    //获取阿里云oss的bucket
+                $listObjectInfo = self::$oss->listObjects($bucket, $options);
+            } catch (OssException $e) {
+                printf(__FUNCTION__ . ": FAILED\n");
+                printf($e->getMessage() . "\n");
+                return;
+            }
+            // 得到nextMarker，从上一次listObjects读到的最后一个文件的下一个文件开始继续获取文件列表。
+            $nextMarker = $listObjectInfo->getNextMarker();
+            $listObject = $listObjectInfo->getObjectList();
+            $listPrefix = $listObjectInfo->getPrefixList();
+
+            if (!empty($listObject)) {
+//                print("objectList:\n");
+                foreach ($listObject as $objectInfo) {
+//                    print($objectInfo->getKey() . "\n");
+                    $deleteArr[] = $objectInfo->getKey();
+                }
+            }
+            if (!empty($listPrefix)) {
+//                print("prefixList: \n");
+                foreach ($listPrefix as $prefixInfo) {
+                    print($prefixInfo->getPrefix() . "\n");
+                }
+            }
+            if ($listObjectInfo->getIsTruncated() !== "true") {
+                break;
+            }
+        }
+        return self::delete($deleteArr);
     }
 
     /**
