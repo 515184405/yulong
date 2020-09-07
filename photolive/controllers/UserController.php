@@ -401,8 +401,10 @@ class UserController extends TokenController
     public function actionPictureArrRemove()
     {
         $ids = \Yii::$app->request->post('ids');
+        $removeImgArr = \Yii::$app->request->post('removeImgArr');
         $result = PictureList::deleteAll(['id' => $ids]);
         if ($result) {
+            $this->actionDelFile($removeImgArr);
             return self::convertJson('100000', '删除成功');
         } else {
             return self::convertJson('100001', '删除失败');
