@@ -96,8 +96,6 @@ class CommonController extends \yii\web\Controller{
         return $str;
     }
 
-    //图片上传
-
     /**
      * @param bool $iscompress 是否压缩
      * @return array
