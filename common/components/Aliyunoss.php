@@ -22,7 +22,7 @@ class Aliyunoss extends Component
         $accessKeyId = Yii::$app->params['oss']['accessKeyId'];                 //获取阿里云oss的accessKeyId
         $accessKeySecret = Yii::$app->params['oss']['accessKeySecret'];         //获取阿里云oss的accessKeySecret
         $endpoint = Yii::$app->params['oss']['endPoint'];                       //获取阿里云oss的endPoint
-        self::$oss = new OssClient($accessKeyId, $accessKeySecret, $endpoint);  //实例化OssClient对象
+        self::$osswruiop= new OssClient($accessKeyId, $accessKeySecret, $endpoint);  //实例化OssClient对象
         self::$oss->setUseSSL(true);
     }
 
