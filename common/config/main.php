@@ -12,5 +12,8 @@ return [
         'Aliyunoss' => [
             'class' => 'common\components\Aliyunoss',
         ],
+        'Resizeimage' => [
+            'class' => 'common\components\Resizeimage',
+        ]
     ],
 ];

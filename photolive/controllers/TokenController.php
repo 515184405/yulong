@@ -139,6 +139,13 @@ class TokenController extends Controller
         }
     }*/
 
+    public function actionResizeImage(){
+        $file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
+        $image = Yii::$app->Resizeimage->set_image('20200907_185471599493514.jpg',$file->tempName,'200','1200');
+        header('Content-Type:image/jpeg;');
+        imagejpeg($image, 'uploads/oss/icon.png');
+    }
+
     /**
      * @return array
      * 图片上传
@@ -171,6 +178,28 @@ class TokenController extends Controller
                 if (!$model->file->saveAs($fileSrc)) {
                     return $this->convertJson('100001', '上传失败');
                 };
+
+                // 上传成功之后修改宽高
+                $photoInfoTmp = getimagesize($fileSrc);
+                $image = Yii::$app->Resizeimage->set_image($fileName,$fileSrc,'120','120');
+                switch ($photoInfoTmp['mime']){
+                    case 'image/jpeg':
+                        header('Content-Type:image/jpeg');
+                        imagejpeg($image,$fileSrc);
+                        imagedestroy($image);
+                        break;
+                    case 'image/png':
+                        header('Content-Type:image/png');
+                        imagepng($image,$fileSrc);
+                        imagedestroy($image);
+                        break;
+                    case 'image/gif':
+                        header('Content-Type:image/gif');
+                        imagegif($image,$fileSrc);
+                        imagedestroy($image);
+                        break;
+                }
+
                 // 获取文件绝对路径
                 $local_abs_src_tmp = dirname(dirname(__FILE__)) . '/web/uploads/oss/' . $fileName;
                 $local_abs_src = str_replace("\\", "/", $local_abs_src_tmp);//绝对路径，上传第二个参数
