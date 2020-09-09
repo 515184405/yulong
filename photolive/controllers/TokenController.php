@@ -139,11 +139,10 @@ class TokenController extends Controller
         }
     }*/
 
-    public function actionResizeImage(){
-        $file = UploadedFile::getInstanceByName('file');  //这个方式是js提交
-        $image = Yii::$app->Resizeimage->set_image('20200907_185471599493514.jpg',$file->tempName,'200','1200');
-        header('Content-Type:image/jpeg;');
-        imagejpeg($image, 'uploads/oss/icon.png');
+    public function actionResizeImage()
+    {
+        Yii::$app->Aliyunoss->test();
+
     }
 
     /**
@@ -154,6 +153,7 @@ class TokenController extends Controller
     {
         $model = new UploadForm();
         if (\Yii::$app->request->isPost) {
+            ini_set("memory_limit",'-1');
             $params = \Yii::$app->request->post();
             // oss上新目录
             $dress = isset($params['dir']) ? $params['dir'] . '/' : 'common/';
@@ -178,28 +178,33 @@ class TokenController extends Controller
                 if (!$model->file->saveAs($fileSrc)) {
                     return $this->convertJson('100001', '上传失败');
                 };
+                $photoInfo = getimagesize($fileSrc);
+                $width = $photoInfo[0] > 1920 ? 1920 : $photoInfo[0];
+                $height = $width / $photoInfo[0] * $photoInfo[1];
 
-                // 上传成功之后修改宽高
-                $photoInfoTmp = getimagesize($fileSrc);
-                $image = Yii::$app->Resizeimage->set_image($fileName,$fileSrc,'120','120');
-                switch ($photoInfoTmp['mime']){
+                switch ($photoInfo['mime'] && $photoInfo[0] > 2500) {
                     case 'image/jpeg':
+                        // 上传成功之后修改宽高
+                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
                         header('Content-Type:image/jpeg');
-                        imagejpeg($image,$fileSrc);
+                        imagejpeg($image, $fileSrc);
                         imagedestroy($image);
                         break;
                     case 'image/png':
+                        // 上传成功之后修改宽高
+                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
                         header('Content-Type:image/png');
-                        imagepng($image,$fileSrc);
+                        imagepng($image, $fileSrc);
                         imagedestroy($image);
                         break;
                     case 'image/gif':
+                        // 上传成功之后修改宽高
+                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
                         header('Content-Type:image/gif');
-                        imagegif($image,$fileSrc);
+                        imagegif($image, $fileSrc);
                         imagedestroy($image);
                         break;
                 }
-
                 // 获取文件绝对路径
                 $local_abs_src_tmp = dirname(dirname(__FILE__)) . '/web/uploads/oss/' . $fileName;
                 $local_abs_src = str_replace("\\", "/", $local_abs_src_tmp);//绝对路径，上传第二个参数
@@ -207,8 +212,7 @@ class TokenController extends Controller
                 $oss_abs_src = $dress . $fileName;
                 // 上传到oss
                 if (Yii::$app->Aliyunoss->upload($oss_abs_src, $local_abs_src)) {
-                    // 获取文件到校
-                    $photoInfo = getimagesize($fileSrc);
+
                     // 删除本地缓存文件
                     $this->deleteFile($fileSrc);
 
@@ -221,7 +225,7 @@ class TokenController extends Controller
                      }*/
 
                     // 上传成功
-                    return $this->convertJson('100000', '上传成功', array('fileSrc' => $oss_abs_src, 'filesize' => $image_size, 'name' => $image_name, 'width' => $photoInfo[0], 'height' => $photoInfo[1]));
+                    return $this->convertJson('100000', '上传成功', array('fileSrc' => $oss_abs_src, 'filesize' => $image_size, 'name' => $image_name, 'width' => $width, 'height' => $height));
                 };
             }
             return $this->convertJson('100001', '上传失败');
