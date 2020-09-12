@@ -177,33 +177,33 @@ class TokenController extends Controller
                 if (!$model->file->saveAs($fileSrc)) {
                     return $this->convertJson('100001', '上传失败');
                 };
+                $width = 0;
+                $height = 0;
                 $photoInfo = getimagesize($fileSrc);
-                $width = $photoInfo[0] > 1920 ? 1920 : $photoInfo[0];
-                $height = $width / $photoInfo[0] * $photoInfo[1];
+                if($photoInfo){
+                    $width = $photoInfo[0] > 1920 ? 1920 : $photoInfo[0];
+                    $height = $width / $photoInfo[0] * $photoInfo[1];
+                    // 上传成功之后修改宽高
+                    $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
+                    header('Content-Type:image/jpeg');
 
-                switch ($photoInfo['mime'] && $photoInfo[0] > 2500) {
-                    case 'image/jpeg':
-                        // 上传成功之后修改宽高
-                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
-                        header('Content-Type:image/jpeg');
-                        imagejpeg($image, $fileSrc);
-                        imagedestroy($image);
-                        break;
-                    case 'image/png':
-                        // 上传成功之后修改宽高
-                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
-                        header('Content-Type:image/png');
-                        imagepng($image, $fileSrc);
-                        imagedestroy($image);
-                        break;
-                    case 'image/gif':
-                        // 上传成功之后修改宽高
-                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
-                        header('Content-Type:image/gif');
-                        imagegif($image, $fileSrc);
-                        imagedestroy($image);
-                        break;
+                    switch ($photoInfo['mime'] && $photoInfo[0] > 2500) {
+                        case 'image/jpeg':
+                            imagejpeg($image, $fileSrc);
+                            imagedestroy($image);
+                            break;
+                        case 'image/png':
+                            imagepng($image, $fileSrc);
+                            imagedestroy($image);
+                            break;
+                        case 'image/gif':
+                            // 上传成功之后修改宽高
+                            imagegif($image, $fileSrc);
+                            imagedestroy($image);
+                            break;
+                    }
                 }
+
                 // 获取文件绝对路径
                 $local_abs_src_tmp = dirname(dirname(__FILE__)) . '/web/uploads/oss/' . $fileName;
                 $local_abs_src = str_replace("\\", "/", $local_abs_src_tmp);//绝对路径，上传第二个参数
