@@ -454,7 +454,7 @@ class UserController extends TokenController
         $params = \Yii::$app->request->post();
         $u_id = $params['u_id'];
         if ($u_id) {
-            $query = PyMessage::find()->where(['u_id'=>$u_id])->orderBy(['status'=>SORT_ACE]);
+            $query = PyMessage::find()->where(['u_id'=>$u_id])->orderBy(['createtime'=>SORT_DESC]);
             $page = isset($params['page']) ? $params['page'] : 1;
             $limit = isset($params['limit']) ? $params['limit'] : 50;
 

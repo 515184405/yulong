@@ -7,6 +7,7 @@ use photolive\models\News;
 use photolive\models\PhotoList;
 use photolive\models\PhotoType;
 use photolive\models\PictureList;
+use photolive\models\PyList;
 use photolive\models\PyMessage;
 use photolive\models\SignupForm;
 use photolive\models\User;
@@ -121,6 +122,10 @@ class ApiController extends TokenController
         //按name查找
         if (isset($params['name']) && $params['name'] != '') {
             $query->andFilterWhere(['like', 'name', $params['name']]);
+        }
+        //按u_id查找
+        if (isset($params['u_id'])) {
+            $query->andFilterWhere(['u_id' => $params['u_id']]);
         }
         //按type查找
         if (isset($params['type']) && $params['type'] != '') {
@@ -317,9 +322,36 @@ class ApiController extends TokenController
      */
     public function actionPyList()
     {
+        $params = \Yii::$app->request->post();
+        $query = PyList::find();
+        //按title查找
+        if(isset($params['name'])){
+            $query->andFilterWhere(['like','name',$params['name']]);
+        }
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $limit = isset($params['limit']) ? $params['limit'] : 50;
+        $count = 0;
+        if($page && $limit){
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->orderBy(['look' => SORT_DESC])->asArray()->all();
+        return self::convertJson(100000, '查询成功', $list, $count);
+    }
+
+    /**
+     * 品牌信息详情
+     */
+    public function actionPyOne()
+    {
         $u_id = \Yii::$app->request->post('u_id');
         if ($u_id) {
-            return PyList::getList(['u_id' => $u_id]);
+            $pyOne = PyList::findOne(['u_id' => $u_id]);
+            $pyOne->look = $pyOne->look + 1;
+            $pyOne->save();
+            $data = $pyOne->attributes;
+            return self::convertJson('100000','查询成功',$data);
         } else {
             return self::convertJson(100001, '查询失败，用户不存在');
         }
