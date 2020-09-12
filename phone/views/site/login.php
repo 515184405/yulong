@@ -45,11 +45,11 @@
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
                 <input type="password" name="password" id="LAY-user-login-password" lay-verify="required" lay-text="密码不能为空" placeholder="密码" class="layui-input">
             </div>
-            <div class="layui-form-item login-relative">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-password"></label>
-                <input type="text" name="verifyCode" placeholder="验证码" class="layui-input login-code">
-                <img onclick='this.src="/site/captcha?c="+Math.random();' class="login-code-image" src="/site/captcha" alt="验证码">
-            </div>
+<!--            <div class="layui-form-item login-relative">-->
+<!--                <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-password"></label>-->
+<!--                <input type="text" name="verifyCode" placeholder="验证码" class="layui-input login-code">-->
+<!--                <img onclick='this.src="/site/captcha?c="+Math.random();' class="login-code-image" src="/site/captcha" alt="验证码">-->
+<!--            </div>-->
             <div class="layui-form-item">
                 <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
             </div>
