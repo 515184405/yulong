@@ -166,6 +166,21 @@ class ApiController extends TokenController
     }
 
     /**
+     * 相册添加修改
+     */
+    public function actionPhotoLook(){
+        $id = \Yii::$app->request->post('id');
+        if($id) {
+            $model = PhotoList::findOne($id);
+            $model->look = $model->look+1;
+            if($model->save()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * 获取相册图片详情
      */
     public function actionCaseDetail()
@@ -295,5 +310,18 @@ class ApiController extends TokenController
         $data['next'] = News::find()->where(['and',['>', 'id', $news_id],['issue'=>2]])->limit(1)->asArray()->one();
 
         return self::convertJson('100000','查询成功',$data);
+    }
+
+    /**
+     * 品牌列表
+     */
+    public function actionPyList()
+    {
+        $u_id = \Yii::$app->request->post('u_id');
+        if ($u_id) {
+            return PyList::getList(['u_id' => $u_id]);
+        } else {
+            return self::convertJson(100001, '查询失败，用户不存在');
+        }
     }
 }

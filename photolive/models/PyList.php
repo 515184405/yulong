@@ -2,6 +2,7 @@
 
 namespace photolive\models;
 
+use photolive\models\CommonModel;
 use Yii;
 
 /**
@@ -16,6 +17,9 @@ use Yii;
  * @property string $erweima 企业二维码
  * @property string $desc 描述
  * @property string $createtime 创建时间
+ * @property int $look
+ * @property string $banner_url
+ * @property string $address
  */
 class PyList extends CommonModel
 {
@@ -34,10 +38,10 @@ class PyList extends CommonModel
     {
         return [
             [['u_id', 'createtime'], 'required'],
-            [['u_id'], 'integer'],
+            [['u_id', 'look'], 'integer'],
             [['createtime'], 'safe'],
-            [['logo', 'website', 'erweima', 'desc'], 'string', 'max' => 255],
-            [['name'], 'string', 'max' => 100],
+            [['logo', 'website', 'erweima', 'desc', 'banner_url'], 'string', 'max' => 255],
+            [['name', 'address'], 'string', 'max' => 100],
             [['phone'], 'string', 'max' => 20],
         ];
     }
@@ -57,6 +61,9 @@ class PyList extends CommonModel
             'erweima' => 'Erweima',
             'desc' => 'Desc',
             'createtime' => 'Createtime',
+            'look' => 'Look',
+            'banner_url' => 'Banner Url',
+            'address' => 'Address',
         ];
     }
 }

@@ -26,7 +26,6 @@ use Yii;
  * @property string $tel 手机号
  * @property int $status 0未发布，1已发布
  * @property int $photo_number 照片数量
- * @property int $py_id 关联品牌id
  */
 class PhotoList extends CommonModel
 {
@@ -44,7 +43,7 @@ class PhotoList extends CommonModel
     public function rules()
     {
         return [
-            [['look', 'type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status', 'photo_number','py_id'], 'integer'],
+            [['look', 'type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status', 'photo_number'], 'integer'],
             [['type_id', 'createtime'], 'required'],
             [['createtime', 'starttime', 'endtime'], 'safe'],
             [['name', 'desc', 'cover_image', 'address'], 'string', 'max' => 255],
@@ -76,7 +75,6 @@ class PhotoList extends CommonModel
             'endtime' => 'Endtime',
             'status' => 'Status',
             'photo_number' => 'Photo Number',
-            'py_id' => 'Py Id',
         ];
     }
 
@@ -112,7 +110,7 @@ class PhotoList extends CommonModel
 
     /*关联企业表*/
     public function getPyInfo(){
-        return $this->hasOne(PyList::className(),['id' => 'py_id']);
+        return $this->hasOne(PyList::className(),['u_id' => 'u_id']);
     }
 
 }
