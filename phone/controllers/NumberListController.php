@@ -102,4 +102,14 @@ class NumberListController extends CommonController
             return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);
         }
     }
+
+    public function actionDeleteAll(){
+        $idArr = Yii::$app->request->post('idArr');
+        if(Yii::$app->request->isPost && $idArr){
+            TelList::deleteAll(['id'=>$idArr]);
+            return Json::encode(['code' => 100000,'message' => '删除成功']);
+        }else{
+            return Json::encode(['code' => 100000,'message'=> '没有找到要删除的目标']);
+        }
+    }
 }

@@ -25,7 +25,7 @@ class UserController extends TokenController
         $uid = $headers->get('u_id');
         $token = $headers->get('token');
         //安全认证(检测Token)
-        $checkRes = $this->actionCheckToken($uid,$token);
+        $checkRes = $this->checkToken($uid,$token);
         if ($checkRes['code'] != 200) {
             echo Json::encode($checkRes);
             return false;
@@ -51,6 +51,10 @@ class UserController extends TokenController
         //按name查找
         if (isset($params['name'])) {
             $query->andFilterWhere(['like', 'name', $params['name']]);
+        }
+        //status查询
+        if(isset($params['status'])){
+            $query->andFilterWhere(['status'=>$params['status']]);
         }
         $page = isset($params['page']) ? $params['page'] : 1;
         $limit = isset($params['limit']) ? $params['limit'] : 50;
@@ -412,13 +416,13 @@ class UserController extends TokenController
     }
 
     /**
-     * 品牌列表
+     * 品牌信息
      */
-    public function actionPyList()
+    public function actionPyOne()
     {
         $u_id = \Yii::$app->request->post('u_id');
         if ($u_id) {
-            return PyList::getList(['u_id' => $u_id]);
+            return PyList::getOne(['u_id' => $u_id]);
         } else {
             return self::convertJson(100001, '查询失败，用户不存在');
         }

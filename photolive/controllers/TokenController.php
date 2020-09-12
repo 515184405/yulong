@@ -36,7 +36,6 @@ class TokenController extends Controller
         $Json['code'] = $code;
         $Json['message'] = $message;
         $Json['data'] = $data;
-        $Json['oss'] = Yii::$app->params['oss_url'];
         if (!empty($count)) {
             $Json['count'] = $count;
         }
@@ -266,7 +265,7 @@ class TokenController extends Controller
      * @param    Str $token [Token密钥]
      * @return   Json           [验证结果]
      */
-    public function actionCheckToken($uid, $token)
+    public function checkToken($uid, $token)
     {
         #获取配置文件中Token验证参数
         $auth = Yii::$app->params['auth'];

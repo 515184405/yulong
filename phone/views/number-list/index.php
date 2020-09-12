@@ -18,6 +18,7 @@
 
        <script type="text/html" id="test-table-toolbar-toolbarDemo">
             <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-danger layui-btn-sm" lay-event="getCheckData">批量删除</button>
                 <a href="/number-list/info" class="layui-btn layui-btn-sm">添加手机号</a>
             </div>
         </script>
@@ -28,7 +29,6 @@
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
             </div>
         </script>
-
     </div>
 </div>
 <script>
@@ -50,7 +50,8 @@
                 backend : true,
             }
             ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
+                {type:'checkbox'}
+                ,{field:'id', width:80, title: 'ID', sort: true}
                 ,{field:'tel',title: '手机号'}
                 ,{field:'createtime',  title: '创建时间'}
                 ,{field:'is_recommend',width:100, title: '是否推荐',templet:function (d) {
@@ -81,6 +82,39 @@
             ,limit: 50
         });
 
+        //头工具栏事件
+        table.on('toolbar(test-table-toolbar)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'getCheckData':
+                    var data = checkStatus.data;
+                    batchDelete(data);
+                    break;
+            };
+        });
+
+        // 批量删除
+        function batchDelete(data){
+            var result = [];
+            layer.confirm('您确定要删除吗', function(index){
+                layer.close(index);
+                for(var i = 0; i < data.length;i++){
+                    result.push(data[i].id);
+                };
+
+                // 发送请求
+                $.post('/number-list/delete-all',{idArr:result},function(res){
+                    if(res.code == 100000){
+                        table.reload('reloaded');
+                        layer.msg(res.message);
+                    }else{
+                        layer.msg(res.message);
+                    }
+                },'json')
+            });
+
+
+        }
 
         // 推荐单选开关事件
         form.on('switch(filter-recommend)',function(res){
