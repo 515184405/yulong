@@ -93,7 +93,7 @@ class SiteController extends CommonController
         $model = new LoginForm();
         if(Yii::$app->request->isPost){
 //            var_dump($_POST['verifyCode']);
-          if($this->createAction('captcha')->validate($_POST['verifyCode'],false)) {
+         // if($this->createAction('captcha')->validate($_POST['verifyCode'],false)) {
               if ($model->load(Yii::$app->request->post(), '') && $model->login()) {
                   //return $this->goBack();
                   $user = new User();
@@ -102,9 +102,9 @@ class SiteController extends CommonController
               } else {
                   return Json::encode(array('code' => '100001', 'message' => '用户名或密码错误'));
               }
-          }else{
-              return Json::encode(array('code' => '100001', 'message' => '验证码错误'));
-          }
+//          }else{
+//              return Json::encode(array('code' => '100001', 'message' => '验证码错误'));
+//          }
         }
 
         return $this->renderPartial('login');
