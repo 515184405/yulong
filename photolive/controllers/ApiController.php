@@ -3,6 +3,7 @@
 namespace photolive\controllers;
 
 use photolive\models\Banner;
+use photolive\models\Goods;
 use photolive\models\News;
 use photolive\models\PhotoList;
 use photolive\models\PhotoType;
@@ -356,4 +357,13 @@ class ApiController extends TokenController
             return self::convertJson(100001, '查询失败，用户不存在');
         }
     }
+
+    /**
+     * 商品列表
+     */
+    public function actionGoodsList(){
+        $data = Goods::find()->where(['status'=>'1'])->asArray()->all();
+        return self::convertJson(100000, '查询成功', $data);
+    }
+
 }

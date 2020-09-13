@@ -3,6 +3,8 @@
 namespace photolive\controllers;
 
 
+use photolive\models\Goods;
+use photolive\models\Order;
 use photolive\models\PyMessage;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -480,4 +482,44 @@ class UserController extends TokenController
         return PyMessage::deleteOne($u_id);
     }
 
+
+    /**
+     * 查询用户订单信息
+     */
+    public function actionOrderList(){
+        $params = \Yii::$app->request->post();
+        if(isset($params['u_id'])){
+            $order = Order::find();
+            if(isset($params['status'])){
+                $order->andFilterWhere(['status'=>$params['status']]);
+            }
+            $list = $order->asArray()->all();
+            return self::convertJson(100000, '查询成功', $list);
+        }else{
+            return self::convertJson(100001, '查询失败');
+        }
+    }
+
+    /**
+     * 新增订单
+     */
+    public function actionInsertUpdateOrder(){
+        $params = \Yii::$app->request->post();
+        $model = new Order();
+        if(Order::findOne($params['good_id'])){
+            return self::convertJson('100001','已加入购物车');
+        }
+        $params['createtime'] = date('Y-m-d H:i:s',time());
+        $model->setAttributes($params);
+        if($model->save()){
+            return self::convertJson('100000','插入成功');
+        }else{
+            if ($model->getFirstErrors()) {
+                foreach ($model->getFirstErrors() as $val) {
+                    return self::convertJson('100001', $val);
+                }
+            }
+            return self::convertJson('100001','插入失败');
+        }
+    }
 }
