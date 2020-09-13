@@ -95,6 +95,12 @@
                         </a>
                     </li>
                     <li data-name="news" class="layui-nav-item">
+                        <a href="/goods" lay-tips="商品列表" lay-direction="2">
+                            <i class="layui-icon iconfont font-5">&#xe681;</i>
+                            <cite>商品列表</cite>
+                        </a>
+                    </li>
+                    <li data-name="news" class="layui-nav-item">
                         <a href="/news" lay-tips="文章管理" lay-direction="2">
                             <i class="layui-icon iconfont font-5">&#xe681;</i>
                             <cite>文章管理</cite>
