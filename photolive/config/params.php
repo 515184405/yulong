@@ -8,7 +8,7 @@ return [
         //密钥(可自定义)
         'secret' =>	'photolive19930313',
         //有效期,单位为s。此处设置为12小时(可自定义)!!!时间不宜过长
-        'timeout'	=>	'3600 * 12'
+        'timeout'	=>	'3600 * 99999' //99999为缓存时间
     ],
     //百度编辑器自定义
     'toolbars'=>[[
@@ -220,6 +220,7 @@ return [
         'accessKeyId'=>'LTAI4G971ckcSibGCjMyLXcw',
         'accessKeySecret'=>'H51TnLzN1lBd6L4V7HyGmcJDBYAke8',
         'bucket' => 'sheyingpai',
+
         'endPoint' => 'oss-accelerate.aliyuncs.com',
     ],
     //oss 地址

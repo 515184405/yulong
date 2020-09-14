@@ -62,46 +62,6 @@ class TokenController extends Controller
         }
     }
 
-    /**
-     * 删除oss上某个目录以及以下所有文件
-     * 传入文件路径
-     */
-    public function actionDelDir($dir = '')
-    {
-        $dir = $dir ? $dir : \Yii::$app->request->post('dir');
-        if ($dir) {
-            if (Yii::$app->Aliyunoss->deleteDir($dir)) {
-                return $this->convertJson('100000', '删除成功');
-            };
-            return $this->convertJson('100000', '删除失败');
-        } else {
-            return $this->convertJson('100000', '您要删除的文件已不存在');
-        }
-    }
-
-    /**
-     * @return 本地删除文件
-     */
-    public function deleteFile($file)
-    {
-        $file = $file ? $file : \Yii::$app->request->post('fileSrc');
-        if (file_exists($file)) {
-            $url = iconv('utf-8', 'gbk', $file);
-            if (PATH_SEPARATOR == ':') { //linux
-                if (unlink($file)) {
-                    return $this->convertJson('100000', '删除成功');
-                }
-            } else {  //Windows
-                if (unlink($url)) {
-                    return $this->convertJson('100000', '删除成功');
-                };
-            }
-            return $this->convertJson('100000', '删除失败');
-        } else {
-            return $this->convertJson('100000', '您要删除的文件已不存在');
-        }
-    }
-
     /* 删除文件夹以及文件夹下所有文件 */
     /*  public function actionDelDir()
       {
@@ -232,6 +192,15 @@ class TokenController extends Controller
     }
 
     /**
+     * 设置token
+     */
+    public static function setTokenRadis($token,$userinfo){
+        \Yii::$app->redis->set($token,Json::encode($userinfo));
+        \Yii::$app->redis->expire($token,2*60*60); // 设置过期时间 俩小时
+        return $token;
+    }
+
+    /**
      * 创建Token密钥
      * @param    Int $uid [用户ID]
      * @return   Str          [生成的Token密钥]
@@ -271,6 +240,9 @@ class TokenController extends Controller
         $auth = Yii::$app->params['auth'];
         #获取Token生成时的加密密码
         $secret = $auth['key'] . $uid;
+        if(!$token){
+            $res = $this->error('401', 'Token已过期');
+        }
         #base64解码token
         $token = base64_decode($token);
 
@@ -299,6 +271,8 @@ class TokenController extends Controller
                 }
             }
         }
+        // 验证通过后再次更新redis时间
+        \Yii::$app->redis->expire($token,2*60*60); // 设置过期时间 俩小时
         return $res;
     }
 
