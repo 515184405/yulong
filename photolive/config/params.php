@@ -220,7 +220,6 @@ return [
         'accessKeyId'=>'LTAI4G971ckcSibGCjMyLXcw',
         'accessKeySecret'=>'H51TnLzN1lBd6L4V7HyGmcJDBYAke8',
         'bucket' => 'sheyingpai',
-
         'endPoint' => 'oss-accelerate.aliyuncs.com',
     ],
     //oss 地址
