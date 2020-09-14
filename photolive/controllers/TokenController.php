@@ -98,6 +98,30 @@ class TokenController extends Controller
         }
     }*/
 
+
+    /**
+     * @return 本地删除文件
+     */
+    public function deleteFile($file)
+    {
+        $file = $file ? $file : \Yii::$app->request->post('fileSrc');
+        if (file_exists($file)) {
+            $url = iconv('utf-8', 'gbk', $file);
+            if (PATH_SEPARATOR == ':') { //linux
+                if (unlink($file)) {
+                    return $this->convertJson('100000', '删除成功');
+                }
+            } else {  //Windows
+                if (unlink($url)) {
+                    return $this->convertJson('100000', '删除成功');
+                };
+            }
+            return $this->convertJson('100000', '删除失败');
+        } else {
+            return $this->convertJson('100000', '您要删除的文件已不存在');
+        }
+    }
+
     public function actionResizeImage()
     {
         Yii::$app->Aliyunoss->test();
