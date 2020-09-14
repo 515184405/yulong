@@ -24,7 +24,7 @@ Thumbs.db
 /frontend/views/widget-file
 /frontend/web/widget_file
 /frontend/web/upload_file
-/config
+/photolive/config
 # composer itself is not needed
 composer.phar
 
