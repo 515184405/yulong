@@ -20,21 +20,22 @@ use photolive\models\PyList;
 
 class UserController extends TokenController
 {
+    public $uid = 0;
     public function beforeAction($action)
     {
         /* 验证是否为登录状态 */
         $headers = \Yii::$app->getRequest()->getHeaders();
-        $uid = $headers->get('u_id');
         $token = $headers->get('token');
+        $this->uid = Json::decode(\Yii::$app->redis->get($token))['id'];
         //安全认证(检测Token)
-        $checkRes = $this->checkToken($uid,$token);
+        $checkRes = $this->checkToken($this->uid,$token);
         if ($checkRes['code'] != 200) {
             echo Json::encode($checkRes);
             return false;
         }
         $project_id = \Yii::$app->request->post('project_id');
         if($project_id){
-            $count = PhotoList::find()->where(['and',['id'=>$project_id],['u_id'=>$uid]])->count();
+            $count = PhotoList::find()->where(['and',['id'=>$project_id],['u_id'=>$this->uid]])->count();
             if(!$count){
                 echo self::convertJson(402, '无权限');
                 return false;
@@ -44,12 +45,52 @@ class UserController extends TokenController
     }
 
     /**
+     * 删除oss上某个目录以及以下所有文件
+     * 传入文件路径
+     */
+    public function actionDelDir($dir = '')
+    {
+        $dir = $dir ? $dir : \Yii::$app->request->post('dir');
+        if ($dir) {
+            if (Yii::$app->Aliyunoss->deleteDir($dir)) {
+                return $this->convertJson('100000', '删除成功');
+            };
+            return $this->convertJson('100000', '删除失败');
+        } else {
+            return $this->convertJson('100000', '您要删除的文件已不存在');
+        }
+    }
+
+    /**
+     * @return 本地删除文件
+     */
+    public function deleteFile($file)
+    {
+        $file = $file ? $file : \Yii::$app->request->post('fileSrc');
+        if (file_exists($file)) {
+            $url = iconv('utf-8', 'gbk', $file);
+            if (PATH_SEPARATOR == ':') { //linux
+                if (unlink($file)) {
+                    return $this->convertJson('100000', '删除成功');
+                }
+            } else {  //Windows
+                if (unlink($url)) {
+                    return $this->convertJson('100000', '删除成功');
+                };
+            }
+            return $this->convertJson('100000', '删除失败');
+        } else {
+            return $this->convertJson('100000', '您要删除的文件已不存在');
+        }
+    }
+
+    /**
      * 获取相册列表
      */
     public function actionPhotoList()
     {
         $params = \Yii::$app->request->post();
-        $query = PhotoList::find()->where(['u_id' => $params['u_id']]);
+        $query = PhotoList::find()->where(['u_id' => $this->uid]);
         //按name查找
         if (isset($params['name'])) {
             $query->andFilterWhere(['like', 'name', $params['name']]);
@@ -422,9 +463,8 @@ class UserController extends TokenController
      */
     public function actionPyOne()
     {
-        $u_id = \Yii::$app->request->post('u_id');
-        if ($u_id) {
-            return PyList::getOne(['u_id' => $u_id]);
+        if ($this->uid != 0) {
+            return PyList::getOne(['u_id' => $this->uid]);
         } else {
             return self::convertJson(100001, '查询失败，用户不存在');
         }
@@ -454,9 +494,8 @@ class UserController extends TokenController
     public function actionPyMessageList()
     {
         $params = \Yii::$app->request->post();
-        $u_id = $params['u_id'];
-        if ($u_id) {
-            $query = PyMessage::find()->where(['u_id'=>$u_id])->orderBy(['createtime'=>SORT_DESC]);
+        if ($this->uid) {
+            $query = PyMessage::find()->where(['u_id'=>$this->uid])->orderBy(['createtime'=>SORT_DESC]);
             $page = isset($params['page']) ? $params['page'] : 1;
             $limit = isset($params['limit']) ? $params['limit'] : 50;
 
@@ -478,8 +517,7 @@ class UserController extends TokenController
      */
     public function actionPyMessageRemove()
     {
-        $u_id = \Yii::$app->request->post('id');
-        return PyMessage::deleteOne($u_id);
+        return PyMessage::deleteOne($this->uid);
     }
 
 
@@ -488,7 +526,7 @@ class UserController extends TokenController
      */
     public function actionOrderList(){
         $params = \Yii::$app->request->post();
-        if(isset($params['u_id'])){
+        if($this->uid != 0){
             $order = Order::find();
             if(isset($params['status'])){
                 $order->andFilterWhere(['status'=>$params['status']]);

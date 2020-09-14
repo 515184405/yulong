@@ -25,8 +25,10 @@ class ApiController extends TokenController
         if($user){
             if(\Yii::$app->security->validatePassword($params['password'],$user->password)){
                 //密码校验，第一个参数为用户输入的密码，第二个为通过用户名选出来用户原本的hash加密的密码
-                $userOne = array_merge($user->attributes,array('token'=>$this->actionCreateToken($user->attributes['id'])));
-                return $this->convertJson('100000', '登录成功', $userOne);
+                $one = $user->attributes;
+                $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
+                $oneModel = array('username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                return $this->convertJson('100000', '登录成功', $oneModel);
             } else {
                 if ($user->getFirstErrors()) {
                     foreach ($user->getFirstErrors() as $val) {
@@ -50,8 +52,10 @@ class ApiController extends TokenController
         if ($model->load(\Yii::$app->request->post(), '')) { //载入post所获取的数据
             $user = $model->signup();
             if ($user) {
-                $userOne = array_merge($user->attributes,array('token'=>$this->actionCreateToken($user->attributes['id'])));
-                return $this->convertJson('100000', '注册成功', $userOne);
+                $one = $user->attributes;
+                $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
+                $oneModel = array('username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                return $this->convertJson('100000', '注册成功', $oneModel);
             } else {
                 if ($model->getFirstErrors()) {
                     foreach ($model->getFirstErrors() as $val) {
@@ -68,7 +72,7 @@ class ApiController extends TokenController
      */
     public function actionLogout()
     {
-        \Yii::$app->user->logout();
+        \Yii::$app->redis->del('token');
         return $this->convertJson('100000', '成功退出');
     }
 
@@ -364,6 +368,16 @@ class ApiController extends TokenController
     public function actionGoodsList(){
         $data = Goods::find()->where(['status'=>'1'])->asArray()->all();
         return self::convertJson(100000, '查询成功', $data);
+    }
+
+    // redis 测试
+    public function actionRedis(){
+        \Yii::$app->redis->set('test','111'); //设置redis缓存
+        \Yii::$app->redis->expire('test',60); // 设置过期时间
+    }
+
+    public function actionGetRedis(){
+        return \Yii::$app->redis->get('test'); //读取redis缓存
     }
 
 }
