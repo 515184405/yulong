@@ -50,4 +50,9 @@ class Order extends CommonModel
             'status' => 'Status',
         ];
     }
+
+    /*关联商品表*/
+    public function getGood(){
+        return $this->hasOne(Goods::className(),['id' => 'good_id']);
+    }
 }

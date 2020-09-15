@@ -516,6 +516,14 @@ class UserController extends TokenController
     }
 
     /**
+     * 查询订单表
+     */
+    public function actionOrderGoodsList(){
+        $order = Order::find()->where(['order.status'=>0])->joinWith(['good'])->asArray()->all();
+        return self::convertJson(100000, '查询成功', $order);
+    }
+
+    /**
      * 新增订单
      */
     public function actionInsertUpdateOrder(){
