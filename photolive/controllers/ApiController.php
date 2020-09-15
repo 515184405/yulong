@@ -27,7 +27,7 @@ class ApiController extends TokenController
                 //密码校验，第一个参数为用户输入的密码，第二个为通过用户名选出来用户原本的hash加密的密码
                 $one = $user->attributes;
                 $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
-                $oneModel = array('username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                $oneModel = array('u_id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
                 return $this->convertJson('100000', '登录成功', $oneModel);
             } else {
                 if ($user->getFirstErrors()) {
@@ -54,7 +54,7 @@ class ApiController extends TokenController
             if ($user) {
                 $one = $user->attributes;
                 $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
-                $oneModel = array('username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                $oneModel = array('u_id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
                 return $this->convertJson('100000', '注册成功', $oneModel);
             } else {
                 if ($model->getFirstErrors()) {

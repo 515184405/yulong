@@ -299,7 +299,7 @@ class TokenController extends Controller
         \Yii::$app->redis->expire($token,2*60*60); // 设置过期时间 俩小时
         return $res;
     }
-
+ 
     /**
      * 成功信息
      * @param Array $data 查询数据
