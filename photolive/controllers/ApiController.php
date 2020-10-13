@@ -27,7 +27,7 @@ class ApiController extends TokenController
                 //密码校验，第一个参数为用户输入的密码，第二个为通过用户名选出来用户原本的hash加密的密码
                 $one = $user->attributes;
                 $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
-                $oneModel = array('u_id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                $oneModel = array('id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
                 return $this->convertJson('100000', '登录成功', $oneModel);
             } else {
                 if ($user->getFirstErrors()) {
@@ -54,7 +54,7 @@ class ApiController extends TokenController
             if ($user) {
                 $one = $user->attributes;
                 $token = self::setTokenRadis($this->actionCreateToken($user->attributes['id']),$one);
-                $oneModel = array('u_id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
+                $oneModel = array('id'=>$one['id'],'username'=>$one['username'],'phone'=>$one['phone'],'token'=>$token);
                 return $this->convertJson('100000', '注册成功', $oneModel);
             } else {
                 if ($model->getFirstErrors()) {
@@ -68,11 +68,22 @@ class ApiController extends TokenController
     }
 
     /**
+     * 获取token过期时间
+     */
+    public function actionRedisTokenTime(){
+        $headers = \Yii::$app->getRequest()->getHeaders();
+        $token = $headers->get('token');
+        return \Yii::$app->redis->TTL($token);
+    }
+
+    /**
      * 前后台同步退出 \\ 前台与后台同步退出
      */
     public function actionLogout()
     {
-        \Yii::$app->redis->del('token');
+        $headers = \Yii::$app->getRequest()->getHeaders();
+        $token = $headers->get('token');
+        \Yii::$app->redis->del($token);
         return $this->convertJson('100000', '成功退出');
     }
 
@@ -112,6 +123,9 @@ class ApiController extends TokenController
         $data['photoType'] = PhotoType::find()->asArray()->all();
         $data['banner']    = Banner::find()->asArray()->all();
         $data['case']      = PhotoList::find()->where(['status'=>1])->orderBy(['id'=>SORT_DESC])->limit(5)->asArray()->all();
+        foreach ($data['case'] as $key=>$item){
+            $data['case'][$key]['pass'] =  $data['case'][$key]['pass'] ? 1 : 0;
+        }
         $data['news']      = News::find()->orderBy(['id'=>SORT_DESC])->limit(3)->asArray()->all();
 
         return $this->convertJson(100000,'查询成功',$data);
@@ -133,7 +147,7 @@ class ApiController extends TokenController
             $query->andFilterWhere(['u_id' => $params['u_id']]);
         }
         //按type查找
-        if (isset($params['type']) && $params['type'] != '') {
+        if (isset($params['type']) && $params['type'] != '' && $params['type'] != 0) {
             $query->andFilterWhere(['type_id' => $params['type']]);
         }
         //按时间查找
@@ -153,7 +167,31 @@ class ApiController extends TokenController
             $query->offset($offset)->limit($limit);
         }
         $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        foreach ($list as $key=>$item) {
+            $list[$key]['pass'] = $item['pass'] ? 1 : 0;
+        }
         return self::convertJson(100000, '查询成功', $list, $count);
+    }
+
+    /**
+     * 验证密码
+     */
+    public function actionRegPass(){
+        $params = \Yii::$app->request->post();
+        $passCount = \Yii::$app->redis->get('passCount');
+        $passCount = $passCount ? $passCount : 0;
+        if($passCount < 3){
+            $model = PhotoList::findOne(['id'=>$params['project_id']]);
+            if($model->pass == $params['pass']){
+                return self::convertJson(100000, '验证通过');
+            }else{
+                \Yii::$app->redis->set('passCount',$passCount + 1);
+                \Yii::$app->redis->expire('passCount', 60);
+                return self::convertJson(100001, '密码错误');
+            }
+        }else{
+            return self::convertJson(100001, '密码输入错误超过三次，请一分钟后重试');
+        }
     }
 
     /**
@@ -172,6 +210,7 @@ class ApiController extends TokenController
         } else {
             $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo'])->where(['photo_list.id' => $id])->asArray()->one();
         }
+        $result['pass'] = $result['pass'] ? 1 : 0;
         return self::convertJson('100000', '查询成功', $result);
     }
 
@@ -219,6 +258,17 @@ class ApiController extends TokenController
         }
         $list = $query->asArray()->all();
         return self::convertJson(100000, '查询成功', $list, $count);
+    }
+
+    /**
+     * 获取热门十张照片并获取当前相册的总照片数
+     */
+    public function actionHotPicture(){
+        $project_id = \Yii::$app->request->post('project_id');
+        $query = PictureList::find()->where(['and',['project_id' => $project_id],['status'=>1]]);
+        $count = $query->count();
+        $data = $query->orderBy(['like' => SORT_DESC])->limit(10)->asArray()->all();
+        return self::convertJson(100000, '查询成功', $data, $count);
     }
 
     /**
