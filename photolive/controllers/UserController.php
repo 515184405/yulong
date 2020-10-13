@@ -5,6 +5,7 @@ namespace photolive\controllers;
 
 use photolive\models\Goods;
 use photolive\models\Order;
+use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -139,6 +140,10 @@ class UserController extends TokenController
             $model7 = new PhotoWxShareSettings();
             $model7->deleteAll(['project_id' => $id]);
 
+            /* 相册皮肤删除 */
+            $model8 = new PhotoSkin();
+            $model8->deleteAll(['project_id' => $id]);
+
             return self::convertJson('100000', '删除成功');
         } else {
             return self::convertJson('100001', '没有找到要删除的目标');
@@ -264,6 +269,31 @@ class UserController extends TokenController
         $project_id = \Yii::$app->request->post('project_id');
         return PhotoWxShareSettings::getOne(['project_id' => $project_id]);
     }
+
+    /**
+     * 创建与更新相册皮肤配置
+     */
+    public function actionPhotoSkinCreateUpdate()
+    {
+        $params = \Yii::$app->request->post();
+        return PhotoSkin::insertUpdate($params);
+    }
+
+    /**
+     * 相册皮肤系统配置列表
+     */
+    public function actionPhotoSkinList(){
+        return PhotoSkin::getList(['type'=>0]);
+    }
+
+    /**
+     * 相册皮肤单个相册配置
+     */
+    public function actionPhotoSkinOne(){
+        $project_id = \Yii::$app->request->post('project_id');
+        return PhotoSkin::getOne(['project_id'=>$project_id]);
+    }
+
 
     /**
      * 创建与更新相册水印配置

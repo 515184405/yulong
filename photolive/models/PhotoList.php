@@ -113,4 +113,9 @@ class PhotoList extends CommonModel
         return $this->hasOne(PyList::className(),['u_id' => 'u_id']);
     }
 
+    /*关联皮肤表*/
+    public function getPhotoSkin(){
+        return $this->hasOne(PhotoSkin::className(),['project_id' => 'id']);
+    }
+
 }
