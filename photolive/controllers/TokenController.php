@@ -14,6 +14,7 @@ use common\models\UploadForm;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
 
+header("Access-Control-Allow-Origin: *");
 /**
  * API安全验证
  * @Author   NingWang
