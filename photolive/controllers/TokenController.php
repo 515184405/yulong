@@ -14,9 +14,6 @@ use common\models\UploadForm;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
 
-header("Access-Control-Allow-Methods", "OPTIONS, GET, POST");
-header("Access-Control-Allow-Headers", "x-requested-with");
-header("Access-Control-Max-Age", "86400");
 /**
  * API安全验证
  * @Author   NingWang
