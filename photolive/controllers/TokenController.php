@@ -14,11 +14,11 @@ use common\models\UploadForm;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
 
-response.setHeader("Access-Control-Allow-Origin", "*");
-response.setHeader("Access-Control-Allow-Credentials", "true");
-response.setHeader("Access-Control-Allow-Methods", "*");
-response.setHeader("Access-Control-Allow-Headers", "Content-Type,Access-Token");
-response.setHeader("Access-Control-Expose-Headers", "*");
+header("Access-Control-Allow-Origin","*");
+header("Access-Control-Allow-Credentials", "true");
+header("Access-Control-Allow-Methods", "*");
+header("Access-Control-Allow-Headers", "Content-Type,Access-Token");
+header("Access-Control-Expose-Headers", "*");
 /**
  * API安全验证
  * @Author   NingWang
