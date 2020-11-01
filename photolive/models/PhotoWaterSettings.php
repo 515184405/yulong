@@ -15,7 +15,7 @@ use Yii;
  * @property int $width 水印宽度 百分比
  * @property int $padding 水印边距
  * @property int $opacity 水印透明度
- * @property int $status 水印状态  0为禁用 1为正常 
+ * @property int $status 水印状态  0为禁用 1为正常
  * @property int $water_id
  */
 class PhotoWaterSettings extends CommonModel
