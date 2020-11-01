@@ -20,6 +20,7 @@ use Yii;
  * @property int $look
  * @property string $banner_url
  * @property string $address
+ * @property string $title
  */
 class PyList extends CommonModel
 {
@@ -40,7 +41,7 @@ class PyList extends CommonModel
             [['u_id', 'createtime'], 'required'],
             [['u_id', 'look'], 'integer'],
             [['createtime'], 'safe'],
-            [['logo', 'website', 'erweima', 'desc', 'banner_url'], 'string', 'max' => 255],
+            [['logo', 'website','title', 'erweima', 'desc', 'banner_url'], 'string', 'max' => 255],
             [['name', 'address'], 'string', 'max' => 100],
             [['phone'], 'string', 'max' => 20],
         ];
@@ -64,6 +65,7 @@ class PyList extends CommonModel
             'look' => 'Look',
             'banner_url' => 'Banner Url',
             'address' => 'Address',
+            'title' => 'Title',
         ];
     }
 }
