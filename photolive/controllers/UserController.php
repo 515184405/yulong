@@ -331,7 +331,7 @@ class UserController extends TokenController
     public function actionPhotoWaterOne()
     {
         $project_id = \Yii::$app->request->post('project_id');
-        $result = PhotoWaterSettings::find()->where(['Photo_water_settings.project_id' => $project_id])->joinWith(['water_arr'])->asArray()->all();
+        $result = PhotoWaterSettings::find()->where(['photo_water_settings.project_id' => $project_id])->joinWith(['waterArr'])->asArray()->all();
         $water_image = PhotoWaterArray::find()->where(['project_id' => $project_id])->asArray()->all();
         if (!$result) {
             $result = array(
@@ -369,7 +369,7 @@ class UserController extends TokenController
             $resultTmp['water_image'] = $water_image;
             foreach ($result as $index => $item) {
                 $resultTmp['style'][$item['position']] = $item;
-                $resultTmp['style'][$item['position']]['imgsrc'] = $item['water_arr']['imgsrc'];
+                $resultTmp['style'][$item['position']]['imgsrc'] = $item['waterArr']['imgsrc'];
             }
             $resultTmp['type'] = $result[0]['type'];
             $result = $resultTmp;

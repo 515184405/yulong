@@ -58,7 +58,7 @@ class PhotoWaterSettings extends CommonModel
             'water_id' => 'Water ID',
         ];
     }
-    public function getWater_arr(){
+    public function getWaterArr(){
         return $this->hasOne(PhotoWaterArray::className(),['id'=>'water_id']);
     }
 }
