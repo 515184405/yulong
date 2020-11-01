@@ -1,0 +1,28 @@
+/* 轮播切换 */
+.swiper__box{
+	position: relative;
+}
+.swiper__dot{
+	position: absolute;
+	left:0;
+	bottom:30upx;
+	width:100%;
+	height:16upx;
+	text-align: center;
+	.swiper__dot__item{
+		display: inline-block;
+		width:16upx;
+		height:16upx;
+		margin-right:16upx;
+		box-sizing: border-box;
+		background-color: $uni-color-theme;
+		border:4upx solid $uni-color-theme;
+		border-radius: 16upx;
+		transition: all 0.2s ease-in;
+		&.active{
+			width:32upx;
+			background-color:$uni-color-theme;
+		}
+	}
+}
+
