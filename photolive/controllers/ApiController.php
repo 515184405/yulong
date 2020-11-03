@@ -208,7 +208,7 @@ class ApiController extends TokenController
         if (isset($no_other)) {
             $result = PhotoList::find()->where(['id' => $id])->asArray()->one();
         } else {
-            $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo','photoSkin'])->where(['photo_list.id' => $id])->asArray()->one();
+            $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo','photoSkin','photoColType'])->where(['photo_list.id' => $id])->asArray()->one();
         }
         $result['pass'] = $result['pass'] ? 1 : 0;
         return self::convertJson('100000', '查询成功', $result);

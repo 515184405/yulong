@@ -118,4 +118,10 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoSkin::className(),['project_id' => 'id']);
     }
 
+    /*关联显示格式*/
+    public function getPhotoColType(){
+        return $this->hasOne(PhotoColType::className(),['project_id' => 'id']);
+    }
+
+
 }

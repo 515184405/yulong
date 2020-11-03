@@ -5,6 +5,7 @@ namespace photolive\controllers;
 
 use photolive\models\Goods;
 use photolive\models\Order;
+use photolive\models\PhotoColType;
 use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
 use yii\helpers\Json;
@@ -147,6 +148,10 @@ class UserController extends TokenController
             $model8 = new PhotoSkin();
             $model8->deleteAll(['project_id' => $id]);
 
+            /* 相册样式删除 */
+            $model9 = new PhotoColType();
+            $model9->deleteAll(['project_id' => $id]);
+
             return self::convertJson('100000', '删除成功');
         } else {
             return self::convertJson('100001', '没有找到要删除的目标');
@@ -287,6 +292,22 @@ class UserController extends TokenController
      */
     public function actionPhotoSkinList(){
         return PhotoSkin::getList(['type'=>0]);
+    }
+    /**
+     * 创建与更新相册皮肤配置
+     */
+    public function actionPhotoColTypeCreateUpdate()
+    {
+        $params = \Yii::$app->request->post();
+        return PhotoColType::insertUpdate($params);
+    }
+
+    /**
+     * 相册皮肤系统配置列表
+     */
+    public function actionPhotoColTypeOne(){
+        $project_id = \Yii::$app->request->post('project_id');
+        return PhotoColType::getOne(['project_id'=>$project_id]);
     }
 
     /**
