@@ -197,15 +197,14 @@ class TokenController extends Controller
                             break;
                     }
                 }
-
                 // 获取文件绝对路径
                 $local_abs_src_tmp = dirname(dirname(__FILE__)) . '/web/uploads/oss/' . $fileName;
                 $local_abs_src = str_replace("\\", "/", $local_abs_src_tmp);//绝对路径，上传第二个参数
+
                 // 上传到oss上的文件路径
                 $oss_abs_src = $dress . $fileName;
                 // 上传到oss
                 if (Yii::$app->Aliyunoss->upload($oss_abs_src, $local_abs_src)) {
-
                     // 删除本地缓存文件
                     $this->deleteFile($fileSrc);
 
