@@ -36,10 +36,10 @@ class Aliyunoss extends Component
     {
         $res = false;
         $bucket = Yii::$app->params['oss']['bucket'];               //获取阿里云oss的bucket
+
         if (self::$oss->uploadFile($bucket, $object, $filepath)) {  //调用uploadFile方法把服务器文件上传到阿里云oss
             $res = true;
         }
-
         return $res;
     }
 

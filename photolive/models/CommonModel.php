@@ -67,7 +67,7 @@ class CommonModel extends \yii\db\ActiveRecord
      * @param $params
      * @return string
      */
-    public static function insertUpdate($params){
+    public static function insertUpdate($params,$isResult=false){
         $model = new static();
         if($params['id']) {
             $message = '修改';
@@ -77,15 +77,19 @@ class CommonModel extends \yii\db\ActiveRecord
             $params['createtime'] = date('Y-m-d H:i:s',time());
         }
         $model->setAttributes($params);
+        $result = null;
         if($model->save()){
-            return self::convertJson('100000',$message.'成功');
+            if($isResult){
+                $result = $model->attributes;
+            }
+            return self::convertJson('100000',$message.'成功',$result);
         }else{
             if ($model->getFirstErrors()) {
                 foreach ($model->getFirstErrors() as $val) {
                     return self::convertJson('100001', $val);
                 }
             }
-            return self::convertJson('100001',$message.'失败');
+            return self::convertJson('100001',$message.'失败',$result);
         }
     }
 }

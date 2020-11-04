@@ -5,6 +5,8 @@ namespace photolive\controllers;
 
 use photolive\models\Goods;
 use photolive\models\Order;
+use photolive\models\PhotoAudioList;
+use photolive\models\PhotoAudioSettting;
 use photolive\models\PhotoColType;
 use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
@@ -299,7 +301,57 @@ class UserController extends TokenController
     public function actionPhotoColTypeCreateUpdate()
     {
         $params = \Yii::$app->request->post();
-        return PhotoColType::insertUpdate($params);
+        return PhotoColType::insertUpdate($params,true);
+    }
+
+    /**
+     * 获取相册项目音频配置
+     */
+    public function actionPhotoAudioInsert(){
+        $params = \Yii::$app->request->post();
+        return PhotoAudioList::insertUpdate($params,true);
+    }
+
+    /**
+     * 获取相册音频配置列表
+     */
+    public function actionPhotoAudioList(){
+        $params = \Yii::$app->request->post();
+        $query = PhotoAudioList::find()->where(['type'=>0])->orderBy(['createtime'=>SORT_DESC]);
+        //按name查找
+        if (isset($params['name'])) {
+            $query->andFilterWhere(['like', 'name', $params['name']]);
+        }
+        $page = isset($params['page']) ? $params['page'] : 1;
+        $limit = isset($params['limit']) ? $params['limit'] : 50;
+        $count = 0;
+        if ($page && $limit) {
+            $offset = ($page - 1) * $limit;
+            $count = $query->count();
+            $query->offset($offset)->limit($limit);
+        }
+        $list = $query->asArray()->all();
+        return self::convertJson(100000, '查询成功', $list, $count);
+    }
+
+    /**
+     * 添加相册音频
+     */
+    public function actionPhotoAudioCreateUpdate(){
+        $params = \Yii::$app->request->post();
+        $model = PhotoAudioSettting::findOne(['project_id'=>$params['project_id']]);
+        if($model){
+            $params['id'] = $model->id;
+        }
+        return PhotoAudioSettting::insertUpdate($params);
+    }
+
+    /**
+     * 获取相册项目音频配置
+     */
+    public function actionPhotoAudioSetting(){
+        $project_id = \Yii::$app->request->post('project_id');
+        return PhotoAudioSettting::getOne(['project_id'=>$project_id]);
     }
 
     /**
