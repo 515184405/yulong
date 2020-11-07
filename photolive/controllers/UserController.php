@@ -6,7 +6,7 @@ namespace photolive\controllers;
 use photolive\models\Goods;
 use photolive\models\Order;
 use photolive\models\PhotoAudioList;
-use photolive\models\PhotoAudioSettting;
+use photolive\models\PhotoAudioSetting;
 use photolive\models\PhotoColType;
 use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
@@ -339,11 +339,11 @@ class UserController extends TokenController
      */
     public function actionPhotoAudioCreateUpdate(){
         $params = \Yii::$app->request->post();
-        $model = PhotoAudioSettting::findOne(['project_id'=>$params['project_id']]);
+        $model = PhotoAudioSetting::findOne(['project_id'=>$params['project_id']]);
         if($model){
             $params['id'] = $model->id;
         }
-        return PhotoAudioSettting::insertUpdate($params);
+        return PhotoAudioSetting::insertUpdate($params);
     }
 
     /**
@@ -351,7 +351,7 @@ class UserController extends TokenController
      */
     public function actionPhotoAudioSetting(){
         $project_id = \Yii::$app->request->post('project_id');
-        return PhotoAudioSettting::getOne(['project_id'=>$project_id]);
+        return PhotoAudioSetting::getOne(['project_id'=>$project_id]);
     }
 
     /**

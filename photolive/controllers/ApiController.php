@@ -5,6 +5,7 @@ namespace photolive\controllers;
 use photolive\models\Banner;
 use photolive\models\Goods;
 use photolive\models\News;
+use photolive\models\PhotoAudioList;
 use photolive\models\PhotoList;
 use photolive\models\PhotoType;
 use photolive\models\PictureList;
@@ -208,7 +209,12 @@ class ApiController extends TokenController
         if (isset($no_other)) {
             $result = PhotoList::find()->where(['id' => $id])->asArray()->one();
         } else {
-            $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo','photoSkin','photoColType'])->where(['photo_list.id' => $id])->asArray()->one();
+            $result = PhotoList::find()->joinWith(['photoCover', 'photoGroup', 'photoTopShare', 'photoWater', 'photoWxShare', 'photoType', 'pyInfo','photoSkin','photoColType','photoAudioSetting'])->where(['photo_list.id' => $id])->asArray()->one();
+            if($result['photoAudioSetting']){
+                $ids = explode(',',$result['photoAudioSetting']['audio_id']);
+                $photoAudioSetting = PhotoAudioList::find()->where(['id'=>$ids])->asArray()->all();
+                $result['photoAudioSetting']['list'] = $photoAudioSetting;
+            }
         }
         $result['pass'] = $result['pass'] ? 1 : 0;
         return self::convertJson('100000', '查询成功', $result);
