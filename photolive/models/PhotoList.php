@@ -123,5 +123,10 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoColType::className(),['project_id' => 'id']);
     }
 
+    /*关联音频*/
+    public function getPhotoAudioSetting(){
+        return $this->hasOne(PhotoAudioSetting::className(),['project_id' => 'id']);
+    }
+
 
 }
