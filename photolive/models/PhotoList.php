@@ -128,5 +128,9 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoAudioSetting::className(),['project_id' => 'id']);
     }
 
+    /*关联背景特效*/
+    public function getPhotoBgAnimate(){
+        return $this->hasOne(PhotoBgAnimateSettings::className(),['project_id'=>'id']);
+    }
 
 }
