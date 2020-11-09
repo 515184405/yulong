@@ -7,6 +7,7 @@ use photolive\models\Goods;
 use photolive\models\Order;
 use photolive\models\PhotoAudioList;
 use photolive\models\PhotoAudioSetting;
+use photolive\models\PhotoBgAnimateSettings;
 use photolive\models\PhotoColType;
 use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
@@ -153,6 +154,10 @@ class UserController extends TokenController
             /* 相册样式删除 */
             $model9 = new PhotoColType();
             $model9->deleteAll(['project_id' => $id]);
+
+            /* 相册音频设置删除 */
+            $model10 = new PhotoAudioSetting();
+            $model10->deleteAll(['project_id'=>$id]);
 
             return self::convertJson('100000', '删除成功');
         } else {
@@ -352,6 +357,34 @@ class UserController extends TokenController
     public function actionPhotoAudioSetting(){
         $project_id = \Yii::$app->request->post('project_id');
         return PhotoAudioSetting::getOne(['project_id'=>$project_id]);
+    }
+
+    /**
+     * 获取相册背景挂件配置
+     */
+    public function actionPhotoBgAnimateList(){
+        $project_id = \Yii::$app->request->post('project_id');
+        $list = PhotoBgAnimateSettings::find()->where(['or',['type'=>1],['project_id'=>$project_id]])->asArray()->all();
+        return self::convertJson(100000, '查询成功', $list);
+    }
+
+    /**
+     * 添加或修改相册背景挂件配置
+     */
+    public function actionPhotoBgAnimateCreateUpdate(){
+        $params = \Yii::$app->request->post();
+        $model = PhotoBgAnimateSettings::findOne(['project_id'=>$params['project_id']]);
+        return PhotoBgAnimateSettings::insertUpdate($params,true);
+    }
+
+    /**
+     * 添加或修改相册背景挂件配置
+     */
+    public function actionPhotoBgAnimateDelete(){
+        $params = \Yii::$app->request->post();
+        if($params['id']){
+            return PhotoBgAnimateSettings::deleteOne($params['id']);
+        }
     }
 
     /**
