@@ -23,7 +23,7 @@ $allow_origin = array(
     'http://sheyingpai.yu313.cn',
     'https://sheyingpai.m.yu313.cn',
     'https://sheyingpai.yu313.cn',
-    'http://localhost',
+//    'http://localhost',
 );
 if(in_array($localhost, $allow_origin)) {
     header('Access-Control-Allow-Origin:'.$origin);
