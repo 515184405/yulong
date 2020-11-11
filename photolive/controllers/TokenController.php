@@ -16,8 +16,8 @@ use yii\web\UploadedFile;
 
 //跨域访问的时候才会存在此字段
 $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
-$port = ':'.$_SERVER['HTTP_X_FORWARDED_PORT'];
-$localhost = str_replace($port,'',$origin);
+//$port = ':'.$_SERVER['HTTP_X_FORWARDED_PORT'];
+//$localhost = str_replace($port,'',$origin);
 $allow_origin = array(
     'http://sheyingpai.m.yu313.cn',
     'http://sheyingpai.yu313.cn',
@@ -25,7 +25,7 @@ $allow_origin = array(
     'https://sheyingpai.yu313.cn',
 //    'http://localhost',
 );
-if(in_array($localhost, $allow_origin)) {
+if(in_array($origin, $allow_origin)) {
     header('Access-Control-Allow-Origin:'.$origin);
     header('Access-Control-Allow-Methods:GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS');
     header('Access-Control-Allow-Headers:Origin, X-Requested-With, Content-Type, Accept,key,token');
