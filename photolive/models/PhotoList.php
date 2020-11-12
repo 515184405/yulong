@@ -133,4 +133,9 @@ class PhotoList extends CommonModel
         return $this->hasOne(PhotoBgAnimateSettings::className(),['project_id'=>'id']);
     }
 
+    /*关联订单状态*/
+    public function getPhotoOrder(){
+        return $this->hasOne(PhotoOrder::className(),['project_id'=>'id']);
+    }
+
 }

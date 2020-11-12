@@ -55,14 +55,32 @@ class PhotoOrder extends CommonModel
             'paytime' => 'Paytime',
         ];
     }
+
+    /*关联相册*/
+    public function getPhotoOne(){
+        return $this->hasOne(PhotoList::className(),['id'=>'project_id']);
+    }
+
+    /*关联商品*/
+    public function getPhotoGood(){
+        return $this->hasOne(Goods::className(),['id'=>'good_id']);
+    }
+
     public static function insertUpdate($params)
     {
-        $model = new static();
-        if($params['id']) {
+        $model = static::findOne(['project_id'=>$params['project_id']]);
+        if($model) {
             $message = '修改';
-            $model = static::findOne($params['id']);
+            // 添加支付时间
+            if($params['status'] == 1){
+                if(!$model->paytime){
+                    $params['paytime'] = date('Y-m-d H:i:s',time());
+                }
+            }
         }else{
+            $model = new static();
             $message = '添加';
+            $params['no'] = 'SYP'.date('Ymd') . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
             $params['createtime'] = date('Y-m-d H:i:s',time());
         }
         $model->setAttributes($params);

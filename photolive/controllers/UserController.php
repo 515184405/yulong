@@ -9,6 +9,7 @@ use photolive\models\PhotoAudioList;
 use photolive\models\PhotoAudioSetting;
 use photolive\models\PhotoBgAnimateSettings;
 use photolive\models\PhotoColType;
+use photolive\models\PhotoOrder;
 use photolive\models\PhotoSkin;
 use photolive\models\PyMessage;
 use yii\helpers\Json;
@@ -75,14 +76,14 @@ class UserController extends TokenController
     public function actionPhotoList()
     {
         $params = \Yii::$app->request->post();
-        $query = PhotoList::find()->where(['u_id' => $this->uid]);
+        $query = PhotoList::find()->where(['photo_list.u_id' => $this->uid]);
         //按name查找
         if (isset($params['name'])) {
             $query->andFilterWhere(['like', 'name', $params['name']]);
         }
         //status查询
         if(isset($params['status'])){
-            $query->andFilterWhere(['status'=>$params['status']]);
+            $query->andFilterWhere(['photo_list.status'=>$params['status']]);
         }
         $page = isset($params['page']) ? $params['page'] : 1;
         $limit = isset($params['limit']) ? $params['limit'] : 50;
@@ -92,7 +93,7 @@ class UserController extends TokenController
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->orderBy(['id' => SORT_DESC])->asArray()->all();
+        $list = $query->joinWith(['photoOrder'])->orderBy(['id' => SORT_DESC])->asArray()->all();
         for ($i = 0; $i < count($list); $i++) {
             $countNumber = PictureList::find()->where(['project_id' => $list[$i]['id']])->count();
             $list[$i]['photo_number'] = $countNumber;
@@ -636,6 +637,28 @@ class UserController extends TokenController
         return PyMessage::deleteOne($this->uid);
     }
 
+    /**
+     * 给某个项目添加订单
+     */
+    public function actionPhotoOrderInsertUpdate(){
+        $params = \Yii::$app->request->post();
+        $params['u_id'] = $this->uid;
+        return PhotoOrder::insertUpdate($params);
+    }
+
+    /**
+     * 查找某个项目订单
+     */
+    public function actionPhotoOrderOne(){
+        $project_id = \Yii::$app->request->post('project_id');
+        $no_other   = \Yii::$app->request->post('no_other');
+        if(isset($no_other)){
+            $result = PhotoOrder::find()->where(['project_id'=>$project_id])->asArray()->one();
+        }else{
+            $result = PhotoOrder::find()->joinWith(['photoOne','photoGood'])->where(['photo_order.project_id'=>$project_id])->asArray()->one();
+        }
+        return self::convertJson('100000','查询成功',$result);
+    }
 
     /**
      * 查询用户订单信息
@@ -655,7 +678,7 @@ class UserController extends TokenController
     }
 
     /**
-     * 查询订单表
+     * 查询商品表
      */
     public function actionOrderGoodsList(){
         $order = Order::find()->where(['order.status'=>0])->joinWith(['good'])->asArray()->all();
