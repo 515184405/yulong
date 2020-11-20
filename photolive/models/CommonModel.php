@@ -26,6 +26,33 @@ class CommonModel extends \yii\db\ActiveRecord
     }
 
     /**
+     * url安全base64_encode加密
+     * @param $string
+     * @return mixed|string
+     */
+    public static function urlsafe_b64encode($string)
+    {
+        $data = base64_encode($string);
+        $data = str_replace(array('+', '/', '='), array('-', '_', ''), $data);
+        return $data;
+    }
+
+    /**
+     * url安全base64_decode解密
+     * @param $string
+     * @return string
+     */
+    public static function urlsafe_b64decode($string)
+    {
+        $data = str_replace(array('-', '_'), array('+', '/'), $string);
+        $mod4 = strlen($data) % 4;
+        if ($mod4) {
+            $data .= substr('====', $mod4);
+        }
+        return base64_decode($data);
+    }
+
+    /**
      * 删除方法
      * @param $id
      * @return string

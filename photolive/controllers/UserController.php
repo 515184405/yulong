@@ -54,6 +54,24 @@ class UserController extends TokenController
     }
 
     /**
+     * 判断此相册是否支付
+     */
+    public static function isPhotoPay($project_id=0){
+        $model = PhotoOrder::find()->where(['project_id'=>$project_id])->asArray()->one();
+        if($model){
+            if($model['status'] == 1){
+                return array('return'=>true,'message'=>'已支付');
+            }else if($model['status'] == 2){
+                return array('return'=>false,'message'=>'已过期不能操作');
+            }else{
+                return array('return'=>false,'message'=>'未支付不能操作');
+            }
+        }else{
+            return array('return'=>false,'message'=>'未支付不能操作');
+        }
+    }
+
+    /**
      * 删除oss上某个目录以及以下所有文件
      * 传入文件路径
      */
@@ -528,6 +546,20 @@ class UserController extends TokenController
     }
 
     /**
+     * 获取水印地址后缀
+     */
+    public function actionUploadWaterParams(){
+        $params = $this->actionPhotoWaterOne();
+        $waterParams = json_decode($params);
+        if($waterParams->code == 100000){
+            $waterParams = $waterParams->data->style;
+            return PhotoWaterSettings::setWaterUrl($waterParams);
+        }else{
+            return self::convertJson('100001', '获取水印失败');
+        }
+    }
+
+    /**
      * 获取相册是否存在图片
      */
     public function actionPictureOne(){
@@ -541,7 +573,12 @@ class UserController extends TokenController
     public function actionPictureInsertUpdate()
     {
         $params = \Yii::$app->request->post();
-        return PictureList::pictureInsertUpdate($params);
+        $payStatus = self::isPhotoPay($params['project_id']);
+        if($payStatus['return']){
+            return PictureList::pictureInsertUpdate($params);
+        }else{
+            return self::convertJson('100001', $payStatus['message']);
+        }
     }
 
     /**

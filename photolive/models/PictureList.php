@@ -16,6 +16,7 @@ use Yii;
  * @property string $createtime 创建时间
  * @property string $size 图片尺寸 宽X高  例1920x1080
  * @property string $filesize 文件大小
+ * @property string $water_filesize 水印文件大小
  * @property int $like 点赞数
  * @property int $collect 收藏数量
  * @property int $project_id 相册id
@@ -39,9 +40,10 @@ class PictureList extends CommonModel
             [['name', 'src', 'createtime', 'project_id'], 'required'],
             [['status', 'groupId', 'like', 'collect', 'project_id'], 'integer'],
             [['createtime'], 'safe'],
-            [['name', 'src', 'waterSrc'], 'string', 'max' => 255],
+            [['name', 'src'], 'string', 'max' => 255],
+            [['waterSrc'], 'string', 'max' => 1500],
             [['size'], 'string', 'max' => 50],
-            [['filesize'], 'string', 'max' => 10],
+            [['filesize','water_filesize'], 'string', 'max' => 10],
         ];
     }
 
@@ -63,6 +65,7 @@ class PictureList extends CommonModel
             'like' => 'Like',
             'collect' => 'Collect',
             'project_id' => 'Project ID',
+            'water_filesize' => 'Water Filesize'
         ];
     }
     /**

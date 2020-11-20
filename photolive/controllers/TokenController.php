@@ -8,6 +8,7 @@
 
 namespace photolive\controllers;
 
+use photolive\models\PhotoWaterSettings;
 use Yii;
 use yii\web\Controller;
 use common\models\UploadForm;
@@ -230,6 +231,107 @@ class TokenController extends Controller
                 };
             }
             return $this->convertJson('100001', '上传失败');
+        }
+    }
+
+    /**
+     * oss上传
+     */
+    public function actionUploadOss(){
+        $params = Yii::$app->request->post();
+        $image = explode('.',$params['imgsrc']);
+        $src_perfix = $params['perfix'];
+        $dir  = $params['dir'];
+        $nameType = end($image);
+
+        // 获取年月日
+        $date = date('Ymd') . '_';
+        $fileName = $date . rand(10000, 99999) . time() . '.' . $nameType;
+        $oss_abs_src = $dir.'/'.$fileName;
+        var_dump($params['imgsrc'], $oss_abs_src, $src_perfix);die;
+        $res = Yii::$app->Aliyunoss->water($params['imgsrc'], $oss_abs_src, $src_perfix);
+        return $this->convertJson('100001', '上传失败',$res);
+    }
+
+    /**
+     * base64图片上传
+     */
+    public function actionBase64Image(){
+        ini_set("memory_limit",'-1');
+        $params = \Yii::$app->request->post();
+        $base64_img = trim($params['base64_img']);
+        $image_name = $params['name'];
+        // oss上新目录
+        $dress = isset($params['dir']) ? $params['dir'] . '/' : 'common/';
+        // 本地暂存目录
+        $rootDir = 'uploads/oss/';
+        if(!file_exists($rootDir)){
+            mkdir($rootDir,0777);
+        }
+
+        if(preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_img, $result)){
+            $type = $result[2];
+            if(in_array($type,array('pjpeg','jpeg','jpg','gif','bmp','png'))){
+                $date = date('Ymd') . '_';
+                // 更改后的名
+                $fileName = $date . rand(10000, 99999) . time() . '.' . $type;
+                // 缓存文件相对路径
+                $fileSrc = $rootDir . $fileName;
+                if(file_put_contents($fileSrc, base64_decode(str_replace($result[1], '', $base64_img)))){
+
+                    $image_size = round(ceil(filesize($fileSrc) / 1000) / 1024,3);
+                    $width = 0;
+                    $height = 0;
+                    $photoInfo = getimagesize($fileSrc);
+                    if($photoInfo){
+                        $width = $photoInfo[0] > 1920 ? 1920 : $photoInfo[0];
+                        $height = $width / $photoInfo[0] * $photoInfo[1];
+                        // 上传成功之后修改宽高
+                        $image = Yii::$app->Resizeimage->set_image($fileName, $fileSrc, '2500', '10000');
+                        header('Content-Type:image/jpeg');
+
+                        switch ($photoInfo['mime'] && $photoInfo[0] > 2500) {
+                            case 'image/jpeg':
+                                imagejpeg($image, $fileSrc);
+                                imagedestroy($image);
+                                break;
+                            case 'image/png':
+                                imagepng($image, $fileSrc);
+                                imagedestroy($image);
+                                break;
+                            case 'image/gif':
+                                // 上传成功之后修改宽高
+                                imagegif($image, $fileSrc);
+                                imagedestroy($image);
+                                break;
+                        }
+                    }
+                    // 获取文件绝对路径
+                    $local_abs_src_tmp = dirname(dirname(__FILE__)) . '/web/uploads/oss/' . $fileName;
+                    $local_abs_src = str_replace("\\", "/", $local_abs_src_tmp);//绝对路径，上传第二个参数
+
+                    // 上传到oss上的文件路径
+                    $oss_abs_src = $dress . $fileName;
+                    // 上传到oss
+                    if (Yii::$app->Aliyunoss->upload($oss_abs_src, $local_abs_src)) {
+                        // 删除本地缓存文件
+                        $this->deleteFile($fileSrc);
+
+                        // 上传成功
+                        return $this->convertJson('100000', '上传成功', array('fileSrc' => $oss_abs_src, 'filesize' => $image_size, 'name' => $image_name, 'width' => $width, 'height' => $height));
+                    };
+
+                }else{
+                    return $this->convertJson('100001', '上传失败');
+                }
+            }else{
+                //文件类型错误
+                return $this->convertJson('100001', '图片上传类型错误');
+            }
+
+        }else{
+            //文件错误
+            return $this->convertJson('100001', '文件错误');
         }
     }
 

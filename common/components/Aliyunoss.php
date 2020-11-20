@@ -44,6 +44,25 @@ class Aliyunoss extends Component
     }
 
     /**
+     * 水印图片下载
+     * @param $object
+     * @param $download_file
+     * @param $process
+     * @return string
+     */
+    public function water($object, $download_file, $process){
+        $bucket = Yii::$app->params['oss']['bucket'];    //获取阿里云oss的bucket
+
+        $options = [
+            OssClient::OSS_FILE_DOWNLOAD => $download_file,
+            OssClient::OSS_PROCESS => $process//"image/auto-orient,1/quality,q_90/watermark,image_a3Zpc2lvbi9hbGJ1bS8xMjMxdy8yMDE4MTExNDE0MTEyNDQ4NzE5MzI1NjEwLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSxQXzIw,x_10,y_10",
+        ];
+        return self::$oss->getObject($bucket, $object, $options);
+        //$this->printImage("imageWatermark", $download_file);
+        //return $res;
+    }
+
+    /**
      * 删除指定文件
      * @param $object 被删除的文件名
      * @return bool   删除是否成功
