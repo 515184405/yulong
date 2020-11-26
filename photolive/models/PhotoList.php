@@ -26,6 +26,7 @@ use Yii;
  * @property string $tel 手机号
  * @property int $status 0未发布，1已发布
  * @property int $photo_number 照片数量
+ * @property int $show_image_type 显示图片类型
  */
 class PhotoList extends CommonModel
 {
@@ -43,7 +44,7 @@ class PhotoList extends CommonModel
     public function rules()
     {
         return [
-            [['look', 'type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status', 'photo_number'], 'integer'],
+            [['look', 'type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status','show_image_type', 'photo_number'], 'integer'],
             [['type_id', 'createtime'], 'required'],
             [['createtime', 'starttime', 'endtime'], 'safe'],
             [['name', 'desc', 'cover_image', 'address'], 'string', 'max' => 255],
@@ -75,6 +76,7 @@ class PhotoList extends CommonModel
             'endtime' => 'Endtime',
             'status' => 'Status',
             'photo_number' => 'Photo Number',
+            'show_image_type' => 'Show Image Type'
         ];
     }
 
