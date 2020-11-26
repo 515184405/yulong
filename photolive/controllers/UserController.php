@@ -111,7 +111,7 @@ class UserController extends TokenController
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->joinWith(['photoOrder','photoWater'])->orderBy(['id' => SORT_DESC])->asArray()->all();
+        $list = $query->joinWith(['photoOrder','photoWater'])->orderBy(['photo_list.id' => SORT_DESC])->asArray()->all();
         for ($i = 0; $i < count($list); $i++) {
             $countNumber = PictureList::find()->where(['project_id' => $list[$i]['id']])->count();
             $list[$i]['photo_number'] = $countNumber;
