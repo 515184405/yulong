@@ -139,5 +139,4 @@ class PhotoList extends CommonModel
     public function getPhotoOrder(){
         return $this->hasOne(PhotoOrder::className(),['project_id'=>'id']);
     }
-
 }
