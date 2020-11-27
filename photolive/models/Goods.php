@@ -15,6 +15,7 @@ use Yii;
  * @property string $createtime 创建时间
  * @property string $imgsrc 商品图片
  * @property int $recommend 是否设为推荐
+ * @property int $img_count 图片数量
  */
 class Goods extends \yii\db\ActiveRecord
 {
@@ -32,8 +33,8 @@ class Goods extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'desc', 'createtime'], 'required'],
-            [['price', 'status', 'recommend'], 'integer'],
+            [['name', 'desc', 'createtime','img_count'], 'required'],
+            [['price', 'status', 'recommend','img_count'], 'integer'],
             [['createtime'], 'safe'],
             [['name', 'desc', 'imgsrc'], 'string', 'max' => 255],
         ];
@@ -53,6 +54,7 @@ class Goods extends \yii\db\ActiveRecord
             'createtime' => 'Createtime',
             'imgsrc' => 'Imgsrc',
             'recommend' => 'Recommend',
+            'img_count' => 'Img Count'
         ];
     }
 

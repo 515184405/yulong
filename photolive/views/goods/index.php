@@ -50,6 +50,7 @@
                     return '<span style="color:#f00;font-weight:bold">'+d.price+'</span>';
         }}
                 ,{field:'status',title: '商品状态',templet:'#switchTp2'}
+                ,{field:'img_count',title: '可传图片数量'}
                 ,{field:'recommend',title: '商品推荐',templet:'#switchTpl'}
                 ,{field:'imgsrc', title: '商品图片',templet: function (d) {
                         return '<a class="theme js_banner_url" target="_blank" href='+site_url+d.imgsrc+' >'+d.imgsrc+'</a>';

@@ -111,7 +111,7 @@ class UserController extends TokenController
             $count = $query->count();
             $query->offset($offset)->limit($limit);
         }
-        $list = $query->joinWith(['photoOrder','photoWater'])->orderBy(['photo_list.id' => SORT_DESC])->asArray()->all();
+        $list = $query->joinWith(['photoOrder','photoWater'])->orderBy(['id' => SORT_DESC])->asArray()->all();
         for ($i = 0; $i < count($list); $i++) {
             $countNumber = PictureList::find()->where(['project_id' => $list[$i]['id']])->count();
             $list[$i]['photo_number'] = $countNumber;
@@ -429,7 +429,11 @@ class UserController extends TokenController
     public function actionPhotoWaterCreateUpdate()
     {
         $params = \Yii::$app->request->post();
-        foreach ($params['style'] as $key => $item) {
+        $style = $params['style'];
+        for($i=1;$i<=count($style);$i++){
+            $key = $i;
+            $item = $style[$i];
+        //foreach ($style as $key => $item) {
             $model = PhotoWaterSettings::findOne([['id' => $item['id']], ['position' => $item['position']]]);
             if (!$model) {
                 // 新增方法
@@ -680,7 +684,7 @@ class UserController extends TokenController
     public function actionPhotoOrderInsertUpdate(){
         $params = \Yii::$app->request->post();
         $params['u_id'] = $this->uid;
-        return PhotoOrder::insertUpdate($params);
+        return PhotoOrder::insertUpdate2($params);
     }
 
     /**
@@ -694,6 +698,15 @@ class UserController extends TokenController
         }else{
             $result = PhotoOrder::find()->joinWith(['photoOne','photoGood'])->where(['photo_order.project_id'=>$project_id])->asArray()->one();
         }
+        return self::convertJson('100000','查询成功',$result);
+    }
+
+    /**
+     * 获取相册支付信息
+     */
+    public function actionPhotoPayInfo(){
+        $project_id = \Yii::$app->request->post('project_id');
+        $result = PhotoOrder::find()->joinWith(['photoGood'])->where(['photo_order.project_id'=>$project_id])->asArray()->one();
         return self::convertJson('100000','查询成功',$result);
     }
 

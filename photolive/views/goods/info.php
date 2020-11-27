@@ -41,6 +41,12 @@ use kucha\ueditor\UEditor;
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">图片数量</label>
+                <div class="layui-input-block">
+                    <input type="number" value="<?=isset($data['goods']['img_count']) ? $data['goods']['img_count'] : ''?>" name="img_count" autocomplete="off" placeholder="请输入图片数量" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="submit-btn">立即提交</button>
                     <a href="javascript:history.go(-1);" class="layui-btn layui-btn-primary">返回</a>

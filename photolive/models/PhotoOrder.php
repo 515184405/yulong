@@ -66,7 +66,7 @@ class PhotoOrder extends CommonModel
         return $this->hasOne(Goods::className(),['id'=>'good_id']);
     }
 
-    public static function insertUpdate($params)
+    public static function insertUpdate2($params)
     {
         $model = static::findOne(['project_id'=>$params['project_id']]);
         if($model) {

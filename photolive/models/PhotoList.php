@@ -44,7 +44,7 @@ class PhotoList extends CommonModel
     public function rules()
     {
         return [
-            [['look', 'type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status','show_image_type', 'photo_number'], 'integer'],
+            [['look','is_down_src','is_down_waterSrc','type_id', 'province_id', 'city_id', 'area_id', 'u_id', 'author_id', 'status','show_image_type', 'photo_number'], 'integer'],
             [['type_id', 'createtime'], 'required'],
             [['createtime', 'starttime', 'endtime'], 'safe'],
             [['name', 'desc', 'cover_image', 'address'], 'string', 'max' => 255],
@@ -76,7 +76,9 @@ class PhotoList extends CommonModel
             'endtime' => 'Endtime',
             'status' => 'Status',
             'photo_number' => 'Photo Number',
-            'show_image_type' => 'Show Image Type'
+            'show_image_type' => 'Show Image Type',
+            'is_down_src' => 'Is Down Src',
+            'is_down_waterSrc' => 'Is Down WaterSrc',
         ];
     }
 
