@@ -108,7 +108,7 @@ $this->description = '313组件库，专业从事网站建设.高品质建站服
             </p>
             <p class="footer-msg">
                 <span>Copyright 2019 聚友之家 ALL Rights Reserved.</span>
-                <span class="margin-left:30px;">工信部备案号：京ICP备19025093号-1</span>
+                <span class="margin-left:30px;">工信部备案号：<a href="https://beian.miit.gov.cn/" target="_blank">京ICP备19025093号-1</a></span>
                 <span>如有侵权，请联系站主删除</span>
 
             </p>
