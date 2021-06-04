@@ -18,7 +18,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">excel模板</label>
                     <div class="layui-input-block">
-                        <a href="/number-list/down-sample" class="layui-btn">导入excel文件模板下载</a>
+                        <a href="/uploads/phone.xlsx" class="layui-btn">导入excel文件模板下载</a>
                     </div>
                 </div>
                 <div class="layui-form-item">

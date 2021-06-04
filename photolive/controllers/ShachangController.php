@@ -36,6 +36,7 @@ class ShachangController extends Controller
     }
     public function actionLogin(){
         $params = \Yii::$app->request->post();
+        var_dump($params['password'] == '000000');die;
         if($params['username'] == 'lipengfei' && $params['password'] == '000000'){
             return $this->convertJson('100000', '登录成功');
         }else{
@@ -146,17 +147,23 @@ class ShachangController extends Controller
         $youMonthData = LiJiayouStuffList::find()->andWhere(['like','daytime',$month])->asArray()->all();
         $youCountData = LiJiayouStuffList::find()->asArray()->all();
         /* 料 */
-        $liaoYearCount = 0;
+        $liaoYearXsCount = 0;
+        $liaoYearLgCount = 0;
         foreach ($liaoYearData as $item) {
-            $liaoYearCount += floatval($item['total']);
+            $liaoYearXsCount += floatval($item['xs_car']);
+            $liaoYearLgCount += floatval($item['lg_car']);
         }
-        $liaoMonthCount = 0;
+        $liaoMonthXsCount = 0;
+        $liaoMonthLgCount = 0;
         foreach ($liaoMonthData as $item) {
-            $liaoMonthCount += floatval($item['total']);
+            $liaoMonthXsCount += floatval($item['xs_car']);
+            $liaoMonthLgCount += floatval($item['lg_car']);
         }
-        $liaoCountDataCount = 0;
+        $liaoCountDataXsCount = 0;
+        $liaoCountDataLgCount = 0;
         foreach ($liaoCountData as $item) {
-            $liaoCountDataCount += floatval($item['total']);
+            $liaoCountDataXsCount += floatval($item['xs_car']);
+            $liaoCountDataLgCount += floatval($item['lg_car']);
         }
         /* 油 */
         $youYearCount = 0;
@@ -172,9 +179,12 @@ class ShachangController extends Controller
             $youCountDataCount += floatval($item['total']);
         }
         $data = array(
-            'liaoYearCount' =>$liaoYearCount,
-            'liaoMonthCount'=>$liaoMonthCount,
-            'liaoCountDataCount' => $liaoCountDataCount,
+            'liaoYearXsCount' => $liaoYearXsCount,
+            'liaoYearLgCount' => $liaoYearLgCount,
+            'liaoMonthXsCount' => $liaoMonthXsCount,
+            'liaoMonthLgCount' => $liaoMonthLgCount,
+            'liaoCountDataXsCount' => $liaoCountDataXsCount,
+            'liaoCountDataLgCount' => $liaoCountDataLgCount,
             'youYearCount' =>$youYearCount,
             'youMonthCount'=>$youMonthCount,
             'youCountDataCount' => $youCountDataCount,
