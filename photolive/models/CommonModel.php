@@ -72,7 +72,7 @@ class CommonModel extends \yii\db\ActiveRecord
      * @return string
      */
     public static function getList($arr = []){
-        $result = static::find()->where($arr)->orderBy(['daytime'=>SORT_ASC])->asArray()->all();
+        $result = static::find()->where($arr)->asArray()->all();
         return self::convertJson('100000','查询成功',$result);
     }
 

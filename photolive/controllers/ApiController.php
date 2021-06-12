@@ -107,7 +107,8 @@ class ApiController extends TokenController
      */
     public function actionPhotoType()
     {
-        return PhotoType::getList();
+        $result = PhotoType::find()->orderBy(['createtime'=>SORT_ASC])->asArray()->all();
+        return $this->convertJson('100000','查询成功',$result);
     }
 
     /**************************************************  以上为个人中心部分 ******************************************************/
