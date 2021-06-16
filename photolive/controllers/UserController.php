@@ -34,7 +34,7 @@ class UserController extends TokenController
         }
         /* 验证是否为登录状态 */
         $headers = \Yii::$app->getRequest()->getHeaders();
-        $token = $headers->get('token');
+        $token = $headers->get('token','');
         $this->uid = Json::decode(\Yii::$app->redis->get($token))['id'];
         //安全认证(检测Token)
         $checkRes = $this->checkToken($this->uid,$token);
